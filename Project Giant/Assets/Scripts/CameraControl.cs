@@ -1,0 +1,56 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraControl : MonoBehaviour
+
+{
+
+    public Transform camera, player, centerPoint;
+    public float mouseX, mouseY;
+    public float mouseSpeed = 100f;
+    private float moveForward, moveSide;
+    public float moveSpeed = 2f;
+    public float zoom;
+    private float zoomSpeed = 2f;
+    public float rotationSpeed = 5f;
+    public int size;
+    // Start is called before the first frame update
+    void Start()
+    {
+        zoom = -3;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        zoom += Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+        camera.transform.localPosition = new Vector3(0, 0, zoom);
+
+        mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
+        mouseY += Input.GetAxis("Mouse Y") * mouseSpeed;
+        mouseY = Mathf.Clamp(mouseY, -10f, 60f); // Camera can't go through floor or directly overhead.
+        camera.LookAt(centerPoint);
+
+        centerPoint.localRotation = Quaternion.Euler(mouseY, mouseX, 0);
+        moveForward += Input.GetAxis("Vertical") * moveSpeed;
+        moveSide += Input.GetAxis("Horizontal") * moveSpeed;
+
+
+        if (Input.GetAxis("Horizontal") == 0)
+        {
+            moveSide = 0;
+        }
+
+        Vector3 movement = new Vector3(moveSide, 0, moveForward);
+        movement = player.rotation * movement;
+        player.GetComponent<CharacterController>().Move(movement * Time.deltaTime);
+        centerPoint.position = new Vector3(player.position.x, (player.position.y + 1), player.position.z);
+        if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0)
+        {
+            Quaternion turnAngle = Quaternion.Euler(0, centerPoint.eulerAngles.y, 0);
+            player.rotation = Quaternion.Slerp(player.rotation, turnAngle, Time.deltaTime * rotationSpeed);
+        }
+    }
+
+}

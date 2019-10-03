@@ -62,7 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CameraZoom.cs" />
+    <Compile Include="Assets\Scripts\CameraControl.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/otaylor4/Documents/GitHub/ProjectGiant/Project Giant/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

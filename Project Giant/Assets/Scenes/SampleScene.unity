@@ -250,13 +250,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa589db71a8d0b43a2b7e1be6d6c219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  giant: {fileID: 1681584531}
+  camera: {fileID: 282840814}
+  player: {fileID: 1681584535}
   centerPoint: {fileID: 819304791}
   mouseX: 0
   mouseY: 0
+  mouseSpeed: 100
+  moveSpeed: 2
   zoom: 0
-  zoomSpeed: 1
-  mouseSensitivity: 0
+  rotationSpeed: 5
+  size: 0
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
@@ -311,7 +314,7 @@ Transform:
   m_LocalPosition: {x: 0.16829681, y: 3.375567, z: -5.5251837}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 819304791}
+  m_Father: {fileID: 1681584535}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &641628844
@@ -416,7 +419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 819304791}
   m_Layer: 0
-  m_Name: centerPoint
+  m_Name: CenterPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -432,10 +435,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 282840814}
+  m_Children: []
   m_Father: {fileID: 1681584535}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &968299883
 GameObject:
@@ -542,6 +544,7 @@ GameObject:
   - component: {fileID: 1681584534}
   - component: {fileID: 1681584533}
   - component: {fileID: 1681584532}
+  - component: {fileID: 1681584536}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -579,7 +582,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7ae9d984d9f487d418a16262dbce73a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -619,7 +622,26 @@ Transform:
   m_LocalPosition: {x: -0.16829681, y: 2.31, z: -1.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 282840814}
   - {fileID: 819304791}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &1681584536
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681584531}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
