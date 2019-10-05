@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControl : MonoBehaviour
+public class PlayerControl : MonoBehaviour
 
 {
 
@@ -41,6 +41,14 @@ public class CameraControl : MonoBehaviour
         {
             moveSide = 0;
         }
+
+        if (Input.GetAxis("Vertical") == 0)
+        {
+            moveForward = 0;
+        }
+
+        moveSide = Mathf.Clamp(moveSide, -3, 3);
+        moveForward = Mathf.Clamp(moveForward, -3, 5);
 
         Vector3 movement = new Vector3(moveSide, 0, moveForward);
         movement = player.rotation * movement;
