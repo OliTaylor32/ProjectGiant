@@ -15,6 +15,12 @@ public class PlayerControl : MonoBehaviour
     private float zoomSpeed = 2f;
     public float rotationSpeed = 5f;
     public int size;
+
+    //Picking up Variables
+    public GameObject pickup;
+    public bool isCarrying = false;
+    public GameObject carrying;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +65,53 @@ public class PlayerControl : MonoBehaviour
             Quaternion turnAngle = Quaternion.Euler(0, centerPoint.eulerAngles.y, 0);
             player.rotation = Quaternion.Slerp(player.rotation, turnAngle, Time.deltaTime * rotationSpeed);
         }
+
+
+
+        //***********************
+        //Picking up and Carrying
+        //***********************
+
+        if (Input.GetKeyDown("space"))
+        {
+            print("Space key pressed");
+            if (isCarrying == false)
+            {
+                pickup.SendMessage("GetPickUp", gameObject, SendMessageOptions.DontRequireReceiver);
+                print("Get item");
+            }
+
+            else
+            {
+                isCarrying = false;
+                print("Drop item");
+            }
+
+        }
+
+        if (isCarrying == true)
+        {
+            carrying.transform.position = pickup.transform.position;
+        }
+
+    }
+
+    private void ReturnPickUp(GameObject obj)
+    {
+        carrying = obj;
+        obj.SendMessage("GetWeight", gameObject, SendMessageOptions.DontRequireReceiver);
+        print("Get Weight");
+    }
+
+    private void ReturnWeight(int weight)
+    {
+        if (weight <= size)
+        {
+            //Play PickUp animation
+            isCarrying = true;
+            carrying.transform.position = pickup.transform.position;
+        }
     }
 
 }
+
