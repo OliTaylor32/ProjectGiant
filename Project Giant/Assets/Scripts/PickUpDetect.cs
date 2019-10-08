@@ -6,6 +6,7 @@ public class PickUpDetect : MonoBehaviour
 {
 
     public GameObject pickUp;
+    public GameObject giant;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +25,10 @@ public class PickUpDetect : MonoBehaviour
         pickUp = collision.gameObject;
     }
 
-    private void GetPickUp(GameObject giant)
+    public void GetPickUp()
     {
+        print("GetPickUp recieved");
+        //Problem is here
         giant.SendMessage("ReturnPickUp", pickUp, SendMessageOptions.DontRequireReceiver);
         print("Returned pickup");
     }

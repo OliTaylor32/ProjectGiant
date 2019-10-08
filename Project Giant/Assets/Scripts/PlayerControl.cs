@@ -77,7 +77,7 @@ public class PlayerControl : MonoBehaviour
             print("Space key pressed");
             if (isCarrying == false)
             {
-                pickup.SendMessage("GetPickUp", gameObject, SendMessageOptions.DontRequireReceiver);
+                pickup.SendMessage("GetPickUp", SendMessageOptions.DontRequireReceiver);
                 print("Get item");
             }
 
@@ -107,7 +107,6 @@ public class PlayerControl : MonoBehaviour
     {
         if (weight <= size)
         {
-            //Play PickUp animation
             isCarrying = true;
             carrying.transform.position = pickup.transform.position;
         }
