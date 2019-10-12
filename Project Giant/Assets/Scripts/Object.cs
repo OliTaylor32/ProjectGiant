@@ -8,6 +8,7 @@ public class Object : MonoBehaviour
     public int weight;
     public Transform townCenter;
     public int speed = 1;
+    public int life;
 
     // Start is called before the first frame update
     void Start()

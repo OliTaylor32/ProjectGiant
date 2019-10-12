@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Object.cs" />
     <Compile Include="Assets\Scripts\PickUpDetect.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
+    <Compile Include="Assets\Scripts\TreeReproDetect.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/AINT254/ProjectGiant/Project Giant/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
