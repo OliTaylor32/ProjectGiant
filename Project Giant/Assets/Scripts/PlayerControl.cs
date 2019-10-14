@@ -24,7 +24,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        zoom = -3;
+        zoom = -7;
     }
 
     // Update is called once per frame
@@ -74,17 +74,18 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
-            print("Space key pressed");
+            //print("Space key pressed");
             if (isCarrying == false)
             {
                 pickup.SendMessage("GetPickUp", SendMessageOptions.DontRequireReceiver);
-                print("Get item");
+                //print("Get item");
             }
 
             else
             {
                 isCarrying = false;
-                print("Drop item");
+                //print("Drop item");
+                carrying = null;
             }
 
         }
@@ -98,9 +99,13 @@ public class PlayerControl : MonoBehaviour
 
     private void ReturnPickUp(GameObject obj)
     {
-        carrying = obj;
+        if (transform.root != transform)
+            carrying = obj.transform.parent.gameObject;
+        else
+            carrying = obj;
+
         obj.SendMessage("GetWeight", gameObject, SendMessageOptions.DontRequireReceiver);
-        print("Get Weight");
+        //print("Get Weight");
     }
 
     private void ReturnWeight(int weight)

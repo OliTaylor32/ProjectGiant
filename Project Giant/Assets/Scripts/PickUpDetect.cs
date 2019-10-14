@@ -21,15 +21,14 @@ public class PickUpDetect : MonoBehaviour
 
     public void OnTriggerEnter(Collider collision)
     {
-        print("Collision entered");
+        //print("Collision entered");
         pickUp = collision.gameObject;
     }
 
     public void GetPickUp()
     {
-        print("GetPickUp recieved");
-        //Problem is here
+        //print("GetPickUp recieved");
         giant.SendMessage("ReturnPickUp", pickUp, SendMessageOptions.DontRequireReceiver);
-        print("Returned pickup");
+        //print("Returned pickup");
     }
 }

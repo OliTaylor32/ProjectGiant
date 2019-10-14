@@ -23,7 +23,10 @@ public class Object : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (life == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void GetWeight(GameObject sender)
@@ -44,5 +47,10 @@ public class Object : MonoBehaviour
         }
         StartCoroutine(Move());
 
+    }
+
+    private void lifeDown()
+    {
+        life--;
     }
 }

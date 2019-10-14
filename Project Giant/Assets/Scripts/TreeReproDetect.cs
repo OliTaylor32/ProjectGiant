@@ -6,10 +6,12 @@ public class TreeReproDetect : MonoBehaviour
 {
 
     public GameObject tree;
+    public GameObject giant;
+    public GameObject currentCollision;
     // Start is called before the first frame update
     void Start()
     {
-        
+        giant = GameObject.Find("Giant");
     }
 
     // Update is called once per frame
@@ -18,13 +20,33 @@ public class TreeReproDetect : MonoBehaviour
         
     }
 
+    public void OnTriggerStay(Collider other)
+    {
+        currentCollision = other.gameObject;
+    }
+
     public void OnTriggerEnter(Collider other)
     {
-        other.SendMessage("GetType", gameObject, SendMessageOptions.DontRequireReceiver);
+        StartCoroutine(TriggerEnter(other));
+    }
+
+    public IEnumerator TriggerEnter(Collider other)
+    {
+        if (other.transform.root != other.transform)
+        {
+            yield return new WaitUntil(() => giant.GetComponent<PlayerControl>().carrying != gameObject.transform.parent.gameObject && giant.GetComponent<PlayerControl>().carrying != other.gameObject.transform.parent.gameObject);
+            if (other.gameObject == currentCollision)
+            {
+                //print("ask if tree");
+                other.SendMessage("GetType", gameObject, SendMessageOptions.DontRequireReceiver);
+            }
+        }
+
     }
 
     public void GetType(GameObject sender)
     {
+        print("Yes tree");
         sender.SendMessage("ReturnType", "tree", SendMessageOptions.DontRequireReceiver);
     }
 
@@ -32,13 +54,15 @@ public class TreeReproDetect : MonoBehaviour
     {
         if (type == "tree")
         {
+            print("Create Tree");
             reproduce();
         }
     }
 
     private void reproduce()
     {
+        Instantiate(tree, new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + 5, transform.position.z + Random.Range(-10, 10)), Quaternion.identity);
+        print("Tree Created");
         transform.parent.gameObject.SendMessage("lifeDown", SendMessageOptions.DontRequireReceiver);
-        Instantiate(tree, new Vector3(transform.position.x + 5, transform.position.y + 5f, transform.position.z + 5), Quaternion.identity);
     }
 }

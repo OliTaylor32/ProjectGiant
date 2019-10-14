@@ -43,8 +43,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.7458246
-  m_Center: {x: -0.19136785, y: 0.21603805, z: 0}
+  m_Radius: 0.87708837
+  m_Center: {x: -0.12612909, y: 0.9673247, z: -0.2870514}
 --- !u!114 &1507933331957845021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,6 +58,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 6272596964674506967}
+  giant: {fileID: 0}
+  currentCollision: {fileID: 0}
 --- !u!1 &6272596964019235959
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,9 +392,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
-  m_Height: 0.537235
+  m_Height: 1.0149834
   m_Direction: 1
-  m_Center: {x: 0.00000007744081, y: -0.7313825, z: -0.00000007744081}
+  m_Center: {x: 0.00000007744081, y: -0.49250832, z: -0.00000007744081}
 --- !u!54 &6272596964674506965
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -425,7 +427,7 @@ MonoBehaviour:
   weight: 1
   townCenter: {fileID: 0}
   speed: 1
-  life: 3
+  life: 2
 --- !u!1 &6272596965239197040
 GameObject:
   m_ObjectHideFlags: 0
