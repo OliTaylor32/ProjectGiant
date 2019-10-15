@@ -19,10 +19,13 @@ public class Villager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        townCenter = GameObject.Find("TownCenter").transform;
         StartCoroutine(Move());
+
         actions = new string[2];
         actions[0] = "Nothing";
         actions[1] = "Build";
+
         buildings = new GameObject[2];
         buildings[0] = snowMan;
         buildings[1] = smallHouse;
@@ -39,7 +42,7 @@ public class Villager : MonoBehaviour
 
     private IEnumerator Move()
     {
-        Vector3 target = new Vector3((townCenter.position.x + Random.Range(-15, 15)), townCenter.position.y + 0.7f, (townCenter.position.z + Random.Range(-15, 15)));
+        Vector3 target = new Vector3((townCenter.position.x + Random.Range(-15, 15)), townCenter.position.y, (townCenter.position.z + Random.Range(-15, 15)));
         transform.LookAt(target);
         while (Vector3.Distance(transform.position, target) > 1)
         {
