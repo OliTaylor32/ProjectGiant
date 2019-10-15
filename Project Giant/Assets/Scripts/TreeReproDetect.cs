@@ -34,7 +34,8 @@ public class TreeReproDetect : MonoBehaviour
     {
         if (other.transform.root != other.transform)
         {
-            yield return new WaitUntil(() => giant.GetComponent<PlayerControl>().carrying != gameObject.transform.parent.gameObject && giant.GetComponent<PlayerControl>().carrying != other.gameObject.transform.parent.gameObject);
+            yield return new WaitUntil(() => giant.GetComponent<PlayerControl>().carrying != gameObject.transform.parent.gameObject 
+                                                && giant.GetComponent<PlayerControl>().carrying != other.gameObject.transform.parent.gameObject);
             if (other.gameObject == currentCollision)
             {
                 //print("ask if tree");

@@ -7,6 +7,7 @@ public class Object : MonoBehaviour
     public string item;
     public int weight;
     public int life;
+    public GameObject villager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,5 +33,14 @@ public class Object : MonoBehaviour
     private void lifeDown()
     {
         life--;
+    }
+
+    private void Built()
+    {
+        if(item == "smallHouse")
+        {
+            Instantiate(villager, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z + 2), Quaternion.identity);
+            Instantiate(villager, new Vector3(transform.position.x + 3, transform.position.y, transform.position.z + 2), Quaternion.identity);
+        }
     }
 }
