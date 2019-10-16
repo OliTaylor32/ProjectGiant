@@ -31,6 +31,7 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         zoom += Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+        zoom = Mathf.Clamp(zoom, -12, -5);
         camera.transform.localPosition = new Vector3(0, 0, zoom);
 
         mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
