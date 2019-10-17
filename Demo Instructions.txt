@@ -1,0 +1,9 @@
+Controls
+WASD - move
+Mouse - look
+scrollwheel - camera zoom
+Space - Pick-up / drop
+R - Restart Demo
+
+Google Form:
+https://forms.gle/S6sZ5FpmCGtz81887

@@ -30,6 +30,15 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //FOR DEMO PURPOSES
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            #pragma warning disable CS0618 // Type or member is obsolete
+            Application.LoadLevel(0);
+            #pragma warning restore CS0618 // Type or member is obsolete
+        }
+
+        //CAMERA AND PLAYER MOVEMENT
         zoom += Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
         zoom = Mathf.Clamp(zoom, -12, -5);
         camera.transform.localPosition = new Vector3(0, 0, zoom);
