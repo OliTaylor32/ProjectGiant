@@ -130,7 +130,7 @@ MonoBehaviour:
   speed: 3
   life: 5
   snowMan: {fileID: 6499585803886891126, guid: b777cbb780c2474449ddfc02c6a4cf18, type: 3}
-  smallHouse: {fileID: 8360496995736838559, guid: 84e666c94c38b3948a002d780d47303b,
+  smallHouse: {fileID: 4577986100095370519, guid: 5e79a163d997fac4e941ed9ddce9e97d,
     type: 3}
 --- !u!1 &7156381930903209532
 GameObject:
