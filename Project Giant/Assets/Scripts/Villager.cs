@@ -42,7 +42,7 @@ public class Villager : MonoBehaviour
 
     private IEnumerator Move()
     {
-        Vector3 target = new Vector3((townCenter.position.x + Random.Range(-25, 25)), townCenter.position.y, (townCenter.position.z + Random.Range(-25, 25)));
+        Vector3 target = new Vector3((townCenter.position.x + Random.Range(-25, 25)), transform.position.y, (townCenter.position.z + Random.Range(-25, 25)));
         transform.LookAt(target);
         while (Vector3.Distance(transform.position, target) > 1)
         {

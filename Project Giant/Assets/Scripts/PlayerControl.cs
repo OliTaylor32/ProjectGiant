@@ -35,7 +35,7 @@ public class PlayerControl : MonoBehaviour
         {
             #pragma warning disable CS0618 // Type or member is obsolete
             Application.LoadLevel(0);
-            #pragma warning restore CS0618 // Type or member is obsolete
+            #pragma warning restore CS0618 
         }
 
         //CAMERA AND PLAYER MOVEMENT
@@ -76,6 +76,17 @@ public class PlayerControl : MonoBehaviour
             player.rotation = Quaternion.Slerp(player.rotation, turnAngle, Time.deltaTime * rotationSpeed);
         }
 
+        //*********
+        //Animation
+        //*********
+        if (moveForward == 0 && moveSide == 0)
+        {
+            gameObject.GetComponent<Animator>().Play("Idle"); 
+        }
+        else if (moveForward > moveSide)
+        {
+            gameObject.GetComponent<Animator>().Play("Walk", 0, 60); //Not Working, animation freezes
+        }
 
 
         //***********************
