@@ -15,6 +15,9 @@ public class Villager : MonoBehaviour
 
     public GameObject snowMan;
     public GameObject smallHouse;
+    public GameObject torch;
+    public GameObject totem;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,9 +29,11 @@ public class Villager : MonoBehaviour
         actions[0] = "Nothing";
         actions[1] = "Build";
 
-        buildings = new GameObject[2];
+        buildings = new GameObject[4];
         buildings[0] = snowMan;
         buildings[1] = smallHouse;
+        buildings[2] = torch;
+        buildings[3] = totem;
     }
 
     // Update is called once per frame
@@ -76,7 +81,7 @@ public class Villager : MonoBehaviour
                 break;
             case "Build":
                 print("Building");
-                action = Random.Range(0, 2);;
+                action = Random.Range(0, buildings.Length);;
                 GameObject newObject = Instantiate(buildings[action], new Vector3(transform.position.x + 1, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
                 newObject.SendMessage("Built", SendMessageOptions.DontRequireReceiver);
                 yield return new WaitForSeconds(5);

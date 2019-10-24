@@ -31,4 +31,18 @@ public class PickUpDetect : MonoBehaviour
         giant.SendMessage("ReturnPickUp", pickUp, SendMessageOptions.DontRequireReceiver);
         //print("Returned pickup");
     }
+
+    public void AttackRequest()
+    {
+        StartCoroutine(Attack());
+
+    }
+
+    private IEnumerator Attack()
+    {
+        yield return new WaitForSeconds(1.7f);
+        giant.SendMessage("AttackFinished", SendMessageOptions.DontRequireReceiver);
+        print("Object Attacked");
+        pickUp.SendMessage("lifeDown", SendMessageOptions.DontRequireReceiver);
+    }
 }

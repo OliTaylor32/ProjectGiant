@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 
-{
-
+{ 
     public Transform camera, player, centerPoint;
+
+    //Movement Variables.
     public float mouseX, mouseY;
     public float mouseSpeed = 100f;
     private float moveForward, moveSide;
@@ -14,12 +15,16 @@ public class PlayerControl : MonoBehaviour
     public float zoom;
     private float zoomSpeed = 2f;
     public float rotationSpeed = 5f;
-    public int size;
+    
 
     //Picking up Variables
     public GameObject pickup;
     public bool isCarrying = false;
     public GameObject carrying;
+    public int size;
+
+    //Attacking Variables
+    public bool isAttacking;
 
     // Start is called before the first frame update
     void Start()
@@ -66,26 +71,41 @@ public class PlayerControl : MonoBehaviour
         moveSide = Mathf.Clamp(moveSide, -3, 3);
         moveForward = Mathf.Clamp(moveForward, -3, 5);
 
-        Vector3 movement = new Vector3(moveSide, 0, moveForward);
-        movement = player.rotation * movement;
-        player.GetComponent<CharacterController>().Move(movement * Time.deltaTime);
-        centerPoint.position = new Vector3(player.position.x, (player.position.y + 1), player.position.z);
-        if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0)
+        if (isAttacking == false)
         {
-            Quaternion turnAngle = Quaternion.Euler(0, centerPoint.eulerAngles.y, 0);
-            player.rotation = Quaternion.Slerp(player.rotation, turnAngle, Time.deltaTime * rotationSpeed);
+
+            Vector3 movement = new Vector3(moveSide, 0, moveForward);
+            movement = player.rotation * movement;
+            player.GetComponent<CharacterController>().Move(movement * Time.deltaTime);
+            centerPoint.position = new Vector3(player.position.x, (player.position.y + 1), player.position.z);
+            if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0)
+            {
+                Quaternion turnAngle = Quaternion.Euler(0, centerPoint.eulerAngles.y, 0);
+                player.rotation = Quaternion.Slerp(player.rotation, turnAngle, Time.deltaTime * rotationSpeed);
+            }
+
         }
+        if (gameObject.GetComponent<CharacterController>().isGrounded == false)
+        {
+            Vector3 grav = new Vector3(0, -10, 0);
+            player.GetComponent<CharacterController>().Move(grav * Time.deltaTime);
+        }
+
 
         //*********
         //Animation
         //*********
-        if (moveForward == 0 && moveSide == 0)
+        if (isAttacking == true)
+        {
+            gameObject.GetComponent<Animator>().Play("Attack");
+        }
+        else if (moveForward == 0 && moveSide == 0)
         {
             gameObject.GetComponent<Animator>().Play("Idle"); 
         }
         else if (moveForward > moveSide)
         {
-            gameObject.GetComponent<Animator>().Play("Walk", 0, 60); //Not Working, animation freezes
+            gameObject.GetComponent<Animator>().Play("Walk");
         }
 
 
@@ -116,6 +136,18 @@ public class PlayerControl : MonoBehaviour
             carrying.transform.position = pickup.transform.position;
         }
 
+        //*********
+        //Attacking
+        //*********
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (isAttacking == false)
+            {
+                isAttacking = true;
+                pickup.SendMessage("Attack", SendMessageOptions.DontRequireReceiver);
+            }
+        }
     }
 
     private void ReturnPickUp(GameObject obj)
@@ -136,6 +168,11 @@ public class PlayerControl : MonoBehaviour
             isCarrying = true;
             carrying.transform.position = pickup.transform.position;
         }
+    }
+
+    private void AttackFinished()
+    {
+        isAttacking = false;
     }
 
 }

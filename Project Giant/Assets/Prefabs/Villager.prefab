@@ -132,6 +132,8 @@ MonoBehaviour:
   snowMan: {fileID: 6499585803886891126, guid: b777cbb780c2474449ddfc02c6a4cf18, type: 3}
   smallHouse: {fileID: 4577986100095370519, guid: 5e79a163d997fac4e941ed9ddce9e97d,
     type: 3}
+  torch: {fileID: 239517594530387321, guid: fd31dfbca9530a941849b0d8b4a31542, type: 3}
+  totem: {fileID: 3746004744579812668, guid: 1cb14a2eae9595e42b16922c7f5a3498, type: 3}
 --- !u!1 &7156381930903209532
 GameObject:
   m_ObjectHideFlags: 0
