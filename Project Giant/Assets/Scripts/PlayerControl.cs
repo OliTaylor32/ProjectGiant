@@ -139,15 +139,18 @@ public class PlayerControl : MonoBehaviour
         //*********
         //Attacking
         //*********
-
-        if (Input.GetKeyDown(KeyCode.X))
+        if (isCarrying == false)
         {
-            if (isAttacking == false)
+            if (Input.GetKeyDown(KeyCode.X))
             {
-                isAttacking = true;
-                pickup.SendMessage("Attack", SendMessageOptions.DontRequireReceiver);
+                if (isAttacking == false)
+                {
+                    isAttacking = true;
+                    pickup.SendMessage("Attack", SendMessageOptions.DontRequireReceiver);
+                }
             }
         }
+
     }
 
     private void ReturnPickUp(GameObject obj)

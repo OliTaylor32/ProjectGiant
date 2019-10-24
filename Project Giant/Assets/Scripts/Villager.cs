@@ -83,6 +83,7 @@ public class Villager : MonoBehaviour
                 print("Building");
                 action = Random.Range(0, buildings.Length);;
                 GameObject newObject = Instantiate(buildings[action], new Vector3(transform.position.x + 1, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+                newObject.transform.Rotate(0, Random.Range(0, 360), 0);
                 newObject.SendMessage("Built", SendMessageOptions.DontRequireReceiver);
                 yield return new WaitForSeconds(5);
                 break;
