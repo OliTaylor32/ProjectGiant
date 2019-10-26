@@ -1760,6 +1760,11 @@ PrefabInstance:
       propertyPath: townCenter
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 713854428813853513, guid: 4c83b3c7646c8b7488af0f7a72d4ddad,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c83b3c7646c8b7488af0f7a72d4ddad, type: 3}
 --- !u!1 &638694254
