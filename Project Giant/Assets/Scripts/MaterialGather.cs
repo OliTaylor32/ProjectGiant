@@ -6,10 +6,11 @@ public class MaterialGather : MonoBehaviour
 {
 
     public GameObject tree;
+    public int objects;
     // Start is called before the first frame update
     void Start()
     {
-        
+        objects = 0;
     }
 
     // Update is called once per frame
@@ -25,7 +26,7 @@ public class MaterialGather : MonoBehaviour
             if (collision.gameObject.GetComponent<Object>().item == "Tree")
                tree = collision.gameObject;
         }
-
+        objects++;
     }
 
     private void OnTriggerExit(Collider other)
@@ -34,5 +35,6 @@ public class MaterialGather : MonoBehaviour
         {
             tree = null;
         }
+        objects--;
     }
 }
