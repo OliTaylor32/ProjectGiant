@@ -10,6 +10,9 @@ public class Villager : MonoBehaviour
     public int speed = 1;
     public int life;
     private string[] actions;
+    public GameObject buildArea;
+    public bool canBuild;
+    public float timer;
 
     private GameObject[] buildings;
 
@@ -82,15 +85,30 @@ public class Villager : MonoBehaviour
             case "Build":
                 print("Building");
                 action = Random.Range(0, buildings.Length);;
-                if (action >= 2)
+                GameObject newObject = Instantiate(buildArea, new Vector3(transform.position.x + 3, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+                yield return new WaitForSeconds(0.5f);
+                newObject.SendMessage("Check", gameObject, SendMessageOptions.DontRequireReceiver);
+                print("Check request sent");
+                newObject = null;
+                print("call for help");
+                timer = Time.time;
+                yield return new WaitUntil(() => canBuild == true || Time.time - timer > 60f);
+                if (canBuild == true)
                 {
-                //    StartCoroutine(HelpTree());
+                    print("Start building");
+
+                    if (action >= 2)
+                    {
+                        //    StartCoroutine(HelpTree());
+                    }
+                    newObject = Instantiate(buildings[action], new Vector3(transform.position.x + 1, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+                    newObject.transform.Rotate(0, Random.Range(0, 360), 0);
+                    newObject.SendMessage("Built", SendMessageOptions.DontRequireReceiver);
+                    yield return new WaitForSeconds(5);
                 }
-                GameObject newObject = Instantiate(buildings[action], new Vector3(transform.position.x + 1, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
-                newObject.transform.Rotate(0, Random.Range(0, 360), 0);
-                newObject.SendMessage("Built", SendMessageOptions.DontRequireReceiver);
-                yield return new WaitForSeconds(5);
-                break;
+                    break;
+                
+
         }
 
 

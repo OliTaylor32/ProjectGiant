@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MaterialGather : MonoBehaviour
 {
-
+    private GameObject villager;
     public GameObject tree;
     public int objects;
     // Start is called before the first frame update
@@ -36,5 +36,25 @@ public class MaterialGather : MonoBehaviour
             tree = null;
         }
         objects--;
+
+    }
+
+    private void Check(GameObject sender)
+    {
+        villager = sender;
+        while(Time.time - villager.GetComponent<Villager>().timer > 60)
+        {
+            if (objects == 0)
+            {
+                villager.GetComponent<Villager>().canBuild = true;
+                Destroy(gameObject);
+            }
+
+            if (Time.time - villager.GetComponent<Villager>().timer > 59)
+            {
+                Destroy(gameObject);
+            }
+        }
+        
     }
 }
