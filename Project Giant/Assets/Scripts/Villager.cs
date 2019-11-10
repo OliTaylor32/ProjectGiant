@@ -85,7 +85,9 @@ public class Villager : MonoBehaviour
             case "Build":
                 print("Building");
                 action = Random.Range(0, buildings.Length);;
-                GameObject newObject = Instantiate(buildArea, new Vector3(transform.position.x + 3, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+                print("About to create buildArea");
+                GameObject newObject = Instantiate(buildArea, new Vector3(transform.position.x + 3, transform.position.y, transform.position.z), Quaternion.identity);
+                print("buildArea spawned");
                 yield return new WaitForSeconds(0.5f);
                 newObject.SendMessage("Check", gameObject, SendMessageOptions.DontRequireReceiver);
                 print("Check request sent");

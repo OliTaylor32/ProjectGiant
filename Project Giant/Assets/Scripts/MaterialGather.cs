@@ -7,16 +7,32 @@ public class MaterialGather : MonoBehaviour
     private GameObject villager;
     public GameObject tree;
     public int objects;
+    private bool checking;
     // Start is called before the first frame update
     void Start()
     {
+        checking = false;
         objects = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (checking == true)
+        {
+            if (objects == 0)
+            {
+                villager.GetComponent<Villager>().canBuild = true;
+                Destroy(gameObject);
+            }
+
+            if (Time.time - villager.GetComponent<Villager>().timer > 60)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -39,22 +55,9 @@ public class MaterialGather : MonoBehaviour
 
     }
 
-    private void Check(GameObject sender)
+    public void Check(GameObject sender)
     {
         villager = sender;
-        while(Time.time - villager.GetComponent<Villager>().timer > 60)
-        {
-            if (objects == 0)
-            {
-                villager.GetComponent<Villager>().canBuild = true;
-                Destroy(gameObject);
-            }
-
-            if (Time.time - villager.GetComponent<Villager>().timer > 59)
-            {
-                Destroy(gameObject);
-            }
-        }
-        
+        checking = true;
     }
 }
