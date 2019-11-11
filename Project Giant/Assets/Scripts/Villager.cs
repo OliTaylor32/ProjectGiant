@@ -13,6 +13,7 @@ public class Villager : MonoBehaviour
     public GameObject buildArea;
     public bool canBuild;
     public float timer;
+    Vector3 target;
 
     private GameObject[] buildings;
 
@@ -50,7 +51,7 @@ public class Villager : MonoBehaviour
 
     private IEnumerator Move()
     {
-        Vector3 target = new Vector3((townCenter.position.x + Random.Range(-25, 25)), transform.position.y, (townCenter.position.z + Random.Range(-25, 25)));
+        target = new Vector3((townCenter.position.x + Random.Range(-25, 25)), transform.position.y, (townCenter.position.z + Random.Range(-25, 25)));
         transform.LookAt(target);
         while (Vector3.Distance(transform.position, target) > 1)
         {
@@ -128,11 +129,26 @@ public class Villager : MonoBehaviour
             //play kicked animation
             transform.Rotate(transform.rotation.x, collision.gameObject.transform.rotation.y, transform.rotation.z);
             //play running animation
-            for (int i = 0; i < length; i++)
+            if (collision.gameObject.transform.rotation.y >= -45 && collision.gameObject.transform.rotation.y < 45)
             {
-
+                target = new Vector3(target.x, target.y, transform.position.z + 10);
             }
-            transform.position += transform.forward * Time.deltaTime * speed;
+
+            if (collision.gameObject.transform.rotation.y >= 45 && collision.gameObject.transform.rotation.y < 135)
+            {
+                target = new Vector3(target.x + 10, target.y, transform.position.z);
+            }
+
+            if (collision.gameObject.transform.rotation.y >= 135 || collision.gameObject.transform.rotation.y < -135)
+            {
+                target = new Vector3(target.x, target.y, transform.position.z - 10);
+            }
+
+            if (collision.gameObject.transform.rotation.y >= -135 && collision.gameObject.transform.rotation.y < -45)
+            {
+                target = new Vector3(target.x, target.y, transform.position.z - 10);
+            }
+
         }
     }
 
