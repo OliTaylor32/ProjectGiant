@@ -106,6 +106,7 @@ public class Villager : MonoBehaviour
                     newObject = Instantiate(buildings[action], new Vector3(transform.position.x + 1, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
                     newObject.transform.Rotate(0, Random.Range(0, 360), 0);
                     newObject.SendMessage("Built", SendMessageOptions.DontRequireReceiver);
+                    canBuild = false;
                     yield return new WaitForSeconds(5);
                 }
                     break;
@@ -120,8 +121,22 @@ public class Villager : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Giant" && Input.anyKey)
+        {
+            //play kicked animation
+            transform.Rotate(transform.rotation.x, collision.gameObject.transform.rotation.y, transform.rotation.z);
+            //play running animation
+            for (int i = 0; i < length; i++)
+            {
+
+            }
+            transform.position += transform.forward * Time.deltaTime * speed;
+        }
+    }
 
 
-    
+
 
 }
