@@ -203,7 +203,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
+  m_Height: 0.96
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -245,11 +245,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 253682359471131964}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.76531655
-  m_Height: 1
+  m_Height: 0.9105007
   m_Direction: 1
-  m_Center: {x: 0.004770994, y: 0, z: -0.06379539}
+  m_Center: {x: 0.004770994, y: -0.02672779, z: -0.06379539}
 --- !u!95 &253682359471131965
 Animator:
   serializedVersion: 3
