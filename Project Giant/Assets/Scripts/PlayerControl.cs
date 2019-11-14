@@ -22,6 +22,8 @@ public class PlayerControl : MonoBehaviour
     public bool isCarrying = false;
     public GameObject carrying;
     public int size;
+    private bool pickingUp = false;
+    private float timer;
 
     //Attacking Variables
     public bool isAttacking;
@@ -95,18 +97,38 @@ public class PlayerControl : MonoBehaviour
         //*********
         //Animation
         //*********
-        if (isAttacking == true)
+        if (pickingUp == false)
         {
-            gameObject.GetComponent<Animator>().Play("Attack");
+            if (isAttacking == true)
+            {
+                gameObject.GetComponent<Animator>().Play("Attack");
+            }
+            else if (moveForward == 0 && moveSide == 0)
+            {
+                if (isCarrying == true)
+                {
+                    gameObject.GetComponent<Animator>().Play("IdleCarry");
+                }
+                else
+                {
+                    gameObject.GetComponent<Animator>().Play("Idle");
+                }
+
+            }
+            else if (moveForward > moveSide)
+            {
+                if (isCarrying == true)
+                {
+                    gameObject.GetComponent<Animator>().Play("WalkCarry");
+                }
+                else
+                {
+                    gameObject.GetComponent<Animator>().Play("Walk");
+                }
+
+            }
         }
-        else if (moveForward == 0 && moveSide == 0)
-        {
-            gameObject.GetComponent<Animator>().Play("Idle"); 
-        }
-        else if (moveForward > moveSide)
-        {
-            gameObject.GetComponent<Animator>().Play("Walk");
-        }
+
 
 
         //***********************
@@ -120,6 +142,10 @@ public class PlayerControl : MonoBehaviour
             {
                 pickup.SendMessage("GetPickUp", SendMessageOptions.DontRequireReceiver);
                 //print("Get item");
+                gameObject.GetComponent<Animator>().Play("PickingUp");
+                pickingUp = true;
+                timer = Time.time;
+
             }
 
             else
@@ -131,9 +157,12 @@ public class PlayerControl : MonoBehaviour
 
         }
 
+        if (Time.time - timer > 2f)
+            pickingUp = false;
+
         if (isCarrying == true)
         {
-            carrying.transform.position = pickup.transform.position;
+            carrying.transform.position = new Vector3 (pickup.transform.position.x, pickup.transform.position.y + 0.5f, pickup.transform.position.z);
         }
 
         //*********
