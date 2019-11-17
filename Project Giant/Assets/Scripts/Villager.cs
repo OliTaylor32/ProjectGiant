@@ -54,6 +54,7 @@ public class Villager : MonoBehaviour
         gameObject.GetComponent<Animator>().Play("VillagerWalk");
         target = new Vector3((townCenter.position.x + Random.Range(-25, 25)), transform.position.y, (townCenter.position.z + Random.Range(-25, 25)));
         transform.LookAt(target);
+        transform.Rotate(0, -90, 0);
         while (Vector3.Distance(transform.position, target) > 1)
         {
             //print("step");
