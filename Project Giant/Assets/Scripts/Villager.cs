@@ -78,6 +78,7 @@ public class Villager : MonoBehaviour
 
     private IEnumerator Action()
     {
+        gameObject.GetComponent<Animator>().Play("VillagerIdle");
         print("Action start");
         int action = Random.Range(0, 2);
         switch (actions[action])
