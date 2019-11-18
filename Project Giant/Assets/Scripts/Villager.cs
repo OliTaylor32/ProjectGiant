@@ -14,6 +14,8 @@ public class Villager : MonoBehaviour
     public bool canBuild;
     public float timer;
     Vector3 target;
+    public GameObject star;
+    public GameObject tear;
 
     private GameObject[] buildings;
 
@@ -45,6 +47,7 @@ public class Villager : MonoBehaviour
     {
         if (life == 0)
         {
+            Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
             Destroy(gameObject);
         }
     }
@@ -68,6 +71,7 @@ public class Villager : MonoBehaviour
     private void lifeDown()
     {
         life--;
+        Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
 
     private void GetWeight(GameObject sender)
@@ -111,6 +115,7 @@ public class Villager : MonoBehaviour
                     newObject.transform.Rotate(0, Random.Range(0, 360), 0);
                     newObject.SendMessage("Built", SendMessageOptions.DontRequireReceiver);
                     canBuild = false;
+                    Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                     yield return new WaitForSeconds(5);
                 }
                     break;
@@ -151,7 +156,7 @@ public class Villager : MonoBehaviour
             {
                 target = new Vector3(target.x, target.y, transform.position.z - 10);
             }
-
+            Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         }
     }
 

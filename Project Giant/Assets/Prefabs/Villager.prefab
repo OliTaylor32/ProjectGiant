@@ -3430,6 +3430,8 @@ MonoBehaviour:
     type: 3}
   canBuild: 0
   timer: 0
+  star: {fileID: 3559250292362852098, guid: dab2c4c9eb753ba4ab3e648705c30ec5, type: 3}
+  tear: {fileID: 6497887434317789109, guid: 7871b36754da21640818601eff852ef7, type: 3}
   snowMan: {fileID: 6499585803886891126, guid: b777cbb780c2474449ddfc02c6a4cf18, type: 3}
   smallHouse: {fileID: 4577986100095370519, guid: 5e79a163d997fac4e941ed9ddce9e97d,
     type: 3}

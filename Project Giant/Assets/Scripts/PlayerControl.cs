@@ -25,8 +25,10 @@ public class PlayerControl : MonoBehaviour
     private bool pickingUp = false;
     private float timer;
 
-    //Attacking Variables
+    //Other Variables
     public bool isAttacking;
+    public int stars = 0;
+    public int tears = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -205,6 +207,14 @@ public class PlayerControl : MonoBehaviour
     private void AttackFinished()
     {
         isAttacking = false;
+    }
+
+    public void starTear(bool isStar)
+    {
+        if (isStar == true)
+            stars++;
+        else
+            tears++;
     }
 
 }
