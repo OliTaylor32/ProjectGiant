@@ -29,7 +29,7 @@ public class StarTear : MonoBehaviour
         if (collision.gameObject == giant.gameObject)
         {
             giant.gameObject.SendMessage("starTear", isStar, SendMessageOptions.DontRequireReceiver);
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }

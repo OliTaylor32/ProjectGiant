@@ -204,7 +204,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 0.96
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -231,11 +231,16 @@ MonoBehaviour:
   moveSpeed: 0.2
   zoom: 0
   rotationSpeed: 1
+  maxSpeed: 5
   pickup: {fileID: 253682361031500078}
   isCarrying: 0
   carrying: {fileID: 0}
   size: 1
   isAttacking: 0
+  stars: 0
+  tears: 0
+  starLv: 0
+  tearLv: 0
 --- !u!136 &253682359471131966
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -244,12 +249,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253682359471131964}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.76531655
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.294025
   m_Height: 0.9105007
   m_Direction: 1
-  m_Center: {x: 0.004770994, y: -0.02672779, z: -0.06379539}
+  m_Center: {x: 0.009757638, y: -0.02672779, z: -0.037198544}
 --- !u!95 &253682359471131965
 Animator:
   serializedVersion: 3

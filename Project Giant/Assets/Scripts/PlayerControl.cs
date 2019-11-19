@@ -15,6 +15,7 @@ public class PlayerControl : MonoBehaviour
     public float zoom;
     private float zoomSpeed = 2f;
     public float rotationSpeed = 5f;
+    public float maxSpeed = 5f;
     
 
     //Picking up Variables
@@ -75,7 +76,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         moveSide = Mathf.Clamp(moveSide, -3, 3);
-        moveForward = Mathf.Clamp(moveForward, -3, 5);
+        moveForward = Mathf.Clamp(moveForward, -3, maxSpeed);
 
         if (isAttacking == false)
         {
@@ -195,18 +196,26 @@ public class PlayerControl : MonoBehaviour
         if (stars < 5)
         {
             starLv = 0;
+            maxSpeed = 5f;
+            rotationSpeed = 1f;
         }
         else if (stars >= 5 && stars < 10)
         {
             starLv = 1;
+            maxSpeed = 6f;
+            rotationSpeed = 1.2f;
         }
         else if (stars >= 10 && stars < 15)
         {
             starLv = 2;
+            maxSpeed = 7f;
+            rotationSpeed = 1.4f;
         }
         else if (stars >= 15 && stars < 20)
         {
             starLv = 3;
+            maxSpeed = 8f;
+            rotationSpeed = 1.6f;
         }
 
         if (tears < 5)

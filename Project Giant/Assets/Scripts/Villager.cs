@@ -56,11 +56,11 @@ public class Villager : MonoBehaviour
     {
         gameObject.GetComponent<Animator>().Play("VillagerWalk");
         target = new Vector3((townCenter.position.x + Random.Range(-25, 25)), transform.position.y, (townCenter.position.z + Random.Range(-25, 25)));
-        transform.LookAt(target);
-        transform.Rotate(0, -90, 0);
         while (Vector3.Distance(transform.position, target) > 1)
         {
             //print("step");
+            transform.LookAt(target);
+            transform.Rotate(0, -90, 0);
             transform.position = Vector3.MoveTowards(transform.position, target, ((speed * 0.1f) * Time.deltaTime));
             yield return new WaitForSeconds(0.01f);
         }
@@ -130,31 +130,37 @@ public class Villager : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "Giant" && Input.anyKey)
+        print("collision Entered");
+        if (collision.GetComponent<PlayerControl>() != null && Input.anyKey )
         {
+            print("Kicked by Giant");
             //play kicked animation
             transform.Rotate(transform.rotation.x, collision.gameObject.transform.rotation.y, transform.rotation.z);
             //play running animation
             if (collision.gameObject.transform.rotation.y >= -45 && collision.gameObject.transform.rotation.y < 45)
             {
-                target = new Vector3(target.x, target.y, transform.position.z + 10);
+                target = new Vector3(transform.position.x, transform.position.y, transform.position.z + 10);
+                transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z + 2);
             }
 
             if (collision.gameObject.transform.rotation.y >= 45 && collision.gameObject.transform.rotation.y < 135)
             {
-                target = new Vector3(target.x + 10, target.y, transform.position.z);
+                target = new Vector3(transform.position.x + 10, transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x + 2, transform.position.y + 1, transform.position.z);
             }
 
             if (collision.gameObject.transform.rotation.y >= 135 || collision.gameObject.transform.rotation.y < -135)
             {
-                target = new Vector3(target.x, target.y, transform.position.z - 10);
+                target = new Vector3(transform.position.x, transform.position.y, transform.position.z - 10);
+                transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z - 2);
             }
 
             if (collision.gameObject.transform.rotation.y >= -135 && collision.gameObject.transform.rotation.y < -45)
             {
-                target = new Vector3(target.x, target.y, transform.position.z - 10);
+                target = new Vector3(transform.position.x - 10, transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x - 2, transform.position.y + 1, transform.position.z);
             }
             Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         }
