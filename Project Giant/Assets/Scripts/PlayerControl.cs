@@ -29,6 +29,8 @@ public class PlayerControl : MonoBehaviour
     public bool isAttacking;
     public int stars = 0;
     public int tears = 0;
+    public int starLv = 0;
+    public int tearLv = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -172,7 +174,7 @@ public class PlayerControl : MonoBehaviour
         //*********
         if (isCarrying == false)
         {
-            if (tears >= 5)
+            if (tearLv >= 1)
             {
                 if (Input.GetKeyDown(KeyCode.X))
                 {
@@ -189,6 +191,70 @@ public class PlayerControl : MonoBehaviour
         //*******
         //Growing
         //*******
+
+        if (stars < 5)
+        {
+            starLv = 0;
+        }
+        else if (stars >= 5 && stars < 10)
+        {
+            starLv = 1;
+        }
+        else if (stars >= 10 && stars < 15)
+        {
+            starLv = 2;
+        }
+        else if (stars >= 15 && stars < 20)
+        {
+            starLv = 3;
+        }
+
+        if (tears < 5)
+        {
+            tearLv = 0;
+        }
+        else if (tears >= 5 && tears < 10)
+        {
+            tearLv = 1;
+        }
+        else if (tears >= 10 && tears < 15)
+        {
+            tearLv = 2;
+        }
+        else if (tears >= 15 && tears < 20)
+        {
+            tearLv = 3;
+        }
+
+        if (tearLv + starLv == 1)
+        {
+            if (size < 2)
+            {
+                //Growing animation
+                size = 2;
+                transform.localScale = new Vector3(1.2f, 3.6f, 1.2f);
+            }
+        }
+
+        if (tearLv + starLv == 2)
+        {
+            if (size < 3)
+            {
+                //Growing animation
+                size = 3;
+                transform.localScale = new Vector3(1.4f, 4.2f, 1.4f);
+            }
+        }
+
+        if (tearLv + starLv == 3)
+        {
+            if (size < 4)
+            {
+                //Growing animation
+                size = 4;
+                transform.localScale = new Vector3(1.6f, 4.8f, 1.4f);
+            }
+        }
     }
 
     private void ReturnPickUp(GameObject obj)
