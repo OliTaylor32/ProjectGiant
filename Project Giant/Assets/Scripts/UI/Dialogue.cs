@@ -119,7 +119,7 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-        if (Time.time - dayTimer >= 590f)
+        if (Time.time - dayTimer >= 290f)
         {
             txt.text = text[9];
             used[9] = true;
