@@ -193,44 +193,44 @@ public class PlayerControl : MonoBehaviour
         //Growing
         //*******
 
-        if (stars < 5)
+        if (stars < 10)
         {
             starLv = 0;
             maxSpeed = 5f;
             rotationSpeed = 1f;
         }
-        else if (stars >= 5 && stars < 10)
+        else if (stars >= 10 && stars < 20)
         {
             starLv = 1;
             maxSpeed = 6f;
             rotationSpeed = 1.2f;
         }
-        else if (stars >= 10 && stars < 15)
+        else if (stars >= 20 && stars < 30)
         {
             starLv = 2;
             maxSpeed = 7f;
             rotationSpeed = 1.4f;
         }
-        else if (stars >= 15 && stars < 20)
+        else if (stars >= 30 && stars < 40)
         {
             starLv = 3;
             maxSpeed = 8f;
             rotationSpeed = 1.6f;
         }
 
-        if (tears < 5)
+        if (tears < 10)
         {
             tearLv = 0;
         }
-        else if (tears >= 5 && tears < 10)
+        else if (tears >= 10 && tears < 20)
         {
             tearLv = 1;
         }
-        else if (tears >= 10 && tears < 15)
+        else if (tears >= 20 && tears < 30)
         {
             tearLv = 2;
         }
-        else if (tears >= 15 && tears < 20)
+        else if (tears >= 30 && tears < 40)
         {
             tearLv = 3;
         }

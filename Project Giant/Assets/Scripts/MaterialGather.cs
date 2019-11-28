@@ -30,6 +30,12 @@ public class MaterialGather : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+
+            if (Time.time - villager.GetComponent<Villager>().timer == 5)
+            {
+                GameObject txtHint = GameObject.Find("Narrator");
+                txtHint.SendMessage("BuildHelp", SendMessageOptions.DontRequireReceiver);
+            }
         }
 
 

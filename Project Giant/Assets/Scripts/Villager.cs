@@ -163,6 +163,7 @@ public class Villager : MonoBehaviour
                 transform.position = new Vector3(transform.position.x - 2, transform.position.y + 1, transform.position.z);
             }
             Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            lifeDown();
         }
     }
 
