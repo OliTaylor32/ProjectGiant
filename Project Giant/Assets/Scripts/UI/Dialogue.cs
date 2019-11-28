@@ -32,7 +32,7 @@ public class Dialogue : MonoBehaviour
         text[5] = "When the Giant grows by collecting stars, it will become more mobile";
         text[6] = "When the Giant grows by collecting tears, it will gain more destructive abilities. ";
         text[7] = "The greater the Giant becomes in size, the stronger it gets, allowing it to lift almost anything!";
-        text[8] = "Keeping nature on your side is always useful in a harsh enviroment";
+        text[8] = "Keeping nature on your side is always useful in a harsh enviroment, try putting 2 trees next to eachother.";
         text[9] = "As the sun starts it's desent into the horizon, the villagers say goodbye to the Giant, as they have to rest, so too does the Giant.";
 
         txt = gameObject.GetComponent<Text>();
@@ -119,7 +119,7 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-        if (Time.time - dayTimer >= 290f)
+        if (Time.time - dayTimer >= 585f)
         {
             txt.text = text[9];
             used[9] = true;

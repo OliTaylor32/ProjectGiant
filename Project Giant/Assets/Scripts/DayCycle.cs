@@ -14,7 +14,7 @@ public class DayCycle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - timer >= 300)
+        if (Time.time - timer >= 600)
         {
             #pragma warning disable CS0618 // Type or member is obsolete
             Application.LoadLevel("TitleScreen");
