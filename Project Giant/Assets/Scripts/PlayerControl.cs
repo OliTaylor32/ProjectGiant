@@ -75,19 +75,19 @@ public class PlayerControl : MonoBehaviour
             moveForward = 0;
         }
 
-        moveSide = Mathf.Clamp(moveSide, -3, 3);
+        moveSide = Mathf.Clamp(moveSide, -maxSpeed, maxSpeed);
         moveForward = Mathf.Clamp(moveForward, -3, maxSpeed);
 
         if (isAttacking == false)
         {
-
-            Vector3 movement = new Vector3(moveSide, 0, moveForward);
-            movement = player.rotation * movement;
+            transform.Rotate(0, moveSide * 10 * Time.deltaTime, 0);
+            Vector3 movement = new Vector3(0, 0, moveForward);
+            movement = transform.rotation * movement;
             player.GetComponent<CharacterController>().Move(movement * Time.deltaTime);
             centerPoint.position = new Vector3(player.position.x, (player.position.y + 1), player.position.z);
             if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0)
             {
-                Quaternion turnAngle = Quaternion.Euler(0, centerPoint.eulerAngles.y, 0);
+                Quaternion turnAngle = Quaternion.Euler(0, gameObject.transform.eulerAngles.y, 0);
                 player.rotation = Quaternion.Slerp(player.rotation, turnAngle, Time.deltaTime * rotationSpeed);
             }
 
