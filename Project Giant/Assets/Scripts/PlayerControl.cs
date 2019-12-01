@@ -94,7 +94,7 @@ public class PlayerControl : MonoBehaviour
         }
         if (gameObject.GetComponent<CharacterController>().isGrounded == false)
         {
-            Vector3 grav = new Vector3(0, -10, 0);
+            Vector3 grav = new Vector3(0, -150, 0);
             player.GetComponent<CharacterController>().Move(grav * Time.deltaTime);
         }
 

@@ -90,6 +90,7 @@ public class Villager : MonoBehaviour
         {
             case "Nothing":
                 print("No Action Taken");
+                gameObject.GetComponent<Animator>().Play("VillagerIdle");
                 break;
             case "Build":
                 print("Building");
@@ -103,6 +104,7 @@ public class Villager : MonoBehaviour
                 newObject = null;
                 print("call for help");
                 timer = Time.time;
+                gameObject.GetComponent<Animator>().Play("VillagerWave");
                 yield return new WaitUntil(() => canBuild == true || Time.time - timer > 60f);
                 if (canBuild == true)
                 {
