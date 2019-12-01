@@ -120,7 +120,7 @@ public class PlayerControl : MonoBehaviour
                 }
 
             }
-            else if (Input.GetKeyDown(KeyCode.W) ==true)
+            else if (Input.GetKey(KeyCode.W) ==true)
             {
                 if (isCarrying == true)
                 {
@@ -132,7 +132,7 @@ public class PlayerControl : MonoBehaviour
                 }
 
             }
-            else if (Input.GetKeyDown(KeyCode.A) == true)
+            else if (Input.GetKey(KeyCode.A) == true)
             {
                 if (isCarrying == true)
                 {
@@ -144,7 +144,7 @@ public class PlayerControl : MonoBehaviour
                 }
 
             }
-            else if (Input.GetKeyDown(KeyCode.D) == true)
+            else if (Input.GetKey(KeyCode.D) == true)
             {
                 if (isCarrying == true)
                 {
@@ -153,6 +153,18 @@ public class PlayerControl : MonoBehaviour
                 else
                 {
                     gameObject.GetComponent<Animator>().Play("TurnRight");
+                }
+
+            }
+            else if (Input.GetKey(KeyCode.S) == true)
+            {
+                if (isCarrying == true)
+                {
+                    gameObject.GetComponent<Animator>().Play("BackwardsCarry");
+                }
+                else
+                {
+                    gameObject.GetComponent<Animator>().Play("Backwards");
                 }
 
             }

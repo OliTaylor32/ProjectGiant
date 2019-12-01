@@ -134,37 +134,41 @@ public class Villager : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         print("collision Entered");
-        if (collision.GetComponent<PlayerControl>() != null && Input.anyKey )
+        if (collision.GetComponent<PlayerControl>() != null && Input.anyKey)
         {
-            print("Kicked by Giant");
-            //play kicked animation
-            transform.Rotate(transform.rotation.x, collision.gameObject.transform.rotation.y, transform.rotation.z);
-            //play running animation
-            if (collision.gameObject.transform.rotation.y >= -45 && collision.gameObject.transform.rotation.y < 45)
+            if (collision.GetComponent<PlayerControl>().carrying != gameObject)
             {
-                target = new Vector3(transform.position.x, transform.position.y, transform.position.z + 10);
-                transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z + 2);
+                //print("Kicked by Giant");
+                //play kicked animation
+                transform.Rotate(transform.rotation.x, collision.gameObject.transform.rotation.y, transform.rotation.z);
+                //play running animation
+                if (collision.gameObject.transform.rotation.y >= -45 && collision.gameObject.transform.rotation.y < 45)
+                {
+                    target = new Vector3(transform.position.x, transform.position.y, transform.position.z + 10);
+                    transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z + 2);
+                }
+
+                if (collision.gameObject.transform.rotation.y >= 45 && collision.gameObject.transform.rotation.y < 135)
+                {
+                    target = new Vector3(transform.position.x + 10, transform.position.y, transform.position.z);
+                    transform.position = new Vector3(transform.position.x + 2, transform.position.y + 1, transform.position.z);
+                }
+
+                if (collision.gameObject.transform.rotation.y >= 135 || collision.gameObject.transform.rotation.y < -135)
+                {
+                    target = new Vector3(transform.position.x, transform.position.y, transform.position.z - 10);
+                    transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z - 2);
+                }
+
+                if (collision.gameObject.transform.rotation.y >= -135 && collision.gameObject.transform.rotation.y < -45)
+                {
+                    target = new Vector3(transform.position.x - 10, transform.position.y, transform.position.z);
+                    transform.position = new Vector3(transform.position.x - 2, transform.position.y + 1, transform.position.z);
+                }
+                Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                lifeDown();
             }
 
-            if (collision.gameObject.transform.rotation.y >= 45 && collision.gameObject.transform.rotation.y < 135)
-            {
-                target = new Vector3(transform.position.x + 10, transform.position.y, transform.position.z);
-                transform.position = new Vector3(transform.position.x + 2, transform.position.y + 1, transform.position.z);
-            }
-
-            if (collision.gameObject.transform.rotation.y >= 135 || collision.gameObject.transform.rotation.y < -135)
-            {
-                target = new Vector3(transform.position.x, transform.position.y, transform.position.z - 10);
-                transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z - 2);
-            }
-
-            if (collision.gameObject.transform.rotation.y >= -135 && collision.gameObject.transform.rotation.y < -45)
-            {
-                target = new Vector3(transform.position.x - 10, transform.position.y, transform.position.z);
-                transform.position = new Vector3(transform.position.x - 2, transform.position.y + 1, transform.position.z);
-            }
-            Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-            lifeDown();
         }
     }
 
