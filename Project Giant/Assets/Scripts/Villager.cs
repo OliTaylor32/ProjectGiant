@@ -61,6 +61,7 @@ public class Villager : MonoBehaviour
             //print("step");
             transform.LookAt(target);
             transform.Rotate(0, -90, 0);
+            transform.rotation.Set(0, transform.rotation.y, 0, 0); 
             transform.position = Vector3.MoveTowards(transform.position, target, ((speed * 0.1f) * Time.deltaTime));
             yield return new WaitForSeconds(0.01f);
         }

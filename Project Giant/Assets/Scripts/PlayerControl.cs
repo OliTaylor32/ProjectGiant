@@ -120,7 +120,7 @@ public class PlayerControl : MonoBehaviour
                 }
 
             }
-            else if (moveForward > moveSide)
+            else if (Input.GetKeyDown(KeyCode.W) ==true)
             {
                 if (isCarrying == true)
                 {
@@ -129,6 +129,30 @@ public class PlayerControl : MonoBehaviour
                 else
                 {
                     gameObject.GetComponent<Animator>().Play("Walk");
+                }
+
+            }
+            else if (Input.GetKeyDown(KeyCode.A) == true)
+            {
+                if (isCarrying == true)
+                {
+                    gameObject.GetComponent<Animator>().Play("TurnLeftCarry");
+                }
+                else
+                {
+                    gameObject.GetComponent<Animator>().Play("TurnLeft");
+                }
+
+            }
+            else if (Input.GetKeyDown(KeyCode.D) == true)
+            {
+                if (isCarrying == true)
+                {
+                    gameObject.GetComponent<Animator>().Play("TurnRightCarry");
+                }
+                else
+                {
+                    gameObject.GetComponent<Animator>().Play("TurnRight");
                 }
 
             }
