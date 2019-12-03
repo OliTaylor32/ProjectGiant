@@ -16,6 +16,7 @@ public class Villager : MonoBehaviour
     Vector3 target;
     public GameObject star;
     public GameObject tear;
+    public string colour;
 
     private GameObject[] buildings;
 
@@ -28,7 +29,14 @@ public class Villager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        townCenter = GameObject.Find("TownCenter").transform;
+        if (colour == "Blue")
+        {
+            townCenter = GameObject.Find("TownCentre").transform;
+        }
+        else if (colour == "Black")
+        {
+            townCenter = GameObject.Find("TownCentreB").transform;
+        }
         StartCoroutine(Move());
 
         actions = new string[2];

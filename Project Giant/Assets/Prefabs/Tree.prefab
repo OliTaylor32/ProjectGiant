@@ -425,7 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: Tree
   weight: 1
-  life: 2
+  life: 1
   villager: {fileID: 0}
 --- !u!1 &6272596965239197040
 GameObject:
