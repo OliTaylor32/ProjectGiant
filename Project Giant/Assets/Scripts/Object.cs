@@ -30,7 +30,7 @@ public class Object : MonoBehaviour
     }
 
 
-    private void lifeDown()
+    public void lifeDown()
     {
         life--;
     }

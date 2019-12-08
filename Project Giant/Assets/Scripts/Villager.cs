@@ -182,6 +182,17 @@ public class Villager : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<Object>() != null)
+        {
+            if (collision.gameObject.GetComponent<Object>().item == "Tree")
+            {
+                collision.gameObject.GetComponent<Object>().lifeDown();
+            }
+        }
+    }
+
 
 
 
