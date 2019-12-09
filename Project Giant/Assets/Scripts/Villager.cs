@@ -104,12 +104,11 @@ public class Villager : MonoBehaviour
                 print("Building");
                 action = Random.Range(0, buildings.Length);;
                 print("About to create buildArea");
-                GameObject newObject = Instantiate(buildArea, new Vector3(transform.position.x + 3, transform.position.y, transform.position.z), Quaternion.identity);
+                GameObject build = Instantiate(buildArea, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z), Quaternion.identity);
                 print("buildArea spawned");
                 yield return new WaitForSeconds(0.5f);
-                newObject.SendMessage("Check", gameObject, SendMessageOptions.DontRequireReceiver);
+                build.SendMessage("Check", gameObject, SendMessageOptions.DontRequireReceiver);
                 print("Check request sent");
-                newObject = null;
                 print("call for help");
                 timer = Time.time;
                 gameObject.GetComponent<Animator>().Play("VillagerWave");
@@ -122,7 +121,8 @@ public class Villager : MonoBehaviour
                     {
                         //    StartCoroutine(HelpTree());
                     }
-                    newObject = Instantiate(buildings[action], new Vector3(transform.position.x + 1, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+                    GameObject newObject = Instantiate(buildings[action], new Vector3(build.transform.position.x, build.transform.position.y, build.transform.position.z), Quaternion.identity);
+                    build = null;
                     newObject.transform.Rotate(0, Random.Range(0, 360), 0);
                     newObject.SendMessage("Built", SendMessageOptions.DontRequireReceiver);
                     canBuild = false;
