@@ -17,6 +17,7 @@ public class Villager : MonoBehaviour
     public GameObject star;
     public GameObject tear;
     public string colour;
+    private bool stop;
 
     private GameObject[] buildings;
 
@@ -48,6 +49,7 @@ public class Villager : MonoBehaviour
         buildings[1] = smallHouse;
         buildings[2] = torch;
         buildings[3] = totem;
+        stop = false;
     }
 
     // Update is called once per frame
@@ -72,8 +74,15 @@ public class Villager : MonoBehaviour
             transform.rotation.Set(0, transform.rotation.y, 0, 0); 
             transform.position = Vector3.MoveTowards(transform.position, target, ((speed * 0.1f) * Time.deltaTime));
             yield return new WaitForSeconds(0.01f);
+            if (stop == true)
+            {
+                break;
+            }
         }
-        StartCoroutine(Action());
+        if (stop == false)
+        {
+            StartCoroutine(Action());
+        }
 
     }
 
@@ -182,14 +191,21 @@ public class Villager : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private IEnumerator OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<Object>() != null)
         {
+            stop = true;
             if (collision.gameObject.GetComponent<Object>().item == "Tree")
             {
+                gameObject.GetComponent<Animator>().Play("VillagerChop");
+                yield return new WaitForSeconds(5);
                 collision.gameObject.GetComponent<Object>().lifeDown();
+                
             }
+            stop = false;
+            StartCoroutine(Move());
+
         }
     }
 
