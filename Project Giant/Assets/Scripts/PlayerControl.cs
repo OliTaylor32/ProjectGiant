@@ -24,6 +24,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject carrying;
     public int size;
     private bool pickingUp = false;
+    private bool dropping;
     private float timer;
 
     //Other Variables
@@ -37,6 +38,7 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         zoom = -7;
+        dropping = false;
     }
 
     // Update is called once per frame
@@ -102,71 +104,74 @@ public class PlayerControl : MonoBehaviour
         //*********
         //Animation
         //*********
-        if (pickingUp == false)
+        if (dropping == false)
         {
-            if (isAttacking == true)
+            if (pickingUp == false)
             {
-                gameObject.GetComponent<Animator>().Play("Attack");
-            }
-            else if (moveForward == 0 && moveSide == 0)
-            {
-                if (isCarrying == true)
+                if (isAttacking == true)
                 {
-                    gameObject.GetComponent<Animator>().Play("IdleCarry");
+                    gameObject.GetComponent<Animator>().Play("Attack");
                 }
-                else
+                else if (moveForward == 0 && moveSide == 0)
                 {
-                    gameObject.GetComponent<Animator>().Play("Idle");
-                }
+                    if (isCarrying == true)
+                    {
+                        gameObject.GetComponent<Animator>().Play("IdleCarry");
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<Animator>().Play("Idle");
+                    }
 
-            }
-            else if (Input.GetKey(KeyCode.W) ==true)
-            {
-                if (isCarrying == true)
-                {
-                    gameObject.GetComponent<Animator>().Play("WalkCarry");
                 }
-                else
+                else if (Input.GetKey(KeyCode.W) == true)
                 {
-                    gameObject.GetComponent<Animator>().Play("Walk");
-                }
+                    if (isCarrying == true)
+                    {
+                        gameObject.GetComponent<Animator>().Play("WalkCarry");
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<Animator>().Play("Walk");
+                    }
 
-            }
-            else if (Input.GetKey(KeyCode.A) == true)
-            {
-                if (isCarrying == true)
-                {
-                    gameObject.GetComponent<Animator>().Play("TurnLeftCarry");
                 }
-                else
+                else if (Input.GetKey(KeyCode.A) == true)
                 {
-                    gameObject.GetComponent<Animator>().Play("TurnLeft");
-                }
+                    if (isCarrying == true)
+                    {
+                        gameObject.GetComponent<Animator>().Play("TurnLeftCarry");
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<Animator>().Play("TurnLeft");
+                    }
 
-            }
-            else if (Input.GetKey(KeyCode.D) == true)
-            {
-                if (isCarrying == true)
-                {
-                    gameObject.GetComponent<Animator>().Play("TurnRightCarry");
                 }
-                else
+                else if (Input.GetKey(KeyCode.D) == true)
                 {
-                    gameObject.GetComponent<Animator>().Play("TurnRight");
-                }
+                    if (isCarrying == true)
+                    {
+                        gameObject.GetComponent<Animator>().Play("TurnRightCarry");
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<Animator>().Play("TurnRight");
+                    }
 
-            }
-            else if (Input.GetKey(KeyCode.S) == true)
-            {
-                if (isCarrying == true)
-                {
-                    gameObject.GetComponent<Animator>().Play("BackwardsCarry");
                 }
-                else
+                else if (Input.GetKey(KeyCode.S) == true)
                 {
-                    gameObject.GetComponent<Animator>().Play("Backwards");
-                }
+                    if (isCarrying == true)
+                    {
+                        gameObject.GetComponent<Animator>().Play("BackwardsCarry");
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<Animator>().Play("Backwards");
+                    }
 
+                }
             }
         }
 
@@ -191,9 +196,7 @@ public class PlayerControl : MonoBehaviour
 
             else
             {
-                isCarrying = false;
-                //print("Drop item");
-                carrying = null;
+                StartCoroutine(Drop());
             }
 
         }
@@ -333,6 +336,16 @@ public class PlayerControl : MonoBehaviour
             stars++;
         else
             tears++;
+    }
+
+    private IEnumerator Drop()
+    {
+        dropping = true;
+        gameObject.GetComponent<Animator>().Play("Drop");
+        yield return new WaitForSeconds(2);
+        isCarrying = false;
+        carrying = null;
+        dropping = false;
     }
 
 }

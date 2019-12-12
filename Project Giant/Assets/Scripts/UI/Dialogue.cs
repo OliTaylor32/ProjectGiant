@@ -37,7 +37,7 @@ public class Dialogue : MonoBehaviour
         text[10] = "The Giant has grown by collecting tears from the villagers, now it can attack by pressing the (X) key!";
         text[11] = "The Giant has grown by collecting stars from the villagers, the Giant's speed has increased!";
         text[12] = "Sometimes it's nessasary to be harmfull in order to help.";
-        text[13] = "In such a vast world, we get so fixated on what's nearby, we sometimes forget to explore what's further afield.";
+        text[13] = "In such a vast world, we get so fixated on what's nearby, we sometimes forget to explore what's further afield. I Wonder if there is anything over those mountains?";
         text[14] = "When all that exists is happiness, we all may as-well be constantly sad.";
 
         txt = gameObject.GetComponent<Text>();

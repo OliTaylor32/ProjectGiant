@@ -69,7 +69,7 @@ public class Villager : MonoBehaviour
         while (Vector3.Distance(transform.position, target) > 1)
         {
             //print("step");
-            transform.LookAt(target);
+            transform.LookAt(new Vector3(target.x, transform.position.y, target.z));
             transform.Rotate(0, -90, 0);
             transform.rotation.Set(0, transform.rotation.y, 0, 0); 
             transform.position = Vector3.MoveTowards(transform.position, target, ((speed * 0.1f) * Time.deltaTime));
