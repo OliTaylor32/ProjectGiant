@@ -6053,7 +6053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3b3ebf0383a974093c1851b07083f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  function: newgame
+  function: extras
 --- !u!65 &1113337452
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6084,7 +6084,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fdb8456739e9b2f4789ab7e327ea636b, type: 2}
+  - {fileID: 2100000, guid: 73f4199ee732fc147ac598752ef85db3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6761,7 +6761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3b3ebf0383a974093c1851b07083f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  function: newgame
+  function: challenge
 --- !u!65 &1829433743
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6792,7 +6792,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fdb8456739e9b2f4789ab7e327ea636b, type: 2}
+  - {fileID: 2100000, guid: 73f4199ee732fc147ac598752ef85db3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

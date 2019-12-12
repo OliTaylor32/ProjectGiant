@@ -40,7 +40,7 @@ public class Object : MonoBehaviour
         if(item == "smallHouse")
         {
             Instantiate(villager, new Vector3(transform.position.x + 5, transform.position.y, transform.position.z + 5), Quaternion.identity);
-            Instantiate(villager, new Vector3(transform.position.x + 5, transform.position.y, transform.position.z + 4), Quaternion.identity);
+            Instantiate(villager, new Vector3(transform.position.x + 5, transform.position.y + 0.5f, transform.position.z + 4), Quaternion.identity);
         }
     }
 }
