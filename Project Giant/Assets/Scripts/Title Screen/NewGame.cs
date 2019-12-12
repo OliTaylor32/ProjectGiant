@@ -30,5 +30,17 @@ public class NewGame : MonoBehaviour
         {
             Application.Quit();
         }
+        if (function == "back")
+        {
+            #pragma warning disable CS0618 // Type or member is obsolete
+            Application.LoadLevel("TitleScreen");
+            #pragma warning restore CS0618 // Type or member is obsolete
+        }
+        if (function == "help")
+        {
+            #pragma warning disable CS0618 // Type or member is obsolete
+            Application.LoadLevel("How To Play");
+            #pragma warning restore CS0618 // Type or member is obsolete
+        }
     }
 }
