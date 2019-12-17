@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 361788805585442548}
   - component: {fileID: 361788805585442549}
   - component: {fileID: 7104270454414762210}
+  - component: {fileID: -6695107263712123199}
   m_Layer: 0
   m_Name: Sapling
   m_TagString: Untagged
@@ -69,6 +70,7 @@ MonoBehaviour:
   weight: 1
   life: 1
   villager: {fileID: 0}
+  tree: {fileID: 8534353622358447377, guid: cd4e8f524e2b9734a8c214f81b22edea, type: 3}
 --- !u!65 &7104270454414762210
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -82,6 +84,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.998285, y: 8.538087, z: 3.752908}
   m_Center: {x: 0.028718572, y: -3.9336865, z: -0.054088853}
+--- !u!95 &-6695107263712123199
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361788805585442550}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 765b757e8b7f3ef4a974354402190fdb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &591943065344005390
 GameObject:
   m_ObjectHideFlags: 0

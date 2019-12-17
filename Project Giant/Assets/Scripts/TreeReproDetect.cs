@@ -53,7 +53,7 @@ public class TreeReproDetect : MonoBehaviour
                     if (other.transform.parent.GetComponent<Object>().item == "Tree")
                     {
                         print("Is tree");
-                        reproduce();
+                        StartCoroutine(reproduce());
                     }
 
                 }
@@ -80,11 +80,13 @@ public class TreeReproDetect : MonoBehaviour
     //    }
     //}
 
-    private void reproduce()
+    private IEnumerator reproduce()
     {
         Instantiate(tree, new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + 5, transform.position.z + Random.Range(-10, 10)), Quaternion.identity);
         Instantiate(tree, new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + 5, transform.position.z + Random.Range(-10, 10)), Quaternion.identity);
         print("Sapling Created");
+        transform.parent.gameObject.GetComponent<Animator>().Play("TreeWilt");
+        yield return new WaitForSeconds(5);
         Destroy(transform.parent.gameObject);
         //transform.parent.gameObject.SendMessage("lifeDown", SendMessageOptions.DontRequireReceiver);
         
