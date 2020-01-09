@@ -53,20 +53,23 @@ public class PlayerControl : MonoBehaviour
         }
 
         //CAMERA AND PLAYER MOVEMENT
+        //Camera Zooming
         zoom += Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
         zoom = Mathf.Clamp(zoom, -12, -5);
         camera.transform.localPosition = new Vector3(0, 0, zoom);
 
+        //Look around pivot with the mouse
         mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
         mouseY += Input.GetAxis("Mouse Y") * mouseSpeed;
         mouseY = Mathf.Clamp(mouseY, -10f, 60f); // Camera can't go through floor or directly overhead.
         camera.LookAt(centerPoint);
-
         centerPoint.localRotation = Quaternion.Euler(mouseY, mouseX, 0);
+
+        //Get any input for movement by the player
         moveForward += Input.GetAxis("Vertical") * moveSpeed;
         moveSide += Input.GetAxis("Horizontal") * moveSpeed;
 
-
+        //If no input, come to a stop.
         if (Input.GetAxis("Horizontal") == 0)
         {
             moveSide = 0;
@@ -77,24 +80,25 @@ public class PlayerControl : MonoBehaviour
             moveForward = 0;
         }
 
+        //make sure Player can't move faster than designated max speeds
         moveSide = Mathf.Clamp(moveSide, -maxSpeed, maxSpeed);
-        moveForward = Mathf.Clamp(moveForward, -3, maxSpeed);
+        moveForward = Mathf.Clamp(moveForward, -3, maxSpeed); //Player can not upgrade backpedal speed
 
-        if (isAttacking == false)
+        if (isAttacking == false)//Attacking locks the player into place
         {
-            transform.Rotate(0, moveSide * 10 * Time.deltaTime, 0);
-            Vector3 movement = new Vector3(0, 0, moveForward);
-            movement = transform.rotation * movement;
-            player.GetComponent<CharacterController>().Move(movement * Time.deltaTime);
-            centerPoint.position = new Vector3(player.position.x, (player.position.y + 1), player.position.z);
+            transform.Rotate(0, (moveSide * 10 * Time.deltaTime), 0);//Rotate
+            Vector3 movement = new Vector3(0, 0, moveForward); //get value for moving the player forward and backwards
+            movement = transform.rotation * movement; //get the direction for moving the player forward and backwards
+            player.GetComponent<CharacterController>().Move(movement * Time.deltaTime); //Move the player
+            centerPoint.position = new Vector3(player.position.x, (player.position.y + 1), player.position.z); //Re-allign centerpoint for camera
             if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0)
             {
-                Quaternion turnAngle = Quaternion.Euler(0, gameObject.transform.eulerAngles.y, 0);
-                player.rotation = Quaternion.Slerp(player.rotation, turnAngle, Time.deltaTime * rotationSpeed);
+                Quaternion turnAngle = Quaternion.Euler(0, gameObject.transform.eulerAngles.y, 0); //used to rotate the player
+                player.rotation = Quaternion.Slerp(player.rotation, turnAngle, Time.deltaTime * rotationSpeed);//Rotate the player
             }
 
         }
-        if (gameObject.GetComponent<CharacterController>().isGrounded == false)
+        if (gameObject.GetComponent<CharacterController>().isGrounded == false) //If the giant isn't on the ground, get him grounded as soon as possible
         {
             Vector3 grav = new Vector3(0, -150, 0);
             player.GetComponent<CharacterController>().Move(grav * Time.deltaTime);
@@ -183,8 +187,7 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
-            //print("Space key pressed");
-            if (isCarrying == false)
+            if (isCarrying == false) //If the player isn't carry anything, pick up an object
             {
                 pickup.SendMessage("GetPickUp", SendMessageOptions.DontRequireReceiver);
                 //print("Get item");
@@ -194,17 +197,22 @@ public class PlayerControl : MonoBehaviour
 
             }
 
-            else
+            else //The player is carrying something, so drop it
             {
+                gameObject.GetComponent<AudioSource>().Play(0);
                 StartCoroutine(Drop());
             }
 
+        }
+        if (Time.time - timer > 1.3f && Time.time - timer < 1.4f)//Used so the picking up grunt sound is played at the correct time
+        {
+            gameObject.GetComponent<AudioSource>().Play(0);
         }
 
         if (Time.time - timer > 2f)
             pickingUp = false;
 
-        if (isCarrying == true)
+        if (isCarrying == true)//Make the carried object move with the player
         {
             carrying.transform.position = new Vector3 (pickup.transform.position.x, pickup.transform.position.y + 0.5f, pickup.transform.position.z);
         }
@@ -212,13 +220,13 @@ public class PlayerControl : MonoBehaviour
         //*********
         //Attacking
         //*********
-        if (isCarrying == false)
+        if (isCarrying == false) //Can't attack if the player is carrying something
         {
-            if (tearLv >= 1)
+            if (tearLv >= 1) // Can't attack until leveled up
             {
                 if (Input.GetKeyDown(KeyCode.X))
                 {
-                    if (isAttacking == false)
+                    if (isAttacking == false)//If the player isn't already attacking, attack
                     {
                         isAttacking = true;
                         pickup.SendMessage("Attack", SendMessageOptions.DontRequireReceiver);
@@ -232,6 +240,7 @@ public class PlayerControl : MonoBehaviour
         //Growing
         //*******
 
+        //Stars give speed upgrades
         if (stars < 10)
         {
             starLv = 0;
@@ -256,6 +265,7 @@ public class PlayerControl : MonoBehaviour
             maxSpeed = 8f;
             rotationSpeed = 1.6f;
         }
+        //tears unlocks new abilities
 
         if (tears < 10)
         {
@@ -273,12 +283,11 @@ public class PlayerControl : MonoBehaviour
         {
             tearLv = 3;
         }
-
+        //Leveling up results in a bigger giant that can lift heavier objects
         if (tearLv + starLv == 1)
         {
             if (size < 2)
             {
-                //Growing animation
                 size = 2;
                 transform.localScale = new Vector3(1.2f, 3.6f, 1.2f);
             }
@@ -288,7 +297,6 @@ public class PlayerControl : MonoBehaviour
         {
             if (size < 3)
             {
-                //Growing animation
                 size = 3;
                 transform.localScale = new Vector3(1.4f, 4.2f, 1.4f);
             }
@@ -298,39 +306,38 @@ public class PlayerControl : MonoBehaviour
         {
             if (size < 4)
             {
-                //Growing animation
                 size = 4;
                 transform.localScale = new Vector3(1.6f, 4.8f, 1.4f);
             }
         }
     }
 
-    private void ReturnPickUp(GameObject obj)
+    private void ReturnPickUp(GameObject obj)//When the giant hears a reply telling it what to try to pick up
     {
-        if (transform.root != transform)
+        if (transform.root != transform) //Get the parent of the object if the object is a child
             carrying = obj.transform.parent.gameObject;
         else
             carrying = obj;
 
-        obj.SendMessage("GetWeight", gameObject, SendMessageOptions.DontRequireReceiver);
+        obj.SendMessage("GetWeight", gameObject, SendMessageOptions.DontRequireReceiver); //Get the weight of the object
         //print("Get Weight");
     }
 
-    private void ReturnWeight(int weight)
+    private void ReturnWeight(int weight)//When the giant hears a reply telling it the objects weight
     {
-        if (weight <= size)
+        if (weight <= size) //If the giant is big enough, carry the object
         {
             isCarrying = true;
             carrying.transform.position = pickup.transform.position;
         }
     }
 
-    private void AttackFinished()
+    private void AttackFinished() //Alow the player to perform other actons after attacking is over
     {
         isAttacking = false;
     }
 
-    public void starTear(bool isStar)
+    public void starTear(bool isStar)//Once a star or tear is collected, add it to correct total
     {
         if (isStar == true)
             stars++;
@@ -338,7 +345,7 @@ public class PlayerControl : MonoBehaviour
             tears++;
     }
 
-    private IEnumerator Drop()
+    private IEnumerator Drop() //Drop the object and allow the giant to pick up a new object
     {
         dropping = true;
         gameObject.GetComponent<Animator>().Play("Drop");

@@ -9,9 +9,12 @@ public class TreeReproDetect : MonoBehaviour
     public GameObject giant;
     public GameObject currentCollision;
     private bool checking;
+    public GameObject stats;
+
     // Start is called before the first frame update
     void Start()
     {
+        stats = GameObject.Find("Narrator");
         giant = GameObject.Find("Giant");
         checking = false;
     }
@@ -32,63 +35,42 @@ public class TreeReproDetect : MonoBehaviour
         if (checking == false)
         {
             checking = true;
-            StartCoroutine(TriggerEnter(other));
+            StartCoroutine(TriggerEnter(other)); //Start cheching if it's another tree
         }
  
     }
 
     public IEnumerator TriggerEnter(Collider other)
     {
-        if (other.transform.root != other.transform)
+        if (other.transform.root != other.transform) //If this object is a child.
         {
+            //Wait until neither this tree or the other tree is being carried by the giant
             yield return new WaitUntil(() => giant.GetComponent<PlayerControl>().carrying != gameObject.transform.parent.gameObject 
                                                 && giant.GetComponent<PlayerControl>().carrying != other.gameObject.transform.parent.gameObject);
-            print("No longer carrying");
-            if (other.gameObject == currentCollision)
+            if (other.gameObject == currentCollision) //If it's the same object
             {
-                print("Is same collision");
-                if (other.transform.parent.GetComponent<Object>() != null)
+                if (other.transform.parent.GetComponent<Object>() != null) //If it is an object
                 {
-                    print("Is object");
-                    if (other.transform.parent.GetComponent<Object>().item == "Tree")
+                    if (other.transform.parent.GetComponent<Object>().item == "Tree") //If it's a tree
                     {
-                        print("Is tree");
-                        StartCoroutine(reproduce());
+                        StartCoroutine(reproduce()); //Reproduce
                     }
 
                 }
-                //print("ask if tree");
-                //other.SendMessage("GetType", gameObject, SendMessageOptions.DontRequireReceiver);
             }
         }
         checking = false;
 
     }
 
-    //public void GetType(GameObject sender)
-    //{
-    //    print("Yes tree");
-    //    sender.SendMessage("ReturnType", "tree", SendMessageOptions.DontRequireReceiver);
-    //}
-
-    //public void ReturnType(string type)
-    //{
-    //    if (type == "tree")
-    //    {
-    //        print("Create Tree");
-    //        reproduce();
-    //    }
-    //}
-
-    private IEnumerator reproduce()
+    private IEnumerator reproduce() //Create 2 new saplings and die
     {
+        stats.GetComponent<Dialogue>().natureScore++;
         Instantiate(tree, new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + 5, transform.position.z + Random.Range(-10, 10)), Quaternion.identity);
         Instantiate(tree, new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + 5, transform.position.z + Random.Range(-10, 10)), Quaternion.identity);
-        print("Sapling Created");
         transform.parent.gameObject.GetComponent<Animator>().Play("TreeWilt");
         yield return new WaitForSeconds(5);
         Destroy(transform.parent.gameObject);
-        //transform.parent.gameObject.SendMessage("lifeDown", SendMessageOptions.DontRequireReceiver);
         
     }
 }

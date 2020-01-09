@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MaterialGather : MonoBehaviour
 {
+    //This script is used to check whether the vilager can build in this location.
     private GameObject villager;
     public GameObject tree;
     public int objects;
@@ -20,18 +21,18 @@ public class MaterialGather : MonoBehaviour
     {
         if (checking == true)
         {
-            if (objects == 0)
+            if (objects == 0) //If there is nothing in the way, allow the villager to build.
             {
                 villager.GetComponent<Villager>().canBuild = true;
                 Destroy(gameObject);
             }
 
-            if (Time.time - villager.GetComponent<Villager>().timer > 60)
+            if (Time.time - villager.GetComponent<Villager>().timer > 60) //If there is still something in the way after 60secs, stop.
             {
                 Destroy(gameObject);
             }
 
-            if (Time.time - villager.GetComponent<Villager>().timer == 5)
+            if (Time.time - villager.GetComponent<Villager>().timer == 5) //IF the villager can't build after 5 secs, tell the player about how they can help the villagers.
             {
                 GameObject txtHint = GameObject.Find("Narrator");
                 txtHint.SendMessage("BuildHelp", SendMessageOptions.DontRequireReceiver);
@@ -41,27 +42,17 @@ public class MaterialGather : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider collision)//An object is in the way, add one to amount of objects that need to be removed.
     {
-        if (collision.gameObject.GetComponent<Object>() != null)
-        {
-            if (collision.gameObject.GetComponent<Object>().item == "Tree")
-               tree = collision.gameObject;
-        }
         objects++;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other) // An object is no longer in the way, take one from the amount of objects that need to be moved.
     {
-        if (tree == other.gameObject)
-        {
-            tree = null;
-        }
         objects--;
-
     }
 
-    public void Check(GameObject sender)
+    public void Check(GameObject sender) //Villager telling this object to start checking if its ok to build.
     {
         villager = sender;
         checking = true;

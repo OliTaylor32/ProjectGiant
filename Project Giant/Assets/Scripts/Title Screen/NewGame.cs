@@ -17,7 +17,7 @@ public class NewGame : MonoBehaviour
         
     }
 
-    public void OnMouseDown()
+    public void OnMouseDown() //Load the scene of the corresponding button
     {
         print("clicked");
         if (function == "newgame")

@@ -8,13 +8,13 @@ public class DayCycle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timer = Time.time;
+        timer = Time.time; //Start the timer
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - timer >= 600)
+        if (Time.time - timer >= 600) //After 10mins, boot the player back to the title screen
         {
             #pragma warning disable CS0618 // Type or member is obsolete
             Application.LoadLevel("TitleScreen");
