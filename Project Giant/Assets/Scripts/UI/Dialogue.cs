@@ -121,9 +121,10 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-        if (Time.time - dayTimer >= 585f) //When the day is about to end.
+        if (Time.time - dayTimer >= 285f) //When the day is about to end.
         {
             villagerScore = giant.GetComponent<PlayerControl>().stars - giant.GetComponent<PlayerControl>().tears;
+            text[9] = "As the sun starts it's desent into the horizon, the villagers say goodbye to the Giant, as they have to rest, so too does the Giant. Villager Score: " + villagerScore + "Nature Score: " + natureScore + "Total Score: " + (villagerScore + natureScore);
             txt.text = text[9];
             used[9] = true;
             panel.SetActive(true);

@@ -93,8 +93,8 @@ public class PlayerControl : MonoBehaviour
             centerPoint.position = new Vector3(player.position.x, (player.position.y + 1), player.position.z); //Re-allign centerpoint for camera
             if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0)
             {
-                Quaternion turnAngle = Quaternion.Euler(0, gameObject.transform.eulerAngles.y, 0); //used to rotate the player
-                player.rotation = Quaternion.Slerp(player.rotation, turnAngle, Time.deltaTime * rotationSpeed);//Rotate the player
+                //Quaternion turnAngle = Quaternion.Euler(0, gameObject.transform.eulerAngles.y, 0); //used to rotate the player
+                //player.rotation = Quaternion.Slerp(player.rotation, turnAngle, Time.deltaTime * rotationSpeed);//Rotate the player
             }
 
         }
