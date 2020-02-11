@@ -57,7 +57,7 @@ public class Villager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (life == 0) //When the villager dies, give out a tear before dying.
+        if (life < 1) //When the villager dies, give out a tear before dying.
         {
             Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
             Destroy(gameObject);

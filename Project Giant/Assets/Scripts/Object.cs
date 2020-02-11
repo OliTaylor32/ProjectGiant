@@ -24,7 +24,7 @@ public class Object : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (life == 0) //If it's depleated of all of its life, destory the game object
+        if (life < 1) //If it's depleated of all of its life, destory the game object
         {
             Destroy(gameObject);
         }
