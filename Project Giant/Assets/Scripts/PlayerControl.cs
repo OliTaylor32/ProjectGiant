@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 
-{ 
+{
     public Transform camera, player, centerPoint;
 
     //Movement Variables.
@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour
     private float zoomSpeed = 2f;
     public float rotationSpeed = 5f;
     public float maxSpeed = 5f;
-    
+
 
     //Picking up Variables
     public GameObject pickup;
@@ -33,12 +33,16 @@ public class PlayerControl : MonoBehaviour
     public int tears = 0;
     public int starLv = 0;
     public int tearLv = 0;
+    private Animator anim;
+    private string[] animations;
 
     // Start is called before the first frame update
     void Start()
     {
+        animations = new string[] { "Idle", "Walking", "LeftTurn", "RightTurn", "Attack", "WalkCarry", "IdleCarry", "PickUp", "LeftTurnCarry", "RightTurnCarry", "Backward", "BackwardCarry", "Drop" };
         zoom = -7;
         dropping = false;
+        anim = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -47,9 +51,9 @@ public class PlayerControl : MonoBehaviour
         //FOR DEMO PURPOSES
         if (Input.GetKeyDown(KeyCode.R))
         {
-            #pragma warning disable CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
             Application.LoadLevel(0);
-            #pragma warning restore CS0618 
+#pragma warning restore CS0618
         }
 
         //CAMERA AND PLAYER MOVEMENT
@@ -105,6 +109,8 @@ public class PlayerControl : MonoBehaviour
         }
 
 
+
+
         //*********
         //Animation
         //*********
@@ -114,17 +120,25 @@ public class PlayerControl : MonoBehaviour
             {
                 if (isAttacking == true)
                 {
-                    gameObject.GetComponent<Animator>().Play("Attack");
+                    if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") == false)
+                        ResetAnimations("Attack");
+                    anim.SetBool("Attack", true);
                 }
                 else if (moveForward == 0 && moveSide == 0)
                 {
                     if (isCarrying == true)
                     {
-                        gameObject.GetComponent<Animator>().Play("IdleCarry");
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("IdleCarry") == false)
+                            ResetAnimations("IdleCarry");
+                        anim.SetBool("IdleCarry", true);
                     }
                     else
                     {
-                        gameObject.GetComponent<Animator>().Play("Idle");
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") == false)
+                        {
+                            ResetAnimations("Idle");
+                            anim.SetBool("Idle", true);
+                        }
                     }
 
                 }
@@ -132,11 +146,15 @@ public class PlayerControl : MonoBehaviour
                 {
                     if (isCarrying == true)
                     {
-                        gameObject.GetComponent<Animator>().Play("WalkCarry");
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("WalkCarry") == false)
+                            ResetAnimations("WalkCarry");
+                        anim.SetBool("WalkCarry", true);
                     }
                     else
                     {
-                        gameObject.GetComponent<Animator>().Play("Walk");
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk") == false)
+                            ResetAnimations("Walking");
+                        anim.SetBool("Walking", true);
                     }
 
                 }
@@ -144,11 +162,15 @@ public class PlayerControl : MonoBehaviour
                 {
                     if (isCarrying == true)
                     {
-                        gameObject.GetComponent<Animator>().Play("TurnLeftCarry");
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("LeftTurnCarry") == false)
+                            ResetAnimations("LeftTurnCarry");
+                        anim.SetBool("LeftTurnCarry", true);
                     }
                     else
                     {
-                        gameObject.GetComponent<Animator>().Play("TurnLeft");
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("LeftTurn") == false)
+                            ResetAnimations("LeftTurn");
+                        anim.SetBool("LeftTurn", true);
                     }
 
                 }
@@ -156,11 +178,15 @@ public class PlayerControl : MonoBehaviour
                 {
                     if (isCarrying == true)
                     {
-                        gameObject.GetComponent<Animator>().Play("TurnRightCarry");
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("RightTurnCarry") == false)
+                            ResetAnimations("RightTurnCarry");
+                        anim.SetBool("RightTurnCarry", true);
                     }
                     else
                     {
-                        gameObject.GetComponent<Animator>().Play("TurnRight");
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("RightTurn") == false)
+                            ResetAnimations("RightTurn");
+                        anim.SetBool("RightTurn", true);
                     }
 
                 }
@@ -168,11 +194,15 @@ public class PlayerControl : MonoBehaviour
                 {
                     if (isCarrying == true)
                     {
-                        gameObject.GetComponent<Animator>().Play("BackwardsCarry");
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("BackwardCarry") == false)
+                            ResetAnimations("BackwardCarry");
+                        anim.SetBool("BackwardCarry", true);
                     }
                     else
                     {
-                        gameObject.GetComponent<Animator>().Play("Backwards");
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Backwards") == false)
+                            ResetAnimations("Backward");
+                        anim.SetBool("Backward", true);
                     }
 
                 }
@@ -191,7 +221,8 @@ public class PlayerControl : MonoBehaviour
             {
                 pickup.SendMessage("GetPickUp", SendMessageOptions.DontRequireReceiver);
                 //print("Get item");
-                gameObject.GetComponent<Animator>().Play("PickingUp");
+                ResetAnimations("PickUp");
+                anim.SetBool("PickUp", true);
                 pickingUp = true;
                 timer = Time.time;
 
@@ -214,7 +245,7 @@ public class PlayerControl : MonoBehaviour
 
         if (isCarrying == true)//Make the carried object move with the player
         {
-            carrying.transform.position = new Vector3 (pickup.transform.position.x, pickup.transform.position.y + 0.5f, pickup.transform.position.z);
+            carrying.transform.position = new Vector3(pickup.transform.position.x, pickup.transform.position.y + 0.5f, pickup.transform.position.z);
         }
 
         //*********
@@ -307,7 +338,7 @@ public class PlayerControl : MonoBehaviour
             if (size < 4)
             {
                 size = 4;
-                transform.localScale = new Vector3(1.6f, 4.8f, 1.4f);
+                transform.localScale = new Vector3(1.6f, 4.8f, 1.6f);
             }
         }
     }
@@ -348,12 +379,24 @@ public class PlayerControl : MonoBehaviour
     private IEnumerator Drop() //Drop the object and allow the giant to pick up a new object
     {
         dropping = true;
-        gameObject.GetComponent<Animator>().Play("Drop");
+        ResetAnimations("Drop");
+        anim.SetBool("Drop", true);
         yield return new WaitForSeconds(2);
         isCarrying = false;
         carrying = null;
         dropping = false;
     }
 
+    private void ResetAnimations(string next)
+    {
+        for (int i = 0; i < animations.Length; i++)
+        {
+            if (animations[i] != next)
+            {
+                anim.SetBool(animations[i], false);
+            }
+        }
+
+    }
 }
 

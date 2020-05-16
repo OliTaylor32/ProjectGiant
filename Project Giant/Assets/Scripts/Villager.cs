@@ -26,10 +26,13 @@ public class Villager : MonoBehaviour
     public GameObject torch;
     public GameObject totem;
 
+    private Animator anim;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = gameObject.GetComponent<Animator>();
         //MAke sure they walk around their own village
         if (colour == "Blue")
         {
@@ -66,7 +69,7 @@ public class Villager : MonoBehaviour
 
     private IEnumerator Move() //Walk to a random point 
     {
-        gameObject.GetComponent<Animator>().Play("VillagerWalk");
+        anim.Play("VillagerWalk");
         //Random area around the village
         target = new Vector3((townCenter.position.x + Random.Range(-25, 25)), transform.position.y, (townCenter.position.z + Random.Range(-25, 25)));
         while (Vector3.Distance(transform.position, target) > 1)
@@ -103,14 +106,14 @@ public class Villager : MonoBehaviour
 
     private IEnumerator Action() //When the destination is reached, build something or do nothing
     {
-        gameObject.GetComponent<Animator>().Play("VillagerIdle");
+        anim.Play("VillagerIdle");
         print("Action start");
         int action = Random.Range(0, 2); 
         switch (actions[action])
         {
             case "Nothing": //Do nothing
                 print("No Action Taken");
-                gameObject.GetComponent<Animator>().Play("VillagerIdle");
+                anim.Play("VillagerIdle");
                 break;
             case "Build": //Create a random building from the buildings array
                 print("Building");
@@ -123,7 +126,7 @@ public class Villager : MonoBehaviour
                 print("Check request sent");
                 print("call for help");
                 timer = Time.time; //Start a timer
-                gameObject.GetComponent<Animator>().Play("VillagerWave");
+                anim.Play("VillagerWave");
                 yield return new WaitUntil(() => canBuild == true || Time.time - timer > 60f); //Wait until it can build or 60secs pass.
                 if (canBuild == true) //if it can, Build the object and give out a star 
                 {
@@ -199,7 +202,7 @@ public class Villager : MonoBehaviour
             if (collision.gameObject.GetComponent<Object>().item == "Tree") //if it's a tree, cut it down
             {
                 
-                gameObject.GetComponent<Animator>().Play("VillagerChop");
+                anim.Play("VillagerChop");
                 yield return new WaitForSeconds(5);
                 collision.gameObject.GetComponent<Object>().lifeDown();
                 

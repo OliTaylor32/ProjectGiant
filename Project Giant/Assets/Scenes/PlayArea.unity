@@ -7923,6 +7923,11 @@ PrefabInstance:
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 819304791}
+    - target: {fileID: 253682359471131967, guid: 29a4349b9b51dbd4fb84025324cea8d7,
+        type: 3}
+      propertyPath: size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 253682361031500074, guid: 29a4349b9b51dbd4fb84025324cea8d7,
         type: 3}
       propertyPath: m_LocalPosition.y
