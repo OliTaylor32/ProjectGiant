@@ -8400,6 +8400,8 @@ MonoBehaviour:
     type: 3}
   torch: {fileID: 239517594530387321, guid: fd31dfbca9530a941849b0d8b4a31542, type: 3}
   totem: {fileID: 3746004744579812668, guid: 1cb14a2eae9595e42b16922c7f5a3498, type: 3}
+  basicWoodWorkshop: {fileID: 7877965972912993312, guid: 5c23c4ffdd1eef345ab0b6dec8e84619,
+    type: 3}
 --- !u!95 &4317783172002872004
 Animator:
   serializedVersion: 3

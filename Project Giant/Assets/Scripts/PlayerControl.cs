@@ -275,25 +275,25 @@ public class PlayerControl : MonoBehaviour
         if (stars < 10)
         {
             starLv = 0;
-            maxSpeed = 5f;
+            maxSpeed = 2f;
             rotationSpeed = 1f;
         }
         else if (stars >= 10 && stars < 20)
         {
             starLv = 1;
-            maxSpeed = 6f;
+            maxSpeed = 3f;
             rotationSpeed = 1.2f;
         }
         else if (stars >= 20 && stars < 30)
         {
             starLv = 2;
-            maxSpeed = 7f;
+            maxSpeed = 4f;
             rotationSpeed = 1.4f;
         }
         else if (stars >= 30 && stars < 40)
         {
             starLv = 3;
-            maxSpeed = 8f;
+            maxSpeed = 5f;
             rotationSpeed = 1.6f;
         }
         //tears unlocks new abilities

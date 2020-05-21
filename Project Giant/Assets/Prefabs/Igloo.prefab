@@ -233,7 +233,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: smallHouse
-  weight: 3
+  weight: 10000
   life: 4
   villager: {fileID: 4631997228253184848, guid: 4c83b3c7646c8b7488af0f7a72d4ddad,
     type: 3}
+  tree: {fileID: 0}
+  stats: {fileID: 0}

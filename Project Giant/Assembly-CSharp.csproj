@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\DayCycle.cs" />
     <Compile Include="Assets\Scripts\Footprints.cs" />
     <Compile Include="Assets\Scripts\MaterialGather.cs" />
+    <Compile Include="Assets\Scripts\MusicControl.cs" />
     <Compile Include="Assets\Scripts\Object.cs" />
     <Compile Include="Assets\Scripts\PickUpDetect.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Scripts\Tornado.cs" />
     <Compile Include="Assets\Scripts\TreeReproDetect.cs" />
     <Compile Include="Assets\Scripts\UI\Dialogue.cs" />
+    <Compile Include="Assets\Scripts\UI\EndStats.cs" />
     <Compile Include="Assets\Scripts\UI\StarTear.cs" />
     <Compile Include="Assets\Scripts\Villager.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />

@@ -8,6 +8,8 @@ public class Dialogue : MonoBehaviour
     //This script is used to control the narrator which gives the player tips and hints.
     public GameObject panel;
     private GameObject giant;
+    public GameObject musicControl;
+    public GameObject endPanel;
     private string[] text;
     private Text txt;
     private float timer;
@@ -23,6 +25,7 @@ public class Dialogue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        endPanel.SetActive(false);
         dayTimer = Time.time;
         giant = GameObject.Find("Giant");
         text = new string[15];
@@ -36,7 +39,7 @@ public class Dialogue : MonoBehaviour
         text[6] = "When the Giant grows by collecting tears, it will gain more destructive abilities. ";
         text[7] = "The greater the Giant becomes in size, the stronger it gets, allowing it to lift almost anything!";
         text[8] = "Keeping nature on your side is always useful in a harsh enviroment, try putting 2 trees next to eachother.";
-        text[9] = "As the sun starts it's desent into the horizon, the villagers say goodbye to the Giant, as they have to rest, so too does the Giant. Villager Score: " + villagerScore + "Nature Score: " + natureScore + "Total Score:" + (villagerScore + natureScore);
+        text[9] = "As the sun starts it's desent into the horizon, the villagers say goodbye to the Giant, as they have to rest, so too does the Giant.";
         text[10] = "The Giant has grown by collecting tears from the villagers, now it can attack by pressing the (X) key!";
         text[11] = "The Giant has grown by collecting stars from the villagers, the Giant's speed has increased!";
         text[12] = "Sometimes it's nessasary to be harmfull in order to help.";
@@ -123,8 +126,7 @@ public class Dialogue : MonoBehaviour
 
         if (Time.time - dayTimer >= 285f) //When the day is about to end.
         {
-            villagerScore = giant.GetComponent<PlayerControl>().stars - giant.GetComponent<PlayerControl>().tears;
-            text[9] = "As the sun starts it's desent into the horizon, the villagers say goodbye to the Giant, as they have to rest, so too does the Giant. Villager Score: " + villagerScore + "Nature Score: " + natureScore + "Total Score: " + (villagerScore + natureScore);
+            musicControl.GetComponent<MusicControl>().endOfDayAlert();
             txt.text = text[9];
             used[9] = true;
             panel.SetActive(true);
@@ -171,6 +173,15 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
+        if (Time.time - dayTimer >= 5f) //When the day has ended
+        {
+            villagerScore = giant.GetComponent<PlayerControl>().stars - giant.GetComponent<PlayerControl>().tears;
+            txt.text = text[9];
+            used[9] = true;
+            endPanel.SetActive(true);
+            endPanel.GetComponent<EndStats>().SetStats(villagerScore, natureScore);
+            gameObject.SetActive(false);
+        }
     }
 
     private void BuildHelp() //When a Villager has been trying to build in a taken up space for 5secs

@@ -25,13 +25,17 @@ public class Villager : MonoBehaviour
     public GameObject smallHouse;
     public GameObject torch;
     public GameObject totem;
+    public GameObject basicWoodWorkshop;
 
     private Animator anim;
+
+    private bool builtToday;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        builtToday = false;
         anim = gameObject.GetComponent<Animator>();
         //MAke sure they walk around their own village
         if (colour == "Blue")
@@ -49,11 +53,12 @@ public class Villager : MonoBehaviour
         actions[0] = "Nothing";
         actions[1] = "Build";
 
-        buildings = new GameObject[4];
+        buildings = new GameObject[5];
         buildings[0] = snowMan;
         buildings[1] = smallHouse;
         buildings[2] = torch;
         buildings[3] = totem;
+        buildings[4] = basicWoodWorkshop;
         stop = false;
     }
 
@@ -108,7 +113,7 @@ public class Villager : MonoBehaviour
     {
         anim.Play("VillagerIdle");
         print("Action start");
-        int action = Random.Range(0, 2); 
+        int action = Random.Range(0, actions.Length); 
         switch (actions[action])
         {
             case "Nothing": //Do nothing
@@ -117,27 +122,28 @@ public class Villager : MonoBehaviour
                 break;
             case "Build": //Create a random building from the buildings array
                 print("Building");
-                action = Random.Range(0, buildings.Length);;
-                print("About to create buildArea");
-                GameObject build = Instantiate(buildArea, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z), Quaternion.identity);
-                print("buildArea spawned");
-                yield return new WaitForSeconds(0.5f);
-                build.SendMessage("Check", gameObject, SendMessageOptions.DontRequireReceiver); //Start checking whether it can build there.
-                print("Check request sent");
-                print("call for help");
-                timer = Time.time; //Start a timer
-                anim.Play("VillagerWave");
-                yield return new WaitUntil(() => canBuild == true || Time.time - timer > 60f); //Wait until it can build or 60secs pass.
-                if (canBuild == true) //if it can, Build the object and give out a star 
+                if (builtToday == false)
                 {
-                    print("Start building");
-                    GameObject newObject = Instantiate(buildings[action], new Vector3(build.transform.position.x, build.transform.position.y, build.transform.position.z), Quaternion.identity);
-                    build = null;
-                    newObject.transform.Rotate(0, Random.Range(0, 360), 0);
-                    newObject.SendMessage("Built", SendMessageOptions.DontRequireReceiver);
-                    canBuild = false;
-                    Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-                    yield return new WaitForSeconds(5);
+                    builtToday = true;
+                    action = Random.Range(0, buildings.Length); ;
+
+                    GameObject build = Instantiate(buildArea, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z), Quaternion.identity);
+                    yield return new WaitForSeconds(0.5f);
+                    build.SendMessage("Check", gameObject, SendMessageOptions.DontRequireReceiver); //Start checking whether it can build there.
+
+                    timer = Time.time; //Start a timer
+                    anim.Play("VillagerWave");
+                    yield return new WaitUntil(() => canBuild == true || Time.time - timer > 60f); //Wait until it can build or 60secs pass.
+                    if (canBuild == true) //if it can, Build the object and give out a star 
+                    {
+                        GameObject newObject = Instantiate(buildings[action], new Vector3(build.transform.position.x, build.transform.position.y, build.transform.position.z), Quaternion.identity);
+                        build = null;
+                        newObject.transform.Rotate(0, Random.Range(0, 360), 0);
+                        newObject.SendMessage("Built", SendMessageOptions.DontRequireReceiver);
+                        canBuild = false;
+                        Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                        yield return new WaitForSeconds(5);
+                    }
                 }
                     break;
                 
