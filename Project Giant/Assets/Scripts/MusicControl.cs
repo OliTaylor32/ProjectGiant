@@ -6,6 +6,7 @@ public class MusicControl : MonoBehaviour
 {
     private AudioSource player;
     public AudioClip[] music;
+    public AudioClip dayEndTheme;
     private bool endOfDay = false;
     // Start is called before the first frame update
     void Start()
@@ -41,5 +42,7 @@ public class MusicControl : MonoBehaviour
     public void endOfDayAlert()
     {
         endOfDay = true;
+        player.clip = dayEndTheme;
+        player.Play();
     }
 }

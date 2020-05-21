@@ -124,7 +124,7 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-        if (Time.time - dayTimer >= 285f) //When the day is about to end.
+        if (Time.time - dayTimer >= 274f) //When the day is about to end.
         {
             musicControl.GetComponent<MusicControl>().endOfDayAlert();
             txt.text = text[9];
@@ -173,7 +173,7 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-        if (Time.time - dayTimer >= 5f) //When the day has ended
+        if (Time.time - dayTimer >= 300f) //When the day has ended
         {
             villagerScore = giant.GetComponent<PlayerControl>().stars - giant.GetComponent<PlayerControl>().tears;
             txt.text = text[9];

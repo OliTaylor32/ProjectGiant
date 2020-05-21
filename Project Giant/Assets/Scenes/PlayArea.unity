@@ -905,6 +905,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ce532ed5799fb9248914ef34b271c906, type: 3}
   - {fileID: 8300000, guid: 082c30d9a4190f1408fba6bb60cd4711, type: 3}
   - {fileID: 8300000, guid: 7291215c45bf10e418e64a2764603545, type: 3}
+  - {fileID: 8300000, guid: fe3f5885cd44d8b4b84682cf31a4cba4, type: 3}
+  dayEndTheme: {fileID: 8300000, guid: c9135a42039fc9a4fb5139b4b63d1c5f, type: 3}
 --- !u!82 &282840812
 AudioSource:
   m_ObjectHideFlags: 0
