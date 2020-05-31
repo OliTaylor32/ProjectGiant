@@ -49,6 +49,7 @@ public class Dialogue : MonoBehaviour
         //Set to start of day text.
         txt = gameObject.GetComponent<Text>();
         txt.text = text[0];
+        txt.color = new Color(1, 1, 1, 1);
         timer = Time.time;
         panel.SetActive(true);
 

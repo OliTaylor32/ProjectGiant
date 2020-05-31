@@ -16,7 +16,6 @@ public class MusicControl : MonoBehaviour
         player.clip = music[0];
         player.Play();
         StartCoroutine(Music());
-        print(music.Length);
     }
 
     // Update is called once per frame
@@ -42,6 +41,7 @@ public class MusicControl : MonoBehaviour
     public void endOfDayAlert()
     {
         endOfDay = true;
+        player.Pause();
         player.clip = dayEndTheme;
         player.Play();
     }

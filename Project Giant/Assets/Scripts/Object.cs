@@ -15,7 +15,7 @@ public class Object : MonoBehaviour
     void Start()
     {
         stats = GameObject.Find("Narrator");
-        if (item == "Sapling") //If this object is a tree sapling, start growing
+        if (item == "sapling") //If this object is a tree sapling, start growing
         {
             StartCoroutine(Sapling());
         }
@@ -40,7 +40,7 @@ public class Object : MonoBehaviour
     public void lifeDown() //When damaged
     {
         life--;
-        if (item == "Tree")
+        if (item == "tree")
         {
             stats.GetComponent<Dialogue>().natureScore--;
         }
@@ -48,7 +48,7 @@ public class Object : MonoBehaviour
 
     private void Built() 
     {
-        if(item == "smallHouse") //Create 2 new villagers
+        if(item == "igloo") //Create 2 new villagers
         {
             Instantiate(villager, new Vector3(transform.position.x + 5, transform.position.y, transform.position.z + 5), Quaternion.identity);
             Instantiate(villager, new Vector3(transform.position.x + 5, transform.position.y + 0.5f, transform.position.z + 4), Quaternion.identity);

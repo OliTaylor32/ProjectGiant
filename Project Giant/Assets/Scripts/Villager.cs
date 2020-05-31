@@ -205,7 +205,7 @@ public class Villager : MonoBehaviour
         if (collision.gameObject.GetComponent<Object>() != null) //And it is an object
         {
             stop = true; //Stop the villager walking.
-            if (collision.gameObject.GetComponent<Object>().item == "Tree") //if it's a tree, cut it down
+            if (collision.gameObject.GetComponent<Object>().item == "tree") //if it's a tree, cut it down
             {
                 
                 anim.Play("VillagerChop");

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewGame : MonoBehaviour
 {
@@ -41,6 +42,10 @@ public class NewGame : MonoBehaviour
             #pragma warning disable CS0618 // Type or member is obsolete
             Application.LoadLevel("How To Play");
             #pragma warning restore CS0618 // Type or member is obsolete
+        }
+        if (function == "loadgame")
+        {
+            SceneManager.LoadScene("LoadData");
         }
     }
 }

@@ -51,7 +51,7 @@ public class TreeReproDetect : MonoBehaviour
             {
                 if (other.transform.parent.GetComponent<Object>() != null) //If it is an object
                 {
-                    if (other.transform.parent.GetComponent<Object>().item == "Tree") //If it's a tree
+                    if (other.transform.parent.GetComponent<Object>().item == "tree") //If it's a tree
                     {
                         StartCoroutine(reproduce()); //Reproduce
                     }
