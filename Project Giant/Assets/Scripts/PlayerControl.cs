@@ -35,6 +35,9 @@ public class PlayerControl : MonoBehaviour
     public int tearLv = 0;
     private Animator anim;
     private string[] animations;
+    public AudioClip grunt;
+    public AudioClip walk;
+    public DayCycle daycycle;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +51,12 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (daycycle.day == false)
+        {
+            ResetAnimations("Idle");
+            anim.SetBool("Idle", true);
+            Destroy(GetComponent<PlayerControl>());
+        }
         //FOR DEMO PURPOSES
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -88,19 +97,13 @@ public class PlayerControl : MonoBehaviour
         moveSide = Mathf.Clamp(moveSide, -maxSpeed, maxSpeed);
         moveForward = Mathf.Clamp(moveForward, -3, maxSpeed); //Player can not upgrade backpedal speed
 
-        if (isAttacking == false)//Attacking locks the player into place
+        if (isAttacking == false && pickingUp == false && dropping == false)//Attacking locks the player into place
         {
             transform.Rotate(0, (moveSide * 10 * Time.deltaTime), 0);//Rotate
             Vector3 movement = new Vector3(0, 0, moveForward); //get value for moving the player forward and backwards
             movement = transform.rotation * movement; //get the direction for moving the player forward and backwards
             player.GetComponent<CharacterController>().Move(movement * Time.deltaTime); //Move the player
             centerPoint.position = new Vector3(player.position.x, (player.position.y + 1), player.position.z); //Re-allign centerpoint for camera
-            if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0)
-            {
-                //Quaternion turnAngle = Quaternion.Euler(0, gameObject.transform.eulerAngles.y, 0); //used to rotate the player
-                //player.rotation = Quaternion.Slerp(player.rotation, turnAngle, Time.deltaTime * rotationSpeed);//Rotate the player
-            }
-
         }
         if (gameObject.GetComponent<CharacterController>().isGrounded == false) //If the giant isn't on the ground, get him grounded as soon as possible
         {
@@ -140,6 +143,9 @@ public class PlayerControl : MonoBehaviour
                             anim.SetBool("Idle", true);
                         }
                     }
+                    gameObject.GetComponent<AudioSource>().clip = null;
+                    gameObject.GetComponent<AudioSource>().Stop();
+
 
                 }
                 else if (Input.GetKey(KeyCode.W) == true)
@@ -156,6 +162,13 @@ public class PlayerControl : MonoBehaviour
                             ResetAnimations("Walking");
                         anim.SetBool("Walking", true);
                     }
+                    if (gameObject.GetComponent<AudioSource>().clip != walk)
+                    {
+                        gameObject.GetComponent<AudioSource>().loop = true;
+                        gameObject.GetComponent<AudioSource>().Stop();
+                        gameObject.GetComponent<AudioSource>().clip = walk;
+                        gameObject.GetComponent<AudioSource>().Play();
+                    }
 
                 }
                 else if (Input.GetKey(KeyCode.A) == true)
@@ -171,6 +184,14 @@ public class PlayerControl : MonoBehaviour
                         if (anim.GetCurrentAnimatorStateInfo(0).IsName("LeftTurn") == false)
                             ResetAnimations("LeftTurn");
                         anim.SetBool("LeftTurn", true);
+
+                    }
+                    if (gameObject.GetComponent<AudioSource>().clip != walk)
+                    {
+                        gameObject.GetComponent<AudioSource>().loop = true;
+                        gameObject.GetComponent<AudioSource>().Stop();
+                        gameObject.GetComponent<AudioSource>().clip = walk;
+                        gameObject.GetComponent<AudioSource>().Play();
                     }
 
                 }
@@ -188,7 +209,13 @@ public class PlayerControl : MonoBehaviour
                             ResetAnimations("RightTurn");
                         anim.SetBool("RightTurn", true);
                     }
-
+                    if (gameObject.GetComponent<AudioSource>().clip != walk)
+                    {
+                        gameObject.GetComponent<AudioSource>().loop = true;
+                        gameObject.GetComponent<AudioSource>().Stop();
+                        gameObject.GetComponent<AudioSource>().clip = walk;
+                        gameObject.GetComponent<AudioSource>().Play();
+                    }
                 }
                 else if (Input.GetKey(KeyCode.S) == true)
                 {
@@ -204,7 +231,13 @@ public class PlayerControl : MonoBehaviour
                             ResetAnimations("Backward");
                         anim.SetBool("Backward", true);
                     }
-
+                    if (gameObject.GetComponent<AudioSource>().clip != walk)
+                    {
+                        gameObject.GetComponent<AudioSource>().loop = true;
+                        gameObject.GetComponent<AudioSource>().Stop();
+                        gameObject.GetComponent<AudioSource>().clip = walk;
+                        gameObject.GetComponent<AudioSource>().Play();
+                    }
                 }
             }
         }
@@ -214,6 +247,19 @@ public class PlayerControl : MonoBehaviour
         //***********************
         //Picking up and Carrying
         //***********************
+
+        if (Input.GetKeyDown("z"))
+        {
+            if (pickup.GetComponent<PickUpDetect>().pickUp.GetComponent<WorkShop>() != null )
+            {
+                if (pickup.GetComponent<PickUpDetect>().pickUp.GetComponent<WorkShop>().open == false)
+                {
+                    pickup.GetComponent<PickUpDetect>().pickUp.GetComponent<WorkShop>().OpenWorkShop();
+                    isAttacking = true;
+                }
+
+            }
+        }
 
         if (Input.GetKeyDown("space"))
         {
@@ -230,7 +276,10 @@ public class PlayerControl : MonoBehaviour
 
             else //The player is carrying something, so drop it
             {
-                gameObject.GetComponent<AudioSource>().Play(0);
+                gameObject.GetComponent<AudioSource>().loop = false;
+                gameObject.GetComponent<AudioSource>().Stop();
+                gameObject.GetComponent<AudioSource>().clip = grunt;
+                gameObject.GetComponent<AudioSource>().Play();
                 StartCoroutine(Drop());
             }
 
@@ -397,6 +446,11 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
+    }
+
+    public void WorkShopExit()
+    {
+        isAttacking = false;
     }
 }
 

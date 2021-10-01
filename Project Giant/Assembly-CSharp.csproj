@@ -62,9 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\DayCycle.cs" />
     <Compile Include="Assets\Scripts\Footprints.cs" />
-    <Compile Include="Assets\Scripts\MaterialGather.cs" />
     <Compile Include="Assets\Scripts\MusicControl.cs" />
     <Compile Include="Assets\Scripts\Object.cs" />
     <Compile Include="Assets\Scripts\PickUpDetect.cs" />
@@ -72,14 +70,21 @@
     <Compile Include="Assets\Scripts\Title Screen\NewGame.cs" />
     <Compile Include="Assets\Scripts\Tornado.cs" />
     <Compile Include="Assets\Scripts\TreeReproDetect.cs" />
+    <Compile Include="Assets\Scripts\UI\DayCycle.cs" />
     <Compile Include="Assets\Scripts\UI\Dialogue.cs" />
     <Compile Include="Assets\Scripts\UI\EndStats.cs" />
+    <Compile Include="Assets\Scripts\UI\ExtractButton.cs" />
     <Compile Include="Assets\Scripts\UI\Load.cs" />
+    <Compile Include="Assets\Scripts\UI\Resources.cs" />
     <Compile Include="Assets\Scripts\UI\Save.cs" />
     <Compile Include="Assets\Scripts\UI\SaveData.cs" />
     <Compile Include="Assets\Scripts\UI\StarTear.cs" />
-    <Compile Include="Assets\Scripts\Villager.cs" />
+    <Compile Include="Assets\Scripts\UI\WorkShop.cs" />
+    <Compile Include="Assets\Scripts\Villagers\MaterialArea.cs" />
+    <Compile Include="Assets\Scripts\Villagers\MaterialGather.cs" />
+    <Compile Include="Assets\Scripts\Villagers\Villager.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\Credits.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />

@@ -70,7 +70,7 @@ MonoBehaviour:
   weight: 1
   life: 1
   villager: {fileID: 0}
-  tree: {fileID: 8534353622358447377, guid: cd4e8f524e2b9734a8c214f81b22edea, type: 3}
+  tree: {fileID: 4100721374366876524, guid: d343456f926715f44a33f38d5b63ac61, type: 3}
   stats: {fileID: 0}
 --- !u!65 &7104270454414762210
 BoxCollider:
