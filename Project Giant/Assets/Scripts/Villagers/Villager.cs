@@ -19,13 +19,7 @@ public class Villager : MonoBehaviour
     public string colour;
     private bool stop;
 
-    private GameObject[] buildings;
-
-    public GameObject snowMan;
-    public GameObject smallHouse;
-    public GameObject torch;
-    public GameObject totem;
-    public GameObject basicWoodWorkshop;
+    public GameObject[] buildings;
 
     private Animator anim;
 
@@ -35,7 +29,9 @@ public class Villager : MonoBehaviour
     private int happyness;
     public GameObject materialChecker;
 
-    private bool fixedMoveComplete;
+    private bool fixedMove;
+
+    public GameObject callBox;
 
 
     // Start is called before the first frame update
@@ -59,15 +55,9 @@ public class Villager : MonoBehaviour
         actions[0] = "Nothing";
         actions[1] = "Build";
 
-        buildings = new GameObject[5];
-        buildings[0] = snowMan;
-        buildings[1] = smallHouse;
-        buildings[2] = torch;
-        buildings[3] = totem;
-        buildings[4] = basicWoodWorkshop;
         stop = false;
 
-        fixedMoveComplete = false;
+        fixedMove = false;
     }
 
     // Update is called once per frame
@@ -107,10 +97,11 @@ public class Villager : MonoBehaviour
 
     private IEnumerator FixedMove(Vector3 destination)
     {
+        fixedMove = true;
         anim.Play("VillagerWalk");
         target = destination;
 
-        while (Vector3.Distance(transform.position, target) > 0.3f)
+        while (Vector3.Distance(transform.position, target) > 0.1f)
         {
             //print("step");
             transform.LookAt(new Vector3(target.x, transform.position.y, target.z)); //Look at the target and straight ahead
@@ -123,7 +114,6 @@ public class Villager : MonoBehaviour
                 break;
             }
         }
-        fixedMoveComplete = true;
     }
 
     private void lifeDown() //When damaged, give out a tear
@@ -169,7 +159,16 @@ public class Villager : MonoBehaviour
                             }
                             else
                             {
-                                //Call for tree
+                                print("Call for tree");
+                                GameObject call = Instantiate(callBox, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);//Call for tree
+                                call.GetComponent<CallBox>().setType(0);
+                                timer = Time.time; //Start a timer
+                                yield return new WaitUntil(() => check.GetComponent<MaterialArea>().tree != null || Time.time - timer > 60f || stop == true);
+                                Destroy(call);
+                                if (check.GetComponent<MaterialArea>().tree != null)
+                                {
+                                    StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().tree.transform.position));
+                                }
                             }
                             Destroy(check);
                             break;
@@ -186,7 +185,16 @@ public class Villager : MonoBehaviour
                             }
                             else
                             {
-                                //Call for stone
+                                print("Call for stone");
+                                GameObject call = Instantiate(callBox, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);//Call for stone
+                                call.GetComponent<CallBox>().setType(1);
+                                timer = Time.time; //Start a timer
+                                yield return new WaitUntil(() => check.GetComponent<MaterialArea>().stone != null || Time.time - timer > 60f || stop == true);
+                                Destroy(call);
+                                if (check.GetComponent<MaterialArea>().stone != null)
+                                {
+                                    StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().stone.transform.position));
+                                }
                             }
                             Destroy(check);
                             break;
@@ -199,14 +207,21 @@ public class Villager : MonoBehaviour
                             yield return new WaitForSeconds(0.5f);
                             build.SendMessage("Check", gameObject, SendMessageOptions.DontRequireReceiver); //Start checking whether it can build there.
                             timer = Time.time; //Start a timer
-                            //Start Asking for help
-                            yield return new WaitUntil(() => canBuild == true || Time.time - timer > 60f); //Wait until it can build or 60secs pass.
-                            //Stop calling for help
+                            GameObject call = Instantiate(callBox, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);//Start Asking for help
+                            call.GetComponent<CallBox>().setType(2);
+                            yield return new WaitUntil(() => canBuild == true || Time.time - timer > 60f || stop == true); //Wait until it can build or 60secs pass.
+                            Destroy(call);//Stop calling for help
                             if (canBuild == true)
                             {
-
+                                GameObject newObject = Instantiate(buildings[action], new Vector3(build.transform.position.x, build.transform.position.y, build.transform.position.z), Quaternion.identity);
+                                Destroy(build);
+                                FixedMove(build.transform.position); // move into the scaffolding to avoid being hit by the giant.
+                                canBuild = false;
                             }
-                            //If villager gets kicked or picked up, cancel build.
+                            else //If villager gets kicked, picked up or the time runs out, cancel build.
+                            {
+                                Destroy(build);
+                            }
 
 
                         }
@@ -256,15 +271,23 @@ public class Villager : MonoBehaviour
         }
 
 
-        yield return new WaitForSeconds(3);
-        print("Action end");
-        StartCoroutine(Move()); //Once the action is complete, start walking again.
+        yield return new WaitForSeconds(1);
+        //print("Action end");
+        //SHOULD NOT CALL FOR MOVE IF FIXEDMOVE HAS BEEN CALLED!!!!!!
+        if (fixedMove == false)
+        {
+            StartCoroutine(Move()); //Once the action is complete, start walking again.
+        }
+        else
+        {
+            fixedMove = false;
+        }
 
     }
 
     private void OnTriggerEnter(Collider collision) //If it comes into contact with something
     {
-        print("collision Entered");
+        //print("collision Entered");
         if (collision.GetComponent<PlayerControl>() != null && Input.anyKey) //If it's the player and its moving
         {
             if (collision.GetComponent<PlayerControl>().carrying != gameObject) //If it isn't being carried around by the player
@@ -300,8 +323,18 @@ public class Villager : MonoBehaviour
                 //Give out a tear and get damaged.
                 Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 lifeDown();
+
             }
 
+        }
+        else if (collision.GetComponent<Object>() != null)
+        {
+            if (collision.gameObject.GetComponent<Object>().item == "scaffolding") //if it is scaffolding, help build
+            {
+                stop = true;
+                anim.Play("VillagerChop");
+                StartCoroutine(TimedEvent(3f));
+            }
         }
     }
 
@@ -332,6 +365,14 @@ public class Villager : MonoBehaviour
 
         }
     }
+
+    private IEnumerator TimedEvent(float time)
+    {
+        yield return new WaitForSeconds(time);
+        stop = false;
+        StartCoroutine(Move());
+    }
+
 
 
 

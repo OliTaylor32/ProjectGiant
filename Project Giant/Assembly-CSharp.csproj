@@ -67,9 +67,11 @@
     <Compile Include="Assets\Scripts\Object.cs" />
     <Compile Include="Assets\Scripts\PickUpDetect.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
+    <Compile Include="Assets\Scripts\Scaffolding.cs" />
     <Compile Include="Assets\Scripts\Title Screen\NewGame.cs" />
     <Compile Include="Assets\Scripts\Tornado.cs" />
     <Compile Include="Assets\Scripts\TreeReproDetect.cs" />
+    <Compile Include="Assets\Scripts\UI\CallBox.cs" />
     <Compile Include="Assets\Scripts\UI\DayCycle.cs" />
     <Compile Include="Assets\Scripts\UI\Dialogue.cs" />
     <Compile Include="Assets\Scripts\UI\EndStats.cs" />

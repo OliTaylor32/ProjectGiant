@@ -8374,7 +8374,7 @@ Transform:
   m_GameObject: {fileID: 4631997228253184848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.90682745, y: 0.4, z: 3.3783212}
-  m_LocalScale: {x: 0.46769, y: 0.46769, z: 0.46769}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 2490844792401059484}
   - {fileID: 4630108674244300888}
@@ -8437,15 +8437,10 @@ MonoBehaviour:
   star: {fileID: 3559250292362852098, guid: dab2c4c9eb753ba4ab3e648705c30ec5, type: 3}
   tear: {fileID: 6497887434317789109, guid: 7871b36754da21640818601eff852ef7, type: 3}
   colour: Blue
-  snowMan: {fileID: 6499585803886891126, guid: b777cbb780c2474449ddfc02c6a4cf18, type: 3}
-  smallHouse: {fileID: 7041735975594151602, guid: fffe67a7219122a49a15d55528ddd40b,
-    type: 3}
-  torch: {fileID: 239517594530387321, guid: fd31dfbca9530a941849b0d8b4a31542, type: 3}
-  totem: {fileID: 3746004744579812668, guid: 1cb14a2eae9595e42b16922c7f5a3498, type: 3}
-  basicWoodWorkshop: {fileID: 7877965972912993312, guid: 5c23c4ffdd1eef345ab0b6dec8e84619,
-    type: 3}
+  buildings: []
   materialChecker: {fileID: 494454840253568946, guid: d28ed63be8e4c744aa49f51f7cfda61b,
     type: 3}
+  callBox: {fileID: 6104982792465010007, guid: 0ae955d94f983014cbfa5b662ab84b3c, type: 3}
 --- !u!95 &4317783172002872004
 Animator:
   serializedVersion: 3
