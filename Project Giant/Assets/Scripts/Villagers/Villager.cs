@@ -105,7 +105,7 @@ public class Villager : MonoBehaviour
         {
             //print("step");
             transform.LookAt(new Vector3(target.x, transform.position.y, target.z)); //Look at the target and straight ahead
-            transform.Rotate(0, -90, 0); //Fixes model (was faster than re-doing all the animation)
+            transform.Rotate(0, 90, 0); //Fixes model (was faster than re-doing all the animation)
             transform.rotation.Set(0, transform.rotation.y, 0, 0);  //Make sure the villager is looking straight ahead
             transform.position = Vector3.MoveTowards(transform.position, target, ((speed * 0.1f) * Time.deltaTime)); //Move forwards (Towards the target)
             yield return new WaitForSeconds(0.01f);
@@ -332,7 +332,7 @@ public class Villager : MonoBehaviour
             if (collision.gameObject.GetComponent<Object>().item == "scaffolding") //if it is scaffolding, help build
             {
                 stop = true;
-                anim.Play("VillagerChop");
+                anim.Play("VillagerBuild");
                 StartCoroutine(TimedEvent(3f));
             }
         }
@@ -354,7 +354,7 @@ public class Villager : MonoBehaviour
             }
             if (collision.gameObject.GetComponent<Object>().item == "stone") //if it's a stone, mine it
             {
-                anim.Play("VillagerChop");
+                anim.Play("VillagerMine");
                 yield return new WaitForSeconds(5);
                 collision.gameObject.GetComponent<Object>().lifeDown();
                 stone = true;
