@@ -94,6 +94,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &-1403443380602298373
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991447621904987640}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!65 &1831729158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -212,7 +228,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 553673d339a822e4481ce8c5a2ba9081,
         type: 3}
       propertyPath: m_Name
-      value: RedHouse
+      value: RHouseS
       objectReference: {fileID: 0}
     - target: {fileID: -339994355416429730, guid: 553673d339a822e4481ce8c5a2ba9081,
         type: 3}

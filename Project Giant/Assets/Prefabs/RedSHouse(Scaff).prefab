@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3322659743481113877
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 679501761260724255, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.8572847
+      objectReference: {fileID: 0}
+    - target: {fileID: 679501761260724255, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.82086086
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021077309774458654, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_Name
+      value: RedSHouse(Scaff)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066963492530789645, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.675148
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066963492530789645, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.63939714
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066963492530789645, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.8957596
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066963492530789645, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066963492530789645, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066963492530789645, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066963492530789645, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066963492530789645, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066963492530789645, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066963492530789645, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066963492530789645, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031510717962488717, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: building
+      value: 
+      objectReference: {fileID: 5991447621904987640, guid: 13c0f3f418d5cd24e80e6bea527ff4c7,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b06b42f4c83f5bb4cbcdd131f36a2fff, type: 3}

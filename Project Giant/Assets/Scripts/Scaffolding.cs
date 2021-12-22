@@ -5,7 +5,8 @@ using UnityEngine;
 public class Scaffolding : MonoBehaviour
 {
     public GameObject building;
-    public GameObject villager;
+    public GameObject mVillager;
+    public GameObject fVillager;
     public int newVillagers;
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,9 @@ public class Scaffolding : MonoBehaviour
         yield return new WaitForSeconds(45f);
         for (int i = 0; i < newVillagers; i++)
         {
-            Instantiate(villager, new Vector3(transform.position.x + 0.5f, transform.position.y + 1, transform.position.z + (i / 5)), Quaternion.identity);
+            Instantiate(mVillager, new Vector3(transform.position.x + 0.5f, transform.position.y + 1, transform.position.z + (i / 5)), Quaternion.identity);
+            Instantiate(fVillager, new Vector3(transform.position.x + 0.5f, transform.position.y + 1, transform.position.z - (i / 5)), Quaternion.identity);
+
         }
         Destroy(gameObject);
     }

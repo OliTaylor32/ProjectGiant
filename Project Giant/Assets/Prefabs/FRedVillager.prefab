@@ -264,8 +264,8 @@ MonoBehaviour:
   tear: {fileID: 6497887434317789109, guid: 7871b36754da21640818601eff852ef7, type: 3}
   colour: Red
   buildings:
-  - {fileID: 5418472615850129936, guid: e076e2bdfe396c441bc77b940de6b803, type: 3}
-  - {fileID: 5418472615850129936, guid: b83e610b0e972174994b8fef1a884858, type: 3}
+  - {fileID: 1021077309774458654, guid: b06b42f4c83f5bb4cbcdd131f36a2fff, type: 3}
+  - {fileID: 2321584759987225099, guid: 0f7ac927597875e4eb0fb9a85b52eb82, type: 3}
   materialChecker: {fileID: 494454840253568946, guid: d28ed63be8e4c744aa49f51f7cfda61b,
     type: 3}
   callBox: {fileID: 6104982792465010007, guid: 0ae955d94f983014cbfa5b662ab84b3c, type: 3}
