@@ -83,5 +83,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5991447621904987640, guid: 13c0f3f418d5cd24e80e6bea527ff4c7,
         type: 3}
+    - target: {fileID: 6031510717962488717, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: fVillager
+      value: 
+      objectReference: {fileID: 8817063030580570143, guid: e486211609286bd4e85e3ff35066a8ad,
+        type: 3}
+    - target: {fileID: 6031510717962488717, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: mVillager
+      value: 
+      objectReference: {fileID: 7450015869874365814, guid: 72090a334784a0e4689ee8f676b2d48c,
+        type: 3}
+    - target: {fileID: 6031510717962488717, guid: b06b42f4c83f5bb4cbcdd131f36a2fff,
+        type: 3}
+      propertyPath: newVillagers
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b06b42f4c83f5bb4cbcdd131f36a2fff, type: 3}
