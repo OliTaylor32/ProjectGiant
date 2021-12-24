@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BirdAI.cs" />
     <Compile Include="Assets\Scripts\Footprints.cs" />
+    <Compile Include="Assets\Scripts\LiveStockAI.cs" />
     <Compile Include="Assets\Scripts\MusicControl.cs" />
     <Compile Include="Assets\Scripts\Object.cs" />
     <Compile Include="Assets\Scripts\PickUpDetect.cs" />

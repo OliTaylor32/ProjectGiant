@@ -29,7 +29,7 @@ public class BirdAI : MonoBehaviour
 
         speed = speed + acceleration;
 
-        speed = Mathf.Clamp(speed, 5, maxSpeed);
+        speed = Mathf.Clamp(speed, 0, maxSpeed);
 
         transform.Translate(forward * speed * Time.deltaTime);
     }
