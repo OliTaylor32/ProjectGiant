@@ -57,7 +57,7 @@ public class Save : MonoBehaviour
         {
             if (gameObject.GetComponent<Object>() != null)
             {
-                print("Object discovered");
+                //print("Object discovered");
                 switch (gameObject.GetComponent<Object>().item)
                 {
                     case "tree":

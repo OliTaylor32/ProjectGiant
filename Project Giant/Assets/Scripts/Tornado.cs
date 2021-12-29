@@ -19,13 +19,15 @@ public class Tornado : MonoBehaviour
         spawned = false;
         chance = 0;
         StartCoroutine(spawn());
+
+        score = stats.natureScore;
+        chanceCalc();
     }
 
     // Update is called once per frame
     void Update()
     {
-        score = stats.natureScore;
-        chanceCalc();
+
     }
 
     private IEnumerator spawn()
@@ -33,18 +35,20 @@ public class Tornado : MonoBehaviour
         yield return new WaitForSeconds(1);
         if (spawned == false)
         {
-            random = Random.Range(0, chance);
+            random = Random.Range(0, chance + 1);
+            print(random);
             if (random == chance)
             {
                 spawned = true;
-                Vector3 start = new Vector3(Random.Range(-500, 500), 3, Random.Range(-500, 500));
-                Vector3 end = new Vector3(Random.Range(-500, 500), 3, Random.Range(-500, 500));
+                Vector3 start = new Vector3(Random.Range(-200, 200), 3, Random.Range(-200, 200));
+                Vector3 end = new Vector3(Random.Range(-100, 100), 3, Random.Range(-100, 100));
                 transform.position = start;
                 //Become visable
                 //Play audio
                 //Start animation 
                 while (Vector3.Distance(transform.position, end) > 1)
                 {
+
                     transform.position = Vector3.MoveTowards(transform.position, end, (speed * Time.deltaTime));
                     yield return new WaitForSeconds(0.01f);
                 }
@@ -52,7 +56,7 @@ public class Tornado : MonoBehaviour
 
         }
         transform.position = new Vector3(0f, -100f, 0f);
-        spawn();
+        StartCoroutine(spawn());
     }
 
     private void chanceCalc()
@@ -100,7 +104,14 @@ public class Tornado : MonoBehaviour
 
     public void OnTriggerStay(Collider collision)
     {
-        collision.gameObject.SendMessage("lifeDown", SendMessageOptions.DontRequireReceiver);
+        if (collision.gameObject.GetComponent<Object>() != null)
+        {
+            collision.gameObject.GetComponent<Object>().lifeDown();
+        }
+        else if (collision.gameObject.GetComponent<Villager>() != null)
+        {
+            collision.gameObject.GetComponent<Villager>().lifeDown();
+        }
     }
 
 

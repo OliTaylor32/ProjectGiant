@@ -116,7 +116,7 @@ public class Villager : MonoBehaviour
         }
     }
 
-    private void lifeDown() //When damaged, give out a tear
+    public void lifeDown() //When damaged, give out a tear
     {
         life--;
         Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
@@ -167,6 +167,7 @@ public class Villager : MonoBehaviour
                                 Destroy(call);
                                 if (check.GetComponent<MaterialArea>().tree != null)
                                 {
+                                    yield return new WaitForSeconds(0.5f);
                                     StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().tree.transform.position));
                                 }
                             }

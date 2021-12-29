@@ -39,7 +39,7 @@ public class BirdAI : MonoBehaviour
         if (other.transform.gameObject == targets[currentTarget].gameObject)
         {
             currentTarget = Random.Range(0, targets.Length);
-            print("New Target");
+            //print("New Target");
         }
     }
 

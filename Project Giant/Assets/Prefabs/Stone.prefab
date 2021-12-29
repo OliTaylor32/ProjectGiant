@@ -9,8 +9,8 @@ Rigidbody:
   m_GameObject: {fileID: 3763959450055417507}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.9
+  m_AngularDrag: 0.9
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -132,7 +132,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: f93a9d2fc163ef24bab27a8b626ae6f7,
         type: 3}
       propertyPath: m_Name
-      value: Stones Variant
+      value: Stone
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: f93a9d2fc163ef24bab27a8b626ae6f7,
         type: 3}

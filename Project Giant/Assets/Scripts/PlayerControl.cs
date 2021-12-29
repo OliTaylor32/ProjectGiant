@@ -430,9 +430,10 @@ public class PlayerControl : MonoBehaviour
         dropping = true;
         ResetAnimations("Drop");
         anim.SetBool("Drop", true);
-        yield return new WaitForSeconds(2);
-        isCarrying = false;
+        yield return new WaitForSeconds(1.5f);
         carrying = null;
+        isCarrying = false;
+        yield return new WaitForSeconds(0.5f);
         dropping = false;
     }
 

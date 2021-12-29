@@ -49,6 +49,24 @@ MonoBehaviour:
   mVillager: {fileID: 0}
   fVillager: {fileID: 0}
   newVillagers: 0
+--- !u!114 &747814236965487142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021077309774458654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a848d80aea59e1a42882ddc464ff819a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: scaffolding
+  weight: 10000
+  life: 1
+  villager: {fileID: 0}
+  tree: {fileID: 0}
+  stats: {fileID: 0}
 --- !u!1001 &9010143133494556183
 PrefabInstance:
   m_ObjectHideFlags: 0

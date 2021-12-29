@@ -64,4 +64,28 @@ public class Object : MonoBehaviour
 
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("COLLISION");
+        if (collision.gameObject.GetComponent<PlayerControl>() != null)
+        {
+            if (item == "farm" || item == "scaffolding")
+            {
+                lifeDown();
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("COLLISION");
+        if (other.GetComponent<PlayerControl>() != null)
+        {
+            if (item == "farm" || item == "scaffolding")
+            {
+                lifeDown();
+            }
+        }
+    }
 }
