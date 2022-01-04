@@ -40,7 +40,7 @@ public class Villager : MonoBehaviour
         builtToday = false;
         anim = gameObject.GetComponent<Animator>();
         //MAke sure they walk around their own village
-        if (colour == "Blue")
+        if (colour == "Red")
         {
             townCenter = GameObject.Find("TownCentre").transform;
         }

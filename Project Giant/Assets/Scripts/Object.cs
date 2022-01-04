@@ -11,9 +11,16 @@ public class Object : MonoBehaviour
     public GameObject tree;
     public GameObject stats;
 
+    private bool destructing;
+    public GameObject smoke;
+
+    public GameObject star;
+    public GameObject tear;
+
     // Start is called before the first frame update
     void Start()
     {
+        destructing = false;
         stats = GameObject.Find("Narrator");
         if (item == "sapling") //If this object is a tree sapling, start growing
         {
@@ -26,7 +33,15 @@ public class Object : MonoBehaviour
     {
         if (life < 1) //If it's depleated of all of its life, destory the game object
         {
-            Destroy(gameObject);
+            if (item == "tree")
+            {
+                stats.GetComponent<Dialogue>().natureScore--;
+            }
+            if (destructing == false)
+            {
+                destructing = true;
+                StartCoroutine(Destruction());
+            }
         }
     }
 
@@ -40,10 +55,6 @@ public class Object : MonoBehaviour
     public void lifeDown() //When damaged
     {
         life--;
-        if (item == "tree")
-        {
-            stats.GetComponent<Dialogue>().natureScore--;
-        }
     }
 
     private void Built() 
@@ -67,7 +78,6 @@ public class Object : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("COLLISION");
         if (collision.gameObject.GetComponent<PlayerControl>() != null)
         {
             if (item == "farm" || item == "scaffolding")
@@ -79,7 +89,6 @@ public class Object : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("COLLISION");
         if (other.GetComponent<PlayerControl>() != null)
         {
             if (item == "farm" || item == "scaffolding")
@@ -87,5 +96,32 @@ public class Object : MonoBehaviour
                 lifeDown();
             }
         }
+    }
+
+    private IEnumerator Destruction()
+    {
+        GameObject smokeSpawned = null;
+        GetComponent<BoxCollider>().isTrigger = true;
+        if (GetComponent<Rigidbody>() != null)
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
+        if (smoke != null)
+        {
+            smokeSpawned = Instantiate(smoke);
+            smokeSpawned.transform.position = transform.position;
+        }
+        Instantiate(tear).transform.position = transform.position;
+        for (int i = 0; i < 500; i++)
+        {
+            yield return new WaitForSeconds(0.01f);
+            transform.Rotate(Vector3.left * (5f * Time.deltaTime));
+            transform.position += new Vector3(0f, -0.01f, 0f);
+        }
+        if (smokeSpawned != null)
+        {
+            smokeSpawned.GetComponent<ParticleSystem>().Stop();
+        }
+        Destroy(gameObject);
     }
 }

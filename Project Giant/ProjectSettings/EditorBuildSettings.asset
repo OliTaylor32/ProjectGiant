@@ -6,15 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TitleScreen.unity
-    guid: c9c06cf1157bfd543b01597b7286e01f
+    path: Assets/Scenes/MainMenu.unity
+    guid: adb13380b78e0994e94760f3fc99ad3d
   - enabled: 1
-    path: Assets/Scenes/How To Play.unity
-    guid: f0da748b64161b14dac30b50c437f2ee
-  - enabled: 1
-    path: Assets/Scenes/PlayArea.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/Scenes/LoadData.unity
-    guid: 9a019665e106a5249b1e473323ecd3e0
+    path: Assets/Scenes/Taddiport.unity
+    guid: a7c488c76c963424d8d8f08e866a84c3
   m_configObjects: {}

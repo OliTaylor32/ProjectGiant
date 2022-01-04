@@ -11,12 +11,15 @@ public class TreeReproDetect : MonoBehaviour
     private bool checking;
     public GameObject stats;
 
+    private bool saplings;
+
     // Start is called before the first frame update
     void Start()
     {
         stats = GameObject.Find("Narrator");
         giant = GameObject.Find("Giant");
         checking = false;
+        saplings = false;
     }
 
     // Update is called once per frame
@@ -27,7 +30,15 @@ public class TreeReproDetect : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        currentCollision = other.gameObject;
+
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == currentCollision)
+        {
+            currentCollision = null;
+        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -35,6 +46,7 @@ public class TreeReproDetect : MonoBehaviour
         if (checking == false)
         {
             checking = true;
+            currentCollision = other.gameObject;
             StartCoroutine(TriggerEnter(other)); //Start cheching if it's another tree
         }
  
@@ -49,8 +61,10 @@ public class TreeReproDetect : MonoBehaviour
                                                 && giant.GetComponent<PlayerControl>().carrying != other.gameObject.transform.parent.gameObject);
             if (other.gameObject == currentCollision) //If it's the same object
             {
+                print("Is the Same Object");
                 if (other.transform.parent.GetComponent<Object>() != null) //If it is an object
                 {
+                    print("Has Object Script");
                     if (other.transform.parent.GetComponent<Object>().item == "tree") //If it's a tree
                     {
                         StartCoroutine(reproduce()); //Reproduce
@@ -65,12 +79,16 @@ public class TreeReproDetect : MonoBehaviour
 
     private IEnumerator reproduce() //Create 2 new saplings and die
     {
-        stats.GetComponent<Dialogue>().natureScore++;
-        Instantiate(tree, new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + 5, transform.position.z + Random.Range(-10, 10)), Quaternion.identity);
-        Instantiate(tree, new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + 5, transform.position.z + Random.Range(-10, 10)), Quaternion.identity);
-        transform.parent.gameObject.GetComponent<Animator>().Play("TreeWilt");
-        yield return new WaitForSeconds(5);
-        Destroy(transform.parent.gameObject);
-        
+        if (saplings == false)
+        {
+            saplings = true;
+
+            stats.GetComponent<Dialogue>().natureScore++;
+            Instantiate(tree, new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y + 3, transform.position.z + Random.Range(-5, 5)), Quaternion.identity);
+            Instantiate(tree, new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y + 5, transform.position.z + Random.Range(-5, 5)), Quaternion.identity);
+            transform.parent.gameObject.GetComponent<Animator>().Play("TreeWilt");
+            yield return new WaitForSeconds(5);
+            Destroy(transform.parent.gameObject);
+        }
     }
 }

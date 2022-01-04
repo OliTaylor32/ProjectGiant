@@ -32,23 +32,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6031510717962488717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1021077309774458654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0000bd1a68af7804fbfb631c6119a71e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  building: {fileID: 7231733999227932771, guid: 2a17a3fb90c603e4ca47f8c716b7b5eb,
-    type: 3}
-  mVillager: {fileID: 0}
-  fVillager: {fileID: 0}
-  newVillagers: 0
 --- !u!114 &747814236965487142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +50,26 @@ MonoBehaviour:
   villager: {fileID: 0}
   tree: {fileID: 0}
   stats: {fileID: 0}
+  smoke: {fileID: 1170902351642930369, guid: 9ea595de6c5c3394b9887387ed136db4, type: 3}
+  star: {fileID: 3559250292362852098, guid: dab2c4c9eb753ba4ab3e648705c30ec5, type: 3}
+  tear: {fileID: 6497887434317789109, guid: 7871b36754da21640818601eff852ef7, type: 3}
+--- !u!114 &6031510717962488717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021077309774458654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0000bd1a68af7804fbfb631c6119a71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  building: {fileID: 7231733999227932771, guid: 2a17a3fb90c603e4ca47f8c716b7b5eb,
+    type: 3}
+  mVillager: {fileID: 0}
+  fVillager: {fileID: 0}
+  newVillagers: 0
 --- !u!1001 &9010143133494556183
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -36,7 +36,6 @@ public class Tornado : MonoBehaviour
         if (spawned == false)
         {
             random = Random.Range(0, chance + 1);
-            print(random);
             if (random == chance)
             {
                 spawned = true;
