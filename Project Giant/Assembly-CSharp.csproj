@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\UI\Dialogue.cs" />
     <Compile Include="Assets\Scripts\UI\EndStats.cs" />
     <Compile Include="Assets\Scripts\UI\ExtractButton.cs" />
+    <Compile Include="Assets\Scripts\UI\Fade.cs" />
     <Compile Include="Assets\Scripts\UI\Load.cs" />
     <Compile Include="Assets\Scripts\UI\Resources.cs" />
     <Compile Include="Assets\Scripts\UI\Save.cs" />

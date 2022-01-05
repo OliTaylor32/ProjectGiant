@@ -16,6 +16,8 @@ public class MainMenu : MonoBehaviour
     private int selected;
     private int selected2;
     private int menuLayer;
+
+    public Fade fade;
     // Start is called before the first frame update
     void Start()
     {
@@ -84,7 +86,11 @@ public class MainMenu : MonoBehaviour
                 {
                     if (selected2 == 0)//New FreePlay Taddiport
                     {
-                        Application.LoadLevel("Taddiport");
+                        StartCoroutine(LoadLevel("Taddiport"));
+                    }
+                    if (selected2 == 0)
+                    {
+                        StartCoroutine(LoadLevel("TaddiportLoad"));
                     }
                 }
             }
@@ -149,5 +155,12 @@ public class MainMenu : MonoBehaviour
             }
             freeplayLocation.SetActive(false);
         }
+    }
+
+    private IEnumerator LoadLevel(string level)
+    {
+        fade.StartFadeOut();
+        yield return new WaitForSeconds(2f);
+        Application.LoadLevel(level);
     }
 }

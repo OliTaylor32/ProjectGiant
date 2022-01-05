@@ -6,25 +6,25 @@ public class Load : MonoBehaviour
 {
     SaveData data;
     private float[,] trees;
-    private float[,] igloos;
-    private float[,] bWW;
-    private float[,] snowMen;
+    private float[,] stones;
+    private float[,] redSmallHouses;
+    private float[,] redFarms;
     private float[,] torches;
     private float[,] totems;
 
-    private int blueVillagers;
-    private int blackVillagers;
+    private int mRedVillagers;
+    private int fRedVillagers;
 
     public GameObject tree;
-    public GameObject igloo;
-    public GameObject basicWoodWorkshop;
-    public GameObject snowMan;
+    public GameObject stone;
+    public GameObject redSmallHouse;
+    public GameObject redFarm;
     public GameObject torch;
     public GameObject totem;
-    public GameObject blueVillager;
-    public GameObject blackVillager;
+    public GameObject mRedVillager;
+    public GameObject fRedVillager;
 
-    public Transform blueCentre;
+    public Transform redCentre;
     public Transform blackCentre;
 
     // Start is called before the first frame update
@@ -34,49 +34,49 @@ public class Load : MonoBehaviour
         data = data.Load();
 
         trees = data.trees;
-        igloos = data.igloos;
-        bWW = data.bWoodWorkshops;
-        snowMen = data.snowMen;
+        stones = data.stones;
+        redSmallHouses = data.redSmallHouses;
+        redFarms = data.redFarms;
         torches = data.torches;
         totems = data.totems;
 
-        blueVillagers = data.blueVillagers;
-        blackVillagers = data.blackVillagers;
+        mRedVillagers = data.mRedVillagers;
+        fRedVillagers = data.fRedVillagers;
 
         if (trees != null)
         {
             for (int i = 0; i < trees.GetLength(0); i++)
             {
-                GameObject obj = Instantiate(tree, new Vector3(trees[i, 0], 20, trees[i, 1]), Quaternion.identity);
-                obj.transform.eulerAngles.Set(0f, trees[i, 2], 0f);
+                GameObject obj = Instantiate(tree, new Vector3(trees[i, 0], 5, trees[i, 1]), Quaternion.identity);
+                obj.transform.eulerAngles = new Vector3(0f, trees[i, 2], 0f);
             }
         }
 
-        if (igloos != null)
+        if (stones != null)
         {
-            for (int i = 0; i < igloos.GetLength(0); i++)
+            for (int i = 0; i < stones.GetLength(0); i++)
             {
-                GameObject obj = Instantiate(igloo, new Vector3(igloos[i, 0], 20, igloos[i, 1]), Quaternion.identity);
-                obj.transform.eulerAngles.Set(0f, igloos[i, 2], 0f);
+                GameObject obj = Instantiate(stone, new Vector3(stones[i, 0], 5, stones[i, 1]), Quaternion.identity);
+                obj.transform.eulerAngles = new Vector3(0f, stones[i, 2], 0f);
             }
         }
 
-        if (bWW != null)
+        if (redSmallHouses != null)
         {
 
-            for (int i = 0; i < bWW.GetLength(0); i++)
+            for (int i = 0; i < redSmallHouses.GetLength(0); i++)
             {
-                GameObject obj = Instantiate(basicWoodWorkshop, new Vector3(bWW[i, 0], 20, bWW[i, 1]), Quaternion.identity);
-                obj.transform.eulerAngles.Set(0f, bWW[i, 2], 0f);
+                GameObject obj = Instantiate(redSmallHouse, new Vector3(redSmallHouses[i, 0], 5, redSmallHouses[i, 1]), Quaternion.identity);
+                obj.transform.eulerAngles = new Vector3(0f, redSmallHouses[i, 2], 0f);
             }
         }
 
-        if (snowMen != null)
+        if (redFarms != null)
         {
-            for (int i = 0; i < snowMen.GetLength(0); i++)
+            for (int i = 0; i < redFarms.GetLength(0); i++)
             {
-                GameObject obj = Instantiate(snowMan, new Vector3(snowMen[i, 0], 20, snowMen[i, 1]), Quaternion.identity);
-                obj.transform.eulerAngles.Set(0f, snowMen[i, 2], 0f);
+                GameObject obj = Instantiate(redFarm, new Vector3(redFarms[i, 0], 5, redFarms[i, 1]), Quaternion.identity);
+                obj.transform.eulerAngles = new Vector3(0f, redFarms[i, 2], 0f);
             }
         }
 
@@ -84,8 +84,8 @@ public class Load : MonoBehaviour
         {
             for (int i = 0; i < torches.GetLength(0); i++)
             {
-                GameObject obj = Instantiate(torch, new Vector3(torches[i, 0], 20, torches[i, 1]), Quaternion.identity);
-                obj.transform.eulerAngles.Set(0f, torches[i, 2], 0f);
+                GameObject obj = Instantiate(torch, new Vector3(torches[i, 0], 5, torches[i, 1]), Quaternion.identity);
+                obj.transform.eulerAngles = new Vector3(0f, torches[i, 2], 0f);
             }
         }
 
@@ -93,19 +93,19 @@ public class Load : MonoBehaviour
         {
             for (int i = 0; i < totems.GetLength(0); i++)
             {
-                GameObject obj = Instantiate(totem, new Vector3(totems[i, 0], 20, totems[i, 1]), Quaternion.identity);
-                obj.transform.eulerAngles.Set(0f, totems[i, 2], 0f);
+                GameObject obj = Instantiate(totem, new Vector3(totems[i, 0], 5, totems[i, 1]), Quaternion.identity);
+                obj.transform.eulerAngles = new Vector3(0f, totems[i, 2], 0f);
             }
         }
 
-        for (int i = 0; i < blueVillagers; i++)
+        for (int i = 0; i < mRedVillagers; i++)
         {
-            Instantiate(blueVillager, new Vector3(Random.Range(blueCentre.position.x - 20.0f, blueCentre.position.x + 20.0f), 20, Random.Range(blueCentre.position.z - 20.0f, blueCentre.position.z + 20.0f)), Quaternion.identity);
+            Instantiate(mRedVillager, new Vector3(Random.Range(redCentre.position.x - 20.0f, redCentre.position.x + 20.0f), 5, Random.Range(redCentre.position.z - 20.0f, redCentre.position.z + 20.0f)), Quaternion.identity);
         }
 
-        for (int i = 0; i < blackVillagers; i++)
+        for (int i = 0; i < fRedVillagers; i++)
         {
-            Instantiate(blackVillager, new Vector3(Random.Range(blackCentre.position.x - 20.0f, blackCentre.position.x + 20.0f), 20, Random.Range(blackCentre.position.z - 20.0f, blackCentre.position.z + 20.0f)), Quaternion.identity);
+            Instantiate(fRedVillager, new Vector3(Random.Range(redCentre.position.x - 20.0f, redCentre.position.x + 20.0f), 5, Random.Range(redCentre.position.z - 20.0f, redCentre.position.z + 20.0f)), Quaternion.identity);
         }
 
     }

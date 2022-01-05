@@ -8,17 +8,17 @@ public class Save : MonoBehaviour
     public GameObject[] trees;
     public int treeNo = 0;
 
-    public float[,] iglooData;
-    public int iglooNo = 0;
-    public GameObject[] igloos;
+    public float[,] stoneData;
+    public int stoneNo = 0;
+    public GameObject[] stones;
 
-    public float[,] bWoodWorkshopData;
-    public int bWWNo = 0;
-    public GameObject[] bWoodWorkshops;
+    public float[,] redSmallHouseData;
+    public int redSmallHouseNo = 0;
+    public GameObject[] redSmallHouses;
 
-    public float[,] snowMenData;
-    public int snowMenNo = 0;
-    public GameObject[] snowMen;
+    public float[,] redFarmData;
+    public int redFarmNo = 0;
+    public GameObject[] redFarms;
 
     public float[,] torchData;
     public int torchNo = 0;
@@ -28,20 +28,23 @@ public class Save : MonoBehaviour
     public int totemNo = 0;
     public GameObject[] totems;
 
-    public int blueVillagers = 0;
-    public int blackVillagers = 0;
+    public int mRedVillagers = 0;
+    public int fRedVillagers = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        save();
         treeNo = 0;
-        iglooNo = 0;
-        bWWNo = 0;
-        snowMenNo = 0;
-        blueVillagers = 0;
+        stoneNo = 0;
+        redSmallHouseNo = 0;
+        redFarmNo = 0;
+        mRedVillagers = 0;
+        fRedVillagers = 0;
         torchNo = 0;
         totemNo = 0;
+        //save();
+
+
     }
 
     // Update is called once per frame
@@ -66,14 +69,14 @@ public class Save : MonoBehaviour
                     case "sapling":
                         AddTree(gameObject);
                         break;
-                    case "igloo":
-                        AddIgloo(gameObject);
+                    case "stone":
+                        AddStone(gameObject);
                         break;
-                    case "bWoodWorkshop":
-                        AddBWW(gameObject);
+                    case "sHouse":
+                        AddRedSmallHouse(gameObject);
                         break;
-                    case "snowMan":
-                        AddSnowMan(gameObject);
+                    case "farm":
+                        AddRedFarm(gameObject);
                         break;
                     case "torch":
                         AddTorch(gameObject);
@@ -90,12 +93,12 @@ public class Save : MonoBehaviour
             {
                 switch (gameObject.GetComponent<Villager>().colour)
                 {
-                    case "Blue":
-                        blueVillagers++;
+                    case "mRed":
+                        mRedVillagers++;
                         break;
 
-                    case "Black":
-                        blackVillagers++;
+                    case "fRed":
+                        fRedVillagers++;
                         break;
                     default:
                         break;
@@ -110,40 +113,40 @@ public class Save : MonoBehaviour
             {
                 treeData[i, 0] = trees[i].transform.position.x;
                 treeData[i, 1] = trees[i].transform.position.z;
-                treeData[i, 2] = trees[i].transform.rotation.y;
+                treeData[i, 2] = trees[i].transform.eulerAngles.y;
             }
         }
 
-        if (igloos != null)
+        if (stones != null)
         {
-            iglooData = new float[igloos.Length, 3];
-            for (int i = 0; i < igloos.Length; i++)
+            stoneData = new float[stones.Length, 3];
+            for (int i = 0; i < stones.Length; i++)
             {
-                iglooData[i, 0] = igloos[i].transform.position.x;
-                iglooData[i, 1] = igloos[i].transform.position.z;
-                iglooData[i, 2] = igloos[i].transform.rotation.y;
+                stoneData[i, 0] = stones[i].transform.position.x;
+                stoneData[i, 1] = stones[i].transform.position.z;
+                stoneData[i, 2] = stones[i].transform.eulerAngles.y;
             }
         }
 
-        if (bWoodWorkshops != null)
+        if (redSmallHouses != null)
         {
-            bWoodWorkshopData = new float[bWoodWorkshops.Length, 3];
-            for (int i = 0; i < bWoodWorkshops.Length; i++)
+            redSmallHouseData = new float[redSmallHouses.Length, 3];
+            for (int i = 0; i < redSmallHouses.Length; i++)
             {
-                bWoodWorkshopData[i, 0] = bWoodWorkshops[i].transform.position.x;
-                bWoodWorkshopData[i, 0] = bWoodWorkshops[i].transform.position.z;
-                bWoodWorkshopData[i, 0] = bWoodWorkshops[i].transform.rotation.y;
+                redSmallHouseData[i, 0] = redSmallHouses[i].transform.position.x;
+                redSmallHouseData[i, 1] = redSmallHouses[i].transform.position.z;
+                redSmallHouseData[i, 2] = redSmallHouses[i].transform.eulerAngles.y;
             }
         }
 
-        if (snowMen != null)
+        if (redFarms != null)
         {
-            snowMenData = new float[snowMen.Length, 3];
-            for (int i = 0; i < snowMen.Length; i++)
+            redFarmData = new float[redFarms.Length, 3];
+            for (int i = 0; i < redFarms.Length; i++)
             {
-                snowMenData[i, 0] = snowMen[i].transform.position.x;
-                snowMenData[i, 0] = snowMen[i].transform.position.z;
-                snowMenData[i, 0] = snowMen[i].transform.rotation.y;
+                redFarmData[i, 0] = redFarms[i].transform.position.x;
+                redFarmData[i, 1] = redFarms[i].transform.position.z;
+                redFarmData[i, 2] = redFarms[i].transform.eulerAngles.y;
             }
         }
 
@@ -153,8 +156,8 @@ public class Save : MonoBehaviour
             for (int i = 0; i < torches.Length; i++)
             {
                 torchData[i, 0] = torches[i].transform.position.x;
-                torchData[i, 0] = torches[i].transform.position.z;
-                torchData[i, 0] = torches[i].transform.rotation.y;
+                torchData[i, 1] = torches[i].transform.position.z;
+                torchData[i, 2] = torches[i].transform.eulerAngles.y;
             }
         }
 
@@ -164,13 +167,12 @@ public class Save : MonoBehaviour
             for (int i = 0; i < totems.Length; i++)
             {
                 totemData[i, 0] = totems[i].transform.position.x;
-                totemData[i, 0] = totems[i].transform.position.z;
-                totemData[i, 0] = totems[i].transform.rotation.y;
+                totemData[i, 1] = totems[i].transform.position.z;
+                totemData[i, 2] = totems[i].transform.eulerAngles.y;
             }
         }
 
-        new SaveData(treeData, iglooData, bWoodWorkshopData, snowMenData, torchData, totemData, blueVillagers, blackVillagers);
-        print("Created saveData");
+        new SaveData(treeData, stoneData, redSmallHouseData, redFarmData, torchData, totemData, mRedVillagers, fRedVillagers);
     }
 
     private void AddTree(GameObject newTree)
@@ -195,67 +197,67 @@ public class Save : MonoBehaviour
 
     }
 
-    private void AddIgloo(GameObject newIgloo)
+    private void AddStone(GameObject newIgloo)
     {
-        if (iglooNo == 0)
+        if (stoneNo == 0)
         {
-            igloos = new GameObject[1];
-            igloos[0] = newIgloo;
-            iglooNo++;
+            stones = new GameObject[1];
+            stones[0] = newIgloo;
+            stoneNo++;
         }
         else
         {
-            iglooNo++;
-            GameObject[] temp = igloos;
-            igloos = new GameObject[iglooNo];
-            igloos[0] = newIgloo;
-            for (int i = 1; i < igloos.Length; i++)
+            stoneNo++;
+            GameObject[] temp = stones;
+            stones = new GameObject[stoneNo];
+            stones[0] = newIgloo;
+            for (int i = 1; i < stones.Length; i++)
             {
-                igloos[i] = temp[i - 1];
+                stones[i] = temp[i - 1];
             }
         }
 
     }
 
-    private void AddBWW(GameObject newBWW)
+    private void AddRedSmallHouse(GameObject newRedSmallHouse)
     {
-        if (treeNo == 0)
+        if (redSmallHouseNo == 0)
         {
-            bWoodWorkshops = new GameObject[1];
-            bWoodWorkshops[0] = newBWW;
-            bWWNo++;
+            redSmallHouses = new GameObject[1];
+            redSmallHouses[0] = newRedSmallHouse;
+            redSmallHouseNo++;
         }
         else
         {
-            bWWNo++;
-            GameObject[] temp = bWoodWorkshops;
-            bWoodWorkshops = new GameObject[bWWNo];
-            bWoodWorkshops[0] = newBWW;
-            for (int i = 1; i < bWoodWorkshops.Length; i++)
+            redSmallHouseNo++;
+            GameObject[] temp = redSmallHouses;
+            redSmallHouses = new GameObject[redSmallHouseNo];
+            redSmallHouses[0] = newRedSmallHouse;
+            for (int i = 1; i < redSmallHouses.Length; i++)
             {
-                bWoodWorkshops[i] = temp[i - 1];
+                redSmallHouses[i] = temp[i - 1];
             }
         }
 
     }
 
-    private void AddSnowMan(GameObject newSnowman)
+    private void AddRedFarm(GameObject newRedFarm)
     {
-        if (snowMenNo == 0)
+        if (redFarmNo == 0)
         {
-            snowMen = new GameObject[1];
-            snowMen[0] = newSnowman;
-            snowMenNo++;
+            redFarms = new GameObject[1];
+            redFarms[0] = newRedFarm;
+            redFarmNo++;
         }
         else
         {
-            snowMenNo++;
-            GameObject[] temp = snowMen;
-            snowMen = new GameObject[snowMenNo];
-            snowMen[0] = newSnowman;
-            for (int i = 1; i < snowMen.Length; i++)
+            redFarmNo++;
+            GameObject[] temp = redFarms;
+            redFarms = new GameObject[redFarmNo];
+            redFarms[0] = newRedFarm;
+            for (int i = 1; i < redFarms.Length; i++)
             {
-                snowMen[i] = temp[i - 1];
+                redFarms[i] = temp[i - 1];
             }
         }
 

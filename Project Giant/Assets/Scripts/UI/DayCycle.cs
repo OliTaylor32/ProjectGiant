@@ -7,6 +7,7 @@ public class DayCycle : MonoBehaviour
     private float timer;
     private bool saved;
     public bool day;
+    public Fade fade;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,10 @@ public class DayCycle : MonoBehaviour
             #pragma warning disable CS0618 // Type or member is obsolete
             Application.LoadLevel("TitleScreen");
             #pragma warning restore CS0618 // Type or member is obsolete
+        }
+        if (Time.time - timer >= 635f)
+        {
+            fade.StartFadeOut();
         }
     }
 }

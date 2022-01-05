@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Taddiport.unity
     guid: a7c488c76c963424d8d8f08e866a84c3
+  - enabled: 1
+    path: Assets/Scenes/TaddiportLoad.unity
+    guid: 665802d782d6ad2458bb57ad7eed5018
   m_configObjects: {}

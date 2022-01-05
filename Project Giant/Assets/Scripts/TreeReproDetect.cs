@@ -61,10 +61,8 @@ public class TreeReproDetect : MonoBehaviour
                                                 && giant.GetComponent<PlayerControl>().carrying != other.gameObject.transform.parent.gameObject);
             if (other.gameObject == currentCollision) //If it's the same object
             {
-                print("Is the Same Object");
                 if (other.transform.parent.GetComponent<Object>() != null) //If it is an object
                 {
-                    print("Has Object Script");
                     if (other.transform.parent.GetComponent<Object>().item == "tree") //If it's a tree
                     {
                         StartCoroutine(reproduce()); //Reproduce

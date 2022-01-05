@@ -10,14 +10,14 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class SaveData
 {
     public float[,] trees;
-    public float[,] igloos;
-    public float[,] bWoodWorkshops;
-    public float[,] snowMen;
+    public float[,] stones;
+    public float[,] redSmallHouses;
+    public float[,] redFarms;
     public float[,] torches;
     public float[,] totems;
 
-    public int blueVillagers;
-    public int blackVillagers;
+    public int mRedVillagers;
+    public int fRedVillagers;
 
 
     public SaveData()
@@ -25,16 +25,16 @@ public class SaveData
         
     }
 
-    public SaveData(float[,] treeData, float[,] iglooData, float[,] bWWData, float[,] snowMenData, float[,] torchData, float[,] totemData, int blue, int black)
+    public SaveData(float[,] treeData, float[,] stoneData, float[,] redSmallHouseData, float[,] redFarmData, float[,] torchData, float[,] totemData, int mRed, int fRed)
     {
         trees = treeData;
-        igloos = iglooData;
-        bWoodWorkshops = bWWData;
-        snowMen = snowMenData;
+        stones = stoneData;
+        redSmallHouses = redSmallHouseData;
+        redFarms = redFarmData;
         torches = torchData;
         totems = totemData;
-        blueVillagers = blue;
-        blackVillagers = black;
+        mRedVillagers = mRed;
+        fRedVillagers = fRed;
         Store();
     }
 
