@@ -30,7 +30,7 @@ public class Dialogue : MonoBehaviour
         giant = GameObject.Find("Giant");
         text = new string[15];
 
-        text[0] = "As another day starts at Snow-Peak village, the residents awake hoping that the Giant will grace them with good deeds and a helping hand.";
+        text[0] = "As the sun emerges from the horizon, the residents awaken, hoping that the Giant will grace them with good deeds and a helping hand.";
         text[1] = "Villagers give out stars when the Giant is nice to them. With enough stars, the Giant will grow.";
         text[2] = "Villagers give out tears when the Giant is mean to them. Collecting enough tears will allow the Giant to grow";
         text[3] = "If someone wants to build something, they can only build when nothing is in the way, perhaps the Giant can help?";
@@ -38,13 +38,13 @@ public class Dialogue : MonoBehaviour
         text[5] = "When the Giant grows by collecting stars, it will become more mobile";
         text[6] = "When the Giant grows by collecting tears, it will gain more destructive abilities. ";
         text[7] = "The greater the Giant becomes in size, the stronger it gets, allowing it to lift almost anything!";
-        text[8] = "Keeping nature on your side is always useful in a harsh enviroment, try putting 2 trees next to eachother.";
-        text[9] = "As the sun starts it's desent into the horizon, the villagers say goodbye to the Giant, as they have to rest, so too does the Giant.";
-        text[10] = "The Giant has grown by collecting tears from the villagers, now it can attack by pressing the (X) key!";
+        text[8] = "Keeping nature on your side is always useful, as if the islands delicate balance is disrupted, the island will grow more dangerous.";
+        text[9] = "As the sun starts it's desent into the endless ocean, the villagers say goodbye to the Giant, as they have to rest, and so too does the Giant.";
+        text[10] = "The Giant has grown by collecting tears from the villagers, now the giant can attack by pressing the (X) key!";
         text[11] = "The Giant has grown by collecting stars from the villagers, the Giant's speed has increased!";
-        text[12] = "Sometimes it's nessasary to be harmfull in order to help.";
-        text[13] = "In such a vast world, we get so fixated on what's nearby, we sometimes forget to explore what's further afield. I Wonder if there is anything over those mountains?";
-        text[14] = "When all that exists is happiness, we all may as-well be constantly sad.";
+        //text[12] = "";
+        //text[13] = "";
+        //text[14] = "";
 
         //Set to start of day text.
         txt = gameObject.GetComponent<Text>();
@@ -125,7 +125,7 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-        if (Time.time - dayTimer >= 274f) //When the day is about to end.
+        if (Time.time - dayTimer >= 574f) //When the day is about to end.
         {
             musicControl.GetComponent<MusicControl>().endOfDayAlert();
             txt.text = text[9];
@@ -150,31 +150,31 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-        if (Time.time - timer >= 20f && used[12] == false) //When 20secs has passed without any narration
-        {
-            txt.text = text[12];
-            used[12] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
+        //if (Time.time - timer >= 20f && used[12] == false) //When 20secs has passed without any narration
+        //{
+        //    txt.text = text[12];
+        //    used[12] = true;
+        //    panel.SetActive(true);
+        //    timer = Time.time;
+        //}
 
-        if (Time.time - timer >= 25f && used[13] == false) //When 25secs has passed without any narration
-        {
-            txt.text = text[13];
-            used[13] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
+        //if (Time.time - timer >= 25f && used[13] == false) //When 25secs has passed without any narration
+        //{
+        //    txt.text = text[13];
+        //    used[13] = true;
+        //    panel.SetActive(true);
+        //    timer = Time.time;
+        //}
 
-        if (Time.time - timer >= 45f && used[14] == false) //When 45secs has passed without any narration
-        {
-            txt.text = text[14];
-            used[14] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
+        //if (Time.time - timer >= 45f && used[14] == false) //When 45secs has passed without any narration
+        //{
+        //    txt.text = text[14];
+        //    used[14] = true;
+        //    panel.SetActive(true);
+        //    timer = Time.time;
+        //}
 
-        if (Time.time - dayTimer >= 300f) //When the day has ended
+        if (Time.time - dayTimer >= 600f) //When the day has ended
         {
             villagerScore = giant.GetComponent<PlayerControl>().stars - giant.GetComponent<PlayerControl>().tears;
             txt.text = text[9];

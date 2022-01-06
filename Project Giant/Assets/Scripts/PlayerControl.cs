@@ -453,5 +453,12 @@ public class PlayerControl : MonoBehaviour
     {
         isAttacking = false;
     }
+
+    public void Freeze()
+    {
+        ResetAnimations("Idle");
+        anim.Play("Idle");
+        Destroy(this);
+    }
 }
 

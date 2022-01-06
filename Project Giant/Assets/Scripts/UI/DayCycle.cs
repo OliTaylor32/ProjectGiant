@@ -24,8 +24,11 @@ public class DayCycle : MonoBehaviour
         {
             gameObject.GetComponent<Save>().save();
             saved = true;
-            GameObject.Find("Giant").GetComponent<PlayerControl>().isAttacking = true;
-            day = false;
+            if (GameObject.Find("Giant") != null)
+            {
+                GameObject.Find("Giant").GetComponent<PlayerControl>().Freeze();
+                day = false;
+            }
         }
         if (Time.time - timer >= 640f) //After 5mins, boot the player back to the title screen
         {

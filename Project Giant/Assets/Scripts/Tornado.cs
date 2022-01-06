@@ -20,7 +20,6 @@ public class Tornado : MonoBehaviour
         chance = 0;
         StartCoroutine(spawn());
 
-        score = stats.natureScore;
         chanceCalc();
     }
 
@@ -33,14 +32,16 @@ public class Tornado : MonoBehaviour
     private IEnumerator spawn()
     {
         yield return new WaitForSeconds(1);
+        chanceCalc();
         if (spawned == false)
         {
             random = Random.Range(0, chance + 1);
             if (random == chance)
             {
                 spawned = true;
-                Vector3 start = new Vector3(Random.Range(-200, 200), 3, Random.Range(-200, 200));
-                Vector3 end = new Vector3(Random.Range(-100, 100), 3, Random.Range(-100, 100));
+                print("Tornado");
+                Vector3 start = new Vector3(Random.Range(-200, 200), 3.6f, Random.Range(-200, 200));
+                Vector3 end = new Vector3(Random.Range(-100, 100), 3.6f, Random.Range(-100, 100));
                 transform.position = start;
                 //Become visable
                 //Play audio
@@ -60,45 +61,49 @@ public class Tornado : MonoBehaviour
 
     private void chanceCalc()
     {
+        score = stats.natureScore;
         if (score > -10)
         {
-            chance = 5000;
+            chance = 2500;
         }
 
         if (score < -9)
         {
-            chance = 4000;
+            chance = 2000;
         }
 
         if (score < -19)
         {
-            chance = 3000;
+            chance = 1500;
         }
 
         if (score < -29)
         {
-            chance = 3000;
+            chance = 1000;
         }
 
         if (score < -39)
         {
-            chance = 2000;
+            chance = 500;
         }
 
         if (score < -49)
         {
-            chance = 1000;
+            chance = 250;
         }
 
         if (score < -59)
         {
-            chance = 600;
+            chance = 100;
         }
     }
 
     public void OnCollisionStay(Collision collision)
     {
-        collision.gameObject.SendMessage("lifeDown", SendMessageOptions.DontRequireReceiver);
+        if (collision.gameObject.GetComponent<Object>() != null)
+        {
+            collision.gameObject.GetComponent<Object>().lifeDown();
+        }
     }
 
     public void OnTriggerStay(Collider collision)

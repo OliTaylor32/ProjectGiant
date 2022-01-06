@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour
     public TextMeshProUGUI[] modes;
     public TextMeshProUGUI[] freeplayModes;
     public GameObject freeplayLocation;
+    public GameObject challenge;
+    public GameObject freeplayMapSS;
     public Image background;
 
     public Sprite[] backgroundSprites;
@@ -40,6 +42,8 @@ public class MainMenu : MonoBehaviour
         }
 
         freeplayLocation.SetActive(false);
+        freeplayMapSS.SetActive(false);
+        challenge.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -93,6 +97,11 @@ public class MainMenu : MonoBehaviour
                         StartCoroutine(LoadLevel("TaddiportLoad"));
                     }
                 }
+
+                if (selected == 2)
+                {
+                    StartCoroutine(LoadLevel("TornadoChallenge1"));
+                }
             }
         }
 
@@ -136,6 +145,11 @@ public class MainMenu : MonoBehaviour
                 freeplayModes[i].gameObject.SetActive(true);
             }
             freeplayLocation.SetActive(true);
+            freeplayMapSS.SetActive(true);
+        }
+        if (selected == 2)
+        {
+            challenge.gameObject.SetActive(true);
         }
         StartCoroutine(TriggerCoolDown());
     }
@@ -154,6 +168,11 @@ public class MainMenu : MonoBehaviour
                 freeplayModes[i].gameObject.SetActive(false);
             }
             freeplayLocation.SetActive(false);
+            freeplayMapSS.SetActive(false);
+        }
+        if (selected == 2)
+        {
+            challenge.gameObject.SetActive(false);
         }
     }
 
