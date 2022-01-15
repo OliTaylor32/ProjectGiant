@@ -997,6 +997,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trees: []
   treeNo: 0
+  treeWilts: []
+  treeWiltNo: 0
   stoneNo: 0
   stones: []
   redSmallHouseNo: 0
@@ -1328,6 +1330,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7291215c45bf10e418e64a2764603545, type: 3}
   - {fileID: 8300000, guid: fe3f5885cd44d8b4b84682cf31a4cba4, type: 3}
   dayEndTheme: {fileID: 8300000, guid: c9135a42039fc9a4fb5139b4b63d1c5f, type: 3}
+  emergency: {fileID: 0}
 --- !u!82 &282840812
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3522,6 +3525,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 5856365949524941649, guid: e62511e0ef67c164496413216e8401fe, type: 3}
+  treeWilt: {fileID: 5856365949524941649, guid: 2376f483c5c6337439f436762a119720,
+    type: 3}
   stone: {fileID: 3763959450055417507, guid: 13ac686f00d6db240a16a98d4a394e27, type: 3}
   redSmallHouse: {fileID: 5991447621904987640, guid: 13c0f3f418d5cd24e80e6bea527ff4c7,
     type: 3}

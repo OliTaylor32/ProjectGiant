@@ -6,6 +6,7 @@ public class Load : MonoBehaviour
 {
     SaveData data;
     private float[,] trees;
+    private float[,] treeWilts;
     private float[,] stones;
     private float[,] redSmallHouses;
     private float[,] redFarms;
@@ -16,6 +17,7 @@ public class Load : MonoBehaviour
     private int fRedVillagers;
 
     public GameObject tree;
+    public GameObject treeWilt;
     public GameObject stone;
     public GameObject redSmallHouse;
     public GameObject redFarm;
@@ -34,6 +36,7 @@ public class Load : MonoBehaviour
         data = data.Load();
 
         trees = data.trees;
+        treeWilts = data.treeWilts;
         stones = data.stones;
         redSmallHouses = data.redSmallHouses;
         redFarms = data.redFarms;
@@ -49,6 +52,15 @@ public class Load : MonoBehaviour
             {
                 GameObject obj = Instantiate(tree, new Vector3(trees[i, 0], 5, trees[i, 1]), Quaternion.identity);
                 obj.transform.eulerAngles = new Vector3(0f, trees[i, 2], 0f);
+            }
+        }
+
+        if (treeWilts != null)
+        {
+            for (int i = 0; i < treeWilts.GetLength(0); i++)
+            {
+                GameObject obj = Instantiate(treeWilt, new Vector3(treeWilts[i, 0], 5, treeWilts[i, 1]), Quaternion.identity);
+                obj.transform.eulerAngles = new Vector3(0f, treeWilts[i, 2], 0f);
             }
         }
 

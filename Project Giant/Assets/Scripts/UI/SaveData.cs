@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class SaveData
 {
     public float[,] trees;
+    public float[,] treeWilts;
     public float[,] stones;
     public float[,] redSmallHouses;
     public float[,] redFarms;
@@ -25,9 +26,10 @@ public class SaveData
         
     }
 
-    public SaveData(float[,] treeData, float[,] stoneData, float[,] redSmallHouseData, float[,] redFarmData, float[,] torchData, float[,] totemData, int mRed, int fRed)
+    public SaveData(float[,] treeData, float[,] treeWiltData, float[,] stoneData, float[,] redSmallHouseData, float[,] redFarmData, float[,] torchData, float[,] totemData, int mRed, int fRed)
     {
         trees = treeData;
+        treeWilts = treeWiltData;
         stones = stoneData;
         redSmallHouses = redSmallHouseData;
         redFarms = redFarmData;

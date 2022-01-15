@@ -334,7 +334,7 @@ public class Villager : MonoBehaviour
             {
                 stop = true;
                 anim.Play("VillagerBuild");
-                StartCoroutine(TimedEvent(3f));
+                StartCoroutine(TimedEvent(5f));
             }
         }
     }
@@ -369,6 +369,7 @@ public class Villager : MonoBehaviour
 
     private IEnumerator TimedEvent(float time)
     {
+        stop = true;
         yield return new WaitForSeconds(time);
         stop = false;
         StartCoroutine(Move());

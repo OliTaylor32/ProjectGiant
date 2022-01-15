@@ -7,7 +7,9 @@ public class MusicControl : MonoBehaviour
     private AudioSource player;
     public AudioClip[] music;
     public AudioClip dayEndTheme;
+    public AudioClip emergency;
     private bool endOfDay = false;
+    private bool playEmergency;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,5 +46,23 @@ public class MusicControl : MonoBehaviour
         player.Pause();
         player.clip = dayEndTheme;
         player.Play();
+    }
+
+    private IEnumerator StartEmergency()
+    {
+        endOfDay = true;
+        if (player.clip != emergency)
+        {
+            player.clip = emergency;
+            player.Play();
+            yield return new WaitForSeconds(player.clip.length);
+            StartCoroutine(Music());
+            yield return new WaitForSeconds(30f);
+            endOfDay = false;
+        }
+    }
+    public void Emergency()
+    {
+        StartCoroutine(StartEmergency());
     }
 }

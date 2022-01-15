@@ -9,13 +9,15 @@ public class Tornado : MonoBehaviour
     public bool spawned;
     public int chance;
     private int random;
-    public int speed = 100;
+    public int speed;
+    private MusicControl music;
 
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0f, -100f, 0f);
         stats = GameObject.Find("Narrator").GetComponent<Dialogue>();
+        music = GameObject.Find("Main Camera").GetComponent<MusicControl>();
         spawned = false;
         chance = 0;
         StartCoroutine(spawn());
@@ -44,7 +46,7 @@ public class Tornado : MonoBehaviour
                 Vector3 end = new Vector3(Random.Range(-100, 100), 3.6f, Random.Range(-100, 100));
                 transform.position = start;
                 //Become visable
-                //Play audio
+                music.Emergency();
                 //Start animation 
                 while (Vector3.Distance(transform.position, end) > 1)
                 {

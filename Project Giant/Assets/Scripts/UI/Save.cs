@@ -8,6 +8,12 @@ public class Save : MonoBehaviour
     public GameObject[] trees;
     public int treeNo = 0;
 
+    public float[,] treeWiltData;
+    public GameObject[] treeWilts;
+    public int treeWiltNo = 0;
+
+    private bool wilting;
+
     public float[,] stoneData;
     public int stoneNo = 0;
     public GameObject[] stones;
@@ -34,7 +40,9 @@ public class Save : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        wilting = true;
         treeNo = 0;
+        treeWiltNo = 0;
         stoneNo = 0;
         redSmallHouseNo = 0;
         redFarmNo = 0;
@@ -64,7 +72,16 @@ public class Save : MonoBehaviour
                 switch (gameObject.GetComponent<Object>().item)
                 {
                     case "tree":
-                        AddTree(gameObject);
+                        if (wilting == false)
+                        {
+                            AddTree(gameObject);
+                            wilting = true;
+                        }
+                        else
+                        {
+                            AddTreeWilt(gameObject);
+                            wilting = false;
+                        }
                         break;
                     case "sapling":
                         AddTree(gameObject);
@@ -172,7 +189,7 @@ public class Save : MonoBehaviour
             }
         }
 
-        new SaveData(treeData, stoneData, redSmallHouseData, redFarmData, torchData, totemData, mRedVillagers, fRedVillagers);
+        new SaveData(treeData, treeWiltData, stoneData, redSmallHouseData, redFarmData, torchData, totemData, mRedVillagers, fRedVillagers);
     }
 
     private void AddTree(GameObject newTree)
@@ -192,6 +209,28 @@ public class Save : MonoBehaviour
             for (int i = 1; i < trees.Length; i++)
             {
                 trees[i] = temp[i - 1];
+            }
+        }
+
+    }
+
+    private void AddTreeWilt(GameObject newTree)
+    {
+        if (treeWiltNo == 0)
+        {
+            treeWilts = new GameObject[1];
+            treeWilts[0] = newTree;
+            treeWiltNo++;
+        }
+        else
+        {
+            treeWiltNo++;
+            GameObject[] temp = trees;
+            treeWilts = new GameObject[treeWiltNo];
+            treeWilts[0] = newTree;
+            for (int i = 1; i < treeWilts.Length; i++)
+            {
+                treeWilts[i] = temp[i - 1];
             }
         }
 

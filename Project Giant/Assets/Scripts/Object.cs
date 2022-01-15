@@ -33,7 +33,7 @@ public class Object : MonoBehaviour
     {
         if (life < 1) //If it's depleated of all of its life, destory the game object
         {
-            if (item == "tree")
+            if (item == "tree" || item == "treeWilt")
             {
                 stats.GetComponent<Dialogue>().natureScore--;
             }
