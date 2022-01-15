@@ -169,6 +169,7 @@ public class Villager : MonoBehaviour
                                 {
                                     yield return new WaitForSeconds(0.5f);
                                     StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().tree.transform.position));
+                                    Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                                 }
                             }
                             Destroy(check);
@@ -195,6 +196,7 @@ public class Villager : MonoBehaviour
                                 if (check.GetComponent<MaterialArea>().stone != null)
                                 {
                                     StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().stone.transform.position));
+                                    Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                                 }
                             }
                             Destroy(check);
@@ -217,6 +219,7 @@ public class Villager : MonoBehaviour
                                 GameObject newObject = Instantiate(buildings[action], new Vector3(build.transform.position.x, build.transform.position.y, build.transform.position.z), Quaternion.identity);
                                 Destroy(build);
                                 FixedMove(build.transform.position); // move into the scaffolding to avoid being hit by the giant.
+                                Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                                 canBuild = false;
                             }
                             else //If villager gets kicked, picked up or the time runs out, cancel build.
@@ -346,7 +349,6 @@ public class Villager : MonoBehaviour
             stop = true; //Stop the villager walking.
             if (collision.gameObject.GetComponent<Object>().item == "tree") //if it's a tree, cut it down
             {
-                
                 anim.Play("VillagerChop");
                 yield return new WaitForSeconds(5);
                 collision.gameObject.GetComponent<Object>().lifeDown();
@@ -359,7 +361,15 @@ public class Villager : MonoBehaviour
                 yield return new WaitForSeconds(5);
                 collision.gameObject.GetComponent<Object>().lifeDown();
                 stone = true;
-
+            }
+            if (collision.gameObject.GetComponent<Object>().item == "sheep") //if it's a sheep, kill it
+            {
+                anim.Play("VillagerMine");
+                yield return new WaitForSeconds(2);
+                collision.gameObject.GetComponent<Object>().lifeDown();
+                anim.Play("VillagerEat");
+                yield return new WaitForSeconds(10f);
+                Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
             }
             stop = false;
             StartCoroutine(Move()); //Start walking again

@@ -50,4 +50,10 @@ public class LiveStockAI : MonoBehaviour
             currentTarget = Random.Range(0, targets.Length);
         }
     }
+
+    public void StopMoving()
+    {
+        GetComponent<Animator>().Play("SheepDead");
+        Destroy(this);
+    }
 }

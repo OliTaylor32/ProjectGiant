@@ -33,14 +33,21 @@ public class Object : MonoBehaviour
     {
         if (life < 1) //If it's depleated of all of its life, destory the game object
         {
-            if (item == "tree" || item == "treeWilt")
+            if (item != "sheep" && item != "fish")
             {
-                stats.GetComponent<Dialogue>().natureScore--;
+                if (item == "tree" || item == "treeWilt")
+                {
+                    stats.GetComponent<Dialogue>().natureScore--;
+                }
+                if (destructing == false)
+                {
+                    destructing = true;
+                    StartCoroutine(Destruction());
+                }
             }
-            if (destructing == false)
+            else
             {
-                destructing = true;
-                StartCoroutine(Destruction());
+                Destroy(gameObject);
             }
         }
     }
@@ -55,6 +62,13 @@ public class Object : MonoBehaviour
     public void lifeDown() //When damaged
     {
         life--;
+        if (item == "sheep")
+        {
+            if (GetComponent<LiveStockAI>() != null)
+            {
+                GetComponent<LiveStockAI>().StopMoving();
+            }
+        }
     }
 
     private void Built() 

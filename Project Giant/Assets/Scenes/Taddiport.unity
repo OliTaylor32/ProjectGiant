@@ -1382,6 +1382,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trees: []
   treeNo: 0
+  treeWilts: []
+  treeWiltNo: 0
   stoneNo: 0
   stones: []
   redSmallHouseNo: 0
@@ -10829,6 +10831,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1165462269, guid: ae67f2470580d774fbde956e41fe3f60, type: 3}
+      propertyPath: life
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1165462270, guid: ae67f2470580d774fbde956e41fe3f60, type: 3}
       propertyPath: targets.Array.size
       value: 9
@@ -10928,6 +10934,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sheep (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990545907054847871, guid: ae67f2470580d774fbde956e41fe3f60,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae67f2470580d774fbde956e41fe3f60, type: 3}
@@ -11439,6 +11450,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2226593595627211133, guid: e486211609286bd4e85e3ff35066a8ad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2226593595627211133, guid: e486211609286bd4e85e3ff35066a8ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2226593595627211133, guid: e486211609286bd4e85e3ff35066a8ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935549591687527278, guid: e486211609286bd4e85e3ff35066a8ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5478586909241186828, guid: e486211609286bd4e85e3ff35066a8ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11548,6 +11579,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4077914357558192352, guid: 72090a334784a0e4689ee8f676b2d48c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7450015869874365813, guid: 72090a334784a0e4689ee8f676b2d48c,
         type: 3}
       propertyPath: townCenter
