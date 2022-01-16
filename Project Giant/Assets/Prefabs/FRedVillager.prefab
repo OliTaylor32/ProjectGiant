@@ -351,6 +351,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: FRedVillager
       objectReference: {fileID: 0}
+    - target: {fileID: -444521105353760620, guid: 7dc5fd419f3f78a4b9c9049f954a391a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -444521105353760620, guid: 7dc5fd419f3f78a4b9c9049f954a391a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -444521105353760620, guid: 7dc5fd419f3f78a4b9c9049f954a391a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -444521105353760620, guid: 7dc5fd419f3f78a4b9c9049f954a391a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 724047663639175830, guid: 7dc5fd419f3f78a4b9c9049f954a391a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -611,7 +631,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 46649ea1b4fc4e54eb4d070aef68bb21,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4063835366044962077, guid: 46649ea1b4fc4e54eb4d070aef68bb21,
         type: 3}
