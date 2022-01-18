@@ -43,7 +43,15 @@ public class Tornado : MonoBehaviour
                 spawned = true;
                 print("Tornado");
                 Vector3 start = new Vector3(Random.Range(-200, 200), 3.6f, Random.Range(-200, 200));
-                Vector3 end = new Vector3(Random.Range(-100, 100), 3.6f, Random.Range(-100, 100));
+                Vector3 end = new Vector3(Random.Range(-200, 200), 3.6f, Random.Range(-100, 100));
+                if (Vector3.Distance(start, end) < 300f)
+                {
+                    while (Vector3.Distance(start, end) < 300f)
+                    {
+                        start = new Vector3(Random.Range(-200, 200), 3.6f, Random.Range(-200, 200));
+                        end = new Vector3(Random.Range(-200, 200), 3.6f, Random.Range(-100, 100));
+                    }
+                }
                 transform.position = start;
                 //Become visable
                 music.Emergency();

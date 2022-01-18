@@ -26,6 +26,8 @@ public class PlayerControl : MonoBehaviour
     private bool pickingUp = false;
     private bool dropping;
     private float timer;
+    public float carryRotation;
+    public float startCarryRotation;
 
     //Other Variables
     public bool isAttacking;
@@ -295,6 +297,8 @@ public class PlayerControl : MonoBehaviour
         if (isCarrying == true)//Make the carried object move with the player
         {
             carrying.transform.position = new Vector3(pickup.transform.position.x, pickup.transform.position.y + 0.5f, pickup.transform.position.z);
+            carrying.transform.eulerAngles = new Vector3(pickup.transform.rotation.x, carryRotation + (transform.eulerAngles.y - startCarryRotation), pickup.transform.rotation.z);
+
         }
 
         //*********
@@ -409,6 +413,8 @@ public class PlayerControl : MonoBehaviour
         {
             isCarrying = true;
             carrying.transform.position = pickup.transform.position;
+            carryRotation = carrying.transform.eulerAngles.y;
+            startCarryRotation = transform.eulerAngles.y;
         }
     }
 
