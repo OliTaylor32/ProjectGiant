@@ -460,5 +460,10 @@ public class PlayerControl : MonoBehaviour
         anim.Play("Idle");
         Destroy(this);
     }
+
+    public void HoldingStolen()
+    {
+        StartCoroutine(Drop());
+    }
 }
 

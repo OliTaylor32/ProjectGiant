@@ -16145,6 +16145,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 83.799
       objectReference: {fileID: 0}
+    - target: {fileID: 253682361031500072, guid: 29a4349b9b51dbd4fb84025324cea8d7,
+        type: 3}
+      propertyPath: fishEatingBird
+      value: 
+      objectReference: {fileID: 5283954685752892236, guid: 218e047aad3c1aa4eb48778dc39d7299,
+        type: 3}
     - target: {fileID: 253682361031500074, guid: 29a4349b9b51dbd4fb84025324cea8d7,
         type: 3}
       propertyPath: m_LocalPosition.y

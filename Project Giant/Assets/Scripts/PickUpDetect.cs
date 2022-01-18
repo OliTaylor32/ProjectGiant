@@ -8,6 +8,7 @@ public class PickUpDetect : MonoBehaviour
     public GameObject pickUp;
     private GameObject pickUpDummy;
     public GameObject giant;
+    public GameObject fishEatingBird;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,12 @@ public class PickUpDetect : MonoBehaviour
     public void GetPickUp() //return the giant the object that is to be picked up.
     {
         giant.SendMessage("ReturnPickUp", pickUp, SendMessageOptions.DontRequireReceiver);
+        if (pickUp.GetComponent<Object>().item == "fish")
+        {
+            pickUp.GetComponent<BirdAI>().PickedUp();
+            GameObject bird = Instantiate(fishEatingBird, new Vector3(transform.position.x + Random.Range(-70f, 70f), transform.position.y + 10f, transform.position.z + Random.Range(-70f, 70f)), Quaternion.identity);
+            bird.GetComponent<BirdAI>().SetFishTarget(pickUp);
+        }
     }
 
     public void AttackRequest() //Called by the giant
@@ -56,7 +63,6 @@ public class PickUpDetect : MonoBehaviour
         //print("Collision entered");
         if (((Vector3.Distance(collision.transform.position, giant.transform.position) < Vector3.Distance(pickUp.transform.position, giant.transform.position)) || pickUp == null) && collision.gameObject != giant && (collision.GetComponent<Object>() != null || collision.GetComponent<Villager>() != null))
         {
-
             pickUp = collision.transform.root.gameObject;
         }
     }

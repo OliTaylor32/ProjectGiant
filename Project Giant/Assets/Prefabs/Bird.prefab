@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf21a89dca8c7df4dac2c926a6284789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishEating: 0
   speed: 0
   maxSpeed: 5
   acceleration: 0.1
@@ -252,6 +253,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bird
+      objectReference: {fileID: 0}
+    - target: {fileID: -444521105353760620, guid: 6f8914d39c650f844af9a61da97eab04,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -444521105353760620, guid: 6f8914d39c650f844af9a61da97eab04,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -444521105353760620, guid: 6f8914d39c650f844af9a61da97eab04,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -444521105353760620, guid: 6f8914d39c650f844af9a61da97eab04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -444521105353760620, guid: 6f8914d39c650f844af9a61da97eab04,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -444521105353760620, guid: 6f8914d39c650f844af9a61da97eab04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 5085544327347355916, guid: 6f8914d39c650f844af9a61da97eab04,
         type: 3}
