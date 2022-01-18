@@ -8,12 +8,28 @@ public class DayCycle : MonoBehaviour
     private bool saved;
     public bool day;
     public Fade fade;
+
+    private GameObject rain;
+    public Material rainSkybox;
     // Start is called before the first frame update
     void Start()
     {
         day = true;
         saved = false;
         timer = Time.time; //Start the timer
+        rain = GameObject.Find("Rain");
+        int random = Random.Range(0, 5);
+        if (random == 0)
+        {
+            print("Rainy Day");
+            RenderSettings.skybox = rainSkybox;
+            GetComponent<Light>().intensity = 0.4f;
+            RenderSettings.ambientSkyColor = new Color(0.3f, 0.3f, 0.3f);
+        }
+        else
+        {
+            Destroy(rain);
+        }
     }
 
     // Update is called once per frame

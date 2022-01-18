@@ -22,15 +22,36 @@ public class Object : MonoBehaviour
     {
         destructing = false;
         stats = GameObject.Find("Narrator");
-        if (item == "sapling") //If this object is a tree sapling, start growing
-        {
-            StartCoroutine(Sapling());
-        }
+        //if (item == "sapling") //If this object is a tree sapling, start growing
+        //{
+        //    StartCoroutine(Sapling());
+        //}
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    private void GetWeight(GameObject sender) //Return this objects weight
+    {
+        sender.SendMessage("ReturnWeight", weight, SendMessageOptions.DontRequireReceiver);
+        print("Sent Weight");
+    }
+
+
+    public void lifeDown() //When damaged
+    {
+        life--;
+        if (item == "sheep")
+        {
+            if (GetComponent<LiveStockAI>() != null)
+            {
+                GetComponent<LiveStockAI>().StopMoving();
+            }
+        }
+
         if (life < 1) //If it's depleated of all of its life, destory the game object
         {
             if (item != "sheep" && item != "fish")
@@ -52,25 +73,6 @@ public class Object : MonoBehaviour
         }
     }
 
-    private void GetWeight(GameObject sender) //Return this objects weight
-    {
-        sender.SendMessage("ReturnWeight", weight, SendMessageOptions.DontRequireReceiver);
-        print("Sent Weight");
-    }
-
-
-    public void lifeDown() //When damaged
-    {
-        life--;
-        if (item == "sheep")
-        {
-            if (GetComponent<LiveStockAI>() != null)
-            {
-                GetComponent<LiveStockAI>().StopMoving();
-            }
-        }
-    }
-
     private void Built() 
     {
         if(item == "igloo") //Create 2 new villagers
@@ -80,15 +82,15 @@ public class Object : MonoBehaviour
         }
     }
 
-    private IEnumerator Sapling() //Grow until full size, then replace with tree (that can reproduce)
-    {
-        yield return new WaitForSeconds(120);    
-        Destroy(gameObject.GetComponent<BoxCollider>());
-        Instantiate(tree, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        Destroy(gameObject);
+    //private IEnumerator Sapling() //Grow until full size, then replace with tree (that can reproduce)
+    //{
+    //    yield return new WaitForSeconds(120);    
+    //    Destroy(gameObject.GetComponent<BoxCollider>());
+    //    Instantiate(tree, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+    //    Destroy(gameObject);
 
 
-    }
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {

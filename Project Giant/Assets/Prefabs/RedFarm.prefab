@@ -13673,6 +13673,19 @@ MonoBehaviour:
   smoke: {fileID: 1170902351642930369, guid: 9ea595de6c5c3394b9887387ed136db4, type: 3}
   star: {fileID: 3559250292362852098, guid: dab2c4c9eb753ba4ab3e648705c30ec5, type: 3}
   tear: {fileID: 6497887434317789109, guid: 7871b36754da21640818601eff852ef7, type: 3}
+--- !u!114 &6051031682249867625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7231733999227932771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce00caeddbffa849a17b00cf75acc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  harvest: 0
 --- !u!1 &1714203009896130793
 GameObject:
   m_ObjectHideFlags: 0

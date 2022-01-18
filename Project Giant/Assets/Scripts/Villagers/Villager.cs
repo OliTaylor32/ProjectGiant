@@ -365,11 +365,28 @@ public class Villager : MonoBehaviour
             if (collision.gameObject.GetComponent<Object>().item == "sheep") //if it's a sheep, kill it
             {
                 anim.Play("VillagerMine");
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(2f);
                 collision.gameObject.GetComponent<Object>().lifeDown();
                 anim.Play("VillagerEat");
                 yield return new WaitForSeconds(10f);
                 Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            }
+            if (collision.gameObject.GetComponent<Object>().item == "farm") //if it's a farm, Check if it can be harvested. 
+            {
+                if (collision.gameObject.GetComponent<Farm>().harvest == true)
+                {
+                    anim.Play("VillagerChop");
+                    collision.gameObject.GetComponent<Farm>().Harvest();
+                    yield return new WaitForSeconds(8f);
+                    Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+
+                }
+                else
+                {
+                    anim.Play("VillagerBuild");
+                    yield return new WaitForSeconds(5f);
+                }
+
             }
             stop = false;
             StartCoroutine(Move()); //Start walking again
