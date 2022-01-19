@@ -36,6 +36,8 @@ public class Save : MonoBehaviour
 
     public int mRedVillagers = 0;
     public int fRedVillagers = 0;
+    public int livestock = 0;
+    public int birds = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +52,8 @@ public class Save : MonoBehaviour
         fRedVillagers = 0;
         torchNo = 0;
         totemNo = 0;
+        livestock = 0;
+        birds = 0;
         //save();
 
 
@@ -100,6 +104,12 @@ public class Save : MonoBehaviour
                         break;
                     case "totem":
                         AddTotem(gameObject);
+                        break;
+                    case "sheep":
+                        livestock++;
+                        break;
+                    case "bird":
+                        birds++;
                         break;
                     default:
                         break;
@@ -189,7 +199,7 @@ public class Save : MonoBehaviour
             }
         }
 
-        new SaveData(treeData, treeWiltData, stoneData, redSmallHouseData, redFarmData, torchData, totemData, mRedVillagers, fRedVillagers);
+        new SaveData(treeData, treeWiltData, stoneData, redSmallHouseData, redFarmData, torchData, totemData, mRedVillagers, fRedVillagers, livestock, birds);
     }
 
     private void AddTree(GameObject newTree)

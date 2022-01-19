@@ -20,13 +20,16 @@ public class SaveData
     public int mRedVillagers;
     public int fRedVillagers;
 
+    public int livestock;
+    public int bird;
+
 
     public SaveData()
     {
         
     }
 
-    public SaveData(float[,] treeData, float[,] treeWiltData, float[,] stoneData, float[,] redSmallHouseData, float[,] redFarmData, float[,] torchData, float[,] totemData, int mRed, int fRed)
+    public SaveData(float[,] treeData, float[,] treeWiltData, float[,] stoneData, float[,] redSmallHouseData, float[,] redFarmData, float[,] torchData, float[,] totemData, int mRed, int fRed, int livestockNo, int birdNo)
     {
         trees = treeData;
         treeWilts = treeWiltData;
@@ -37,6 +40,8 @@ public class SaveData
         totems = totemData;
         mRedVillagers = mRed;
         fRedVillagers = fRed;
+        livestock = livestockNo;
+        bird = birdNo;
         Store();
     }
 

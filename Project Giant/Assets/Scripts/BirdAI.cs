@@ -22,7 +22,7 @@ public class BirdAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (fishEating == true)
+        if (GetComponent<Object>().item == "bird")
         {
             targets = new Transform[GameObject.Find("BirdTargets").transform.childCount];
             for (int i = 0; i < targets.Length; i++)

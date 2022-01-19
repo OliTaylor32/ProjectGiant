@@ -15,9 +15,20 @@ public class LiveStockAI : MonoBehaviour
     Vector3 rotationRight = new Vector3(0, 30, 0);
     Vector3 forward = new Vector3(0, 0, 1);
 
+    public bool canBreed;
+    public GameObject child;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+         GameObject getTargets = GameObject.Find("LiveStockTargets");
+         targets = new Transform[getTargets.transform.childCount];
+         for (int i = 0; i < getTargets.transform.childCount; i++)
+         {
+             targets[i] = getTargets.transform.GetChild(i);
+         }
         currentTarget = Random.Range(0, targets.Length);
     }
 
@@ -51,9 +62,27 @@ public class LiveStockAI : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<LiveStockAI>() != null)
+        {
+            if (canBreed == true)
+            {
+                GameObject newChild = Instantiate(child, new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z + 0.5f), Quaternion.identity);
+                canBreed = false;
+                newChild.GetComponent<LiveStockAI>().SetTarget(currentTarget);
+            }
+        }
+    }
+
     public void StopMoving()
     {
         GetComponent<Animator>().Play("SheepDead");
         Destroy(this);
+    }
+
+    public void SetTarget(int newTarget)
+    {
+        currentTarget = newTarget;
     }
 }

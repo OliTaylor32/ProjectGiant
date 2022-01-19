@@ -16,6 +16,9 @@ public class Load : MonoBehaviour
     private int mRedVillagers;
     private int fRedVillagers;
 
+    private int livestock;
+    private int birds;
+
     public GameObject tree;
     public GameObject treeWilt;
     public GameObject stone;
@@ -25,6 +28,9 @@ public class Load : MonoBehaviour
     public GameObject totem;
     public GameObject mRedVillager;
     public GameObject fRedVillager;
+    public GameObject livestockObj;
+    public GameObject bird;
+
 
     public Transform redCentre;
     public Transform blackCentre;
@@ -45,6 +51,10 @@ public class Load : MonoBehaviour
 
         mRedVillagers = data.mRedVillagers;
         fRedVillagers = data.fRedVillagers;
+
+        livestock = data.livestock;
+        birds = data.bird;
+        
 
         if (trees != null)
         {
@@ -118,6 +128,16 @@ public class Load : MonoBehaviour
         for (int i = 0; i < fRedVillagers; i++)
         {
             Instantiate(fRedVillager, new Vector3(Random.Range(redCentre.position.x - 20.0f, redCentre.position.x + 20.0f), 5, Random.Range(redCentre.position.z - 20.0f, redCentre.position.z + 20.0f)), Quaternion.identity);
+        }
+
+        for (int i = 0; i < livestock; i++)
+        {
+            Instantiate(livestockObj, new Vector3(Random.Range(redCentre.position.x - 20.0f, redCentre.position.x + 20.0f), 5, Random.Range(redCentre.position.z - 20.0f, redCentre.position.z + 20.0f)), Quaternion.identity);
+        }
+
+        for (int i = 0; i < birds; i++)
+        {
+            Instantiate(bird, new Vector3(Random.Range(redCentre.position.x - 20.0f, redCentre.position.x + 20.0f), 5, Random.Range(redCentre.position.z - 20.0f, redCentre.position.z + 20.0f)), Quaternion.identity);
         }
 
     }
