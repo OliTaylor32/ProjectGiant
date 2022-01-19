@@ -106,7 +106,10 @@ public class Save : MonoBehaviour
                         AddTotem(gameObject);
                         break;
                     case "sheep":
-                        livestock++;
+                        if (gameObject.GetComponent<LiveStockAI>() != null)
+                        {
+                            livestock++;
+                        }
                         break;
                     case "bird":
                         birds++;

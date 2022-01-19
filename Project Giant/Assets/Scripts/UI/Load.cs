@@ -137,7 +137,7 @@ public class Load : MonoBehaviour
 
         for (int i = 0; i < birds; i++)
         {
-            Instantiate(bird, new Vector3(Random.Range(redCentre.position.x - 20.0f, redCentre.position.x + 20.0f), 5, Random.Range(redCentre.position.z - 20.0f, redCentre.position.z + 20.0f)), Quaternion.identity);
+            Instantiate(bird, new Vector3(Random.Range(redCentre.position.x - 30.0f, redCentre.position.x + 30.0f), 5, Random.Range(redCentre.position.z - 30.0f, redCentre.position.z + 30.0f)), Quaternion.identity);
         }
 
     }

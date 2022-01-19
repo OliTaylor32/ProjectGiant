@@ -92,7 +92,7 @@ public class MainMenu : MonoBehaviour
                     {
                         StartCoroutine(LoadLevel("Taddiport"));
                     }
-                    if (selected2 == 0)
+                    if (selected2 == 1)
                     {
                         StartCoroutine(LoadLevel("TaddiportLoad"));
                     }
