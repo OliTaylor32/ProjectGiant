@@ -41,6 +41,8 @@ public class PlayerControl : MonoBehaviour
     public AudioClip walk;
     public DayCycle daycycle;
 
+    public GameObject growEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -97,7 +99,7 @@ public class PlayerControl : MonoBehaviour
 
         //make sure Player can't move faster than designated max speeds
         moveSide = Mathf.Clamp(moveSide, -maxSpeed, maxSpeed);
-        moveForward = Mathf.Clamp(moveForward, -3, maxSpeed); //Player can not upgrade backpedal speed
+        moveForward = Mathf.Clamp(moveForward, -2, maxSpeed); //Player can not upgrade backpedal speed
 
         if (isAttacking == false && pickingUp == false && dropping == false)//Attacking locks the player into place
         {
@@ -329,13 +331,13 @@ public class PlayerControl : MonoBehaviour
         {
             starLv = 0;
             maxSpeed = 2f;
-            rotationSpeed = 1f;
+            rotationSpeed = 1.2f;
         }
         else if (stars >= 10 && stars < 20)
         {
             starLv = 1;
             maxSpeed = 3f;
-            rotationSpeed = 1.2f;
+            rotationSpeed = 1.3f;
         }
         else if (stars >= 20 && stars < 30)
         {
@@ -347,7 +349,7 @@ public class PlayerControl : MonoBehaviour
         {
             starLv = 3;
             maxSpeed = 5f;
-            rotationSpeed = 1.6f;
+            rotationSpeed = 1.5f;
         }
         //tears unlocks new abilities
 
@@ -373,7 +375,7 @@ public class PlayerControl : MonoBehaviour
             if (size < 2)
             {
                 size = 2;
-                transform.localScale = new Vector3(1.2f, 3.6f, 1.2f);
+                StartCoroutine(Grow());
             }
         }
 
@@ -382,7 +384,7 @@ public class PlayerControl : MonoBehaviour
             if (size < 3)
             {
                 size = 3;
-                transform.localScale = new Vector3(1.4f, 4.2f, 1.4f);
+                StartCoroutine(Grow());
             }
         }
 
@@ -391,7 +393,7 @@ public class PlayerControl : MonoBehaviour
             if (size < 4)
             {
                 size = 4;
-                transform.localScale = new Vector3(1.6f, 4.8f, 1.6f);
+                StartCoroutine(Grow());
             }
         }
     }
@@ -470,6 +472,26 @@ public class PlayerControl : MonoBehaviour
     public void HoldingStolen()
     {
         StartCoroutine(Drop());
+    }
+
+    private IEnumerator Grow()
+    {
+        Instantiate(growEffect, transform.position, Quaternion.Euler(new Vector3(-90f, 0f, 180f)));
+        yield return new WaitForSeconds(0.5f);
+        switch (size)
+        {
+            case 2:
+                transform.localScale = new Vector3(1.2f, 3.6f, 1.2f);
+                break;
+            case 3:
+                transform.localScale = new Vector3(1.4f, 4.2f, 1.4f);
+                break;
+            case 4:
+                transform.localScale = new Vector3(1.6f, 4.8f, 1.6f);
+                break;
+            default:
+                break;
+        }
     }
 }
 
