@@ -51,9 +51,10 @@ public class Villager : MonoBehaviour
         //Start moving
         StartCoroutine(Move());
 
-        actions = new string[2];
+        actions = new string[3];
         actions[0] = "Nothing";
         actions[1] = "Build";
+        actions[2] = "Play";
 
         stop = false;
 
@@ -268,6 +269,17 @@ public class Villager : MonoBehaviour
                         StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().tree.transform.position));
                     }
                     Destroy(check);
+                }
+                break;
+            case "Play":
+                anim.Play("VillagerPlay1");
+                for (int i = 0; i < 14; i++)
+                {
+                    yield return new WaitForSeconds(1f);
+                    if (stop == true)
+                    {
+                        break;
+                    }
                 }
                 break;
                 

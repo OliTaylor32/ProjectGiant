@@ -76,8 +76,8 @@ public class PlayerControl : MonoBehaviour
         camera.transform.localPosition = new Vector3(0, 0, zoom);
 
         //Look around pivot with the mouse
-        mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
-        mouseY += Input.GetAxis("Mouse Y") * mouseSpeed;
+        mouseX += (Input.GetAxis("Mouse X") + Input.GetAxis("HorizontalRS")) * mouseSpeed;
+        mouseY += (Input.GetAxis("Mouse Y") + Input.GetAxis("VerticalRS")) * mouseSpeed;
         mouseY = Mathf.Clamp(mouseY, -10f, 60f); // Camera can't go through floor or directly overhead.
         camera.LookAt(centerPoint);
         centerPoint.localRotation = Quaternion.Euler(mouseY, mouseX, 0);
@@ -85,6 +85,11 @@ public class PlayerControl : MonoBehaviour
         //Get any input for movement by the player
         moveForward += Input.GetAxis("Vertical") * moveSpeed;
         moveSide += Input.GetAxis("Horizontal") * moveSpeed;
+
+        if (moveForward < -1f)
+        {
+            moveSide = 0f;
+        }
 
         //If no input, come to a stop.
         if (Input.GetAxis("Horizontal") == 0)
@@ -152,7 +157,7 @@ public class PlayerControl : MonoBehaviour
 
 
                 }
-                else if (Input.GetKey(KeyCode.W) == true)
+                else if (Input.GetAxis("Vertical") > 0.05f)
                 {
                     if (isCarrying == true)
                     {
@@ -175,7 +180,29 @@ public class PlayerControl : MonoBehaviour
                     }
 
                 }
-                else if (Input.GetKey(KeyCode.A) == true)
+                else if (Input.GetAxis("Vertical") < -0.05f)
+                {
+                    if (isCarrying == true)
+                    {
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("BackwardCarry") == false)
+                            ResetAnimations("BackwardCarry");
+                        anim.SetBool("BackwardCarry", true);
+                    }
+                    else
+                    {
+                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Backwards") == false)
+                            ResetAnimations("Backward");
+                        anim.SetBool("Backward", true);
+                    }
+                    if (gameObject.GetComponent<AudioSource>().clip != walk)
+                    {
+                        gameObject.GetComponent<AudioSource>().loop = true;
+                        gameObject.GetComponent<AudioSource>().Stop();
+                        gameObject.GetComponent<AudioSource>().clip = walk;
+                        gameObject.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (Input.GetAxis("Horizontal") < -0.05f)
                 {
                     if (isCarrying == true)
                     {
@@ -199,7 +226,7 @@ public class PlayerControl : MonoBehaviour
                     }
 
                 }
-                else if (Input.GetKey(KeyCode.D) == true)
+                else if (Input.GetAxis("Horizontal") > 0.05f)
                 {
                     if (isCarrying == true)
                     {
@@ -221,28 +248,6 @@ public class PlayerControl : MonoBehaviour
                         gameObject.GetComponent<AudioSource>().Play();
                     }
                 }
-                else if (Input.GetKey(KeyCode.S) == true)
-                {
-                    if (isCarrying == true)
-                    {
-                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("BackwardCarry") == false)
-                            ResetAnimations("BackwardCarry");
-                        anim.SetBool("BackwardCarry", true);
-                    }
-                    else
-                    {
-                        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Backwards") == false)
-                            ResetAnimations("Backward");
-                        anim.SetBool("Backward", true);
-                    }
-                    if (gameObject.GetComponent<AudioSource>().clip != walk)
-                    {
-                        gameObject.GetComponent<AudioSource>().loop = true;
-                        gameObject.GetComponent<AudioSource>().Stop();
-                        gameObject.GetComponent<AudioSource>().clip = walk;
-                        gameObject.GetComponent<AudioSource>().Play();
-                    }
-                }
             }
         }
 
@@ -252,20 +257,20 @@ public class PlayerControl : MonoBehaviour
         //Picking up and Carrying
         //***********************
 
-        if (Input.GetKeyDown("z"))
-        {
-            if (pickup.GetComponent<PickUpDetect>().pickUp.GetComponent<WorkShop>() != null )
-            {
-                if (pickup.GetComponent<PickUpDetect>().pickUp.GetComponent<WorkShop>().open == false)
-                {
-                    pickup.GetComponent<PickUpDetect>().pickUp.GetComponent<WorkShop>().OpenWorkShop();
-                    isAttacking = true;
-                }
+        //if (Input.GetKeyDown("z"))
+        //{
+        //    if (pickup.GetComponent<PickUpDetect>().pickUp.GetComponent<WorkShop>() != null )
+        //    {
+        //        if (pickup.GetComponent<PickUpDetect>().pickUp.GetComponent<WorkShop>().open == false)
+        //        {
+        //            pickup.GetComponent<PickUpDetect>().pickUp.GetComponent<WorkShop>().OpenWorkShop();
+        //            isAttacking = true;
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetButtonDown("PickUp"))
         {
             if (isCarrying == false) //If the player isn't carry anything, pick up an object
             {
@@ -310,7 +315,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (tearLv >= 1) // Can't attack until leveled up
             {
-                if (Input.GetKeyDown(KeyCode.X))
+                if (Input.GetButtonDown("Attack"))
                 {
                     if (isAttacking == false)//If the player isn't already attacking, attack
                     {

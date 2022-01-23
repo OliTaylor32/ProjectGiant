@@ -122,11 +122,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: tree
-  weight: 1
+  weight: 0
   life: 3
   villager: {fileID: 0}
   tree: {fileID: 0}
   stats: {fileID: 0}
+  smoke: {fileID: 0}
+  star: {fileID: 0}
+  tear: {fileID: 0}
 --- !u!1001 &2478124231740605016
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: sheep
-  weight: 1
+  weight: 0
   life: 2
   villager: {fileID: 0}
   tree: {fileID: 0}

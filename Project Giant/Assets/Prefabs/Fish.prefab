@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf21a89dca8c7df4dac2c926a6284789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishEating: 0
   speed: 0
   maxSpeed: 5
   acceleration: 0.1
@@ -71,6 +72,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  fishGrabbed: 0
 --- !u!114 &4143380659284301732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: fish
-  weight: 1
+  weight: 0
   life: 1
   villager: {fileID: 0}
   tree: {fileID: 0}

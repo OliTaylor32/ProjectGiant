@@ -78,7 +78,7 @@ public class MainMenu : MonoBehaviour
             StartCoroutine(TriggerCoolDown());
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("PickUp"))
         {
             if (menuLayer == 0)
             {
