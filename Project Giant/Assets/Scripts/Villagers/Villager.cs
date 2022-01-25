@@ -37,6 +37,7 @@ public class Villager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(AudioPlay());
         builtToday = false;
         anim = gameObject.GetComponent<Animator>();
         //MAke sure they walk around their own village
@@ -414,7 +415,15 @@ public class Villager : MonoBehaviour
         StartCoroutine(Move());
     }
 
-
+    private IEnumerator AudioPlay()
+    {
+        while (life > 0)
+        {
+            yield return new WaitForSeconds(Random.Range(10f, 30f));
+            GetComponent<AudioSource>().Stop();
+            GetComponent<AudioSource>().Play();
+        }
+    }
 
 
 

@@ -12611,6 +12611,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1603363388444707284, guid: ae67f2470580d774fbde956e41fe3f60,
+        type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1603363388444707284, guid: ae67f2470580d774fbde956e41fe3f60,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1165462270, guid: ae67f2470580d774fbde956e41fe3f60, type: 3}
       propertyPath: targets.Array.size
       value: 9

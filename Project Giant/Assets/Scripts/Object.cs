@@ -26,6 +26,11 @@ public class Object : MonoBehaviour
         //{
         //    StartCoroutine(Sapling());
         //}
+
+        if (item == "sheep")
+        {
+            StartCoroutine(AudioPlay());
+        }
     }
 
     // Update is called once per frame
@@ -142,5 +147,15 @@ public class Object : MonoBehaviour
             smokeSpawned.GetComponent<ParticleSystem>().Stop();
         }
         Destroy(gameObject);
+    }
+
+    private IEnumerator AudioPlay()
+    {
+        while (life > 0)
+        {
+            yield return new WaitForSeconds(Random.Range(5f, 10f));
+            GetComponent<AudioSource>().Stop();
+            GetComponent<AudioSource>().Play();
+        }
     }
 }
