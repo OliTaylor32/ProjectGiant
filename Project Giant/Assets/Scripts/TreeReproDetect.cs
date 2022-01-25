@@ -10,6 +10,7 @@ public class TreeReproDetect : MonoBehaviour
     public GameObject currentCollision;
     private bool checking;
     public GameObject stats;
+    public GameObject particleFX;
 
     private bool saplings;
 
@@ -82,10 +83,12 @@ public class TreeReproDetect : MonoBehaviour
             saplings = true;
 
             stats.GetComponent<Dialogue>().natureScore++;
+            GameObject particles = Instantiate(particleFX, transform.position, Quaternion.Euler(-90, 0, 0));
             Instantiate(tree, new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y + 3, transform.position.z + Random.Range(-5, 5)), Quaternion.identity);
             Instantiate(tree, new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y + 5, transform.position.z + Random.Range(-5, 5)), Quaternion.identity);
             transform.parent.gameObject.GetComponent<Animator>().Play("TreeWilt");
             yield return new WaitForSeconds(5);
+            Destroy(particles);
             Destroy(transform.parent.gameObject);
         }
     }

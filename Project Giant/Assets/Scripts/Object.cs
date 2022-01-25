@@ -127,7 +127,10 @@ public class Object : MonoBehaviour
             smokeSpawned = Instantiate(smoke);
             smokeSpawned.transform.position = transform.position;
         }
-        Instantiate(tear).transform.position = transform.position;
+        if (tear != null)
+        {
+            Instantiate(tear).transform.position = transform.position;
+        }
         for (int i = 0; i < 500; i++)
         {
             yield return new WaitForSeconds(0.01f);
