@@ -44,7 +44,7 @@ public class TreeReproDetect : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (checking == false)
+        if (checking == false && other.transform.root.GetComponent<PlayerControl>() == null)
         {
             checking = true;
             currentCollision = other.gameObject;
@@ -57,15 +57,20 @@ public class TreeReproDetect : MonoBehaviour
     {
         if (other.transform.root != other.transform) //If this object is a child.
         {
+            print("Object is Child");
             //Wait until neither this tree or the other tree is being carried by the giant
             yield return new WaitUntil(() => giant.GetComponent<PlayerControl>().carrying != gameObject.transform.parent.gameObject 
                                                 && giant.GetComponent<PlayerControl>().carrying != other.gameObject.transform.parent.gameObject);
+            print("Object is dropped");
             if (other.gameObject == currentCollision) //If it's the same object
             {
+                print("Still Colliding with other object");
                 if (other.transform.parent.GetComponent<Object>() != null) //If it is an object
                 {
+                    print("Is an object");
                     if (other.transform.parent.GetComponent<Object>().item == "tree" || other.transform.parent.GetComponent<Object>().item == "treeWilt") //If it's a tree
                     {
+                        print("Is a tree");
                         StartCoroutine(reproduce()); //Reproduce
                     }
 

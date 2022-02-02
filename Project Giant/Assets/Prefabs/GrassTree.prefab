@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: tree
   weight: 0
-  life: 3
+  life: 2
   villager: {fileID: 0}
   tree: {fileID: 0}
   stats: {fileID: 0}

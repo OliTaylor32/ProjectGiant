@@ -29,6 +29,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0038445, y: 0.99480903, z: 2.0604959}
   m_Center: {x: 0.011216799, y: 0.5208415, z: -0.04611969}
+--- !u!114 &5982293138785680013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3670062272022646079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a848d80aea59e1a42882ddc464ff819a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: sapling
+  weight: 100
+  life: 1
+  villager: {fileID: 0}
+  tree: {fileID: 0}
+  stats: {fileID: 0}
+  smoke: {fileID: 0}
+  star: {fileID: 0}
+  tear: {fileID: 0}
 --- !u!1001 &4742082769129460790
 PrefabInstance:
   m_ObjectHideFlags: 0
