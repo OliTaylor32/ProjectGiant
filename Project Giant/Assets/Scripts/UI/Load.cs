@@ -54,7 +54,6 @@ public class Load : MonoBehaviour
 
         livestock = data.livestock;
         birds = data.bird;
-        
 
         if (trees != null)
         {
@@ -64,9 +63,10 @@ public class Load : MonoBehaviour
                 obj.transform.eulerAngles = new Vector3(0f, trees[i, 2], 0f);
             }
         }
+        print("TreeWilts check");
 
         if (treeWilts != null)
-        {
+        { 
             for (int i = 0; i < treeWilts.GetLength(0); i++)
             {
                 GameObject obj = Instantiate(treeWilt, new Vector3(treeWilts[i, 0], 5, treeWilts[i, 1]), Quaternion.identity);
@@ -74,6 +74,7 @@ public class Load : MonoBehaviour
             }
         }
 
+        print("TreeWilts check end");
         if (stones != null)
         {
             for (int i = 0; i < stones.GetLength(0); i++)

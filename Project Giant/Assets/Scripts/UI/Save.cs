@@ -147,6 +147,17 @@ public class Save : MonoBehaviour
             }
         }
 
+        if (treeWilts != null)
+        {
+            treeWiltData = new float[treeWilts.Length, 3];
+            for (int i = 0; i < treeWilts.Length; i++)
+            {
+                treeWiltData[i, 0] = treeWilts[i].transform.position.x;
+                treeWiltData[i, 1] = treeWilts[i].transform.position.z;
+                treeWiltData[i, 2] = treeWilts[i].transform.eulerAngles.y;
+            }
+        }
+
         if (stones != null)
         {
             stoneData = new float[stones.Length, 3];
@@ -238,7 +249,7 @@ public class Save : MonoBehaviour
         else
         {
             treeWiltNo++;
-            GameObject[] temp = trees;
+            GameObject[] temp = treeWilts;
             treeWilts = new GameObject[treeWiltNo];
             treeWilts[0] = newTree;
             for (int i = 1; i < treeWilts.Length; i++)

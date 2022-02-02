@@ -36,7 +36,7 @@ public class DayCycle : MonoBehaviour
     void Update()
     {
 
-        if (Time.time - timer > 600f && saved == false)
+        if (Time.time - timer > 1f && saved == false)
         {
             #pragma warning disable CS0618 // Type or member is obsolete
             if (Application.loadedLevel == 0)
@@ -44,15 +44,15 @@ public class DayCycle : MonoBehaviour
                 Application.LoadLevel("TitleScreen");
             }
             #pragma warning restore CS0618 // Type or member is obsolete
-            GetComponent<Save>().save();
+            gameObject.GetComponent<Save>().save();
             saved = true;
             if (GameObject.Find("Giant") != null)
             {
                 GameObject.Find("Giant").GetComponent<PlayerControl>().Freeze();
                 day = false;
-                GameObject.Find("Canvas").transform.FindChild("EndPanel").
-                    GetComponent<EndStats>().SetPopulationStats(GetComponent<Save>().mRedVillagers + GetComponent<Save>().fRedVillagers,
-                    GetComponent<Save>().treeNo, GetComponent<Save>().livestock, GetComponent<Save>().birds);
+                GameObject.Find("Canvas").transform.Find("EndPanel").
+                    GetComponent<EndStats>().SetPopulationStats(gameObject.GetComponent<Save>().mRedVillagers + gameObject.GetComponent<Save>().fRedVillagers,
+                    gameObject.GetComponent<Save>().treeNo + gameObject.GetComponent<Save>().treeWiltNo, gameObject.GetComponent<Save>().livestock, gameObject.GetComponent<Save>().birds);
             }
         }
         if (Time.time - timer >= 640f) //After 5mins, boot the player back to the title screen
@@ -63,6 +63,7 @@ public class DayCycle : MonoBehaviour
         }
         if (Time.time - timer >= 635f)
         {
+            GetComponent<Save>().save();
             fade.StartFadeOut();
         }
     }
