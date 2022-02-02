@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     public TextMeshProUGUI[] modes;
     public TextMeshProUGUI[] freeplayModes;
     public GameObject freeplayLocation;
-    public GameObject challenge;
+    public TextMeshProUGUI[] challenges;
     public GameObject freeplayMapSS;
     public Image background;
 
@@ -43,7 +43,10 @@ public class MainMenu : MonoBehaviour
 
         freeplayLocation.SetActive(false);
         freeplayMapSS.SetActive(false);
-        challenge.gameObject.SetActive(false);
+        for (int i = 0; i < challenges.Length; i++)
+        {
+            challenges[i].gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -100,7 +103,14 @@ public class MainMenu : MonoBehaviour
 
                 if (selected == 2)
                 {
-                    StartCoroutine(LoadLevel("TornadoChallenge1"));
+                    if (selected2 == 0)
+                    {
+                        StartCoroutine(LoadLevel("TornadoChallenge1"));
+                    }
+                    else
+                    {
+                        StartCoroutine(LoadLevel("PresentChallenge1"));
+                    }
                 }
             }
         }
@@ -130,6 +140,14 @@ public class MainMenu : MonoBehaviour
                 freeplayModes[i].color = new Color(1f, 1f, 1f, 1f);
             }
         }
+        for (int i = 0; i < challenges.Length; i++)
+        {
+            challenges[i].color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            if (i == selected2)
+            {
+                challenges[i].color = new Color(1f, 1f, 1f, 1f);
+            }
+        }
         yield return new WaitForSeconds(0.2f);
         cooldown = false;
     }
@@ -149,7 +167,11 @@ public class MainMenu : MonoBehaviour
         }
         if (selected == 2)
         {
-            challenge.gameObject.SetActive(true);
+            for (int i = 0; i < challenges.Length; i++)
+            {
+                challenges[i].gameObject.SetActive(true);
+            }
+
         }
         StartCoroutine(TriggerCoolDown());
     }
@@ -172,7 +194,10 @@ public class MainMenu : MonoBehaviour
         }
         if (selected == 2)
         {
-            challenge.gameObject.SetActive(false);
+            for (int i = 0; i < challenges.Length; i++)
+            {
+                challenges[i].gameObject.SetActive(false);
+            }
         }
     }
 

@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TornadoChallenge1.unity
     guid: a1bbfb5ea259ab44bb04669bb415b853
+  - enabled: 1
+    path: Assets/Scenes/PresentChallenge1.unity
+    guid: f12467d254fce994bb792aa539664cba
   m_configObjects: {}
