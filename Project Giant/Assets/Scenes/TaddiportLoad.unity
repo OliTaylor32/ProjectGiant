@@ -844,6 +844,7 @@ MonoBehaviour:
   day: 0
   fade: {fileID: 1498380615}
   rainSkybox: {fileID: 0}
+  confirmedRain: 0
 --- !u!123 &170076738
 LensFlare:
   m_ObjectHideFlags: 0
@@ -2049,7 +2050,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1.5
+    m_LineSpacing: 0.7
   m_Text: 
 --- !u!222 &588045669
 CanvasRenderer:
@@ -5725,6 +5726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 588045666}
+  challengeMode: 0
 --- !u!1 &1886528039
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,8 @@ public class DayCycle : MonoBehaviour
 
     private GameObject rain;
     public Material rainSkybox;
+
+    public bool confirmedRain;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,17 +20,20 @@ public class DayCycle : MonoBehaviour
         saved = false;
         timer = Time.time; //Start the timer
         rain = GameObject.Find("Rain");
-        int random = Random.Range(0, 5);
-        if (random == 0)
+        if (confirmedRain == false)
         {
-            print("Rainy Day");
-            RenderSettings.skybox = rainSkybox;
-            GetComponent<Light>().intensity = 0.4f;
-            RenderSettings.ambientSkyColor = new Color(0.3f, 0.3f, 0.3f);
-        }
-        else
-        {
-            Destroy(rain);
+            int random = Random.Range(0, 5);
+            if (random == 0)
+            {
+                print("Rainy Day");
+                RenderSettings.skybox = rainSkybox;
+                GetComponent<Light>().intensity = 0.4f;
+                RenderSettings.ambientSkyColor = new Color(0.3f, 0.3f, 0.3f);
+            }
+            else
+            {
+                Destroy(rain);
+            }
         }
     }
 
@@ -36,7 +41,7 @@ public class DayCycle : MonoBehaviour
     void Update()
     {
 
-        if (Time.time - timer > 1f && saved == false)
+        if (Time.time - timer > 600f && saved == false)
         {
             #pragma warning disable CS0618 // Type or member is obsolete
             if (Application.loadedLevel == 0)

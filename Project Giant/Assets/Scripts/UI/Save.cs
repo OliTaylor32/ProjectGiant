@@ -212,8 +212,13 @@ public class Save : MonoBehaviour
                 totemData[i, 2] = totems[i].transform.eulerAngles.y;
             }
         }
+        int slot = 0;
+        if (Application.loadedLevelName == "Taddiport" || Application.loadedLevelName == "TaddiportLoad")
+        {
+            slot = 1;
+        }
 
-        new SaveData(treeData, treeWiltData, stoneData, redSmallHouseData, redFarmData, torchData, totemData, mRedVillagers, fRedVillagers, livestock, birds);
+        new SaveData(treeData, treeWiltData, stoneData, redSmallHouseData, redFarmData, torchData, totemData, mRedVillagers, fRedVillagers, livestock, birds, slot);
     }
 
     private void AddTree(GameObject newTree)

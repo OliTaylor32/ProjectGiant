@@ -23,13 +23,15 @@ public class SaveData
     public int livestock;
     public int bird;
 
+    public int saveSlot;
+
 
     public SaveData()
     {
         
     }
 
-    public SaveData(float[,] treeData, float[,] treeWiltData, float[,] stoneData, float[,] redSmallHouseData, float[,] redFarmData, float[,] torchData, float[,] totemData, int mRed, int fRed, int livestockNo, int birdNo)
+    public SaveData(float[,] treeData, float[,] treeWiltData, float[,] stoneData, float[,] redSmallHouseData, float[,] redFarmData, float[,] torchData, float[,] totemData, int mRed, int fRed, int livestockNo, int birdNo, int saveSlot)
     {
         trees = treeData;
         treeWilts = treeWiltData;
@@ -47,8 +49,16 @@ public class SaveData
 
     public void Store()
     {
+        string path;
+        if (saveSlot == 0)
+        {
+             path = Application.persistentDataPath + "/tempdata.map";
 
-        string path = Application.persistentDataPath + "/savedata.map";
+        }
+        else
+        {
+            path = Application.persistentDataPath + "/savedata.map";
+        }
         FileStream file;
 
         if (File.Exists(path))
