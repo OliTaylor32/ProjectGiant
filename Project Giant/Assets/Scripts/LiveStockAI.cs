@@ -71,6 +71,7 @@ public class LiveStockAI : MonoBehaviour
                 GameObject newChild = Instantiate(child, new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z + 0.5f), Quaternion.identity);
                 canBreed = false;
                 newChild.GetComponent<LiveStockAI>().SetTarget(currentTarget);
+                GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().natureScore++;
             }
         }
     }

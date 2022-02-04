@@ -112,6 +112,7 @@ public class BirdAI : MonoBehaviour
     public void SetFishTarget(GameObject fish2Eat)
     {
         fishTarget = fish2Eat;
+        GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().natureScore++;
     }
 
     public void FishGrabbed(GameObject bird)

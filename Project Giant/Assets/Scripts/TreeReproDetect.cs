@@ -17,7 +17,7 @@ public class TreeReproDetect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stats = GameObject.Find("Narrator");
+        stats = GameObject.Find("Canvas").transform.Find("Narrator").gameObject;
         giant = GameObject.Find("Giant");
         checking = false;
         saplings = false;

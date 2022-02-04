@@ -21,7 +21,7 @@ public class Object : MonoBehaviour
     void Start()
     {
         destructing = false;
-        stats = GameObject.Find("Narrator");
+        stats = GameObject.Find("Canvas").transform.Find("Narrator").gameObject;
         //if (item == "sapling") //If this object is a tree sapling, start growing
         //{
         //    StartCoroutine(Sapling());
@@ -54,6 +54,7 @@ public class Object : MonoBehaviour
             if (GetComponent<LiveStockAI>() != null)
             {
                 GetComponent<LiveStockAI>().StopMoving();
+                stats.GetComponent<Dialogue>().natureScore--;
             }
         }
 
@@ -134,7 +135,21 @@ public class Object : MonoBehaviour
         }
         if (tear != null)
         {
-            Instantiate(tear).transform.position = transform.position;
+            if (item == "farm")
+            {
+                Instantiate(tear).transform.position = transform.position;
+                yield return new WaitForSeconds(0.05f);
+                Instantiate(tear).transform.position = transform.position;
+            }
+
+            if (item == "sHouse")
+            {
+                Instantiate(tear).transform.position = transform.position;
+                yield return new WaitForSeconds(0.1f);
+                Instantiate(tear).transform.position = transform.position;
+                yield return new WaitForSeconds(0.1f);
+                Instantiate(tear).transform.position = transform.position;
+            }
         }
         for (int i = 0; i < 500; i++)
         {

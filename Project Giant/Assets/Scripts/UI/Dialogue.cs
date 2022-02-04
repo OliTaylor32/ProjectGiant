@@ -38,12 +38,12 @@ public class Dialogue : MonoBehaviour
         text[5] = "When the Giant grows by collecting stars, it will become more mobile";
         text[6] = "When the Giant grows by collecting tears, it will gain more destructive abilities. ";
         text[7] = "The greater the Giant becomes in size, the stronger it gets, allowing it to lift almost anything!";
-        text[8] = "Keeping nature on your side is always useful, as if the islands delicate balance is disrupted, the island will grow more dangerous.";
+        text[8] = "The trees on the island will slowly wither and die if left alone, almost as if they long for companionship. Maybe you could give the trees a friend?";
         text[9] = "As the sun starts it's desent into the endless ocean, the villagers say goodbye to the Giant, as they have to rest, and so too does the Giant.";
-        text[10] = "The Giant has grown by collecting tears from the villagers, now the giant can attack by pressing the (X) key!";
-        text[11] = "The Giant has grown by collecting stars from the villagers, the Giant's speed has increased!";
-        //text[12] = "";
-        //text[13] = "";
+        text[10] = "The Giant has grown by collecting tears from the villagers, the giant can now attack larger structures";
+        text[11] = "The Giant has grown by collecting stars from the villagers, and can now move at greater speeds";
+        text[12] = "All life on the island can be helped or hindered by the Giant, from the birds in the sky to the fish in the sea. You wouldn't notice though, as they are unable to communicate with The Giant";
+        text[13] = "Keeping nature on your side is always useful, if the islands delicate balance is disrupted, the island will grow more dangerous.";
         //text[14] = "";
 
         //Set to start of day text.
@@ -93,7 +93,7 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-        if (giant.GetComponent<PlayerControl>().stars > 4 && used[5] == false) //When the player has grown using stars
+        if (giant.GetComponent<PlayerControl>().stars > 9 && used[5] == false) //When the player has grown using stars
         {
             txt.text = text[5];
             used[5] = true;
@@ -101,7 +101,7 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-        if (giant.GetComponent<PlayerControl>().tears > 4 && used[6] == false) //When the player has grown using tears
+        if (giant.GetComponent<PlayerControl>().tears > 9 && used[6] == false) //When the player has grown using tears
         {
             txt.text = text[6];
             used[6] = true;
@@ -109,7 +109,7 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
         //When the player has collected either 7 stars or tears.
-        if ((giant.GetComponent<PlayerControl>().stars > 6|| giant.GetComponent<PlayerControl>().tears > 6) && used[7] == false) 
+        if ((giant.GetComponent<PlayerControl>().stars > 11|| giant.GetComponent<PlayerControl>().tears > 11) && used[7] == false) 
         {
             txt.text = text[7];
             used[7] = true;
@@ -117,7 +117,7 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-        if (Time.time - timer >= 13f && used[8] == false) //When 13secs has passed without any narration
+        if (Time.time - timer >= 20f && used[8] == false) //When 20secs has passed without any narration
         {
             txt.text = text[8];
             used[8] = true;
@@ -150,21 +150,21 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-        //if (Time.time - timer >= 20f && used[12] == false) //When 20secs has passed without any narration
-        //{
-        //    txt.text = text[12];
-        //    used[12] = true;
-        //    panel.SetActive(true);
-        //    timer = Time.time;
-        //}
+        if (Time.time - timer >= 40f && used[12] == false) //When 40secs has passed without any narration
+        {
+            txt.text = text[12];
+            used[12] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
 
-        //if (Time.time - timer >= 25f && used[13] == false) //When 25secs has passed without any narration
-        //{
-        //    txt.text = text[13];
-        //    used[13] = true;
-        //    panel.SetActive(true);
-        //    timer = Time.time;
-        //}
+        if (Time.time - timer >= 60f && used[13] == false) //When 60secs has passed without any narration
+        {
+            txt.text = text[13];
+            used[13] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
 
         //if (Time.time - timer >= 45f && used[14] == false) //When 45secs has passed without any narration
         //{
@@ -181,11 +181,66 @@ public class Dialogue : MonoBehaviour
             used[9] = true;
             endPanel.SetActive(true);
             endPanel.GetComponent<EndStats>().SetStats(villagerScore, natureScore);
-            gameObject.SetActive(false);
+            string endMessage = "";
+
+            if (villagerScore > 9)
+            {
+                endMessage = "The villagers were very happy with how the Giant helped them make the island a better place, and are hoping to be blessed by the Gaint again tomorrow.";
+            }
+            else if (villagerScore > 4)
+            {
+                endMessage = "The villagers were happy with how they were treated by the Giant during the day.";
+            }
+            else if (villagerScore > 0)
+            {
+                endMessage = "The villagers wished that the Giant would help and care for them more.";
+            }
+            else if (villagerScore > -5)
+            {
+                endMessage = "The villagers hope that the Giant will be kinder to them in the future.";
+            }
+            else if (villagerScore > -10)
+            {
+                endMessage = "The villagers wish that the Gaint wasn't so mean.";
+            }
+            else
+            {
+                endMessage = "The villagers pray into the night, hoping the Giant will not return tomorrow.";
+            }
+
+            if (natureScore > 9)
+            {
+                endMessage += " Nature on the island has flourished thanks to the helping hand of the Giant.";
+            }
+            else if (natureScore > 4)
+            {
+                endMessage += " Nature on the island is in a healthy state thanks to the Giant.";
+            }
+            else if (natureScore > 0)
+            {
+                endMessage += " The Giant has neglected the nature of the island.";
+            }
+            else if (natureScore > -5)
+            {
+                endMessage += " The Giant seems unmoved by the degregation of nature on the island.";
+            }
+            else if (natureScore > -10)
+            {
+                endMessage += " The Giant is causing unsustanable harm to the islands nature.";
+            }
+            else
+            {
+                endMessage += " The Giant is activly causing the seemingly inevitable extinction of nature on the island.";
+            }
+
+            txt.text = endMessage;
+            used[13] = true;
+            panel.SetActive(true);
+            timer = Time.time - 40f;
         }
     }
 
-    private void BuildHelp() //When a Villager has been trying to build in a taken up space for 5secs
+    public void BuildHelp() //When a Villager has been trying to build in a taken up space for 5secs
     {
         if (used[3] == false)
         {
