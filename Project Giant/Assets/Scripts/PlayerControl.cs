@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     private float moveForward, moveSide;
     public float moveSpeed = 2f;
     public float zoom;
-    private float zoomSpeed = 2f;
+    private float zoomSpeed = 5f;
     public float rotationSpeed = 5f;
     public float maxSpeed = 5f;
 
@@ -71,7 +71,7 @@ public class PlayerControl : MonoBehaviour
 
         //CAMERA AND PLAYER MOVEMENT
         //Camera Zooming
-        zoom += Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+        zoom += (Input.GetAxis("Mouse ScrollWheel") + Input.GetAxis("Zoom")) * zoomSpeed;
         zoom = Mathf.Clamp(zoom, -12, -5);
         camera.transform.localPosition = new Vector3(0, 0, zoom);
 
