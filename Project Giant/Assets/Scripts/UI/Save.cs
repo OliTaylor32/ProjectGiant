@@ -213,8 +213,9 @@ public class Save : MonoBehaviour
             }
         }
         int slot = 0;
-        if (Application.loadedLevelName == "Taddiport" || Application.loadedLevelName == "TaddiportLoad")
+        if (Application.loadedLevel == 1 || Application.loadedLevel == 2)
         {
+            print("Save As Taddiport Data");
             slot = 1;
         }
 

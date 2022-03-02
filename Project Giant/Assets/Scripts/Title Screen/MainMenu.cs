@@ -11,26 +11,27 @@ public class MainMenu : MonoBehaviour
     public TextMeshProUGUI[] freeplayModes;
     public GameObject freeplayLocation;
     public TextMeshProUGUI[] challenges;
+    public GameObject settings;
     public GameObject freeplayMapSS;
     public Image background;
 
     public Sprite[] backgroundSprites;
-    private int selected;
-    private int selected2;
-    private int menuLayer;
+    public int selected;
+    public int selected2;
+    public int menuLayer;
 
     public Fade fade;
     // Start is called before the first frame update
     void Start()
     {
         //Top Menu
-        selected = 1;
+        selected = 0;
         selected2 = 0;
-        for (int i = 1; i < modes.Length; i++)
+        for (int i = 0; i < modes.Length; i++)
         {
             modes[i].color = new Color (0.5f, 0.5f, 0.5f, 1f);
         }
-        modes[1].color = new Color(1f, 1f, 1f, 1f);
+        modes[0].color = new Color(1f, 1f, 1f, 1f);
 
         //FreePlay Menu
         freeplayModes[0].color = new Color(1f, 1f, 1f, 1f);
@@ -47,16 +48,17 @@ public class MainMenu : MonoBehaviour
         {
             challenges[i].gameObject.SetActive(false);
         }
+        settings.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Vertical") > 0.1f && selected > 0 && cooldown == false)
+        if (Input.GetAxis("Vertical") > 0.1f && cooldown == false)
         {
             if (menuLayer == 0)
             {
-                if (selected > 1)
+                if (selected > 0)
                 {
                     selected--;
                 }
@@ -68,11 +70,14 @@ public class MainMenu : MonoBehaviour
             StartCoroutine(TriggerCoolDown());
         }
 
-        if (Input.GetAxis("Vertical") < -0.1f && selected < modes.Length - 1 && cooldown == false)
+        if (Input.GetAxis("Vertical") < -0.1f && cooldown == false)
         {
             if (menuLayer == 0)
             {
-                selected++;
+                if (selected < modes.Length - 1)
+                {
+                    selected++;
+                }
             }
             else if (selected2 < 1)
             {
@@ -85,11 +90,15 @@ public class MainMenu : MonoBehaviour
         {
             if (menuLayer == 0)
             {
+                if (selected == 3)
+                {
+                    Application.Quit();
+                }
                 SubMenu();
             }
             else
             {
-                if (selected == 1)
+                if (selected == 0)
                 {
                     if (selected2 == 0)//New FreePlay Taddiport
                     {
@@ -101,7 +110,7 @@ public class MainMenu : MonoBehaviour
                     }
                 }
 
-                if (selected == 2)
+                if (selected == 1)
                 {
                     if (selected2 == 0)
                     {
@@ -111,6 +120,11 @@ public class MainMenu : MonoBehaviour
                     {
                         StartCoroutine(LoadLevel("PresentChallenge1"));
                     }
+                }
+
+                if (selected == 2)
+                {
+                    Screen.fullScreen = !Screen.fullScreen;
                 }
             }
         }
@@ -124,7 +138,7 @@ public class MainMenu : MonoBehaviour
     private IEnumerator TriggerCoolDown()
     {
         cooldown = true;
-        for (int i = 1; i < modes.Length; i++)
+        for (int i = 0; i < modes.Length; i++)
         {
             modes[i].color = new Color(0.5f, 0.5f, 0.5f, 1f);
             if (i == selected)
@@ -156,7 +170,7 @@ public class MainMenu : MonoBehaviour
     {
         background.sprite = backgroundSprites[1];
         menuLayer = 1;
-        if (selected == 1)
+        if (selected == 0)
         {
             for (int i = 0; i < freeplayModes.Length; i++)
             {
@@ -165,13 +179,17 @@ public class MainMenu : MonoBehaviour
             freeplayLocation.SetActive(true);
             freeplayMapSS.SetActive(true);
         }
-        if (selected == 2)
+        if (selected == 1)
         {
             for (int i = 0; i < challenges.Length; i++)
             {
                 challenges[i].gameObject.SetActive(true);
             }
 
+        }
+        if (selected == 2)
+        {
+            settings.SetActive(true);
         }
         StartCoroutine(TriggerCoolDown());
     }
@@ -183,7 +201,7 @@ public class MainMenu : MonoBehaviour
         selected2 = 0;
         StartCoroutine(TriggerCoolDown());
 
-        if (selected == 1)
+        if (selected == 0)
         {
             for (int i = 0; i < freeplayModes.Length; i++)
             {
@@ -192,13 +210,14 @@ public class MainMenu : MonoBehaviour
             freeplayLocation.SetActive(false);
             freeplayMapSS.SetActive(false);
         }
-        if (selected == 2)
+        if (selected == 1)
         {
             for (int i = 0; i < challenges.Length; i++)
             {
                 challenges[i].gameObject.SetActive(false);
             }
         }
+        settings.SetActive(false);
     }
 
     private IEnumerator LoadLevel(string level)

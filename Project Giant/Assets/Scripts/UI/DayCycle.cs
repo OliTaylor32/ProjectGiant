@@ -13,6 +13,8 @@ public class DayCycle : MonoBehaviour
     public Material rainSkybox;
 
     public bool confirmedRain;
+
+    private bool saving;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,7 +70,6 @@ public class DayCycle : MonoBehaviour
         }
         if (Time.time - timer >= 635f)
         {
-            GetComponent<Save>().save();
             fade.StartFadeOut();
         }
     }

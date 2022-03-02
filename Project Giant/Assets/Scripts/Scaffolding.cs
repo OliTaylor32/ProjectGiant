@@ -24,7 +24,7 @@ public class Scaffolding : MonoBehaviour
     private IEnumerator StartBuild()
     {
         yield return new WaitForSeconds(60f);
-        GameObject newBuild = Instantiate(building, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+        GameObject newBuild = Instantiate(building, new Vector3(transform.position.x, transform.position.y + 1.3f, transform.position.z), Quaternion.identity);
         newBuild.transform.rotation = gameObject.transform.rotation;
         yield return new WaitForSeconds(45f);
         for (int i = 0; i < newVillagers; i++)

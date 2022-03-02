@@ -34,17 +34,33 @@ public class Dialogue : MonoBehaviour
         text[1] = "Villagers give out stars when the Giant is nice to them. With enough stars, the Giant will grow.";
         text[2] = "Villagers give out tears when the Giant is mean to them. Collecting enough tears will allow the Giant to grow";
         text[3] = "If someone wants to build something, they can only build when nothing is in the way, perhaps the Giant can help?";
-        text[4] = "Villagers don't like being trodden on.";
         text[5] = "When the Giant grows by collecting stars, it will become more mobile";
         text[6] = "When the Giant grows by collecting tears, it will gain more destructive abilities. ";
         text[7] = "The greater the Giant becomes in size, the stronger it gets, allowing it to lift almost anything!";
         text[8] = "The trees on the island will slowly wither and die if left alone, almost as if they long for companionship. Maybe you could give the trees a friend?";
         text[9] = "As the sun starts it's desent into the endless ocean, the villagers say goodbye to the Giant, as they have to rest, and so too does the Giant.";
-        text[10] = "The Giant has grown by collecting tears from the villagers, the giant can now attack larger structures";
-        text[11] = "The Giant has grown by collecting stars from the villagers, and can now move at greater speeds";
         text[12] = "All life on the island can be helped or hindered by the Giant, from the birds in the sky to the fish in the sea. You wouldn't notice though, as they are unable to communicate with The Giant";
         text[13] = "Keeping nature on your side is always useful, if the islands delicate balance is disrupted, the island will grow more dangerous.";
-        //text[14] = "";
+        //Achievment Text
+        text[4] = "Villagers don't like being trodden on.";
+        text[10] = "The Giant has grown by collecting tears from the villagers, the giant can now attack larger structures";
+        text[11] = "The Giant has grown by collecting stars from the villagers, and can now move at greater speeds";
+        text[14] = "The villager is harvesting the crops now that it has finished growing. They will then ready the land to grow new crops in its' place.";
+        text[15] = "Even on rainy days like this, the villagers lives must go on, and the same goes for the Giant. Will the Giant be the silver lining of the cloudy skies?";
+        text[16] = "When trees are places together, they wither and leave in their place seeds which will grow into trees when a new sun rises. Wilted trees left standing at sunset will be left to the mercy of the moon.";
+        text[17] = "Oh dear. I guess the waters surface is the only thing protecting the sealife from the hunters in the sky, i'm sure there's a healthy balance to be found.";
+        text[18] = "A villager has gone hunting, it would be wrong to not make the most out of the livestocks sacrifice no?";
+        text[19] = "Now there is a clear area in which to build, the villager gives praise to the Giant and gets to work.";
+        text[20] = "The villager praises the Giant for granting a tree to help grow the village.";
+        text[21] = "The villager praises the Giant for bringing them stone, the foundation for all structures on the island.";
+        text[22] = "The villagers have built a new house on the island, and new friends have joined them. The village grows.";
+        text[23] = "oops, the Giant can appear gentle but sometimes a stumple can destroy fragile creations of the villagers. Farms are especially vunerable to being trodden on";
+        text[24] = "If the Giant takes their shelter, their privacy and their comfort space, it will take their spirit as well.";
+        text[25] = "Oh no, guess the Giant can't kick around the villagers forever.";
+        text[26] = "Look out, a tornado is forming, the Giant can't stop it but it can move things away from the tornados path, or maybe it would like to use the tornado to it's full destructive potential.";
+        text[27] = "Welcome to challenge mode, make the Giants presence known as much as possible in just one day.";
+
+
 
         //Set to start of day text.
         txt = gameObject.GetComponent<Text>();
@@ -191,7 +207,7 @@ public class Dialogue : MonoBehaviour
             {
                 endMessage = "The villagers were happy with how they were treated by the Giant during the day.";
             }
-            else if (villagerScore > 0)
+            else if (villagerScore >= 0)
             {
                 endMessage = "The villagers wished that the Giant would help and care for them more.";
             }
@@ -216,7 +232,7 @@ public class Dialogue : MonoBehaviour
             {
                 endMessage += " Nature on the island is in a healthy state thanks to the Giant.";
             }
-            else if (natureScore > 0)
+            else if (natureScore >= 0)
             {
                 endMessage += " The Giant has neglected the nature of the island.";
             }
@@ -236,7 +252,7 @@ public class Dialogue : MonoBehaviour
             txt.text = endMessage;
             used[13] = true;
             panel.SetActive(true);
-            timer = Time.time - 40f;
+            timer = Time.time + 40f;
         }
     }
 

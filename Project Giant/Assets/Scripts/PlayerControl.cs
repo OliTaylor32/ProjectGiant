@@ -303,7 +303,17 @@ public class PlayerControl : MonoBehaviour
 
         if (isCarrying == true)//Make the carried object move with the player
         {
-            carrying.transform.position = new Vector3(pickup.transform.position.x, pickup.transform.position.y + 0.5f, pickup.transform.position.z);
+            if (carrying.GetComponent<Object>()!= null)
+            {
+                if (carrying.GetComponent<Object>().item == "sHouse")
+                {
+                    carrying.transform.position = new Vector3(pickup.transform.position.x, pickup.transform.position.y + 1.6f, pickup.transform.position.z);
+                }
+                else
+                    carrying.transform.position = new Vector3(pickup.transform.position.x, pickup.transform.position.y + 0.5f, pickup.transform.position.z);
+            }
+            else
+                carrying.transform.position = new Vector3(pickup.transform.position.x, pickup.transform.position.y + 0.5f, pickup.transform.position.z);
             carrying.transform.eulerAngles = new Vector3(pickup.transform.rotation.x, carryRotation + (transform.eulerAngles.y - startCarryRotation), pickup.transform.rotation.z);
 
         }

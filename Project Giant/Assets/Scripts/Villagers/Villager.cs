@@ -52,10 +52,11 @@ public class Villager : MonoBehaviour
         //Start moving
         StartCoroutine(Move());
 
-        actions = new string[3];
+        actions = new string[4];
         actions[0] = "Nothing";
         actions[1] = "Build";
-        actions[2] = "Play";
+        actions[2] = "Build";
+        actions[3] = "Play";
 
         stop = false;
 
@@ -76,7 +77,11 @@ public class Villager : MonoBehaviour
     {
         anim.Play("VillagerWalk");
         //Random area around the village
-        target = new Vector3((townCenter.position.x + Random.Range(-25, 25)), transform.position.y, (townCenter.position.z + Random.Range(-25, 25)));
+        target = new Vector3((transform.position.x + Random.Range(-10, 10)), transform.position.y, (transform.position.z + Random.Range(-10, 10)));
+        while (target.x > townCenter.position.x + 25 || target.x < townCenter.position.x - 25 || target.z > townCenter.position.z + 25 || target.z < townCenter.position.z - 25)
+        {
+            target = new Vector3((transform.position.x + Random.Range(-10, 10)), transform.position.y, (transform.position.z + Random.Range(-10, 10)));
+        }
         while (Vector3.Distance(transform.position, target) > 1)
         {
             //print("step");
@@ -151,7 +156,7 @@ public class Villager : MonoBehaviour
 
                         if (wood == false)
                         {
-                            GameObject check = Instantiate(materialChecker, transform);
+                            GameObject check = Instantiate(materialChecker, transform.position, Quaternion.identity);
                             yield return new WaitForSeconds(1f);
                             //if nearby wood
                             if (check.GetComponent<MaterialArea>().tree != null)
@@ -169,7 +174,7 @@ public class Villager : MonoBehaviour
                                 Destroy(call);
                                 if (check.GetComponent<MaterialArea>().tree != null)
                                 {
-                                    yield return new WaitForSeconds(0.5f);
+                                    yield return new WaitUntil(() => GameObject.Find("Giant").GetComponent<PlayerControl>().carrying != check.GetComponent<MaterialArea>().tree || stop == true);
                                     StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().tree.transform.position));
                                     Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                                 }
@@ -179,7 +184,7 @@ public class Villager : MonoBehaviour
                         }
                         else if (stone == false)
                         {
-                            GameObject check = Instantiate(materialChecker, transform);
+                            GameObject check = Instantiate(materialChecker, transform.position, Quaternion.identity);
                             yield return new WaitForSeconds(1f);
                             //if nearby stone
                             if (check.GetComponent<MaterialArea>().stone != null)
@@ -197,6 +202,7 @@ public class Villager : MonoBehaviour
                                 Destroy(call);
                                 if (check.GetComponent<MaterialArea>().stone != null)
                                 {
+                                    yield return new WaitUntil(() => GameObject.Find("Giant").GetComponent<PlayerControl>().carrying != check.GetComponent<MaterialArea>().stone || stop == true);
                                     StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().stone.transform.position));
                                     Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                                 }
