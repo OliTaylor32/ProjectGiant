@@ -33,6 +33,10 @@ public class Scaffolding : MonoBehaviour
             Instantiate(fVillager, new Vector3(transform.position.x + 0.5f, transform.position.y + 1, transform.position.z - (i / 5)), Quaternion.identity);
 
         }
+        if (newVillagers > 0)
+        {
+            GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().HouseBuilt();
+        }
         Destroy(gameObject);
     }
 }

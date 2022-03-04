@@ -32,5 +32,6 @@ public class Farm : MonoBehaviour
     {
         anim.Play("RedFarmHarvest");
         harvest = false;
+        GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().Harvest();
     }
 }

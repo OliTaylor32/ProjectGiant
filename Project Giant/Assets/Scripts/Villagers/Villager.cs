@@ -177,6 +177,7 @@ public class Villager : MonoBehaviour
                                     yield return new WaitUntil(() => GameObject.Find("Giant").GetComponent<PlayerControl>().carrying != check.GetComponent<MaterialArea>().tree || stop == true);
                                     StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().tree.transform.position));
                                     Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                                    GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().GiveTree();
                                 }
                             }
                             Destroy(check);
@@ -205,6 +206,7 @@ public class Villager : MonoBehaviour
                                     yield return new WaitUntil(() => GameObject.Find("Giant").GetComponent<PlayerControl>().carrying != check.GetComponent<MaterialArea>().stone || stop == true);
                                     StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().stone.transform.position));
                                     Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                                    GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().GiveStone();
                                 }
                             }
                             Destroy(check);
@@ -224,6 +226,10 @@ public class Villager : MonoBehaviour
                             Destroy(call);//Stop calling for help
                             if (canBuild == true)
                             {
+                                if (Time.time - timer >3f)
+                                {
+                                    GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().ClearedArea();
+                                }
                                 GameObject newObject = Instantiate(buildings[action], new Vector3(build.transform.position.x, build.transform.position.y, build.transform.position.z), Quaternion.identity);
                                 Destroy(build);
                                 FixedMove(build.transform.position); // move into the scaffolding to avoid being hit by the giant.
@@ -311,12 +317,13 @@ public class Villager : MonoBehaviour
     private void OnTriggerEnter(Collider collision) //If it comes into contact with something
     {
         //print("collision Entered");
-        if (collision.GetComponent<PlayerControl>() != null && Input.anyKey) //If it's the player and its moving
+        if (collision.GetComponent<PlayerControl>() != null && (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)) //If it's the player and its moving
         {
             if (collision.GetComponent<PlayerControl>().carrying != gameObject) //If it isn't being carried around by the player
             {
                 //It has been kicked by the player, play damage sound effect
                 gameObject.GetComponent<AudioSource>().Play(0);
+                GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().VillagerKicked();
                 //face the way the player is facing
                 transform.Rotate(transform.rotation.x, collision.gameObject.transform.rotation.y, transform.rotation.z); 
                 //Depending on way way the giant was facing, change the target destination and move away from the Giant.
@@ -345,6 +352,10 @@ public class Villager : MonoBehaviour
                 }
                 //Give out a tear and get damaged.
                 Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                if (life == 1)
+                {
+                    GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().VillagerKickedDead();
+                }
                 lifeDown();
 
             }
@@ -383,6 +394,7 @@ public class Villager : MonoBehaviour
             }
             if (collision.gameObject.GetComponent<Object>().item == "sheep") //if it's a sheep, kill it
             {
+                GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().Hunting();
                 anim.Play("VillagerMine");
                 yield return new WaitForSeconds(2f);
                 collision.gameObject.GetComponent<Object>().lifeDown();

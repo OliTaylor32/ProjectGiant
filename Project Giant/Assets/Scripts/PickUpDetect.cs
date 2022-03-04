@@ -56,6 +56,7 @@ public class PickUpDetect : MonoBehaviour
         giant.SendMessage("AttackFinished", SendMessageOptions.DontRequireReceiver);
         print("Object Attacked");
         pickUp.SendMessage("lifeDown", SendMessageOptions.DontRequireReceiver);
+
     }
 
     public void OnTriggerStay(Collider collision) //If it's the closest object to the giant inside the pick up zone, it will be the object to be picked up.

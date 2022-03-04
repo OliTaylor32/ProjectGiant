@@ -105,6 +105,10 @@ public class Object : MonoBehaviour
             if (item == "farm" || item == "scaffolding")
             {
                 lifeDown();
+                if (item == "farm")
+                {
+                    GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().FarmDestroyed();
+                }
             }
         }
     }
@@ -122,6 +126,10 @@ public class Object : MonoBehaviour
 
     private IEnumerator Destruction()
     {
+        if (item == "sHouse")
+        {
+            GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().HouseDestroyed();
+        }
         GameObject smokeSpawned = null;
         GetComponent<BoxCollider>().isTrigger = true;
         if (GetComponent<Rigidbody>() != null)

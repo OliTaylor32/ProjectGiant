@@ -41,6 +41,7 @@ public class Tornado : MonoBehaviour
             if (random == chance)
             {
                 spawned = true;
+                GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().TornadoFormed();
                 print("Tornado");
                 Vector3 start = new Vector3(Random.Range(-200, 200), 3.6f, Random.Range(-200, 200));
                 Vector3 end = new Vector3(Random.Range(-200, 200), 3.6f, Random.Range(-100, 100));

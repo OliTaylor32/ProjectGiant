@@ -77,6 +77,7 @@ public class BirdAI : MonoBehaviour
             fishEating = false;
             fishTarget.GetComponent<BirdAI>().FishGrabbed(gameObject);
             GameObject.Find("Giant").GetComponent<PlayerControl>().HoldingStolen();
+            GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().FishTaken();
         }
     }
 

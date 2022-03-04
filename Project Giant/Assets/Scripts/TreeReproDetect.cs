@@ -92,6 +92,7 @@ public class TreeReproDetect : MonoBehaviour
             Instantiate(tree, new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y + 3, transform.position.z + Random.Range(-5, 5)), Quaternion.identity);
             Instantiate(tree, new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y + 5, transform.position.z + Random.Range(-5, 5)), Quaternion.identity);
             transform.parent.gameObject.GetComponent<Animator>().Play("TreeWilt");
+            GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().TreePlanted();
             yield return new WaitForSeconds(5);
             Destroy(particles);
             Destroy(transform.parent.gameObject);

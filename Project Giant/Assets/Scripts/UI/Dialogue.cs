@@ -28,7 +28,7 @@ public class Dialogue : MonoBehaviour
         endPanel.SetActive(false);
         dayTimer = Time.time;
         giant = GameObject.Find("Giant");
-        text = new string[15];
+        text = new string[28];
 
         text[0] = "As the sun emerges from the horizon, the residents awaken, hoping that the Giant will grace them with good deeds and a helping hand.";
         text[1] = "Villagers give out stars when the Giant is nice to them. With enough stars, the Giant will grow.";
@@ -74,6 +74,11 @@ public class Dialogue : MonoBehaviour
         {
             used[i] = false;
         }
+
+        if (Application.loadedLevel != 1 && Application.loadedLevel != 2)
+        {
+            Challenge();
+        }
     }
 
     // Update is called once per frame
@@ -100,14 +105,6 @@ public class Dialogue : MonoBehaviour
             timer = Time.time;
         }
 
-
-        if (giant.GetComponent<PlayerControl>().tears > 1 && used[4] == false) //When the player has collected a secound tear
-        {
-            txt.text = text[4];
-            used[4] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
 
         if (giant.GetComponent<PlayerControl>().stars > 9 && used[5] == false) //When the player has grown using stars
         {
@@ -262,6 +259,171 @@ public class Dialogue : MonoBehaviour
         {
             txt.text = text[3];
             used[3] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void VillagerKicked()
+    {
+        if (used[4] == false)
+        {
+            txt.text = text[4];
+            used[4] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void Harvest()
+    {
+        if (used[14] == false)
+        {
+            txt.text = text[14];
+            used[14] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void Rain()
+    {
+        if (used[15] == false)
+        {
+            txt.text = text[15];
+            used[15] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void TreePlanted()
+    {
+        if (used[16] == false)
+        {
+            txt.text = text[16];
+            used[16] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void FishTaken()
+    {
+        if (used[17] == false)
+        {
+            txt.text = text[17];
+            used[17] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void Hunting()
+    {
+        if (used[18] == false)
+        {
+            txt.text = text[18];
+            used[18] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void ClearedArea()
+    {
+        if (used[19] == false)
+        {
+            txt.text = text[19];
+            used[19] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void GiveTree()
+    {
+        if (used[20] == false)
+        {
+            txt.text = text[20];
+            used[20] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void GiveStone()
+    {
+        if (used[21] == false)
+        {
+            txt.text = text[21];
+            used[21] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void HouseBuilt()
+    {
+        if (used[22] == false)
+        {
+            txt.text = text[22];
+            used[22] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void FarmDestroyed()
+    {
+        if (used[23] == false)
+        {
+            txt.text = text[23];
+            used[23] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void HouseDestroyed()
+    {
+        if (used[24] == false)
+        {
+            txt.text = text[24];
+            used[24] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void VillagerKickedDead()
+    {
+        if (used[25] == false)
+        {
+            txt.text = text[25];
+            used[25] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void TornadoFormed()
+    {
+        if (used[26] == false)
+        {
+            txt.text = text[26];
+            used[26] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+        }
+    }
+
+    public void Challenge()
+    {
+        if (used[27] == false)
+        {
+            txt.text = text[27];
+            used[27] = true;
             panel.SetActive(true);
             timer = Time.time;
         }
