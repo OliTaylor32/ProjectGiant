@@ -294,6 +294,9 @@
     <Reference Include="UnityEditor">
       <HintPath>D:/Unity/2019.3.14f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="Facepunch.Steamworks.Win64">
+      <HintPath>D:/AINT254/ProjectGiant/Project Giant/Assets/Plugins/FacePunchSteamworks/Facepunch.Steamworks.Win64.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>D:/AINT254/ProjectGiant/Project Giant/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
     </Reference>

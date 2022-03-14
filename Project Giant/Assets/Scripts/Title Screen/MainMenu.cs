@@ -24,6 +24,18 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        try
+        {
+            Steamworks.SteamClient.Init(1903330);
+        }
+        catch (System.Exception)
+        {
+            print("Steamworks error");
+            throw;
+        }
+
+        print(Steamworks.SteamClient.Name);
+
         //Top Menu
         selected = 0;
         selected2 = 0;
@@ -92,6 +104,7 @@ public class MainMenu : MonoBehaviour
             {
                 if (selected == 3)
                 {
+                    Steamworks.SteamClient.Shutdown();
                     Application.Quit();
                 }
                 SubMenu();

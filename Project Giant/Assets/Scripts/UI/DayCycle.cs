@@ -31,7 +31,10 @@ public class DayCycle : MonoBehaviour
                 RenderSettings.skybox = rainSkybox;
                 GetComponent<Light>().intensity = 0.4f;
                 RenderSettings.ambientSkyColor = new Color(0.3f, 0.3f, 0.3f);
-                GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().Rain();
+                if (Application.loadedLevelName != "MainMenu")
+                {
+                    GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().Rain();
+                }
             }
             else
             {

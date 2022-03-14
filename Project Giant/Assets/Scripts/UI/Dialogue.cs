@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Steamworks.Data;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,18 @@ public class Dialogue : MonoBehaviour
         dayTimer = Time.time;
         giant = GameObject.Find("Giant");
         text = new string[28];
+
+        try
+        {
+            Steamworks.SteamClient.Init(1903330);
+        }
+        catch (System.Exception)
+        {
+            print("Steamworks error");
+            throw;
+        }
+
+        print(Steamworks.SteamClient.Name);
 
         text[0] = "As the sun emerges from the horizon, the residents awaken, hoping that the Giant will grace them with good deeds and a helping hand.";
         text[1] = "Villagers give out stars when the Giant is nice to them. With enough stars, the Giant will grow.";
@@ -65,7 +78,7 @@ public class Dialogue : MonoBehaviour
         //Set to start of day text.
         txt = gameObject.GetComponent<Text>();
         txt.text = text[0];
-        txt.color = new Color(1, 1, 1, 1);
+        txt.color = new UnityEngine.Color(1, 1, 1, 1);
         timer = Time.time;
         panel.SetActive(true);
 
@@ -112,6 +125,9 @@ public class Dialogue : MonoBehaviour
             used[5] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("star");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
 
         if (giant.GetComponent<PlayerControl>().tears > 9 && used[6] == false) //When the player has grown using tears
@@ -120,6 +136,9 @@ public class Dialogue : MonoBehaviour
             used[6] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("tear");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
         //When the player has collected either 7 stars or tears.
         if ((giant.GetComponent<PlayerControl>().stars > 11|| giant.GetComponent<PlayerControl>().tears > 11) && used[7] == false) 
@@ -272,6 +291,9 @@ public class Dialogue : MonoBehaviour
             used[4] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("tread");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -283,6 +305,9 @@ public class Dialogue : MonoBehaviour
             used[14] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("farmer");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -294,6 +319,9 @@ public class Dialogue : MonoBehaviour
             used[15] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("rainy");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -305,6 +333,9 @@ public class Dialogue : MonoBehaviour
             used[16] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("gardener");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -316,6 +347,9 @@ public class Dialogue : MonoBehaviour
             used[17] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("fish");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -327,6 +361,9 @@ public class Dialogue : MonoBehaviour
             used[18] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("dinner");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -338,6 +375,9 @@ public class Dialogue : MonoBehaviour
             used[19] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("space");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -349,6 +389,9 @@ public class Dialogue : MonoBehaviour
             used[20] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("wood");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -360,6 +403,9 @@ public class Dialogue : MonoBehaviour
             used[21] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("stone");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -371,6 +417,9 @@ public class Dialogue : MonoBehaviour
             used[22] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("house");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -382,6 +431,9 @@ public class Dialogue : MonoBehaviour
             used[23] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("diet");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -393,6 +445,9 @@ public class Dialogue : MonoBehaviour
             used[24] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("eviction");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -404,6 +459,9 @@ public class Dialogue : MonoBehaviour
             used[25] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("boot");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -415,6 +473,9 @@ public class Dialogue : MonoBehaviour
             used[26] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("disaster");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -426,6 +487,9 @@ public class Dialogue : MonoBehaviour
             used[27] = true;
             panel.SetActive(true);
             timer = Time.time;
+            var ach = new Achievement("challenge");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
         }
     }
 }
