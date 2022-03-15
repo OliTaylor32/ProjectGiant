@@ -41,4 +41,14 @@ public class Fade : MonoBehaviour
     {
         StartCoroutine(FadeOut());
     }
+
+    public void StartFadeIn()
+    {
+        StartCoroutine(FadeIn());
+    }
+
+    public void HalfFade()
+    {
+        img.color = new Color(0f, 0f, 0f, 0.5f);
+    }
 }

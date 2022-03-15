@@ -61,12 +61,19 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("Idle", true);
             Destroy(GetComponent<PlayerControl>());
         }
-        //FOR DEMO PURPOSES
-        if (Input.GetKeyDown(KeyCode.R))
+        //        //FOR DEMO PURPOSES
+        //        if (Input.GetKeyDown(KeyCode.R))
+        //        {
+        //#pragma warning disable CS0618 // Type or member is obsolete
+        //            Application.LoadLevel(0);
+        //#pragma warning restore CS0618
+        //        }
+        if (Input.GetButtonDown("Pause"))
         {
-#pragma warning disable CS0618 // Type or member is obsolete
-            Application.LoadLevel(0);
-#pragma warning restore CS0618
+            GameObject.Find("Directional Light").GetComponent<Save>().save();
+            GameObject.Find("Canvas").GetComponentInChildren<Fade>().HalfFade();
+            GameObject.Find("Canvas").transform.Find("QuitText").gameObject.SetActive(true);
+            StartCoroutine(WaitForQuit());
         }
 
         //CAMERA AND PLAYER MOVEMENT
@@ -507,6 +514,20 @@ public class PlayerControl : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private IEnumerator WaitForQuit()
+    {
+        yield return new WaitForSeconds(3f);
+        GameObject.Find("Canvas").transform.Find("QuitText").gameObject.SetActive(false);
+        if (Input.GetButton("Pause"))
+        {
+            GameObject.Find("Canvas").GetComponentInChildren<Fade>().StartFadeOut();
+            yield return new WaitForSeconds(1f);
+            Application.LoadLevel(0);
+
+        }
+        GameObject.Find("Canvas").GetComponentInChildren<Fade>().StartFadeIn();
     }
 }
 

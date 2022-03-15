@@ -31,7 +31,7 @@ public class SaveData
         
     }
 
-    public SaveData(float[,] treeData, float[,] treeWiltData, float[,] stoneData, float[,] redSmallHouseData, float[,] redFarmData, float[,] torchData, float[,] totemData, int mRed, int fRed, int livestockNo, int birdNo, int saveSlot)
+    public SaveData(float[,] treeData, float[,] treeWiltData, float[,] stoneData, float[,] redSmallHouseData, float[,] redFarmData, float[,] torchData, float[,] totemData, int mRed, int fRed, int livestockNo, int birdNo, int slot)
     {
         trees = treeData;
         treeWilts = treeWiltData;
@@ -44,6 +44,7 @@ public class SaveData
         fRedVillagers = fRed;
         livestock = livestockNo;
         bird = birdNo;
+        saveSlot = slot;
         Store();
     }
 
@@ -55,9 +56,13 @@ public class SaveData
              path = Application.persistentDataPath + "/tempdata.map";
 
         }
-        else
+        if (saveSlot == 1)
         {
             path = Application.persistentDataPath + "/savedata.map";
+        }
+        else
+        {
+            path = Application.persistentDataPath + "/errordata.map";
         }
         FileStream file;
 

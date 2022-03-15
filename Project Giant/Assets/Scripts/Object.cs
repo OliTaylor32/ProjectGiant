@@ -129,6 +129,7 @@ public class Object : MonoBehaviour
         if (item == "sHouse")
         {
             GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().HouseDestroyed();
+            GetComponent<AudioSource>().Play();
         }
         GameObject smokeSpawned = null;
         GetComponent<BoxCollider>().isTrigger = true;
@@ -157,6 +158,11 @@ public class Object : MonoBehaviour
                 Instantiate(tear).transform.position = transform.position;
                 yield return new WaitForSeconds(0.1f);
                 Instantiate(tear).transform.position = transform.position;
+            }
+            if (item == "scaffolding")
+            {
+                Instantiate(tear).transform.position = transform.position;
+                yield return new WaitForSeconds(0.1f);
             }
         }
         for (int i = 0; i < 500; i++)

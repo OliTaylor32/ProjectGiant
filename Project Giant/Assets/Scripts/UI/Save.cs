@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Save : MonoBehaviour
 {
@@ -54,9 +55,7 @@ public class Save : MonoBehaviour
         totemNo = 0;
         livestock = 0;
         birds = 0;
-        //save();
-
-
+        StartCoroutine(DelayedSave());
     }
 
     // Update is called once per frame
@@ -68,6 +67,19 @@ public class Save : MonoBehaviour
 
     public void save()
     {
+        wilting = true;
+        treeNo = 0;
+        treeWiltNo = 0;
+        stoneNo = 0;
+        redSmallHouseNo = 0;
+        redFarmNo = 0;
+        mRedVillagers = 0;
+        fRedVillagers = 0;
+        torchNo = 0;
+        totemNo = 0;
+        livestock = 0;
+        birds = 0;
+
         foreach (var gameObject in FindObjectsOfType(typeof(GameObject)) as GameObject[])
         {
             if (gameObject.GetComponent<Object>() != null)
@@ -113,6 +125,9 @@ public class Save : MonoBehaviour
                         break;
                     case "bird":
                         birds++;
+                        break;
+                    case "scaffolding":
+                        AddRedFarm(gameObject);
                         break;
                     default:
                         break;
@@ -213,12 +228,13 @@ public class Save : MonoBehaviour
             }
         }
         int slot = 0;
-        if (Application.loadedLevel == 1 || Application.loadedLevel == 2)
+        print(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name == "Taddiport" || SceneManager.GetActiveScene().name == "TaddiportLoad")
         {
             print("Save As Taddiport Data");
             slot = 1;
         }
-
+        print(slot);
         new SaveData(treeData, treeWiltData, stoneData, redSmallHouseData, redFarmData, torchData, totemData, mRedVillagers, fRedVillagers, livestock, birds, slot);
     }
 
@@ -374,5 +390,11 @@ public class Save : MonoBehaviour
             }
         }
 
+    }
+
+    private IEnumerator DelayedSave()
+    {
+        yield return new WaitForSeconds(1f);
+        save();
     }
 }

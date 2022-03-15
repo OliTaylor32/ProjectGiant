@@ -31,15 +31,15 @@ public class Dialogue : MonoBehaviour
         giant = GameObject.Find("Giant");
         text = new string[28];
 
-        try
-        {
-            Steamworks.SteamClient.Init(1903330);
-        }
-        catch (System.Exception)
-        {
-            print("Steamworks error");
-            throw;
-        }
+        //try
+        //{
+        //    Steamworks.SteamClient.Init(1903330);
+        //}
+        //catch (System.Exception)
+        //{
+        //    print("Steamworks error");
+        //    throw;
+        //}
 
         print(Steamworks.SteamClient.Name);
 

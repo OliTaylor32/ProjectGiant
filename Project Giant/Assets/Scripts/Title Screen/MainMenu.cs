@@ -24,14 +24,34 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        try
+        if (selected == 0)
         {
-            Steamworks.SteamClient.Init(1903330);
+            for (int i = 0; i < freeplayModes.Length; i++)
+            {
+                freeplayModes[i].gameObject.SetActive(false);
+            }
+            freeplayLocation.SetActive(false);
+            freeplayMapSS.SetActive(false);
         }
-        catch (System.Exception)
+        if (selected == 1)
         {
-            print("Steamworks error");
-            throw;
+            for (int i = 0; i < challenges.Length; i++)
+            {
+                challenges[i].gameObject.SetActive(false);
+            }
+        }
+        settings.SetActive(false);
+        if (Steamworks.SteamClient.AppId != 1903330)
+        {
+            try
+            {
+                Steamworks.SteamClient.Init(1903330);
+            }
+            catch (System.Exception)
+            {
+                print("Steamworks error");
+                throw;
+            }
         }
 
         print(Steamworks.SteamClient.Name);
