@@ -24,17 +24,24 @@ public class Present : MonoBehaviour
         print("Collision");
         if (collision.gameObject.GetComponent<PlayerControl>() != null)
         {
+            print("Is player");
             Instantiate(objects[item], transform.position, Quaternion.identity);
+            print("Item Spawned");
             Instantiate(particles, transform.position, Quaternion.Euler(-90, 0, 0));
+            print("Particles Spawned");
             StartCoroutine(WaitforSpawn());
         }
     }
 
     private IEnumerator WaitforSpawn()
     {
+        print("Wait for spawn");
         item = Random.Range(0, objects.Length);
+        print("New Item Decided");
         GetComponent<Rigidbody>().useGravity = false;
-        transform.position = new Vector3(Random.Range(-40, 40), 100, Random.Range(-40, 40));
+        print("Use gravity = false");
+        transform.position = new Vector3(Random.Range(-20, 20), 100, Random.Range(-20, 20));
+        print("Start Wait");
         yield return new WaitForSeconds(Random.Range(0, 180));
         GetComponent<Rigidbody>().useGravity = true;
     }

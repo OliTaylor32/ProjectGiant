@@ -488,6 +488,7 @@ public class PlayerControl : MonoBehaviour
     {
         ResetAnimations("Idle");
         anim.Play("Idle");
+        centerPoint.gameObject.GetComponent<Animator>().enabled = true;
         Destroy(this);
     }
 

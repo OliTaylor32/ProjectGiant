@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Villager : MonoBehaviour
 {
@@ -51,12 +52,22 @@ public class Villager : MonoBehaviour
         }
         //Start moving
         StartCoroutine(Move());
-
-        actions = new string[4];
-        actions[0] = "Nothing";
-        actions[1] = "Build";
-        actions[2] = "Build";
-        actions[3] = "Play";
+        if (SceneManager.GetActiveScene().name == "TaddiportLoad")
+        {
+            actions = new string[4];
+            actions[0] = "Nothing";
+            actions[1] = "Build";
+            actions[2] = "Build";
+            actions[3] = "Play";
+        }
+        else
+        {
+            actions = new string[4];
+            actions[0] = "Build";
+            actions[1] = "Build";
+            actions[2] = "Build";
+            actions[3] = "Play";
+        }
 
         stop = false;
 

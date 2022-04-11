@@ -24,6 +24,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
         if (selected == 0)
         {
             for (int i = 0; i < freeplayModes.Length; i++)
@@ -162,7 +163,7 @@ public class MainMenu : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Back"))
         {
             TopMenu();
         }

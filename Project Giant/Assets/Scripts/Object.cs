@@ -57,6 +57,10 @@ public class Object : MonoBehaviour
                 stats.GetComponent<Dialogue>().natureScore--;
             }
         }
+        if (item == "sHouse")
+        {
+            GetComponent<AudioSource>().Play();
+        }
 
         if (life < 1) //If it's depleated of all of its life, destory the game object
         {
@@ -130,6 +134,11 @@ public class Object : MonoBehaviour
         {
             GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().HouseDestroyed();
             GetComponent<AudioSource>().Play();
+        }
+
+        if (item == "farm")
+        {
+            GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().FarmDestroyed();
         }
         GameObject smokeSpawned = null;
         GetComponent<BoxCollider>().isTrigger = true;

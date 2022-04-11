@@ -248,7 +248,7 @@ MonoBehaviour:
   starLv: 0
   tearLv: 0
   grunt: {fileID: 8300000, guid: 6f5a94f780828d349a422eee0e1e3e1b, type: 3}
-  walk: {fileID: 8300000, guid: 2beb1d3b21afb574c9583332e3c8c397, type: 3}
+  walk: {fileID: 8300000, guid: 1a7e6a964e16b8e44b32413f4be8a1c9, type: 3}
   daycycle: {fileID: 0}
   growEffect: {fileID: 4739909265829597445, guid: 2448f8c4b901d864e85cefcc47fa5b08,
     type: 3}
@@ -2148,7 +2148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickUp: {fileID: 0}
   giant: {fileID: 253682359471131964}
-  fishEatingBird: {fileID: 0}
+  fishEatingBird: {fileID: 5283954685752892236, guid: 218e047aad3c1aa4eb48778dc39d7299,
+    type: 3}
 --- !u!54 &253682361031500079
 Rigidbody:
   m_ObjectHideFlags: 0

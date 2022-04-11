@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DayCycle : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class DayCycle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        print("DayCycle Start");
         day = true;
         saved = false;
         timer = Time.time; //Start the timer
@@ -25,15 +27,17 @@ public class DayCycle : MonoBehaviour
         if (confirmedRain == false)
         {
             int random = Random.Range(0, 5);
+            print("Random is " + random);
             if (random == 0)
             {
                 print("Rainy Day");
                 RenderSettings.skybox = rainSkybox;
                 GetComponent<Light>().intensity = 0.4f;
                 RenderSettings.ambientSkyColor = new Color(0.3f, 0.3f, 0.3f);
-                if (Application.loadedLevelName != "MainMenu")
+                print(SceneManager.GetActiveScene().name);
+                if (SceneManager.GetActiveScene().name != "MainMenu")
                 {
-                    GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().Rain();
+                    StartCoroutine(DialogueRain());
                 }
             }
             else
@@ -76,5 +80,11 @@ public class DayCycle : MonoBehaviour
         {
             fade.StartFadeOut();
         }
+    }
+
+    private IEnumerator DialogueRain()
+    {
+        yield return new WaitForSeconds(0.2f);
+        GameObject.Find("Canvas").GetComponentInChildren<Dialogue>().Rain();
     }
 }

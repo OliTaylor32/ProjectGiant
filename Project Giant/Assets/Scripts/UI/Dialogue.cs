@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
@@ -125,9 +126,12 @@ public class Dialogue : MonoBehaviour
             used[5] = true;
             panel.SetActive(true);
             timer = Time.time;
-            var ach = new Achievement("star");
-            ach.Trigger();
-            Steamworks.SteamClient.RunCallbacks();
+            if (SceneManager.GetActiveScene().name != "TornadoChallenge1")
+            {
+                var ach = new Achievement("star");
+                ach.Trigger();
+                Steamworks.SteamClient.RunCallbacks();
+            }
         }
 
         if (giant.GetComponent<PlayerControl>().tears > 9 && used[6] == false) //When the player has grown using tears
@@ -315,6 +319,7 @@ public class Dialogue : MonoBehaviour
     {
         if (used[15] == false)
         {
+            print("Rain Recieved from Dialogue");
             txt.text = text[15];
             used[15] = true;
             panel.SetActive(true);
