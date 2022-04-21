@@ -56,6 +56,7 @@ public class DayCycle : MonoBehaviour
             #pragma warning disable CS0618 // Type or member is obsolete
             if (Application.loadedLevel == 0)
             {
+                Destroy(GameObject.Find("InputManager"));
                 Application.LoadLevel("TitleScreen");
             }
             #pragma warning restore CS0618 // Type or member is obsolete
@@ -79,6 +80,7 @@ public class DayCycle : MonoBehaviour
         if (Time.time - timer >= 635f)
         {
             fade.StartFadeOut();
+            Destroy(GameObject.Find("InputManager"));
         }
     }
 

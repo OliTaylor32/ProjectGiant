@@ -43,6 +43,9 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject growEffect;
 
+    private InputManager inputManager;
+    private bool invertY;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +53,8 @@ public class PlayerControl : MonoBehaviour
         zoom = -7;
         dropping = false;
         anim = gameObject.GetComponent<Animator>();
+        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        invertY = inputManager.invertY;
     }
 
     // Update is called once per frame
@@ -84,7 +89,14 @@ public class PlayerControl : MonoBehaviour
 
         //Look around pivot with the mouse
         mouseX += (Input.GetAxis("Mouse X") + Input.GetAxis("HorizontalRS")) * mouseSpeed;
-        mouseY += (Input.GetAxis("Mouse Y") + Input.GetAxis("VerticalRS")) * mouseSpeed;
+        if (invertY == true)
+        {
+            mouseY += ((Input.GetAxis("Mouse Y") + Input.GetAxis("VerticalRS")) * mouseSpeed) * -1f;
+        }
+        else
+        {
+            mouseY += (Input.GetAxis("Mouse Y") + Input.GetAxis("VerticalRS")) * mouseSpeed;
+        }
         mouseY = Mathf.Clamp(mouseY, -10f, 60f); // Camera can't go through floor or directly overhead.
         camera.LookAt(centerPoint);
         centerPoint.localRotation = Quaternion.Euler(mouseY, mouseX, 0);
@@ -110,7 +122,14 @@ public class PlayerControl : MonoBehaviour
         }
 
         //make sure Player can't move faster than designated max speeds
-        moveSide = Mathf.Clamp(moveSide, -maxSpeed, maxSpeed);
+        if (moveForward == 0)
+        {
+            moveSide = Mathf.Clamp(moveSide, -maxSpeed * 1.5f, maxSpeed * 1.5f);
+        }
+        else
+        {
+            moveSide = Mathf.Clamp(moveSide, -maxSpeed, maxSpeed);
+        }
         moveForward = Mathf.Clamp(moveForward, -2, maxSpeed); //Player can not upgrade backpedal speed
 
         if (isAttacking == false && pickingUp == false && dropping == false)//Attacking locks the player into place
@@ -277,7 +296,7 @@ public class PlayerControl : MonoBehaviour
         //    }
         //}
 
-        if (Input.GetButtonDown("PickUp"))
+        if (Input.GetButtonDown("PickUp") || Input.GetKeyDown(inputManager.pickUp))
         {
             if (isCarrying == false) //If the player isn't carry anything, pick up an object
             {
@@ -332,7 +351,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (tearLv >= 1) // Can't attack until leveled up
             {
-                if (Input.GetButtonDown("Attack"))
+                if (Input.GetButtonDown("Attack") || Input.GetKeyDown(inputManager.attack))
                 {
                     if (isAttacking == false)//If the player isn't already attacking, attack
                     {
@@ -524,6 +543,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetButton("Pause"))
         {
             GameObject.Find("Canvas").GetComponentInChildren<Fade>().StartFadeOut();
+            Destroy(inputManager.gameObject);
             yield return new WaitForSeconds(1f);
             Application.LoadLevel(0);
 

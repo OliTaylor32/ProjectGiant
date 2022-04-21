@@ -48,6 +48,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
+    com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
     Assets/Scenes/MainMenu.unity:
     - Class: 1
@@ -789,7 +791,7 @@ ScriptsOnlyBuild:
     className: BannerPlaceholder
   - hash:
       serializedVersion: 2
-      Hash: b2a7b7ce4d0960e80236f3e2dc950794
+      Hash: beb4ab8b0da5dd9c2efca2bd133d68c3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenu
@@ -1526,4 +1528,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/TaddiportLoad.unity
   - Assets/Scenes/TornadoChallenge1.unity
   - Assets/Scenes/PresentChallenge1.unity
-  playerPath: D:/AINT254/Builds/Apr11/The Giant of Torridge Island.exe
+  playerPath: D:/AINT254/Builds/Apr16/The Giant of Torridge Island.exe

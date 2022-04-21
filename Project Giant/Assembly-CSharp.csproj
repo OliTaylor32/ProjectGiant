@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\BirdAI.cs" />
     <Compile Include="Assets\Scripts\Farm.cs" />
     <Compile Include="Assets\Scripts\Footprints.cs" />
+    <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\LiveStockAI.cs" />
     <Compile Include="Assets\Scripts\MusicControl.cs" />
     <Compile Include="Assets\Scripts\Object.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Scripts\TornadoChallenge.cs" />
     <Compile Include="Assets\Scripts\TreeReproDetect.cs" />
     <Compile Include="Assets\Scripts\UI\CallBox.cs" />
+    <Compile Include="Assets\Scripts\UI\ControlsSave.cs" />
     <Compile Include="Assets\Scripts\UI\DayCycle.cs" />
     <Compile Include="Assets\Scripts\UI\Dialogue.cs" />
     <Compile Include="Assets\Scripts\UI\EndStats.cs" />

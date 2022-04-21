@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class MainMenu : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class MainMenu : MonoBehaviour
     public TextMeshProUGUI encyclopediaTxt;
     private string[] articles;
     public GameObject ePanel;
-    public GameObject settings;
+    public TextMeshProUGUI[] settings;
     public GameObject freeplayMapSS;
     public Image background;
 
@@ -26,26 +27,31 @@ public class MainMenu : MonoBehaviour
 
     public Fade fade;
     public GameObject logo;
+
+    private InputManager inputManager;
+    private bool rebinding;
+    public TextMeshProUGUI instructionTxt;
     // Start is called before the first frame update
     void Start()
     {
+        rebinding = false;
+        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         Cursor.visible = false;
 
-        settings.SetActive(false);
-        //if (Steamworks.SteamClient.AppId != 1903330)
-        //{
-        //    try
-        //    {
-        //        Steamworks.SteamClient.Init(1903330);
-        //    }
-        //    catch (System.Exception)
-        //    {
-        //        print("Steamworks error");
-        //        throw;
-        //    }
-        //}
+        if (Steamworks.SteamClient.AppId != 1903330)
+        {
+            try
+            {
+                Steamworks.SteamClient.Init(1903330);
+            }
+            catch (System.Exception)
+            {
+                print("Steamworks error");
+                throw;
+            }
+        }
 
-        //print(Steamworks.SteamClient.Name);
+        print(Steamworks.SteamClient.Name);
 
         //Top Menu
         selected = 0;
@@ -83,92 +89,134 @@ public class MainMenu : MonoBehaviour
         ePanel.SetActive(false);
 
         //Settings Menu
-        settings.SetActive(false);
+        for (int i = 0; i < settings.Length; i++)
+        {
+            settings[i].gameObject.SetActive(false);
+        }
+        instructionTxt.gameObject.SetActive(false);
+
+        if (inputManager.invertY == true)
+        {
+            settings[2].text = "Invert Y axis: On";
+        }
+        else
+        {
+            settings[2].text = "Invert Y axis: Off";
+        }
+
         SetEncyclopediaText();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Vertical") > 0.1f && cooldown == false)
+        if (rebinding == false)
         {
-            if (menuLayer == 0)
-            {
-                if (selected > 0)
-                {
-                    selected--;
-                }
-            }
-            else if (selected2 > 0)
-            {
-                selected2--;
-            }
-            StartCoroutine(TriggerCoolDown());
-        }
 
-        if (Input.GetAxis("Vertical") < -0.1f && cooldown == false)
-        {
-            if (menuLayer == 0)
-            {
-                if (selected < modes.Length - 1)
-                {
-                    selected++;
-                }
-            }
-            else if (selected2 < 1)
-            {
-                selected2++;
-            }
-            StartCoroutine(TriggerCoolDown());
-        }
 
-        if (Input.GetButtonDown("PickUp"))
-        {
-            if (menuLayer == 0)
+            if (Input.GetAxis("Vertical") > 0.1f && cooldown == false)
             {
-                if (selected == 4)
+                if (menuLayer == 0)
                 {
-                    Steamworks.SteamClient.Shutdown();
-                    Application.Quit();
-                }
-                SubMenu();
-            }
-            else
-            {
-                if (selected == 0)
-                {
-                    if (selected2 == 0)//New FreePlay Taddiport
+                    if (selected > 0)
                     {
-                        StartCoroutine(LoadLevel("Taddiport"));
-                    }
-                    if (selected2 == 1)
-                    {
-                        StartCoroutine(LoadLevel("TaddiportLoad"));
+                        selected--;
                     }
                 }
-
-                if (selected == 1)
+                else if (selected2 > 0)
                 {
-                    if (selected2 == 0)
+                    selected2--;
+                }
+                StartCoroutine(TriggerCoolDown());
+            }
+
+            if (Input.GetAxis("Vertical") < -0.1f && cooldown == false)
+            {
+                if (menuLayer == 0)
+                {
+                    if (selected < modes.Length - 1)
                     {
-                        StartCoroutine(LoadLevel("TornadoChallenge1"));
-                    }
-                    else
-                    {
-                        StartCoroutine(LoadLevel("PresentChallenge1"));
+                        selected++;
                     }
                 }
-
-                if (selected == 3)
+                else if (selected2 < 1 || (selected == 3 && selected2 < 2))
                 {
-                    Screen.fullScreen = !Screen.fullScreen;
+                    selected2++;
+                }
+                StartCoroutine(TriggerCoolDown());
+            }
+
+            if (Input.GetButtonDown("Confirm"))
+            {
+                if (menuLayer == 0)
+                {
+                    if (selected == 4)
+                    {
+                        Steamworks.SteamClient.Shutdown();
+                        Application.Quit();
+                    }
+                    SubMenu();
+                }
+                else
+                {
+                    if (selected == 0)
+                    {
+                        if (selected2 == 0)//New FreePlay Taddiport
+                        {
+                            StartCoroutine(LoadLevel("Taddiport"));
+                        }
+                        if (selected2 == 1)
+                        {
+                            StartCoroutine(LoadLevel("TaddiportLoad"));
+                        }
+                    }
+
+                    if (selected == 1)
+                    {
+                        if (selected2 == 0)
+                        {
+                            StartCoroutine(LoadLevel("TornadoChallenge1"));
+                        }
+                        else
+                        {
+                            StartCoroutine(LoadLevel("PresentChallenge1"));
+                        }
+                    }
+
+                    if (selected == 3)
+                    {
+                        if (selected2 == 0)
+                        {
+                            Screen.fullScreen = !Screen.fullScreen;
+                        }
+                        else if (selected2 == 1)
+                        {
+                            //Start Rebinding Controls process
+                            fade.HalfFade();
+                            rebinding = true;
+                            StartCoroutine(RebindKeyboard());
+                        }
+                        else
+                        {
+                            inputManager.invertY = !inputManager.invertY;
+                            if (inputManager.invertY == true)
+                            {
+                                settings[2].text = "Invert Y axis: On";
+                            }
+                            else
+                            {
+                                settings[2].text = "Invert Y axis: Off";
+                            }
+                            inputManager.SaveBindings();
+                        }
+                    }
                 }
             }
-        }
 
-        if (Input.GetButtonDown("Back"))
-        {
-            TopMenu();
+            if (Input.GetButtonDown("Back"))
+            {
+                TopMenu();
+            }
         }
     }
 
@@ -207,6 +255,14 @@ public class MainMenu : MonoBehaviour
                 encyclopediaEntries[i].color = new Color(1f, 1f, 1f, 1f);
             }
             encyclopediaTxt.text = articles[selected2];
+        }
+        for (int i = 0; i < settings.Length; i++)
+        {
+            settings[i].color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            if (i == selected2)
+            {
+                settings[i].color = new Color(1f, 1f, 1f, 1f);
+            }
         }
         yield return new WaitForSeconds(0.2f);
         cooldown = false;
@@ -253,7 +309,10 @@ public class MainMenu : MonoBehaviour
         }
         if (selected == 3)
         {
-            settings.SetActive(true);
+            for (int i = 0; i < settings.Length; i++)
+            {
+                settings[i].gameObject.SetActive(true);
+            }
         }
         StartCoroutine(TriggerCoolDown());
     }
@@ -291,7 +350,13 @@ public class MainMenu : MonoBehaviour
             logo.SetActive(true);
             ePanel.SetActive(false);
         }
-        settings.SetActive(false);
+        if (selected == 3)
+        {
+            for (int i = 0; i < settings.Length; i++)
+            {
+                settings[i].gameObject.SetActive(false);
+            }
+        }
     }
 
     private IEnumerator LoadLevel(string level)
@@ -304,12 +369,49 @@ public class MainMenu : MonoBehaviour
     private void SetEncyclopediaText()
     {
         articles = new string[6];
-        articles[0] = "Controls (Gamepad/Keyboard):" + "\n" + "Look around: RS or Mouse" + "\n" + "Movement: LS or WASD" + "\n" + "Pick Up / Drop Objects: A or Space" + "\n" + "Attack (Must grow via tears): X or X key" + "\n" + "Camera Zoom: D-Pad or Scroll Wheel";
+        articles[0] = "Controls (Gamepad/Keyboard):" + "\n" + "Look around: RS or Mouse" + "\n" + "Movement: LS or WASD keys" + "\n" + "Pick Up / Drop Objects: A or Space key" + "\n" + "Attack (Must grow via tears): X or X key" + "\n" + "Camera Zoom: D-Pad or Scroll Wheel" + "\n" + "\n" + "Keyboard controls can be changed in the settings menu.";
         articles[1] = "Welcome to The Giant of Torridge Island! This article will go over the basics of the game and your abilities as the Giant." + "\n" + "The Goal of the game is to shape the island to your liking. As the Giant you have the power to pick up anything on the island (as long as you grow big enough). In order to grow you need to interact with the villagers of the island. The villagers will give out stars for good deeds and tears for bad ones." + "\n" + "Good deeds include completing requests from the villagers such as collecting materials or making space for new buildings." + "\n" + "Some bad deeds include hurting the villagers or destroying their buildings" + "\n" + "The deeds you complete will then be collected to create a villager score at the end of the day. The other score you are given is a nature score." + "\n" + "Much like the villager score, the nature score can be changed via good and bad deeds towards the enviroment. Good deeds include planting trees and breeding animals, while bad deeds include chopping down trees and hunting animals";
         articles[2] = "Trees and Stones";
         articles[3] = "Villagers";
         articles[4] = "Wildlife";
         articles[5] = "Farms";
         encyclopediaTxt.text = articles[0];
+    }
+
+    private IEnumerator RebindKeyboard()
+    {
+        instructionTxt.gameObject.SetActive(true);
+        instructionTxt.text = "Press the key you wish to assign to picking up/dropping objects";
+        while (Input.anyKey)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        while (!Input.anyKey)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKey(kcode))
+                inputManager.pickUp = kcode.ToString().ToLower();
+        }
+        instructionTxt.text = "Press the key you wish to assign to Attacking objects";
+        while (Input.anyKey)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        while (!Input.anyKey)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKey(kcode))
+                inputManager.attack = kcode.ToString().ToLower();
+        }
+        fade.StartFadeIn();
+        instructionTxt.gameObject.SetActive(false);
+        rebinding = false;
+        inputManager.SaveBindings();
     }
 }
