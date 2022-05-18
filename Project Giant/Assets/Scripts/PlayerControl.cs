@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 
@@ -46,6 +47,11 @@ public class PlayerControl : MonoBehaviour
     private InputManager inputManager;
     private bool invertY;
 
+    //Star and Tear counters
+    public GameObject starCounter;
+    public GameObject tearCounter;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +61,8 @@ public class PlayerControl : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         invertY = inputManager.invertY;
+        starCounter.SetActive(false);
+        tearCounter.SetActive(false);
     }
 
     // Update is called once per frame
@@ -469,9 +477,15 @@ public class PlayerControl : MonoBehaviour
     public void starTear(bool isStar)//Once a star or tear is collected, add it to correct total
     {
         if (isStar == true)
+        {
             stars++;
+            StartCoroutine(ShowStarCount());
+        }
         else
+        {
             tears++;
+            StartCoroutine(ShowTearCount());
+        }
     }
 
     private IEnumerator Drop() //Drop the object and allow the giant to pick up a new object
@@ -549,6 +563,52 @@ public class PlayerControl : MonoBehaviour
 
         }
         GameObject.Find("Canvas").GetComponentInChildren<Fade>().StartFadeIn();
+    }
+
+    private IEnumerator ShowStarCount()
+    {
+        starCounter.SetActive(true);
+        if (stars != 10 && stars != 20 && stars != 30 && stars != 40 && stars != 50 && stars != 60 && stars != 70 && stars != 80 && stars != 90 && stars != 100 && stars != 110 && stars != 120)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                starCounter.GetComponent<Slider>().value += 0.01f;
+                yield return new WaitForSeconds(0.01f);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 90; i++)
+            {
+                starCounter.GetComponent<Slider>().value -= 0.1f;
+                yield return new WaitForSeconds(0.01f);
+            }
+        }
+        yield return new WaitForSeconds(3f);
+        starCounter.SetActive(false);
+    }
+
+    private IEnumerator ShowTearCount()
+    {
+        tearCounter.SetActive(true);
+        if (tears != 10 && tears != 20 && tears != 30 && tears != 40 && tears != 50 && tears != 60 && tears != 70 && tears != 80 && tears != 90 && tears != 100 && tears != 110 && tears != 120)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                tearCounter.GetComponent<Slider>().value += 0.01f;
+                yield return new WaitForSeconds(0.01f);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 90; i++)
+            {
+                tearCounter.GetComponent<Slider>().value -= 0.1f;
+                yield return new WaitForSeconds(0.01f);
+            }
+        }
+        yield return new WaitForSeconds(3f);
+        tearCounter.SetActive(false);
     }
 }
 

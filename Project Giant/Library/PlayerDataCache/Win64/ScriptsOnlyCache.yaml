@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - EndStats
     - Fade
     - Farm
+    - InputManager
     - LiveStockAI
     - Load
     - MainMenu
@@ -48,8 +49,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
-    com.unity.multiplayer-hlapi.Runtime.dll:
-    - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
     Assets/Scenes/MainMenu.unity:
     - Class: 1
@@ -129,17 +128,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13350}
     - Class: 114
-      Script: {instanceID: 13362}
+      Script: {instanceID: 13364}
     - Class: 114
-      Script: {instanceID: 13508}
+      Script: {instanceID: 13510}
     - Class: 114
-      Script: {instanceID: 13566}
+      Script: {instanceID: 13568}
     - Class: 114
-      Script: {instanceID: 13584}
+      Script: {instanceID: 13586}
     - Class: 114
-      Script: {instanceID: 13754}
+      Script: {instanceID: 13756}
     - Class: 114
-      Script: {instanceID: 13792}
+      Script: {instanceID: 13794}
+    - Class: 114
+      Script: {instanceID: 13966}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -264,17 +265,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13350}
     - Class: 114
-      Script: {instanceID: 13362}
+      Script: {instanceID: 13364}
     - Class: 114
-      Script: {instanceID: 13418}
+      Script: {instanceID: 13420}
     - Class: 114
-      Script: {instanceID: 13508}
+      Script: {instanceID: 13510}
     - Class: 114
-      Script: {instanceID: 13566}
+      Script: {instanceID: 13568}
     - Class: 114
-      Script: {instanceID: 13754}
+      Script: {instanceID: 13756}
     - Class: 114
-      Script: {instanceID: 13792}
+      Script: {instanceID: 13794}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -405,17 +406,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13350}
     - Class: 114
-      Script: {instanceID: 13362}
+      Script: {instanceID: 13364}
     - Class: 114
-      Script: {instanceID: 13418}
+      Script: {instanceID: 13420}
     - Class: 114
-      Script: {instanceID: 13508}
+      Script: {instanceID: 13510}
     - Class: 114
-      Script: {instanceID: 13566}
+      Script: {instanceID: 13568}
     - Class: 114
-      Script: {instanceID: 13754}
+      Script: {instanceID: 13756}
     - Class: 114
-      Script: {instanceID: 13792}
+      Script: {instanceID: 13794}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -548,17 +549,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13350}
     - Class: 114
-      Script: {instanceID: 13362}
+      Script: {instanceID: 13364}
     - Class: 114
-      Script: {instanceID: 13418}
+      Script: {instanceID: 13420}
     - Class: 114
-      Script: {instanceID: 13508}
+      Script: {instanceID: 13510}
     - Class: 114
-      Script: {instanceID: 13566}
+      Script: {instanceID: 13568}
     - Class: 114
-      Script: {instanceID: 13754}
+      Script: {instanceID: 13756}
     - Class: 114
-      Script: {instanceID: 13792}
+      Script: {instanceID: 13794}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -691,17 +692,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13350}
     - Class: 114
-      Script: {instanceID: 13362}
+      Script: {instanceID: 13364}
     - Class: 114
-      Script: {instanceID: 13418}
+      Script: {instanceID: 13420}
     - Class: 114
-      Script: {instanceID: 13508}
+      Script: {instanceID: 13510}
     - Class: 114
-      Script: {instanceID: 13566}
+      Script: {instanceID: 13568}
     - Class: 114
-      Script: {instanceID: 13754}
+      Script: {instanceID: 13756}
     - Class: 114
-      Script: {instanceID: 13792}
+      Script: {instanceID: 13794}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -791,7 +792,7 @@ ScriptsOnlyBuild:
     className: BannerPlaceholder
   - hash:
       serializedVersion: 2
-      Hash: beb4ab8b0da5dd9c2efca2bd133d68c3
+      Hash: 463d64de657f0324a74d0c9d71879d46
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenu
@@ -1521,6 +1522,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 25e9b634abdfd0759fabc58c8e1e3d27
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: InputManager
   platform: 19
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
@@ -1528,4 +1535,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/TaddiportLoad.unity
   - Assets/Scenes/TornadoChallenge1.unity
   - Assets/Scenes/PresentChallenge1.unity
-  playerPath: D:/AINT254/Builds/Apr16/The Giant of Torridge Island.exe
+  playerPath: D:/AINT254/Builds/Apr21/The Giant of Torridge Island.exe

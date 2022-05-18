@@ -227,6 +227,20 @@ public class Save : MonoBehaviour
                 totemData[i, 2] = totems[i].transform.eulerAngles.y;
             }
         }
+
+        if (birds > 10)
+        {
+            birds = birds - 3;
+        }
+        else if (birds > 5)
+        {
+            birds = birds - 2;
+        }
+        else if (birds > 0)
+        {
+            birds = birds - 1;
+        }
+
         int slot = 0;
         print(SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name == "Taddiport" || SceneManager.GetActiveScene().name == "TaddiportLoad")
