@@ -48,7 +48,10 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
+    com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
     Assets/Scenes/MainMenu.unity:
     - Class: 1
@@ -276,6 +279,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13756}
     - Class: 114
       Script: {instanceID: 13794}
+    - Class: 114
+      Script: {instanceID: 13910}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -417,6 +422,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13756}
     - Class: 114
       Script: {instanceID: 13794}
+    - Class: 114
+      Script: {instanceID: 13910}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -560,6 +567,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13756}
     - Class: 114
       Script: {instanceID: 13794}
+    - Class: 114
+      Script: {instanceID: 13910}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -703,6 +712,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13756}
     - Class: 114
       Script: {instanceID: 13794}
+    - Class: 114
+      Script: {instanceID: 13910}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -1296,7 +1307,7 @@ ScriptsOnlyBuild:
     className: NetworkBehaviour
   - hash:
       serializedVersion: 2
-      Hash: daa348f8536af013c5e6995786442dca
+      Hash: c0a90ca1ee4e4650b2dac565f1eadbfa
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerControl
@@ -1535,4 +1546,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/TaddiportLoad.unity
   - Assets/Scenes/TornadoChallenge1.unity
   - Assets/Scenes/PresentChallenge1.unity
-  playerPath: D:/AINT254/Builds/Apr21/The Giant of Torridge Island.exe
+  playerPath: D:/AINT254/Builds/May19/The Giant of Torridge Island.exe
