@@ -125,8 +125,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.018242, y: 1.5396583, z: 1.9638672}
-  m_Center: {x: -0.000049604314, y: 0.8503884, z: -0.030746462}
+  m_Size: {x: 2.018242, y: 1.3932993, z: 1.9638672}
+  m_Center: {x: -0.000049604314, y: 0.9235679, z: -0.030746462}
 --- !u!54 &1340006267672827838
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -162,6 +162,9 @@ MonoBehaviour:
     type: 3}
   tree: {fileID: 0}
   stats: {fileID: 0}
+  smoke: {fileID: 0}
+  star: {fileID: 0}
+  tear: {fileID: 0}
 --- !u!1 &8948160772990892071
 GameObject:
   m_ObjectHideFlags: 0
