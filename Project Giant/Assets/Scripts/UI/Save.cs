@@ -248,6 +248,11 @@ public class Save : MonoBehaviour
             print("Save As Taddiport Data");
             slot = 1;
         }
+        else if(SceneManager.GetActiveScene().name == "Shebbear" || SceneManager.GetActiveScene().name == "ShebbearLoad")
+        {
+            print("Save As Shebbear Data");
+            slot = 2;
+        }
         print(slot);
         new SaveData(treeData, treeWiltData, stoneData, redSmallHouseData, redFarmData, torchData, totemData, mRedVillagers, fRedVillagers, livestock, birds, slot);
     }

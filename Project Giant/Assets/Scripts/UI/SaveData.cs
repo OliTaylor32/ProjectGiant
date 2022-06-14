@@ -60,6 +60,10 @@ public class SaveData
         {
             path = Application.persistentDataPath + "/savedata.map";
         }
+        if (saveSlot == 2)
+        {
+            path = Application.persistentDataPath + "/savedatashebbear.map";
+        }
         else
         {
             path = Application.persistentDataPath + "/errordata.map";
@@ -82,9 +86,17 @@ public class SaveData
         file.Close();
     }
 
-    public SaveData Load()
+    public SaveData Load(string map)
     {
-        string path = Application.persistentDataPath + "/savedata.map";
+        string path;
+        if (map == "Taddiport")
+        {
+            path = Application.persistentDataPath + "/savedata.map";
+        }
+        else
+        {
+            path = Application.persistentDataPath + "/savedatashebbear.map";
+        }
         FileStream file;
 
         if (File.Exists(path)) 

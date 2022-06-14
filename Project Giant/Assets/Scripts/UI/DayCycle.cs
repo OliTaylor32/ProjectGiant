@@ -12,6 +12,7 @@ public class DayCycle : MonoBehaviour
 
     private GameObject rain;
     public Material rainSkybox;
+    public GameObject clouds;
 
     public bool confirmedRain;
 
@@ -38,6 +39,11 @@ public class DayCycle : MonoBehaviour
                 if (SceneManager.GetActiveScene().name != "MainMenu")
                 {
                     StartCoroutine(DialogueRain());
+                }
+
+                if (clouds != null)
+                {
+                    clouds.gameObject.SetActive(true);
                 }
             }
             else

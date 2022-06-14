@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PresentChallenge1.unity
     guid: f12467d254fce994bb792aa539664cba
+  - enabled: 1
+    path: Assets/Scenes/Shebbear.unity
+    guid: 1437f51cc510283458b973d200abfe35
+  - enabled: 1
+    path: Assets/Scenes/ShebbearLoad.unity
+    guid: 4fefd0ac578bbf14295332d53a128a7f
   m_configObjects: {}

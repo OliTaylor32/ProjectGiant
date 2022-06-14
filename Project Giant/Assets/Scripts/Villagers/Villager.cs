@@ -380,6 +380,13 @@ public class Villager : MonoBehaviour
                 anim.Play("VillagerBuild");
                 StartCoroutine(TimedEvent(5f));
             }
+            if (collision.gameObject.GetComponent<Object>().item == "mountain") //if it's a stone, mine it
+            {
+                anim.Play("VillagerMine");
+                StartCoroutine(TimedEvent(5f));
+                collision.gameObject.GetComponent<Object>().lifeDown();
+                stone = true;
+            }
         }
     }
 

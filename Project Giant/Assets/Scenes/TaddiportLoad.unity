@@ -3842,6 +3842,7 @@ MonoBehaviour:
   bird: {fileID: 5283954685752892236, guid: 9a0b6b37c6a7db944aae08d18e46826b, type: 3}
   redCentre: {fileID: 45135578}
   blackCentre: {fileID: 0}
+  map: Taddiport
 --- !u!1001 &1102189663
 PrefabInstance:
   m_ObjectHideFlags: 0

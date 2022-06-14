@@ -35,11 +35,14 @@ public class Load : MonoBehaviour
     public Transform redCentre;
     public Transform blackCentre;
 
+    public string map;
+
     // Start is called before the first frame update
     void Start()
     {
         data = new SaveData();
-        data = data.Load();
+
+        data = data.Load(map);
 
         trees = data.trees;
         treeWilts = data.treeWilts;

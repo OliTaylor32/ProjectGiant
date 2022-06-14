@@ -21,6 +21,9 @@ public class Dialogue : MonoBehaviour
 
     private bool[] used;
 
+    private string[] altText;
+    private bool alt;
+
 
 
 
@@ -31,6 +34,7 @@ public class Dialogue : MonoBehaviour
         dayTimer = Time.time;
         giant = GameObject.Find("Giant");
         text = new string[28];
+        altText = new string[28];
 
         //try
         //{
@@ -61,7 +65,7 @@ public class Dialogue : MonoBehaviour
         text[11] = "The Giant has grown by collecting stars from the villagers, and can now move at greater speeds";
         text[14] = "The villager is harvesting the crops now that it has finished growing. They will then ready the land to grow new crops in its' place.";
         text[15] = "Even on rainy days like this, the villagers lives must go on, and the same goes for the Giant. Will the Giant be the silver lining of the cloudy skies?";
-        text[16] = "When trees are places together, they wither and leave in their place seeds which will grow into trees when a new sun rises. Wilted trees left standing at sunset will be left to the mercy of the moon.";
+        text[16] = "When trees are placed together, they wither and leave in their place seeds which will grow into trees when a new sun rises. Wilted trees left standing at sunset will be left to the mercy of the moon.";
         text[17] = "Oh dear. I guess the waters surface is the only thing protecting the sealife from the hunters in the sky, i'm sure there's a healthy balance to be found.";
         text[18] = "A villager has gone hunting, it would be wrong to not make the most out of the livestocks sacrifice no?";
         text[19] = "Now there is a clear area in which to build, the villager gives praise to the Giant and gets to work.";
@@ -74,14 +78,57 @@ public class Dialogue : MonoBehaviour
         text[26] = "Look out, a tornado is forming, the Giant can't stop it but it can move things away from the tornados path, or maybe it would like to use the tornado to it's full destructive potential.";
         text[27] = "Welcome to challenge mode, make the Giants presence known as much as possible in just one day.";
 
+        //AltText
+        altText[0] = "The sun rises over the island as a new day dawns, will The Giant grant the villagers their wishes or bring forth their worst fears.";
+        altText[1] = "A villager has gifted the giant a star as thanks for a good deed.";
+        altText[2] = "A villager has shed a tear over The Giants actions.";
+        altText[3] = "A villager wants to build a new structure, however something appears to be in the way.";
+        altText[5] = "When The Giant grows through stars granted by the villagers, it becomes easier for The Giant to help them further";
+        altText[6] = "The tears of the villagers only make it easier for The Giant to worsen their misery";
+        altText[7] = "No matter how The Giant grows, the ability to lift objects will always be improved.";
+        altText[8] = "There's always a way for The Giant to influence the island. Consult the encyclopedia if it ever seems like The Giant is waiting for fate rather than creating it.";
+        altText[9] = "And so another page in the tale of this island comes to a close. What lessons are to be learnt from today? What fate awaits the island tomorrow?";
+        altText[12] = "Sometimes I wonder if The Giant has a plan for the island on a day-to-day basis, or are The Giants actions purely reactionary to the circumstances of which The Giant finds itself?";
+        altText[13] = "Many things that are good for the inhabitants of the island are harmful to nature and vice versa. It's a balancing act The Giant must perform.";
+        //Achievment Text
+        altText[4] = "I don't think the villagers liked being trampled.";
+        altText[10] = "The Giant has caused enough tears to be shed to grow, and can now demolish bigger structures.";
+        altText[11] = "The villagers have blessed The Giant with enough stars to grow larger, the energy also allows The Giant to move at greater speeds";
+        altText[14] = "The crops are fully grown and so the villager begins the harvest. The farmer praises The Giant with a star.";
+        altText[15] = "As a new day dawns the sun tries desperatly to peirce through the clouds, The Giant and villagers rise from their slumber.";
+        altText[16] = "As the trees wither and die four new seeds take their place. These seeds will grow to be as mighty as their parents soon enough.";
+        altText[17] = "As The Giant helps in the birds hunt, their population will surely increase.";
+        altText[18] = "The villager gives blessing to the giant for the animal it has hunted, perhaps they believe the Giant to be the god that created livestock?";
+        altText[19] = "The villager gives thanks to The Giant for clearing the way by granting a star.";
+        altText[20] = "As thanks for giving a tree, the villager gives The Giant a star.";
+        altText[21] = "A stone for a star, a fair trade.";
+        altText[22] = "Another house has successfully been constructed, and the population of the tribe has increased.";
+        altText[23] = "A farm has been destroyed. The villagers shed a tear over their lost work.";
+        altText[24] = "The villagers who lived in that house shed a tear as they beg for shelter from their neihbours";
+        altText[25] = "I guess that villager was *booted* from the island, haha.";
+        altText[26] = "A tornado has just been spotted off the shore, and is about to touchdown on the island.";
+        altText[27] = "In challenge mode there are no days on the island after today, so make the most of it!";
+
 
 
         //Set to start of day text.
+        int random = Random.Range(0, 2);
+        if (random == 0)
+            alt = true;
+        else
+            alt = false;
+
         txt = gameObject.GetComponent<Text>();
-        txt.text = text[0];
+
+        if(alt == true)
+            txt.text = altText[0];
+        else
+            txt.text = text[0];
+
         txt.color = new UnityEngine.Color(1, 1, 1, 1);
         timer = Time.time;
         panel.SetActive(true);
+        alt = !alt;
 
         used = new bool[text.Length];
         for (int i = 0; i < used.Length; i++) //All texts can be used (once said once they can't be repeated)
@@ -102,10 +149,14 @@ public class Dialogue : MonoBehaviour
         {
             txt.text = "";
             panel.SetActive(false);
+            alt = !alt;
         }
         if (giant.GetComponent<PlayerControl>().stars > 0 && used[1] == false) //When the player has collected their first star
         {
-            txt.text = text[1];
+            if (alt == true)
+                txt.text = altText[1];
+            else
+                txt.text = text[1];
             used[1] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -113,17 +164,23 @@ public class Dialogue : MonoBehaviour
 
         if (giant.GetComponent<PlayerControl>().tears > 0 && used[2] == false) //When the player has collected their first star
         {
-            txt.text = text[2];
+            if (alt == true)
+                txt.text = altText[2];
+            else
+                txt.text = text[2];
             used[2] = true;
             panel.SetActive(true);
             timer = Time.time;
         }
 
 
-        if (giant.GetComponent<PlayerControl>().stars > 9 && used[5] == false) //When the player has grown using stars
+        if (giant.GetComponent<PlayerControl>().stars > 9 && used[11] == false) //When the player has grown using stars
         {
-            txt.text = text[5];
-            used[5] = true;
+            if (alt == true)
+                txt.text = altText[11];
+            else
+                txt.text = text[11];
+            used[11] = true;
             panel.SetActive(true);
             timer = Time.time;
             if (SceneManager.GetActiveScene().name != "TornadoChallenge1")
@@ -134,20 +191,26 @@ public class Dialogue : MonoBehaviour
             }
         }
 
-        if (giant.GetComponent<PlayerControl>().tears > 9 && used[6] == false) //When the player has grown using tears
+        if (giant.GetComponent<PlayerControl>().tears > 9 && used[10] == false) //When the player has grown using tears
         {
-            txt.text = text[6];
-            used[6] = true;
+            if (alt == true)
+                txt.text = altText[10];
+            else
+                txt.text = text[10];
+            used[10] = true;
             panel.SetActive(true);
             timer = Time.time;
             var ach = new Achievement("tear");
             ach.Trigger();
             Steamworks.SteamClient.RunCallbacks();
         }
-        //When the player has collected either 7 stars or tears.
+        //When the player has collected either 11 stars or tears.
         if ((giant.GetComponent<PlayerControl>().stars > 11|| giant.GetComponent<PlayerControl>().tears > 11) && used[7] == false) 
         {
-            txt.text = text[7];
+            if (alt == true)
+                txt.text = altText[7];
+            else
+                txt.text = text[7];
             used[7] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -155,7 +218,10 @@ public class Dialogue : MonoBehaviour
 
         if (Time.time - timer >= 20f && used[8] == false) //When 20secs has passed without any narration
         {
-            txt.text = text[8];
+            if (alt == true)
+                txt.text = altText[8];
+            else
+                txt.text = text[8];
             used[8] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -164,31 +230,43 @@ public class Dialogue : MonoBehaviour
         if (Time.time - dayTimer >= 574f) //When the day is about to end.
         {
             musicControl.GetComponent<MusicControl>().endOfDayAlert();
-            txt.text = text[9];
+            if (alt == true)
+                txt.text = altText[9];
+            else
+                txt.text = text[9];
             used[9] = true;
             panel.SetActive(true);
             timer = Time.time;
         }
 
-        if (giant.GetComponent<PlayerControl>().tears > 9 && used[10] == false) //When the player grew for a secound time using tears
+        if (giant.GetComponent<PlayerControl>().tears > 19 && used[6] == false) //When the player grew for a secound time using tears
         {
-            txt.text = text[10];
-            used[10] = true;
+            if (alt == true)
+                txt.text = altText[6];
+            else
+                txt.text = text[6];
+            used[6] = true;
             panel.SetActive(true);
             timer = Time.time;
         }
 
-        if (giant.GetComponent<PlayerControl>().stars > 9 && used[11] == false) //When the player grew for a secound time using stars
+        if (giant.GetComponent<PlayerControl>().stars > 19 && used[5] == false) //When the player grew for a secound time using stars
         {
-            txt.text = text[11];
-            used[11] = true;
+            if (alt == true)
+                txt.text = altText[5];
+            else
+                txt.text = text[5];
+            used[5] = true;
             panel.SetActive(true);
             timer = Time.time;
         }
 
         if (Time.time - timer >= 40f && used[12] == false) //When 40secs has passed without any narration
         {
-            txt.text = text[12];
+            if (alt == true)
+                txt.text = altText[12];
+            else
+                txt.text = text[12];
             used[12] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -196,7 +274,10 @@ public class Dialogue : MonoBehaviour
 
         if (Time.time - timer >= 60f && used[13] == false) //When 60secs has passed without any narration
         {
-            txt.text = text[13];
+            if (alt == true)
+                txt.text = altText[13];
+            else
+                txt.text = text[13];
             used[13] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -280,7 +361,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[3] == false)
         {
-            txt.text = text[3];
+            if (alt == true)
+                txt.text = altText[3];
+            else
+                txt.text = text[3];
             used[3] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -291,7 +375,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[4] == false)
         {
-            txt.text = text[4];
+            if (alt == true)
+                txt.text = altText[4];
+            else
+                txt.text = text[4];
             used[4] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -305,7 +392,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[14] == false)
         {
-            txt.text = text[14];
+            if (alt == true)
+                txt.text = altText[14];
+            else
+                txt.text = text[14];
             used[14] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -320,7 +410,10 @@ public class Dialogue : MonoBehaviour
         if (used[15] == false)
         {
             print("Rain Recieved from Dialogue");
-            txt.text = text[15];
+            if (alt == true)
+                txt.text = altText[15];
+            else
+                txt.text = text[15];
             used[15] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -334,7 +427,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[16] == false)
         {
-            txt.text = text[16];
+            if (alt == true)
+                txt.text = altText[16];
+            else
+                txt.text = text[16];
             used[16] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -348,7 +444,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[17] == false)
         {
-            txt.text = text[17];
+            if (alt == true)
+                txt.text = altText[17];
+            else
+                txt.text = text[17];
             used[17] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -362,7 +461,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[18] == false)
         {
-            txt.text = text[18];
+            if (alt == true)
+                txt.text = altText[18];
+            else
+                txt.text = text[18];
             used[18] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -376,7 +478,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[19] == false)
         {
-            txt.text = text[19];
+            if (alt == true)
+                txt.text = altText[19];
+            else
+                txt.text = text[19];
             used[19] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -390,7 +495,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[20] == false)
         {
-            txt.text = text[20];
+            if (alt == true)
+                txt.text = altText[20];
+            else
+                txt.text = text[20];
             used[20] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -404,7 +512,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[21] == false)
         {
-            txt.text = text[21];
+            if (alt == true)
+                txt.text = altText[21];
+            else
+                txt.text = text[21];
             used[21] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -418,7 +529,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[22] == false)
         {
-            txt.text = text[22];
+            if (alt == true)
+                txt.text = altText[22];
+            else
+                txt.text = text[22];
             used[22] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -432,7 +546,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[23] == false)
         {
-            txt.text = text[23];
+            if (alt == true)
+                txt.text = altText[23];
+            else
+                txt.text = text[23];
             used[23] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -446,7 +563,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[24] == false)
         {
-            txt.text = text[24];
+            if (alt == true)
+                txt.text = altText[24];
+            else
+                txt.text = text[24];
             used[24] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -460,7 +580,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[25] == false)
         {
-            txt.text = text[25];
+            if (alt == true)
+                txt.text = altText[25];
+            else
+                txt.text = text[25];
             used[25] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -474,7 +597,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[26] == false)
         {
-            txt.text = text[26];
+            if (alt == true)
+                txt.text = altText[26];
+            else
+                txt.text = text[26];
             used[26] = true;
             panel.SetActive(true);
             timer = Time.time;
@@ -488,7 +614,10 @@ public class Dialogue : MonoBehaviour
     {
         if (used[27] == false)
         {
-            txt.text = text[27];
+            if (alt == true)
+                txt.text = altText[27];
+            else
+                txt.text = text[27];
             used[27] = true;
             panel.SetActive(true);
             timer = Time.time;
