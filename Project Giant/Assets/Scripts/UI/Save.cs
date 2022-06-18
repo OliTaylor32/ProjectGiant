@@ -123,6 +123,9 @@ public class Save : MonoBehaviour
                             livestock++;
                         }
                         break;
+                    case "penguin":
+                        birds++;
+                        break;
                     case "bird":
                         birds++;
                         break;

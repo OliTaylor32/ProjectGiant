@@ -40,8 +40,18 @@ public class PickUpDetect : MonoBehaviour
         if (pickUp.GetComponent<Object>().item == "fish")
         {
             pickUp.GetComponent<BirdAI>().PickedUp();
-            GameObject bird = Instantiate(fishEatingBird, new Vector3(transform.position.x + Random.Range(-70f, 70f), transform.position.y + 10f, transform.position.z + Random.Range(-70f, 70f)), Quaternion.identity);
-            bird.GetComponent<BirdAI>().SetFishTarget(pickUp);
+            if (fishEatingBird.GetComponent<BirdAI>() != null)
+            {
+                GameObject bird = Instantiate(fishEatingBird, new Vector3(transform.position.x + Random.Range(-70f, 70f), transform.position.y + 10f, transform.position.z + Random.Range(-70f, 70f)), Quaternion.identity);
+                bird.GetComponent<BirdAI>().SetFishTarget(pickUp);
+            }
+
+            if (fishEatingBird.GetComponent<PenguinAI>() != null)
+            {
+                GameObject bird = Instantiate(fishEatingBird, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y, transform.position.z + Random.Range(-10f, 10f)), Quaternion.identity);
+                bird.GetComponent<PenguinAI>().SetFishTarget(pickUp);
+            }
+
         }
     }
 

@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\LiveStockAI.cs" />
     <Compile Include="Assets\Scripts\MusicControl.cs" />
     <Compile Include="Assets\Scripts\Object.cs" />
+    <Compile Include="Assets\Scripts\PenguinAI.cs" />
     <Compile Include="Assets\Scripts\PickUpDetect.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
     <Compile Include="Assets\Scripts\Present.cs" />

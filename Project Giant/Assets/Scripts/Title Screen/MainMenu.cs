@@ -9,14 +9,21 @@ public class MainMenu : MonoBehaviour
 {
     private bool cooldown;
     public TextMeshProUGUI[] modes;
+
     public TextMeshProUGUI[] freeplayModes;
     public GameObject freeplayLocation;
+    public string[] freeplayMaps;
+    public Sprite[] freeplayMapImages;
+
     public TextMeshProUGUI[] challenges;
+
     public TextMeshProUGUI[] encyclopediaEntries;
     public TextMeshProUGUI encyclopediaTxt;
     private string[] articles;
     public GameObject ePanel;
+
     public TextMeshProUGUI[] settings;
+
     public GameObject freeplayMapSS;
     public Image background;
 
@@ -24,6 +31,7 @@ public class MainMenu : MonoBehaviour
     public int selected;
     public int selected2;
     public int menuLayer;
+    public int mapSelected;
 
     public Fade fade;
     public GameObject logo;
@@ -56,6 +64,7 @@ public class MainMenu : MonoBehaviour
         //Top Menu
         selected = 0;
         selected2 = 0;
+        mapSelected = 0;
         for (int i = 0; i < modes.Length; i++)
         {
             modes[i].color = new Color (0.5f, 0.5f, 0.5f, 1f);
@@ -112,7 +121,17 @@ public class MainMenu : MonoBehaviour
     {
         if (rebinding == false)
         {
+            if (Input.GetAxis("Horizontal") > 0.1f && cooldown == false && mapSelected < 1)
+            {
+                mapSelected++;
+                StartCoroutine(TriggerCoolDown());
+            }
 
+            if (Input.GetAxis("Horizontal") < -0.1f && cooldown == false && mapSelected != 0)
+            {
+                mapSelected--;
+                StartCoroutine(TriggerCoolDown());
+            }
 
             if (Input.GetAxis("Vertical") > 0.1f && cooldown == false)
             {
@@ -161,14 +180,29 @@ public class MainMenu : MonoBehaviour
                 {
                     if (selected == 0)
                     {
-                        if (selected2 == 0)//New FreePlay Taddiport
+                        if (selected2 == 0)//New FreePlay
                         {
-                            StartCoroutine(LoadLevel("Taddiport"));
+                            if (mapSelected == 0)
+                            {
+                                StartCoroutine(LoadLevel("Taddiport"));
+                            }
+                            if (mapSelected == 1)
+                            {
+                                StartCoroutine(LoadLevel("Shebbear"));
+                            }
                         }
                         if (selected2 == 1)
                         {
-                            StartCoroutine(LoadLevel("TaddiportLoad"));
+                            if (mapSelected == 0)
+                            {
+                                StartCoroutine(LoadLevel("TaddiportLoad"));
+                            }
+                            if (mapSelected == 1)
+                            {
+                                StartCoroutine(LoadLevel("ShebbearLoad"));
+                            }
                         }
+
                     }
 
                     if (selected == 1)
@@ -231,6 +265,7 @@ public class MainMenu : MonoBehaviour
                 modes[i].color = new Color(1f, 1f, 1f, 1f);
             }
         }
+
         for (int i = 0; i < freeplayModes.Length; i++)
         {
             freeplayModes[i].color = new Color(0.5f, 0.5f, 0.5f, 1f);
@@ -239,6 +274,10 @@ public class MainMenu : MonoBehaviour
                 freeplayModes[i].color = new Color(1f, 1f, 1f, 1f);
             }
         }
+
+        freeplayLocation.GetComponent<TextMeshProUGUI>().text = freeplayMaps[mapSelected];
+        freeplayMapSS.GetComponent<Image>().sprite = freeplayMapImages[mapSelected];
+
         for (int i = 0; i < challenges.Length; i++)
         {
             challenges[i].color = new Color(0.5f, 0.5f, 0.5f, 1f);
@@ -247,6 +286,7 @@ public class MainMenu : MonoBehaviour
                 challenges[i].color = new Color(1f, 1f, 1f, 1f);
             }
         }
+
         for (int i = 0; i < encyclopediaEntries.Length; i++)
         {
             encyclopediaEntries[i].color = new Color(0.5f, 0.5f, 0.5f, 1f);
@@ -256,6 +296,7 @@ public class MainMenu : MonoBehaviour
             }
             encyclopediaTxt.text = articles[selected2];
         }
+
         for (int i = 0; i < settings.Length; i++)
         {
             settings[i].color = new Color(0.5f, 0.5f, 0.5f, 1f);
@@ -264,6 +305,7 @@ public class MainMenu : MonoBehaviour
                 settings[i].color = new Color(1f, 1f, 1f, 1f);
             }
         }
+
         yield return new WaitForSeconds(0.2f);
         cooldown = false;
     }

@@ -136,7 +136,7 @@ public class Dialogue : MonoBehaviour
             used[i] = false;
         }
 
-        if (Application.loadedLevel != 1 && Application.loadedLevel != 2)
+        if (Application.loadedLevel == 3 || Application.loadedLevel == 4)
         {
             Challenge();
         }

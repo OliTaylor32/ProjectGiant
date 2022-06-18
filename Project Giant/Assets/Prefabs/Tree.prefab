@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: tree
-  weight: 1
+  weight: 0
   life: 3
   villager: {fileID: 0}
   tree: {fileID: 0}
@@ -359,7 +359,8 @@ MonoBehaviour:
   giant: {fileID: 0}
   currentCollision: {fileID: 0}
   stats: {fileID: 0}
-  particleFX: {fileID: 0}
+  particleFX: {fileID: 8829006083422798341, guid: 4d749d0d865c2004489e3125f2523a07,
+    type: 3}
 --- !u!1 &8125838154397033066
 GameObject:
   m_ObjectHideFlags: 0

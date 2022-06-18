@@ -437,6 +437,16 @@ public class Villager : MonoBehaviour
                 }
 
             }
+            if (collision.gameObject.GetComponent<Object>().item == "penguin")
+            {
+                if (collision.gameObject.GetComponent<PenguinAI>().fish == true)
+                {
+                    collision.gameObject.GetComponent<PenguinAI>().FishTaken();
+                    anim.Play("VillagerEatFish");
+                    yield return new WaitForSeconds(10f);
+                    Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                }
+            }
             stop = false;
             StartCoroutine(Move()); //Start walking again
 
