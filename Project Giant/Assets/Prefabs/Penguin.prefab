@@ -66,6 +66,10 @@ PrefabInstance:
       propertyPath: fishProp
       value: 
       objectReference: {fileID: 6882435284491575268}
+    - target: {fileID: 1739382623, guid: ab0936905ba5ecf478a2c45cd2f10c39, type: 3}
+      propertyPath: maxSpeed
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3292996210796306234, guid: ab0936905ba5ecf478a2c45cd2f10c39,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -105,6 +109,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6149109129942703291, guid: ab0936905ba5ecf478a2c45cd2f10c39,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 4.2058764
+      objectReference: {fileID: 0}
+    - target: {fileID: 6149109129942703291, guid: ab0936905ba5ecf478a2c45cd2f10c39,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.6209625
+      objectReference: {fileID: 0}
+    - target: {fileID: 6149109129942703291, guid: ab0936905ba5ecf478a2c45cd2f10c39,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.41452175
+      objectReference: {fileID: 0}
+    - target: {fileID: 6149109129942703291, guid: ab0936905ba5ecf478a2c45cd2f10c39,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1.102999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6149109129942703291, guid: ab0936905ba5ecf478a2c45cd2f10c39,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -3.996937
       objectReference: {fileID: 0}
     - target: {fileID: 6319228270124093812, guid: ab0936905ba5ecf478a2c45cd2f10c39,
         type: 3}

@@ -42,7 +42,7 @@ public class Villager : MonoBehaviour
         builtToday = false;
         anim = gameObject.GetComponent<Animator>();
         //MAke sure they walk around their own village
-        if (colour == "mRed" || colour == "fRed")
+        if (colour == "mRed" || colour == "fBlue" || colour == "fBlue" || colour == "mBlue")
         {
             townCenter = GameObject.Find("TownCentre").transform;
         }
@@ -52,7 +52,7 @@ public class Villager : MonoBehaviour
         }
         //Start moving
         StartCoroutine(Move());
-        if (SceneManager.GetActiveScene().name == "TaddiportLoad")
+        if (SceneManager.GetActiveScene().name == "TaddiportLoad" || SceneManager.GetActiveScene().name == "ShebbearLoad")
         {
             actions = new string[4];
             actions[0] = "Nothing";
@@ -443,6 +443,7 @@ public class Villager : MonoBehaviour
                 {
                     collision.gameObject.GetComponent<PenguinAI>().FishTaken();
                     anim.Play("VillagerEatFish");
+                    GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().Penguin();
                     yield return new WaitForSeconds(10f);
                     Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 }

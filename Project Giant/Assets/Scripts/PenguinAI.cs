@@ -53,6 +53,7 @@ public class PenguinAI : MonoBehaviour
                 }
                 maxSpeed = 2f;
                 turnspeed = Vector3.Distance(transform.position, fishTarget.transform.position) * 0.5f;
+            GetComponent<Object>().enabled = false;
         }
 
         speed = speed + acceleration;
@@ -117,6 +118,15 @@ public class PenguinAI : MonoBehaviour
             GetComponent<Rigidbody>().useGravity = true;
             maxSpeed = 0.1f;
             turnspeed = 1f;
+            GetComponent<Object>().enabled = false;
+        }
+        else if (collision.gameObject.name == "Giant")
+        {
+            transform.position = fishTarget.transform.position;
+        }
+        else
+        {
+            currentTarget = Random.Range(0, targets.Length);
         }
     }
 

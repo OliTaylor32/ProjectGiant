@@ -33,8 +33,8 @@ public class Dialogue : MonoBehaviour
         endPanel.SetActive(false);
         dayTimer = Time.time;
         giant = GameObject.Find("Giant");
-        text = new string[28];
-        altText = new string[28];
+        text = new string[29];
+        altText = new string[29];
 
         //try
         //{
@@ -77,6 +77,7 @@ public class Dialogue : MonoBehaviour
         text[25] = "Oh no, guess the Giant can't kick around the villagers forever.";
         text[26] = "Look out, a tornado is forming, the Giant can't stop it but it can move things away from the tornados path, or maybe it would like to use the tornado to it's full destructive potential.";
         text[27] = "Welcome to challenge mode, make the Giants presence known as much as possible in just one day.";
+        text[28] = "The villagers are friends with the penguins, as the penguins give them fish from the sea.";
 
         //AltText
         altText[0] = "The sun rises over the island as a new day dawns, will The Giant grant the villagers their wishes or bring forth their worst fears.";
@@ -108,6 +109,7 @@ public class Dialogue : MonoBehaviour
         altText[25] = "I guess that villager was *booted* from the island, haha.";
         altText[26] = "A tornado has just been spotted off the shore, and is about to touchdown on the island.";
         altText[27] = "In challenge mode there are no days on the island after today, so make the most of it!";
+        altText[28] = "The Penguin has given its fish to the villager, how kind!";
 
 
 
@@ -622,6 +624,23 @@ public class Dialogue : MonoBehaviour
             panel.SetActive(true);
             timer = Time.time;
             var ach = new Achievement("challenge");
+            ach.Trigger();
+            Steamworks.SteamClient.RunCallbacks();
+        }
+    }
+
+    public void Penguin()
+    {
+        if (used[28] == false)
+        {
+            if (alt == true)
+                txt.text = altText[28];
+            else
+                txt.text = text[28];
+            used[28] = true;
+            panel.SetActive(true);
+            timer = Time.time;
+            var ach = new Achievement("penguin");
             ach.Trigger();
             Steamworks.SteamClient.RunCallbacks();
         }

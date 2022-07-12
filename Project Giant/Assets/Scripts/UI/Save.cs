@@ -108,6 +108,9 @@ public class Save : MonoBehaviour
                     case "sHouse":
                         AddRedSmallHouse(gameObject);
                         break;
+                    case "igloo":
+                        AddRedSmallHouse(gameObject);
+                        break;
                     case "farm":
                         AddRedFarm(gameObject);
                         break;
@@ -145,7 +148,15 @@ public class Save : MonoBehaviour
                         mRedVillagers++;
                         break;
 
+                    case "mBlue":
+                        mRedVillagers++;
+                        break;
+
                     case "fRed":
+                        fRedVillagers++;
+                        break;
+
+                    case "fBlue":
                         fRedVillagers++;
                         break;
                     default:

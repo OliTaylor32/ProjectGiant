@@ -73,6 +73,11 @@ public class LiveStockAI : MonoBehaviour
                 GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().natureScore++;
             }
         }
+        else
+        {
+            currentTarget = Random.Range(0, targets.Length);
+            print("New Target");
+        }
     }
 
     public void StopMoving()

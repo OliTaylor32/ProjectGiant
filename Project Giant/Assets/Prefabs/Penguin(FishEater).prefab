@@ -57,6 +57,11 @@ PrefabInstance:
       propertyPath: fishGrabber
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1513142705569246902, guid: 357717080fa81514cac2afedf7960f5a,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4849721386452328605, guid: 357717080fa81514cac2afedf7960f5a,
         type: 3}
       propertyPath: m_Name

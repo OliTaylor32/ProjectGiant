@@ -196,4 +196,20 @@ public class Object : MonoBehaviour
             GetComponent<AudioSource>().Play();
         }
     }
+
+    private void OnCollisionStay(Collision other)
+    {
+            if (other.gameObject.name == "Terrain")
+            {
+                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
+            }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
+
+    }
 }
