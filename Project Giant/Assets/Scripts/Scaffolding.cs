@@ -8,6 +8,7 @@ public class Scaffolding : MonoBehaviour
     public GameObject mVillager;
     public GameObject fVillager;
     public int newVillagers;
+    private TownCentre village;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,11 +33,49 @@ public class Scaffolding : MonoBehaviour
             Instantiate(mVillager, new Vector3(transform.position.x + 0.5f, transform.position.y + 1, transform.position.z + (i / 5)), Quaternion.identity);
             Instantiate(fVillager, new Vector3(transform.position.x + 0.5f, transform.position.y + 1, transform.position.z - (i / 5)), Quaternion.identity);
 
+            if (village != null)
+            {
+                switch (mVillager.name)
+                {
+                    case "MRedVillager":
+                        village.redM++;
+                        break;
+                    case "MBlueVillager":
+                        village.blueM++;
+                        break;
+                    case "MGreenVillager":
+                        village.greenM++;
+                        break;
+                    default:
+                        break;
+                }
+
+                switch (fVillager.name)
+                {
+                    case "FRedVillager":
+                        village.redF++;
+                        break;
+                    case "FBlueVillager":
+                        village.blueF++;
+                        break;
+                    case "FGreenVillager":
+                        village.greenF++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
         }
         if (newVillagers > 0)
         {
             GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().HouseBuilt();
         }
         Destroy(gameObject);
+    }
+
+    public void SetTown(TownCentre town)
+    {
+        village = town;
     }
 }

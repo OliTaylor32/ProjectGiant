@@ -25,7 +25,11 @@ public class Present : MonoBehaviour
         if (collision.gameObject.GetComponent<PlayerControl>() != null)
         {
             print("Is player");
-            Instantiate(objects[item], transform.position, Quaternion.identity);
+            GameObject newItem = Instantiate(objects[item], transform.position, Quaternion.identity);
+            if (newItem.GetComponent<Villager>() != null)
+            {
+                newItem.GetComponent<Villager>().PresentVillager();
+            }
             print("Item Spawned");
             Instantiate(particles, transform.position, Quaternion.Euler(-90, 0, 0));
             print("Particles Spawned");

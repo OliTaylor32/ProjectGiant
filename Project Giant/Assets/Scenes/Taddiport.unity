@@ -349,6 +349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 45135578}
   - component: {fileID: 45135579}
+  - component: {fileID: 45135580}
   m_Layer: 0
   m_Name: TownCentre
   m_TagString: Untagged
@@ -386,6 +387,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &45135580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45135577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dd18849d4f8fa249976d16013ecec18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colour: 0
+  redM: 1
+  redF: 1
+  blueM: 0
+  blueF: 0
+  greenM: 0
+  greenF: 0
+  happiness: 0
 --- !u!1 &57322660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,7 +1341,7 @@ Transform:
   - {fileID: 1980601032}
   - {fileID: 78800350}
   m_Father: {fileID: 0}
-  m_RootOrder: 104
+  m_RootOrder: 103
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &170076733
 GameObject:
@@ -1452,6 +1473,7 @@ MonoBehaviour:
   day: 0
   fade: {fileID: 1498380615}
   rainSkybox: {fileID: 2100000, guid: 5f56476a7d14bec479788ac9b8572ef1, type: 2}
+  clouds: {fileID: 0}
   confirmedRain: 0
 --- !u!123 &170076738
 LensFlare:
@@ -4307,7 +4329,7 @@ Transform:
   - {fileID: 1922151272}
   - {fileID: 550471538}
   m_Father: {fileID: 0}
-  m_RootOrder: 105
+  m_RootOrder: 104
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &819304790
 GameObject:
@@ -5802,7 +5824,7 @@ Transform:
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 108
+  m_RootOrder: 107
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1050468942
 PrefabInstance:
@@ -6934,7 +6956,7 @@ Transform:
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 97
+  m_RootOrder: 96
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1254547703
 PrefabInstance:
@@ -7431,7 +7453,7 @@ Transform:
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 100
+  m_RootOrder: 99
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1328913065
 Animator:
@@ -7857,7 +7879,7 @@ Transform:
   - {fileID: 275322798}
   - {fileID: 57322661}
   m_Father: {fileID: 0}
-  m_RootOrder: 102
+  m_RootOrder: 101
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1421217625
 AudioSource:
@@ -10144,7 +10166,7 @@ Transform:
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 107
+  m_RootOrder: 106
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!1 &1811889054
 GameObject:
@@ -10276,54 +10298,7 @@ Transform:
   - {fileID: 1072649523}
   - {fileID: 1998539871}
   m_Father: {fileID: 0}
-  m_RootOrder: 106
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1854846714
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1854846716}
-  - component: {fileID: 1854846715}
-  m_Layer: 0
-  m_Name: TownCentreB
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!54 &1854846715
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854846714}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!4 &1854846716
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854846714}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.7, y: 0, z: 19.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 96
+  m_RootOrder: 105
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1877703553
 PrefabInstance:
@@ -10842,7 +10817,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 99
+  m_RootOrder: 98
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1918274303
 PrefabInstance:
@@ -12016,7 +11991,7 @@ Transform:
   - {fileID: 192740676}
   - {fileID: 1320137451}
   m_Father: {fileID: 0}
-  m_RootOrder: 103
+  m_RootOrder: 102
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2084842254
 PrefabInstance:
@@ -12211,7 +12186,7 @@ Transform:
   - {fileID: 1374271680}
   - {fileID: 922941559}
   m_Father: {fileID: 0}
-  m_RootOrder: 101
+  m_RootOrder: 100
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2142448473
 GameObject:
@@ -13601,7 +13576,7 @@ PrefabInstance:
     - target: {fileID: 6036205678023970924, guid: 52cc53e9cd3042a4cac567ba29fc64f4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 98
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 6036205678023970924, guid: 52cc53e9cd3042a4cac567ba29fc64f4,
         type: 3}

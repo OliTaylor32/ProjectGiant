@@ -25,6 +25,7 @@ ScriptsOnlyBuild:
     - StarTear
     - Tornado
     - TornadoChallenge
+    - TownCentre
     - TreeReproDetect
     - Villager
     Unity.2D.Tilemap.Editor.dll:
@@ -51,6 +52,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
+    com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
     Assets/Scenes/MainMenu.unity:
     - Class: 1
@@ -280,6 +283,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13796}
     - Class: 114
       Script: {instanceID: 13912}
+    - Class: 114
+      Script: {instanceID: 28514}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -419,6 +424,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13796}
     - Class: 114
       Script: {instanceID: 13912}
+    - Class: 114
+      Script: {instanceID: 28514}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -564,6 +571,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13796}
     - Class: 114
       Script: {instanceID: 13912}
+    - Class: 114
+      Script: {instanceID: 28514}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -707,6 +716,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13796}
     - Class: 114
       Script: {instanceID: 13912}
+    - Class: 114
+      Script: {instanceID: 28514}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -852,6 +863,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13796}
     - Class: 114
       Script: {instanceID: 13912}
+    - Class: 114
+      Script: {instanceID: 28514}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -997,6 +1010,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13796}
     - Class: 114
       Script: {instanceID: 13912}
+    - Class: 114
+      Script: {instanceID: 28514}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 123
@@ -1828,6 +1843,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: InputManager
+  - hash:
+      serializedVersion: 2
+      Hash: 006ddbf8e27800b992f8d4a2a6359951
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TownCentre
   platform: 19
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
@@ -1837,4 +1858,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/PresentChallenge1.unity
   - Assets/Scenes/Shebbear.unity
   - Assets/Scenes/ShebbearLoad.unity
-  playerPath: D:/AINT254/Builds/Jul12/The Giant of Torridge Island.exe
+  playerPath: D:/AINT254/Builds/Jul30/The Giant of Torridge Island.exe

@@ -41,8 +41,8 @@ public class Villager : MonoBehaviour
         StartCoroutine(AudioPlay());
         builtToday = false;
         anim = gameObject.GetComponent<Animator>();
-        //MAke sure they walk around their own village
-        if (colour == "mRed" || colour == "fBlue" || colour == "fBlue" || colour == "mBlue")
+        //Make sure they walk around their own village
+        if (colour == "mRed" || colour == "fRed" || colour == "fBlue" || colour == "mBlue")
         {
             townCenter = GameObject.Find("TownCentre").transform;
         }
@@ -80,6 +80,30 @@ public class Villager : MonoBehaviour
         if (life < 1) //When the villager dies, give out a tear before dying.
         {
             Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            townCenter.GetComponent<TownCentre>().happiness--;
+            switch (colour)
+            {
+                case "mRed":
+                    townCenter.GetComponent<TownCentre>().redM--;
+                    break;
+                case "fRed":
+                    townCenter.GetComponent<TownCentre>().redF--;
+                    break;
+                case "mBlue":
+                    townCenter.GetComponent<TownCentre>().blueM--;
+                    break;
+                case "fBlue":
+                    townCenter.GetComponent<TownCentre>().blueF--;
+                    break;
+                case "mGreen":
+                    townCenter.GetComponent<TownCentre>().greenM--;
+                    break;
+                case "fGreen":
+                    townCenter.GetComponent<TownCentre>().greenF--;
+                    break;
+                default:
+                    break;
+            }
             Destroy(gameObject);
         }
     }
@@ -138,6 +162,7 @@ public class Villager : MonoBehaviour
     {
         life--;
         Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        townCenter.GetComponent<TownCentre>().happiness--;
     }
 
     private void GetWeight(GameObject sender) //Return weight to the giant
@@ -189,6 +214,7 @@ public class Villager : MonoBehaviour
                                     StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().tree.transform.position));
                                     Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                                     GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().GiveTree();
+                                    townCenter.GetComponent<TownCentre>().happiness++;
                                 }
                             }
                             Destroy(check);
@@ -218,6 +244,7 @@ public class Villager : MonoBehaviour
                                     StartCoroutine(FixedMove(check.GetComponent<MaterialArea>().stone.transform.position));
                                     Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                                     GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().GiveStone();
+                                    townCenter.GetComponent<TownCentre>().happiness++;
                                 }
                             }
                             Destroy(check);
@@ -242,10 +269,12 @@ public class Villager : MonoBehaviour
                                     GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().ClearedArea();
                                 }
                                 GameObject newObject = Instantiate(buildings[action], new Vector3(build.transform.position.x, build.transform.position.y, build.transform.position.z), Quaternion.identity);
+                                newObject.GetComponent<Scaffolding>().SetTown(townCenter.GetComponent<TownCentre>());
                                 Destroy(build);
                                 FixedMove(build.transform.position); // move into the scaffolding to avoid being hit by the giant.
                                 Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                                 canBuild = false;
+                                townCenter.GetComponent<TownCentre>().happiness++;
                             }
                             else //If villager gets kicked, picked up or the time runs out, cancel build.
                             {
@@ -362,7 +391,6 @@ public class Villager : MonoBehaviour
                     transform.position = new Vector3(transform.position.x - 2, transform.position.y + 1, transform.position.z);
                 }
                 //Give out a tear and get damaged.
-                Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 if (life == 1)
                 {
                     GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().VillagerKickedDead();
@@ -419,6 +447,7 @@ public class Villager : MonoBehaviour
                 anim.Play("VillagerEat");
                 yield return new WaitForSeconds(10f);
                 Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                townCenter.GetComponent<TownCentre>().happiness++;
             }
             if (collision.gameObject.GetComponent<Object>().item == "farm") //if it's a farm, Check if it can be harvested. 
             {
@@ -428,6 +457,7 @@ public class Villager : MonoBehaviour
                     collision.gameObject.GetComponent<Farm>().Harvest();
                     yield return new WaitForSeconds(8f);
                     Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                    townCenter.GetComponent<TownCentre>().happiness++;
 
                 }
                 else
@@ -446,6 +476,7 @@ public class Villager : MonoBehaviour
                     GameObject.Find("Canvas").transform.Find("Narrator").GetComponent<Dialogue>().Penguin();
                     yield return new WaitForSeconds(10f);
                     Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                    townCenter.GetComponent<TownCentre>().happiness++;
                 }
             }
             stop = false;
@@ -469,6 +500,33 @@ public class Villager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(10f, 30f));
             GetComponent<AudioSource>().Stop();
             GetComponent<AudioSource>().Play();
+        }
+    }
+
+    public void PresentVillager()
+    {
+        switch (colour)
+        {
+            case "mRed":
+                townCenter.GetComponent<TownCentre>().redM++;
+                break;
+            case "fRed":
+                townCenter.GetComponent<TownCentre>().redF++;
+                break;
+            case "mBlue":
+                townCenter.GetComponent<TownCentre>().blueM++;
+                break;
+            case "fBlue":
+                townCenter.GetComponent<TownCentre>().blueF++;
+                break;
+            case "mGreen":
+                townCenter.GetComponent<TownCentre>().greenM++;
+                break;
+            case "fGreen":
+                townCenter.GetComponent<TownCentre>().greenF++;
+                break;
+            default:
+                break;
         }
     }
 

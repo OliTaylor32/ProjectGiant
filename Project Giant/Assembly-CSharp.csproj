@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\Title Screen\NewGame.cs" />
     <Compile Include="Assets\Scripts\Tornado.cs" />
     <Compile Include="Assets\Scripts\TornadoChallenge.cs" />
+    <Compile Include="Assets\Scripts\TownCentre.cs" />
     <Compile Include="Assets\Scripts\TreeReproDetect.cs" />
     <Compile Include="Assets\Scripts\UI\CallBox.cs" />
     <Compile Include="Assets\Scripts\UI\ControlsSave.cs" />
