@@ -37,21 +37,28 @@ public class PickUpDetect : MonoBehaviour
     public void GetPickUp() //return the giant the object that is to be picked up.
     {
         giant.SendMessage("ReturnPickUp", pickUp, SendMessageOptions.DontRequireReceiver);
-        if (pickUp.GetComponent<Object>().item == "fish")
+        if (pickUp.GetComponent<Object>() != null)
         {
-            pickUp.GetComponent<BirdAI>().PickedUp();
-            if (fishEatingBird.GetComponent<BirdAI>() != null)
+            if (pickUp.GetComponent<Object>().item == "fish")
             {
-                GameObject bird = Instantiate(fishEatingBird, new Vector3(transform.position.x + Random.Range(-70f, 70f), transform.position.y + 10f, transform.position.z + Random.Range(-70f, 70f)), Quaternion.identity);
-                bird.GetComponent<BirdAI>().SetFishTarget(pickUp);
-            }
+                pickUp.GetComponent<BirdAI>().PickedUp();
+                if (fishEatingBird.GetComponent<BirdAI>() != null)
+                {
+                    GameObject bird = Instantiate(fishEatingBird, new Vector3(transform.position.x + Random.Range(-70f, 70f), transform.position.y + 10f, transform.position.z + Random.Range(-70f, 70f)), Quaternion.identity);
+                    bird.GetComponent<BirdAI>().SetFishTarget(pickUp);
+                }
 
-            if (fishEatingBird.GetComponent<PenguinAI>() != null)
-            {
-                GameObject bird = Instantiate(fishEatingBird, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y, transform.position.z + Random.Range(-10f, 10f)), Quaternion.identity);
-                bird.GetComponent<PenguinAI>().SetFishTarget(pickUp);
-            }
+                if (fishEatingBird.GetComponent<PenguinAI>() != null)
+                {
+                    GameObject bird = Instantiate(fishEatingBird, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y, transform.position.z + Random.Range(-10f, 10f)), Quaternion.identity);
+                    bird.GetComponent<PenguinAI>().SetFishTarget(pickUp);
+                }
 
+            }
+        }
+        if (pickUp.GetComponent<Villager>() != null)
+        {
+            pickUp.GetComponent<Villager>().PickedUp();
         }
     }
 

@@ -34,6 +34,9 @@ public class Villager : MonoBehaviour
 
     public GameObject callBox;
 
+    private bool pickedUp;
+    private bool changeCentre;
+
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +75,9 @@ public class Villager : MonoBehaviour
         stop = false;
 
         fixedMove = false;
+
+        pickedUp = false;
+        changeCentre = false;
     }
 
     // Update is called once per frame
@@ -105,6 +111,19 @@ public class Villager : MonoBehaviour
                     break;
             }
             Destroy(gameObject);
+        }
+
+        if (pickedUp == true)
+        {
+            if (changeCentre == false)
+            {
+                print(Vector3.Distance(townCenter.position, transform.position));
+                if (Vector3.Distance(townCenter.position, transform.position) > 25)
+                {
+                    changeCentre = true;
+                }
+            }
+            PickUpCheck();
         }
     }
 
@@ -530,6 +549,83 @@ public class Villager : MonoBehaviour
         }
     }
 
+    public void PickedUp()
+    {
+        pickedUp = true;
+        //GameObject giant = GameObject.Find("Giant");
+        //bool changeCentre = false;
+        ////Causes Crash.
+        //while (giant.GetComponent<PlayerControl>().isCarrying == true)
+        //{
+        //    if (changeCentre == false)
+        //    {
+        //        print(Vector3.Distance(townCenter.position, transform.position));
+        //        if (Vector3.Distance(townCenter.position, transform.position) > 25)
+        //        {
+        //            changeCentre = true;
+        //            break;
+        //        }
+        //    }
+        //}
 
+        //if (changeCentre == true)
+        //{
+        //    //cancel any actions
+        //    townCenter = null;
+        //    //Search all towncentres for 1 that is close enough/closest and set as town center
+        //    foreach (var gameObject in FindObjectsOfType(typeof(TownCentre)) as GameObject[])
+        //    {
+        //        if (Vector3.Distance(transform.position, gameObject.transform.position) < 25)
+        //        {
+        //            townCenter = gameObject.transform;
+        //        }
+        //    }
+
+        //    //If none are begin new village process. 
+
+        //}
+    }
+
+    private void PickUpCheck()
+    {
+        GameObject giant = GameObject.Find("Giant");
+        if (giant.GetComponent<PlayerControl>().isCarrying == false) //No Longer being carried
+        {
+            pickedUp = false;
+            if (changeCentre == true)
+            {
+                StartCoroutine(TimedEvent(1f));//cancel any actions
+                townCenter = null;
+                //Search all towncentres for 1 that is close enough/closest and set as town center
+                foreach (var gameObject in FindObjectsOfType(typeof(GameObject)) as GameObject[])
+                {
+                    if (gameObject.GetComponent<TownCentre>() != null)
+                    {
+                        if (townCenter == null)
+                        {
+                            if (Vector3.Distance(transform.position, gameObject.transform.position) < 25)
+                            {
+                                townCenter = gameObject.transform;
+                            }
+                        }
+                        else
+                        {
+                            if (Vector3.Distance(transform.position, gameObject.transform.position) < Vector3.Distance(transform.position, townCenter.transform.position))
+                            {
+                                townCenter = gameObject.transform;
+                            }
+                        }
+                    }
+                }
+
+                //If none are begin new village process. 
+                //if (townCenter == null)
+                //{
+                    
+                //}
+
+            }
+        }
+    }
 
 }
