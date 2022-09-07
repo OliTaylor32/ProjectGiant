@@ -36,7 +36,11 @@ public class Villager : MonoBehaviour
 
     private bool pickedUp;
     private bool changeCentre;
+    public GameObject TownCentre;
 
+    public GameObject redVarient;
+    public GameObject blueVarient;
+    public GameObject greenVarient;
 
     // Start is called before the first frame update
     void Start()
@@ -45,14 +49,14 @@ public class Villager : MonoBehaviour
         builtToday = false;
         anim = gameObject.GetComponent<Animator>();
         //Make sure they walk around their own village
-        if (colour == "mRed" || colour == "fRed" || colour == "fBlue" || colour == "mBlue")
-        {
-            townCenter = GameObject.Find("TownCentre").transform;
-        }
-        else if (colour == "Black")
-        {
-            townCenter = GameObject.Find("TownCentreB").transform;
-        }
+        //if (colour == "mRed" || colour == "fRed" || colour == "fBlue" || colour == "mBlue")
+        //{
+        //    townCenter = GameObject.Find("TownCentre").transform; //Remove this when new save file completed (Load script should set this)
+        //}
+        //else if (colour == "Black")
+        //{
+        //    townCenter = GameObject.Find("TownCentreB").transform;
+        //}
         //Start moving
         StartCoroutine(Move());
         if (SceneManager.GetActiveScene().name == "TaddiportLoad" || SceneManager.GetActiveScene().name == "ShebbearLoad")
@@ -123,7 +127,7 @@ public class Villager : MonoBehaviour
                     changeCentre = true;
                 }
             }
-            PickUpCheck();
+            StartCoroutine(PickUpCheck());
         }
     }
 
@@ -586,7 +590,7 @@ public class Villager : MonoBehaviour
         //}
     }
 
-    private void PickUpCheck()
+    private IEnumerator PickUpCheck()
     {
         GameObject giant = GameObject.Find("Giant");
         if (giant.GetComponent<PlayerControl>().isCarrying == false) //No Longer being carried
@@ -594,7 +598,30 @@ public class Villager : MonoBehaviour
             pickedUp = false;
             if (changeCentre == true)
             {
-                StartCoroutine(TimedEvent(1f));//cancel any actions
+                stop = true;//cancel any actions
+                switch (colour)
+                {
+                    case "mRed":
+                        townCenter.GetComponent<TownCentre>().redM--;
+                        break;
+                    case "fRed":
+                        townCenter.GetComponent<TownCentre>().redF--;
+                        break;
+                    case "mBlue":
+                        townCenter.GetComponent<TownCentre>().blueM--;
+                        break;
+                    case "fBlue":
+                        townCenter.GetComponent<TownCentre>().blueF--;
+                        break;
+                    case "mGreen":
+                        townCenter.GetComponent<TownCentre>().greenM--;
+                        break;
+                    case "fGreen":
+                        townCenter.GetComponent<TownCentre>().greenF--;
+                        break;
+                    default:
+                        break;
+                }
                 townCenter = null;
                 //Search all towncentres for 1 that is close enough/closest and set as town center
                 foreach (var gameObject in FindObjectsOfType(typeof(GameObject)) as GameObject[])
@@ -618,14 +645,185 @@ public class Villager : MonoBehaviour
                     }
                 }
 
-                //If none are begin new village process. 
-                //if (townCenter == null)
-                //{
-                    
-                //}
+                //If none are begin new village process.
+                if (townCenter == null)
+                {
+                    stop = true;
+                    yield return new WaitForSeconds(1f);
+                    stop = false;
+                    GameObject build = Instantiate(buildArea, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                    build.GetComponent<MaterialGather>().VillageBuild(gameObject); //Start checking whether it can build there.
+                    GameObject call = Instantiate(callBox, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);//Start Asking for help
+                    call.GetComponent<CallBox>().setType(3);
+                    yield return new WaitUntil(() => canBuild == true || stop == true); //Wait until it can build or 60secs pass.
+                    Destroy(call);//Stop calling for help
+                    Destroy(build);
+
+                }
+                else //If there is start moving again
+                {
+                    switch (colour)
+                    {
+                        case "mRed":
+                            townCenter.GetComponent<TownCentre>().redM++;
+                            break;
+                        case "fRed":
+                            townCenter.GetComponent<TownCentre>().redF++;
+                            break;
+                        case "mBlue":
+                            townCenter.GetComponent<TownCentre>().blueM++;
+                            break;
+                        case "fBlue":
+                            townCenter.GetComponent<TownCentre>().blueF++;
+                            break;
+                        case "mGreen":
+                            townCenter.GetComponent<TownCentre>().greenM++;
+                            break;
+                        case "fGreen":
+                            townCenter.GetComponent<TownCentre>().greenF++;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (townCenter.GetComponent<TownCentre>().colour == 0)
+                    {
+                        Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+                    }
+                    else if (townCenter.GetComponent<TownCentre>().colour == 1)
+                    {
+                        Instantiate(blueVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+                    }
+                    else
+                    {
+                        Instantiate(greenVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+                    }
+
+                    Destroy(gameObject);
+                    //stop = false;
+                    //StartCoroutine(Move());
+                }
 
             }
         }
+    }
+
+    public void BuildVillage()
+    {
+        Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        canBuild = true;
+        StartCoroutine(TimedEvent(1f));//cancel any actions
+        GameObject build = Instantiate(TownCentre, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        townCenter = build.transform;
+
+        switch (colour)
+        {
+            case "mRed":
+                townCenter.GetComponent<TownCentre>().redM++;
+                break;
+            case "fRed":
+                townCenter.GetComponent<TownCentre>().redF++;
+                break;
+            case "mBlue":
+                townCenter.GetComponent<TownCentre>().blueM++;
+                break;
+            case "fBlue":
+                townCenter.GetComponent<TownCentre>().blueF++;
+                break;
+            case "mGreen":
+                townCenter.GetComponent<TownCentre>().greenM++;
+                break;
+            case "fGreen":
+                townCenter.GetComponent<TownCentre>().greenF++;
+                break;
+            default:
+                break;
+        }
+
+        if (townCenter.GetComponent<TownCentre>().colour == 0)
+        {
+            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+        }
+        else if (townCenter.GetComponent<TownCentre>().colour == 1)
+        {
+            Instantiate(blueVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+        }
+        else
+        {
+            Instantiate(greenVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+        }
+
+        Destroy(gameObject);
+
+
+    }
+
+    public void SetVillage()
+    {
+        //Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        StartCoroutine(TimedEvent(1f));//cancel any actions
+        townCenter = null;
+        //Search all towncentres for 1 that is close enough/closest and set as town center
+        foreach (var gameObject in FindObjectsOfType(typeof(GameObject)) as GameObject[])
+        {
+            if (gameObject.GetComponent<TownCentre>() != null)
+            {
+                if (townCenter == null)
+                {
+                    if (Vector3.Distance(transform.position, gameObject.transform.position) < 25)
+                    {
+                        townCenter = gameObject.transform;
+                    }
+                }
+                else
+                {
+                    if (Vector3.Distance(transform.position, gameObject.transform.position) < Vector3.Distance(transform.position, townCenter.transform.position))
+                    {
+                        townCenter = gameObject.transform;
+                    }
+                }
+            }
+        }
+
+        switch (colour)
+        {
+            case "mRed":
+                townCenter.GetComponent<TownCentre>().redM++;
+                break;
+            case "fRed":
+                townCenter.GetComponent<TownCentre>().redF++;
+                break;
+            case "mBlue":
+                townCenter.GetComponent<TownCentre>().blueM++;
+                break;
+            case "fBlue":
+                townCenter.GetComponent<TownCentre>().blueF++;
+                break;
+            case "mGreen":
+                townCenter.GetComponent<TownCentre>().greenM++;
+                break;
+            case "fGreen":
+                townCenter.GetComponent<TownCentre>().greenF++;
+                break;
+            default:
+                break;
+        }
+
+        if (townCenter.GetComponent<TownCentre>().colour == 0)
+        {
+            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+        }
+        else if (townCenter.GetComponent<TownCentre>().colour == 1)
+        {
+            Instantiate(blueVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+        }
+        else
+        {
+            Instantiate(greenVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+        }
+
+        Destroy(gameObject);
+
     }
 
 }

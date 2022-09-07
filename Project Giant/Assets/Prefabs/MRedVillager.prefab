@@ -1479,6 +1479,11 @@ MonoBehaviour:
   materialChecker: {fileID: 494454840253568946, guid: d28ed63be8e4c744aa49f51f7cfda61b,
     type: 3}
   callBox: {fileID: 6104982792465010007, guid: 0ae955d94f983014cbfa5b662ab84b3c, type: 3}
+  TownCentre: {fileID: 6336252034725897333, guid: 9173e65a61d718f4495103b89074c198,
+    type: 3}
+  redVarient: {fileID: 7450015869874365814}
+  blueVarient: {fileID: 0}
+  greenVarient: {fileID: 0}
 --- !u!95 &5301942965664018890
 Animator:
   serializedVersion: 3

@@ -18,6 +18,7 @@ public class BirdAI : MonoBehaviour
     Vector3 forward = new Vector3(0, 0, 1);
 
     public bool fishGrabbed;
+    public bool snowFish;
 
     // Start is called before the first frame update
     void Start()

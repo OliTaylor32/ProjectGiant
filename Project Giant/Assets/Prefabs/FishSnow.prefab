@@ -31,6 +31,10 @@ PrefabInstance:
       propertyPath: targets.Array.data[5]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1359999704, guid: 33fd7774d5605664a930f4a64cde2c1b, type: 3}
+      propertyPath: snowFish
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 521533571020294415, guid: 33fd7774d5605664a930f4a64cde2c1b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

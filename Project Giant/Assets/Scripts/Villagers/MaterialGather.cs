@@ -9,10 +9,12 @@ public class MaterialGather : MonoBehaviour
     public GameObject tree;
     public int objects;
     private bool checking;
+    private bool villageCheck;
     // Start is called before the first frame update
     void Start()
     {
         checking = false;
+        //villageCheck = false;
         objects = 0;
     }
 
@@ -52,9 +54,39 @@ public class MaterialGather : MonoBehaviour
         objects--;
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (villageCheck == true)
+        {
+            if (other.GetComponent<Villager>() != null)
+            {
+                if (villager != null)
+                {
+                    if (villager.GetComponent<Villager>().colour == "mRed" || villager.GetComponent<Villager>().colour == "mBlue" || villager.GetComponent<Villager>().colour == "mGreen")
+                    {
+
+                        if (other.GetComponent<Villager>().colour == "fRed" || other.GetComponent<Villager>().colour == "fBlue" || other.GetComponent<Villager>().colour == "fGreen")
+                        {
+                            villager.GetComponent<Villager>().BuildVillage();
+                            other.GetComponent<Villager>().SetVillage();
+                            Destroy(this);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public void Check(GameObject sender) //Villager telling this object to start checking if its ok to build.
     {
         villager = sender;
         checking = true;
     }
+
+    public void VillageBuild(GameObject sender)
+    {
+        villager = sender;
+        villageCheck = true;
+    }
+    
 }
