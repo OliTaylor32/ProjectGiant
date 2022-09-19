@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShebbearLoad.unity
     guid: 4fefd0ac578bbf14295332d53a128a7f
+  - enabled: 1
+    path: Assets/Scenes/SGMap.unity
+    guid: 1174599e2fc2a2748adb0341677f591c
   m_configObjects: {}

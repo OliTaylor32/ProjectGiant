@@ -42,10 +42,14 @@ public class Villager : MonoBehaviour
     public GameObject blueVarient;
     public GameObject greenVarient;
 
+    private Vector3 lastPos;
+    private bool fishing;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(AudioPlay());
+        StartCoroutine(SetLastPos());
         builtToday = false;
         anim = gameObject.GetComponent<Animator>();
         //Make sure they walk around their own village
@@ -82,6 +86,8 @@ public class Villager : MonoBehaviour
 
         pickedUp = false;
         changeCentre = false;
+
+        fishing = false;
     }
 
     // Update is called once per frame
@@ -133,31 +139,37 @@ public class Villager : MonoBehaviour
 
     private IEnumerator Move() //Walk to a random point 
     {
-        anim.Play("VillagerWalk");
-        //Random area around the village
-        target = new Vector3((transform.position.x + Random.Range(-10, 10)), transform.position.y, (transform.position.z + Random.Range(-10, 10)));
-        while (target.x > townCenter.position.x + 25 || target.x < townCenter.position.x - 25 || target.z > townCenter.position.z + 25 || target.z < townCenter.position.z - 25)
+        if (townCenter != null)
         {
+            anim.Play("VillagerWalk");
+            //Random area around the village
             target = new Vector3((transform.position.x + Random.Range(-10, 10)), transform.position.y, (transform.position.z + Random.Range(-10, 10)));
-        }
-        while (Vector3.Distance(transform.position, target) > 1)
-        {
-            //print("step");
-            transform.LookAt(new Vector3(target.x, transform.position.y, target.z)); //Look at the target and straight ahead
-            transform.Rotate(0, -90, 0); //Fixes model (was faster than re-doing all the animation)
-            transform.rotation.Set(0, transform.rotation.y, 0, 0);  //Make sure the villager is looking straight ahead
-            transform.position = Vector3.MoveTowards(transform.position, target, ((speed * 0.1f) * Time.deltaTime)); //Move forwards (Towards the target)
-            yield return new WaitForSeconds(0.01f);
-            if (stop == true) //If the villager interacts with an object or the player, stop moving
+            while (target.x > townCenter.position.x + 25 || target.x < townCenter.position.x - 25 || target.z > townCenter.position.z + 25 || target.z < townCenter.position.z - 25)
             {
-                break;
+                target = new Vector3((transform.position.x + Random.Range(-10, 10)), transform.position.y, (transform.position.z + Random.Range(-10, 10)));
+            }
+            while (Vector3.Distance(transform.position, target) > 1)
+            {
+                //print("step");
+                transform.LookAt(new Vector3(target.x, transform.position.y, target.z)); //Look at the target and straight ahead
+                transform.Rotate(0, -90, 0); //Fixes model (was faster than re-doing all the animation)
+                transform.rotation.Set(0, transform.rotation.y, 0, 0);  //Make sure the villager is looking straight ahead
+                transform.position = Vector3.MoveTowards(transform.position, target, ((speed * 0.1f) * Time.deltaTime)); //Move forwards (Towards the target)
+                yield return new WaitForSeconds(0.01f);
+                if (stop == true) //If the villager interacts with an object or the player, stop moving
+                {
+                    break;
+                }
+            }
+            if (stop == false) //If the player wasn't stopped before reaching its destination, perform an action.
+            {
+                StartCoroutine(Action());
             }
         }
-        if (stop == false) //If the player wasn't stopped before reaching its destination, perform an action.
+        else
         {
-            StartCoroutine(Action());
+            StartCoroutine(PickUpCheck());
         }
-
     }
 
     private IEnumerator FixedMove(Vector3 destination)
@@ -439,6 +451,18 @@ public class Villager : MonoBehaviour
                 stone = true;
             }
         }
+        else if (collision.gameObject.name == "Water")
+        {
+            if (fishing == false)
+            {
+                fishing = true;
+                stop = true;
+                transform.position = lastPos;
+                anim.Play("VillagerFish");
+                //StartCoroutine(TimedEvent(15f));
+                StartCoroutine(Fishing());
+            }
+        }
     }
 
     private IEnumerator OnCollisionEnter(Collision collision) //If it comes into contact with something
@@ -556,6 +580,7 @@ public class Villager : MonoBehaviour
     public void PickedUp()
     {
         pickedUp = true;
+        stop = true;//cancel any actions
         //GameObject giant = GameObject.Find("Giant");
         //bool changeCentre = false;
         ////Causes Crash.
@@ -596,8 +621,9 @@ public class Villager : MonoBehaviour
         if (giant.GetComponent<PlayerControl>().isCarrying == false) //No Longer being carried
         {
             pickedUp = false;
-            if (changeCentre == true)
+            if (changeCentre == true || townCenter == null)
             {
+                anim.Play("VillagerIdle");
                 stop = true;//cancel any actions
                 switch (colour)
                 {
@@ -746,14 +772,14 @@ public class Villager : MonoBehaviour
         }
         else if (townCenter.GetComponent<TownCentre>().colour == 1)
         {
-            Instantiate(blueVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
         }
         else
         {
-            Instantiate(greenVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
 
 
     }
@@ -815,15 +841,45 @@ public class Villager : MonoBehaviour
         }
         else if (townCenter.GetComponent<TownCentre>().colour == 1)
         {
-            Instantiate(blueVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
         }
         else
         {
-            Instantiate(greenVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
 
+    }
+
+    private IEnumerator SetLastPos()
+    {
+        for (int i = 0; i < 600; i++)
+        {
+            lastPos = transform.position;
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
+    private IEnumerator Fishing()
+    {
+            print("fishing");
+            int random = Random.Range(0, 2);
+            yield return new WaitForSeconds(10f);
+            if (random == 0)
+            {
+                Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                //Play eating fish animation
+                anim.Play("VillagerEatFish");
+            }
+            else
+            {
+                //Play Thinking animation
+                anim.Play("VillagerIdle");
+            }
+            fishing = false;
+            stop = false;
+            StartCoroutine(Move());
     }
 
 }
