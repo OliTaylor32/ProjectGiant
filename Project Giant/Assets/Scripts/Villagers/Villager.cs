@@ -38,9 +38,7 @@ public class Villager : MonoBehaviour
     private bool changeCentre;
     public GameObject TownCentre;
 
-    public GameObject redVarient;
-    public GameObject blueVarient;
-    public GameObject greenVarient;
+    public bool newVillage;
 
     private Vector3 lastPos;
     private bool fishing;
@@ -221,7 +219,7 @@ public class Villager : MonoBehaviour
                 if (wood || stone)
                 {
                     print("Get Materials");
-                    if (builtToday == false)
+                    if (newVillage == false)
                     {
                         //builtToday = true;
 
@@ -712,22 +710,22 @@ public class Villager : MonoBehaviour
                             break;
                     }
 
-                    if (townCenter.GetComponent<TownCentre>().colour == 0)
-                    {
-                        Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
-                    }
-                    else if (townCenter.GetComponent<TownCentre>().colour == 1)
-                    {
-                        Instantiate(blueVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
-                    }
-                    else
-                    {
-                        Instantiate(greenVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
-                    }
+                    //if (townCenter.GetComponent<TownCentre>().colour == 0)
+                    //{
+                    //    Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+                    //}
+                    //else if (townCenter.GetComponent<TownCentre>().colour == 1)
+                    //{
+                    //    Instantiate(blueVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+                    //}
+                    //else
+                    //{
+                    //    Instantiate(greenVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+                    //}
 
-                    Destroy(gameObject);
-                    //stop = false;
-                    //StartCoroutine(Move());
+                    //Destroy(gameObject);
+                    stop = false;
+                    StartCoroutine(Move());
                 }
 
             }
@@ -766,18 +764,18 @@ public class Villager : MonoBehaviour
                 break;
         }
 
-        if (townCenter.GetComponent<TownCentre>().colour == 0)
-        {
-            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
-        }
-        else if (townCenter.GetComponent<TownCentre>().colour == 1)
-        {
-            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
-        }
-        else
-        {
-            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
-        }
+        //if (townCenter.GetComponent<TownCentre>().colour == 0)
+        //{
+        //    Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+        //}
+        //else if (townCenter.GetComponent<TownCentre>().colour == 1)
+        //{
+        //    Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+        //}
+        //else
+        //{
+        //    Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+        //}
 
         //Destroy(gameObject);
 
@@ -835,17 +833,27 @@ public class Villager : MonoBehaviour
                 break;
         }
 
+
         if (townCenter.GetComponent<TownCentre>().colour == 0)
         {
-            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+            if (!(colour == "mRed" || colour == "fRed"))
+            {
+                newVillage = true;
+            }
         }
         else if (townCenter.GetComponent<TownCentre>().colour == 1)
         {
-            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+            if (!(colour == "mBlue" || colour == "fBlue"))
+            {
+                newVillage = true;
+            }
         }
         else
         {
-            Instantiate(redVarient, transform).GetComponent<Villager>().townCenter = townCenter.transform;
+            if (!(colour == "mGreen" || colour == "fGreen"))
+            {
+                newVillage = true;
+            }
         }
 
         //Destroy(gameObject);

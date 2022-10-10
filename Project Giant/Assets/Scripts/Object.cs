@@ -17,6 +17,8 @@ public class Object : MonoBehaviour
     public GameObject star;
     public GameObject tear;
 
+    public int treeType;
+
     // Start is called before the first frame update
     void Start()
     {

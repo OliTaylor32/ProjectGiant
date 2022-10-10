@@ -13,6 +13,14 @@ public class Save : MonoBehaviour
     public GameObject[] treeWilts;
     public int treeWiltNo = 0;
 
+    public float[,] snowTreeData;
+    public GameObject[] snowTrees;
+    public int snowTreeNo = 0;
+
+    public float[,] snowTreeWiltData;
+    public GameObject[] snowTreeWilts;
+    public int snowTreeWiltNo = 0;
+
     private bool wilting;
 
     public float[,] stoneData;
@@ -22,6 +30,10 @@ public class Save : MonoBehaviour
     public float[,] redSmallHouseData;
     public int redSmallHouseNo = 0;
     public GameObject[] redSmallHouses;
+
+    public float[,] blueSmallHouseData;
+    public int blueSmallHouseNo = 0;
+    public GameObject[] blueSmallHouses;
 
     public float[,] redFarmData;
     public int redFarmNo = 0;
@@ -35,10 +47,13 @@ public class Save : MonoBehaviour
     public int totemNo = 0;
     public GameObject[] totems;
 
-    public int mRedVillagers = 0;
-    public int fRedVillagers = 0;
+    public float[,] villageData;
+    public int villageNo;
+    public GameObject[] villages;
+
     public int livestock = 0;
     public int birds = 0;
+    public int penguins = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -46,11 +61,13 @@ public class Save : MonoBehaviour
         wilting = true;
         treeNo = 0;
         treeWiltNo = 0;
+        snowTreeNo = 0;
+        snowTreeWiltNo = 0;
         stoneNo = 0;
         redSmallHouseNo = 0;
+        blueSmallHouseNo = 0;
         redFarmNo = 0;
-        mRedVillagers = 0;
-        fRedVillagers = 0;
+        villageNo = 0;
         torchNo = 0;
         totemNo = 0;
         livestock = 0;
@@ -61,7 +78,7 @@ public class Save : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -73,8 +90,6 @@ public class Save : MonoBehaviour
         stoneNo = 0;
         redSmallHouseNo = 0;
         redFarmNo = 0;
-        mRedVillagers = 0;
-        fRedVillagers = 0;
         torchNo = 0;
         totemNo = 0;
         livestock = 0;
@@ -90,17 +105,48 @@ public class Save : MonoBehaviour
                     case "tree":
                         if (wilting == false)
                         {
-                            AddTree(gameObject);
+                            switch (gameObject.GetComponent<Object>().treeType)
+                            {
+                                case 0:
+                                    AddTree(gameObject);
+                                    break;
+                                case 1:
+                                    AddSnowTree(gameObject);
+                                    break;
+                                default:
+                                    break;
+                            }
                             wilting = true;
                         }
                         else
                         {
-                            AddTreeWilt(gameObject);
+                            switch (gameObject.GetComponent<Object>().treeType)
+                            {
+                                case 0:
+                                    AddTreeWilt(gameObject);
+                                    break;
+                                case 1:
+                                    AddSnowTreeWilt(gameObject);
+                                    break;
+                                default:
+                                    break;
+                            }
                             wilting = false;
                         }
                         break;
                     case "sapling":
-                        AddTree(gameObject);
+                        switch (gameObject.GetComponent<Object>().treeType)
+                        {
+                            case 0:
+                                AddTree(gameObject);
+                                break;
+                            case 1:
+                                AddSnowTree(gameObject);
+                                break;
+                            default:
+                                break;
+                        }
+
                         break;
                     case "stone":
                         AddStone(gameObject);
@@ -109,7 +155,7 @@ public class Save : MonoBehaviour
                         AddRedSmallHouse(gameObject);
                         break;
                     case "igloo":
-                        AddRedSmallHouse(gameObject);
+                        AddBlueSmallHouse(gameObject);
                         break;
                     case "farm":
                         AddRedFarm(gameObject);
@@ -127,44 +173,25 @@ public class Save : MonoBehaviour
                         }
                         break;
                     case "penguin":
-                        birds++;
+                        penguins++;
                         break;
                     case "bird":
                         birds++;
                         break;
                     case "scaffolding":
-                        AddRedFarm(gameObject);
+                        //Not sure what to do about this yet.
                         break;
                     default:
                         break;
                 }
             }
 
-            if (gameObject.GetComponent<Villager>() != null)
+            if (gameObject.GetComponent<TownCentre>() != null)
             {
-                switch (gameObject.GetComponent<Villager>().colour)
-                {
-                    case "mRed":
-                        mRedVillagers++;
-                        break;
-
-                    case "mBlue":
-                        mRedVillagers++;
-                        break;
-
-                    case "fRed":
-                        fRedVillagers++;
-                        break;
-
-                    case "fBlue":
-                        fRedVillagers++;
-                        break;
-                    default:
-                        break;
-                }
+                AddVillage(gameObject);
             }
         }
-
+        //Left Off work HERE, need to make new ifs for new items. ALL ELSE IS DONE.
         if (trees != null)
         {
             treeData = new float[trees.Length, 3];
@@ -262,7 +289,7 @@ public class Save : MonoBehaviour
             print("Save As Taddiport Data");
             slot = 1;
         }
-        else if(SceneManager.GetActiveScene().name == "Shebbear" || SceneManager.GetActiveScene().name == "ShebbearLoad")
+        else if (SceneManager.GetActiveScene().name == "Shebbear" || SceneManager.GetActiveScene().name == "ShebbearLoad")
         {
             print("Save As Shebbear Data");
             slot = 2;
@@ -315,6 +342,50 @@ public class Save : MonoBehaviour
 
     }
 
+    private void AddSnowTree(GameObject newTree)
+    {
+        if (snowTreeNo == 0)
+        {
+            snowTrees = new GameObject[1];
+            snowTrees[0] = newTree;
+            snowTreeNo++;
+        }
+        else
+        {
+            snowTreeNo++;
+            GameObject[] temp = snowTrees;
+            snowTrees = new GameObject[snowTreeNo];
+            snowTrees[0] = newTree;
+            for (int i = 1; i < snowTrees.Length; i++)
+            {
+                snowTrees[i] = temp[i - 1];
+            }
+        }
+
+    }
+
+    private void AddSnowTreeWilt(GameObject newTree)
+    {
+        if (snowTreeWiltNo == 0)
+        {
+            snowTreeWilts = new GameObject[1];
+            snowTreeWilts[0] = newTree;
+            snowTreeWiltNo++;
+        }
+        else
+        {
+            snowTreeWiltNo++;
+            GameObject[] temp = snowTreeWilts;
+            snowTreeWilts = new GameObject[snowTreeWiltNo];
+            snowTreeWilts[0] = newTree;
+            for (int i = 1; i < snowTreeWilts.Length; i++)
+            {
+                snowTreeWilts[i] = temp[i - 1];
+            }
+        }
+
+    }
+
     private void AddStone(GameObject newIgloo)
     {
         if (stoneNo == 0)
@@ -354,6 +425,28 @@ public class Save : MonoBehaviour
             for (int i = 1; i < redSmallHouses.Length; i++)
             {
                 redSmallHouses[i] = temp[i - 1];
+            }
+        }
+
+    }
+
+    private void AddBlueSmallHouse(GameObject newBlueSmallHouse)
+    {
+        if (blueSmallHouseNo == 0)
+        {
+            blueSmallHouses = new GameObject[1];
+            blueSmallHouses[0] = newBlueSmallHouse;
+            blueSmallHouseNo++;
+        }
+        else
+        {
+            blueSmallHouseNo++;
+            GameObject[] temp = blueSmallHouses;
+            blueSmallHouses = new GameObject[blueSmallHouseNo];
+            blueSmallHouses[0] = newBlueSmallHouse;
+            for (int i = 1; i < blueSmallHouses.Length; i++)
+            {
+                blueSmallHouses[i] = temp[i - 1];
             }
         }
 
@@ -423,6 +516,27 @@ public class Save : MonoBehaviour
             }
         }
 
+    }
+
+    private void AddVillage(GameObject newVillage)
+    {
+        if (villageNo == 0)
+        {
+            villages = new GameObject[1];
+            villages[0] = newVillage;
+            villageNo++;
+        }
+        else
+        {
+            villageNo++;
+            GameObject[] temp = villages;
+            villages = new GameObject[villageNo];
+            villages[0] = newVillage;
+            for (int i = 1; i < villages.Length; i++)
+            {
+                villages[i] = temp[i - 1];
+            }
+        }
     }
 
     private IEnumerator DelayedSave()
