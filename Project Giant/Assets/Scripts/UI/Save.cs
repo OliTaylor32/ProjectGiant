@@ -54,6 +54,7 @@ public class Save : MonoBehaviour
     public int livestock = 0;
     public int birds = 0;
     public int penguins = 0;
+    public int nature = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +73,7 @@ public class Save : MonoBehaviour
         totemNo = 0;
         livestock = 0;
         birds = 0;
+        nature = 0;
         StartCoroutine(DelayedSave());
     }
 
@@ -214,6 +216,28 @@ public class Save : MonoBehaviour
             }
         }
 
+        if (snowTrees != null)
+        {
+            snowTreeData = new float[snowTrees.Length, 3];
+            for (int i = 0; i < snowTrees.Length; i++)
+            {
+                snowTreeData[i, 0] = snowTrees[i].transform.position.x;
+                snowTreeData[i, 1] = snowTrees[i].transform.position.z;
+                snowTreeData[i, 2] = snowTrees[i].transform.eulerAngles.y;
+            }
+        }
+
+        if (snowTreeWilts != null)
+        {
+            snowTreeWiltData = new float[snowTreeWilts.Length, 3];
+            for (int i = 0; i < snowTreeWilts.Length; i++)
+            {
+                snowTreeWiltData[i, 0] = snowTreeWilts[i].transform.position.x;
+                snowTreeWiltData[i, 1] = snowTreeWilts[i].transform.position.z;
+                snowTreeWiltData[i, 2] = snowTreeWilts[i].transform.eulerAngles.y;
+            }
+        }
+
         if (stones != null)
         {
             stoneData = new float[stones.Length, 3];
@@ -233,6 +257,17 @@ public class Save : MonoBehaviour
                 redSmallHouseData[i, 0] = redSmallHouses[i].transform.position.x;
                 redSmallHouseData[i, 1] = redSmallHouses[i].transform.position.z;
                 redSmallHouseData[i, 2] = redSmallHouses[i].transform.eulerAngles.y;
+            }
+        }
+
+        if (blueSmallHouses != null)
+        {
+            blueSmallHouseData = new float[blueSmallHouses.Length, 3];
+            for (int i = 0; i < blueSmallHouses.Length; i++)
+            {
+                blueSmallHouseData[i, 0] = blueSmallHouses[i].transform.position.x;
+                blueSmallHouseData[i, 1] = blueSmallHouses[i].transform.position.z;
+                blueSmallHouseData[i, 2] = blueSmallHouses[i].transform.eulerAngles.y;
             }
         }
 
@@ -269,6 +304,25 @@ public class Save : MonoBehaviour
             }
         }
 
+        if (villages != null)
+        {
+            villageData = new float[villages.Length, 11];
+            for (int i = 0; i < villages.Length; i++)
+            {
+                villageData[i, 0] = villages[i].transform.position.x;
+                villageData[i, 1] = villages[i].transform.position.y;
+                villageData[i, 2] = villages[i].transform.position.z;
+                villageData[i, 3] = villages[i].GetComponent<TownCentre>().redM;
+                villageData[i, 4] = villages[i].GetComponent<TownCentre>().redF;
+                villageData[i, 5] = villages[i].GetComponent<TownCentre>().blueM;
+                villageData[i, 6] = villages[i].GetComponent<TownCentre>().blueF;
+                villageData[i, 7] = villages[i].GetComponent<TownCentre>().greenM;
+                villageData[i, 8] = villages[i].GetComponent<TownCentre>().greenF;
+                villageData[i, 9] = villages[i].GetComponent<TownCentre>().colour;
+                villageData[i, 10] = villages[i].GetComponent<TownCentre>().happiness;
+            }
+        }
+
         if (birds > 10)
         {
             birds = birds - 3;
@@ -278,6 +332,19 @@ public class Save : MonoBehaviour
             birds = birds - 2;
         }
         else if (birds > 0)
+        {
+            birds = birds - 1;
+        }
+
+        if (penguins > 10)
+        {
+            birds = birds - 3;
+        }
+        else if (penguins > 5)
+        {
+            birds = birds - 2;
+        }
+        else if (penguins > 0)
         {
             birds = birds - 1;
         }
@@ -294,8 +361,13 @@ public class Save : MonoBehaviour
             print("Save As Shebbear Data");
             slot = 2;
         }
+        else if (SceneManager.GetActiveScene().name == "Bideford" || SceneManager.GetActiveScene().name == "BidefordLoad")
+        {
+            print("Save As Bideford Data");
+            slot = 3;
+        }
         print(slot);
-        new SaveData(treeData, treeWiltData, stoneData, redSmallHouseData, redFarmData, torchData, totemData, mRedVillagers, fRedVillagers, livestock, birds, slot);
+        new SaveData(treeData, treeWiltData, snowTreeData, snowTreeWiltData, stoneData, redSmallHouseData, blueSmallHouseData, redFarmData, torchData, totemData, villageData, livestock, birds, penguins, slot);
     }
 
     private void AddTree(GameObject newTree)

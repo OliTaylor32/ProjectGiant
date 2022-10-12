@@ -25,6 +25,7 @@ public class SaveData
     public int livestock;
     public int bird;
     public int penguins;
+    public int nature;
 
     public int saveSlot;
 
@@ -34,7 +35,7 @@ public class SaveData
         
     }
 
-    public SaveData(float[,] treeData, float[,] treeWiltData, float[,] snowTreeData, float[,] snowTreeWiltData, float[,] stoneData, float[,] redSmallHouseData, float[,] redFarmData, float[,] torchData, float[,] totemData, float[,] villageData, int livestockNo, int birdNo, int penguinNo, int slot)
+    public SaveData(float[,] treeData, float[,] treeWiltData, float[,] snowTreeData, float[,] snowTreeWiltData, float[,] stoneData, float[,] redSmallHouseData, float[,] blueSmallHouseData, float[,] redFarmData, float[,] torchData, float[,] totemData, float[,] villageData, int livestockNo, int birdNo, int penguinNo, int natureScore, int slot)
     {
         trees = treeData;
         treeWilts = treeWiltData;
@@ -42,6 +43,7 @@ public class SaveData
         snowTreeWilts = snowTreeWiltData;
         stones = stoneData;
         redSmallHouses = redSmallHouseData;
+        blueSmallHouses = blueSmallHouseData;
         redFarms = redFarmData;
         torches = torchData;
         totems = totemData;
@@ -49,6 +51,7 @@ public class SaveData
         livestock = livestockNo;
         bird = birdNo;
         penguins = penguinNo;
+        nature = natureScore;
         saveSlot = slot;
         Store();
     }
