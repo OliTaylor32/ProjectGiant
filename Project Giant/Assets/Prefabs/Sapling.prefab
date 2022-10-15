@@ -74,6 +74,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 1
 --- !u!65 &7104270454414762210
 BoxCollider:
   m_ObjectHideFlags: 0

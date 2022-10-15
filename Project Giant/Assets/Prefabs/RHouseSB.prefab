@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a848d80aea59e1a42882ddc464ff819a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: sHouse
+  item: igloo
   weight: 3
   life: 3
   villager: {fileID: 0}
@@ -225,6 +225,7 @@ MonoBehaviour:
   smoke: {fileID: 1170902351642930369, guid: 9ea595de6c5c3394b9887387ed136db4, type: 3}
   star: {fileID: 3559250292362852098, guid: dab2c4c9eb753ba4ab3e648705c30ec5, type: 3}
   tear: {fileID: 6497887434317789109, guid: 7871b36754da21640818601eff852ef7, type: 3}
+  treeType: 0
 --- !u!1001 &2306978565617233137
 PrefabInstance:
   m_ObjectHideFlags: 0

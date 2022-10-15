@@ -298,6 +298,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 1
 --- !u!1 &5460998600528640759
 GameObject:
   m_ObjectHideFlags: 0

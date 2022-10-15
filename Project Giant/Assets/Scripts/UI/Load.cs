@@ -20,14 +20,15 @@ public class Load : MonoBehaviour
     private int livestock;
     private int birds;
     private int penguins;
+    public int nature;
 
     public GameObject tree;
     public GameObject treeWilt;
     public GameObject snowTree;
     public GameObject snowTreeWilt;
     public GameObject stone;
-    public GameObject redSmallHouse;
-    public GameObject blueSmallHouse;
+    public GameObject[] redSmallHouse;
+    public GameObject[] blueSmallHouse;
     public GameObject redFarm;
     public GameObject torch;
     public GameObject totem;
@@ -66,6 +67,7 @@ public class Load : MonoBehaviour
         livestock = data.livestock;
         birds = data.bird;
         penguins = data.penguins;
+        nature = data.nature;
         
         if (trees != null)
         {
@@ -121,7 +123,7 @@ public class Load : MonoBehaviour
 
             for (int i = 0; i < redSmallHouses.GetLength(0); i++)
             {
-                GameObject obj = Instantiate(redSmallHouse, new Vector3(redSmallHouses[i, 0], 5, redSmallHouses[i, 1]), Quaternion.identity);
+                GameObject obj = Instantiate(redSmallHouse[Mathf.RoundToInt(redSmallHouses[i, 3])], new Vector3(redSmallHouses[i, 0], 5, redSmallHouses[i, 1]), Quaternion.identity);
                 obj.transform.eulerAngles = new Vector3(0f, redSmallHouses[i, 2], 0f);
             }
         }
@@ -131,7 +133,7 @@ public class Load : MonoBehaviour
 
             for (int i = 0; i < blueSmallHouses.GetLength(0); i++)
             {
-                GameObject obj = Instantiate(blueSmallHouse, new Vector3(blueSmallHouses[i, 0], 5, blueSmallHouses[i, 1]), Quaternion.identity);
+                GameObject obj = Instantiate(blueSmallHouse[Mathf.RoundToInt(redSmallHouses[i, 3])], new Vector3(blueSmallHouses[i, 0], 5, blueSmallHouses[i, 1]), Quaternion.identity);
                 obj.transform.eulerAngles = new Vector3(0f, blueSmallHouses[i, 2], 0f);
             }
         }

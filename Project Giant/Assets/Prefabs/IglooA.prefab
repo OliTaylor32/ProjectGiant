@@ -158,13 +158,13 @@ MonoBehaviour:
   item: igloo
   weight: 10000
   life: 4
-  villager: {fileID: 4631997228253184848, guid: 4c83b3c7646c8b7488af0f7a72d4ddad,
-    type: 3}
+  villager: {fileID: 0}
   tree: {fileID: 0}
   stats: {fileID: 0}
-  smoke: {fileID: 0}
-  star: {fileID: 0}
-  tear: {fileID: 0}
+  smoke: {fileID: 1170902351642930369, guid: 9ea595de6c5c3394b9887387ed136db4, type: 3}
+  star: {fileID: 3559250292362852098, guid: dab2c4c9eb753ba4ab3e648705c30ec5, type: 3}
+  tear: {fileID: 6497887434317789109, guid: 7871b36754da21640818601eff852ef7, type: 3}
+  treeType: 1
 --- !u!1 &8948160772990892071
 GameObject:
   m_ObjectHideFlags: 0

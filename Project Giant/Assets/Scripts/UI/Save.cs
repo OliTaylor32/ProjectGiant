@@ -251,12 +251,13 @@ public class Save : MonoBehaviour
 
         if (redSmallHouses != null)
         {
-            redSmallHouseData = new float[redSmallHouses.Length, 3];
+            redSmallHouseData = new float[redSmallHouses.Length, 4];
             for (int i = 0; i < redSmallHouses.Length; i++)
             {
                 redSmallHouseData[i, 0] = redSmallHouses[i].transform.position.x;
                 redSmallHouseData[i, 1] = redSmallHouses[i].transform.position.z;
                 redSmallHouseData[i, 2] = redSmallHouses[i].transform.eulerAngles.y;
+                redSmallHouseData[i, 3] = redSmallHouses[i].GetComponent<Object>().treeType;
             }
         }
 
@@ -268,6 +269,7 @@ public class Save : MonoBehaviour
                 blueSmallHouseData[i, 0] = blueSmallHouses[i].transform.position.x;
                 blueSmallHouseData[i, 1] = blueSmallHouses[i].transform.position.z;
                 blueSmallHouseData[i, 2] = blueSmallHouses[i].transform.eulerAngles.y;
+                blueSmallHouseData[i, 3] = blueSmallHouses[i].GetComponent<Object>().treeType;
             }
         }
 
@@ -367,7 +369,8 @@ public class Save : MonoBehaviour
             slot = 3;
         }
         print(slot);
-        new SaveData(treeData, treeWiltData, snowTreeData, snowTreeWiltData, stoneData, redSmallHouseData, blueSmallHouseData, redFarmData, torchData, totemData, villageData, livestock, birds, penguins, slot);
+        nature = GameObject.Find("Dialogue").GetComponent<Dialogue>().natureScore;
+        new SaveData(treeData, treeWiltData, snowTreeData, snowTreeWiltData, stoneData, redSmallHouseData, blueSmallHouseData, redFarmData, torchData, totemData, villageData, livestock, birds, penguins, nature, slot);
     }
 
     private void AddTree(GameObject newTree)

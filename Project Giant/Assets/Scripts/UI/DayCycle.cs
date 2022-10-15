@@ -72,9 +72,20 @@ public class DayCycle : MonoBehaviour
             {
                 GameObject.Find("Giant").GetComponent<PlayerControl>().Freeze();
                 day = false;
+                int vilPop = 0;
+                for (int i = 0; i < gameObject.GetComponent<Save>().villages.Length; i++)
+                {
+                    vilPop = vilPop + GetComponent<Save>().villages[i].GetComponent<TownCentre>().redM;
+                    vilPop = vilPop + GetComponent<Save>().villages[i].GetComponent<TownCentre>().redF;
+                    vilPop = vilPop + GetComponent<Save>().villages[i].GetComponent<TownCentre>().blueM;
+                    vilPop = vilPop + GetComponent<Save>().villages[i].GetComponent<TownCentre>().blueF;
+                    vilPop = vilPop + GetComponent<Save>().villages[i].GetComponent<TownCentre>().greenM;
+                    vilPop = vilPop + GetComponent<Save>().villages[i].GetComponent<TownCentre>().greenF;
+                }
                 GameObject.Find("Canvas").transform.Find("EndPanel").
-                    GetComponent<EndStats>().SetPopulationStats(gameObject.GetComponent<Save>().mRedVillagers + gameObject.GetComponent<Save>().fRedVillagers,
-                    gameObject.GetComponent<Save>().treeNo + gameObject.GetComponent<Save>().treeWiltNo, gameObject.GetComponent<Save>().livestock, gameObject.GetComponent<Save>().birds);
+                    GetComponent<EndStats>().SetPopulationStats(vilPop,
+                    gameObject.GetComponent<Save>().treeNo + gameObject.GetComponent<Save>().treeWiltNo + gameObject.GetComponent<Save>().snowTreeNo + gameObject.GetComponent<Save>().snowTreeWiltNo,
+                    gameObject.GetComponent<Save>().livestock, gameObject.GetComponent<Save>().birds, gameObject.GetComponent<Save>().penguins);
             }
         }
         if (Time.time - timer >= 640f) //After 5mins, boot the player back to the title screen

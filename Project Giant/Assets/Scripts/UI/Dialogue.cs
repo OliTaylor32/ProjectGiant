@@ -17,6 +17,7 @@ public class Dialogue : MonoBehaviour
     private float timer;
     private float dayTimer;
     public int natureScore;
+    private int startNatureScore;
     private int villagerScore;
 
     private bool[] used;
@@ -142,6 +143,12 @@ public class Dialogue : MonoBehaviour
         {
             Challenge();
         }
+
+        if (GameObject.Find("Canvas").GetComponent<Load>() != null)
+        {
+            startNatureScore = GameObject.Find("Canvas").GetComponent<Load>().nature;
+            natureScore = startNatureScore;
+        }
     }
 
     // Update is called once per frame
@@ -152,6 +159,7 @@ public class Dialogue : MonoBehaviour
             txt.text = "";
             panel.SetActive(false);
             alt = !alt;
+
         }
         if (giant.GetComponent<PlayerControl>().stars > 0 && used[1] == false) //When the player has collected their first star
         {
@@ -326,24 +334,25 @@ public class Dialogue : MonoBehaviour
             {
                 endMessage = "The villagers pray into the night, hoping the Giant will not return tomorrow.";
             }
+            int dailyNatureScore = natureScore - startNatureScore;
 
-            if (natureScore > 9)
+            if (dailyNatureScore > 9)
             {
                 endMessage += " Nature on the island has flourished thanks to the helping hand of the Giant.";
             }
-            else if (natureScore > 4)
+            else if (dailyNatureScore > 4)
             {
                 endMessage += " Nature on the island is in a healthy state thanks to the Giant.";
             }
-            else if (natureScore >= 0)
+            else if (dailyNatureScore >= 0)
             {
                 endMessage += " The Giant has neglected the nature of the island.";
             }
-            else if (natureScore > -5)
+            else if (dailyNatureScore > -5)
             {
                 endMessage += " The Giant seems unmoved by the degregation of nature on the island.";
             }
-            else if (natureScore > -10)
+            else if (dailyNatureScore > -10)
             {
                 endMessage += " The Giant is causing unsustanable harm to the islands nature.";
             }

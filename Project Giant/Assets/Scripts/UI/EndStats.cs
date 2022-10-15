@@ -55,7 +55,7 @@ public class EndStats : MonoBehaviour
         }
     }
 
-    public void SetPopulationStats(int villagers, int trees, int livestock, int birds)
+    public void SetPopulationStats(int villagers, int trees, int livestock, int birds, int penguins)
     {
         vPop = villagers;
         tPop = trees;
