@@ -119,31 +119,31 @@ public class SaveData
         {
             file = File.OpenRead(path);
         }
-        else
-        {
-            if (map == "Taddiport")
-            {
-                path = Application.persistentDataPath + "/savedata.map2";
-            }
-            else if (map == "Shebbear")
-            {
-                path = Application.persistentDataPath + "/savedatashebbear.map";
-            }
-            else
-            {
-                path = Application.persistentDataPath + "/savedatabideford.map";
-            }
+        //else
+        //{
+        //    if (map == "Taddiport")
+        //    {
+        //        path = Application.persistentDataPath + "/savedata.map2";
+        //    }
+        //    else if (map == "Shebbear")
+        //    {
+        //        path = Application.persistentDataPath + "/savedatashebbear.map";
+        //    }
+        //    else
+        //    {
+        //        path = Application.persistentDataPath + "/savedatabideford.map";
+        //    }
 
-            if (File.Exists(path))
-            {
-                file = File.OpenRead(path);
-            }
+        //    if (File.Exists(path))
+        //    {
+        //        file = File.OpenRead(path);
+        //    }
             else
             {
                 //Here should be return what ever the default is
                 return null;
             }
-        }
+        //}
     
 
         BinaryFormatter bf = new BinaryFormatter();

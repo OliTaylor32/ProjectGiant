@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bideford.unity
     guid: 1174599e2fc2a2748adb0341677f591c
+  - enabled: 1
+    path: Assets/Scenes/BidefordLoad.unity
+    guid: 11eb453a265f01d4ab58ec28c7c7c12f
   m_configObjects: {}

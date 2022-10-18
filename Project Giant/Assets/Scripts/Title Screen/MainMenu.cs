@@ -46,20 +46,20 @@ public class MainMenu : MonoBehaviour
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         Cursor.visible = false;
 
-        //if (Steamworks.SteamClient.AppId != 1903330)
-        //{
-        //    try
-        //    {
-        //        Steamworks.SteamClient.Init(1903330);
-        //    }
-        //    catch (System.Exception)
-        //    {
-        //        print("Steamworks error");
-        //        throw;
-        //    }
-        //}
+        if (Steamworks.SteamClient.AppId != 1903330)
+        {
+            try
+            {
+                Steamworks.SteamClient.Init(1903330);
+            }
+            catch (System.Exception)
+            {
+                print("Steamworks error");
+                throw;
+            }
+        }
 
-        //print(Steamworks.SteamClient.Name);
+        print(Steamworks.SteamClient.Name);
 
         //Top Menu
         selected = 0;
@@ -184,7 +184,7 @@ public class MainMenu : MonoBehaviour
                         {
                             if (mapSelected == 0)
                             {
-                                StartCoroutine(LoadLevel("SGMap"));
+                                StartCoroutine(LoadLevel("Bideford"));
                             }
                             if (mapSelected == 1)
                             {
@@ -195,7 +195,7 @@ public class MainMenu : MonoBehaviour
                         {
                             if (mapSelected == 0)
                             {
-                                StartCoroutine(LoadLevel("TaddiportLoad"));
+                                StartCoroutine(LoadLevel("BidefordLoad"));
                             }
                             if (mapSelected == 1)
                             {

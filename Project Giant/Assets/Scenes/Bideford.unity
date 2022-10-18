@@ -566,7 +566,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73999697}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1620,20 +1620,28 @@ MonoBehaviour:
   treeNo: 0
   treeWilts: []
   treeWiltNo: 0
+  snowTrees: []
+  snowTreeNo: 0
+  snowTreeWilts: []
+  snowTreeWiltNo: 0
   stoneNo: 0
   stones: []
   redSmallHouseNo: 0
   redSmallHouses: []
+  blueSmallHouseNo: 0
+  blueSmallHouses: []
   redFarmNo: 0
   redFarms: []
   torchNo: 0
   torches: []
   totemNo: 0
   totems: []
-  mRedVillagers: 0
-  fRedVillagers: 0
+  villageNo: 0
+  villages: []
   livestock: 0
   birds: 0
+  penguins: 0
+  nature: 0
 --- !u!1 &192740675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,7 +1774,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192776892}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2013,7 +2021,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260118818}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3969,7 +3977,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556136915}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4432,7 +4440,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613119407}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -9278,7 +9286,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395353067}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -11651,17 +11659,27 @@ PrefabInstance:
     - target: {fileID: 6336252034725897328, guid: 9173e65a61d718f4495103b89074c198,
         type: 3}
       propertyPath: redM
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6336252034725897328, guid: 9173e65a61d718f4495103b89074c198,
         type: 3}
       propertyPath: redF
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6336252034725897328, guid: 9173e65a61d718f4495103b89074c198,
         type: 3}
       propertyPath: colour
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336252034725897328, guid: 9173e65a61d718f4495103b89074c198,
+        type: 3}
+      propertyPath: blueM
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336252034725897328, guid: 9173e65a61d718f4495103b89074c198,
+        type: 3}
+      propertyPath: blueF
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6336252034725897333, guid: 9173e65a61d718f4495103b89074c198,
         type: 3}
@@ -13271,7 +13289,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877603351}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

@@ -74,7 +74,7 @@ public class Save : MonoBehaviour
         livestock = 0;
         birds = 0;
         nature = 0;
-        StartCoroutine(DelayedSave());
+        //StartCoroutine(DelayedSave());
     }
 
     // Update is called once per frame
@@ -89,13 +89,18 @@ public class Save : MonoBehaviour
         wilting = true;
         treeNo = 0;
         treeWiltNo = 0;
+        snowTreeNo = 0;
+        snowTreeWiltNo = 0;
         stoneNo = 0;
         redSmallHouseNo = 0;
+        blueSmallHouseNo = 0;
         redFarmNo = 0;
         torchNo = 0;
         totemNo = 0;
         livestock = 0;
         birds = 0;
+        penguins = 0;
+        villageNo = 0;
 
         foreach (var gameObject in FindObjectsOfType(typeof(GameObject)) as GameObject[])
         {
@@ -263,7 +268,7 @@ public class Save : MonoBehaviour
 
         if (blueSmallHouses != null)
         {
-            blueSmallHouseData = new float[blueSmallHouses.Length, 3];
+            blueSmallHouseData = new float[blueSmallHouses.Length, 4];
             for (int i = 0; i < blueSmallHouses.Length; i++)
             {
                 blueSmallHouseData[i, 0] = blueSmallHouses[i].transform.position.x;
@@ -340,15 +345,15 @@ public class Save : MonoBehaviour
 
         if (penguins > 10)
         {
-            birds = birds - 3;
+            penguins = penguins - 3;
         }
         else if (penguins > 5)
         {
-            birds = birds - 2;
+            penguins = penguins - 2;
         }
         else if (penguins > 0)
         {
-            birds = birds - 1;
+            penguins = penguins - 1;
         }
 
         int slot = 0;
@@ -369,7 +374,7 @@ public class Save : MonoBehaviour
             slot = 3;
         }
         print(slot);
-        nature = GameObject.Find("Dialogue").GetComponent<Dialogue>().natureScore;
+        nature = GameObject.Find("Narrator").GetComponent<Dialogue>().natureScore;
         new SaveData(treeData, treeWiltData, snowTreeData, snowTreeWiltData, stoneData, redSmallHouseData, blueSmallHouseData, redFarmData, torchData, totemData, villageData, livestock, birds, penguins, nature, slot);
     }
 

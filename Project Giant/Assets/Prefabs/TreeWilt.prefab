@@ -92,6 +92,11 @@ PrefabInstance:
       propertyPath: life
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5460998601611287137, guid: d343456f926715f44a33f38d5b63ac61,
+        type: 3}
+      propertyPath: item
+      value: treeWilt
+      objectReference: {fileID: 0}
     - target: {fileID: 6931871974418456416, guid: d343456f926715f44a33f38d5b63ac61,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

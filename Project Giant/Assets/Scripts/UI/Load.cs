@@ -55,9 +55,11 @@ public class Load : MonoBehaviour
 
         trees = data.trees;
         treeWilts = data.treeWilts;
+        snowTrees = data.snowTrees;
+        snowTreeWilts = data.snowTreeWilts;
         stones = data.stones;
         redSmallHouses = data.redSmallHouses;
-        blueSmallHouses = data.redSmallHouses;
+        blueSmallHouses = data.blueSmallHouses;
         redFarms = data.redFarms;
         torches = data.torches;
         totems = data.totems;
@@ -133,7 +135,7 @@ public class Load : MonoBehaviour
 
             for (int i = 0; i < blueSmallHouses.GetLength(0); i++)
             {
-                GameObject obj = Instantiate(blueSmallHouse[Mathf.RoundToInt(redSmallHouses[i, 3])], new Vector3(blueSmallHouses[i, 0], 5, blueSmallHouses[i, 1]), Quaternion.identity);
+                GameObject obj = Instantiate(blueSmallHouse[Mathf.RoundToInt(blueSmallHouses[i, 3])], new Vector3(blueSmallHouses[i, 0], 5, blueSmallHouses[i, 1]), Quaternion.identity);
                 obj.transform.eulerAngles = new Vector3(0f, blueSmallHouses[i, 2], 0f);
             }
         }
