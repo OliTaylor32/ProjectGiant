@@ -77,6 +77,7 @@ public class Villager : MonoBehaviour
             actions[2] = "Build";
             actions[3] = "Play";
         }
+        canBuild = true;
 
         stop = false;
 
@@ -125,8 +126,15 @@ public class Villager : MonoBehaviour
         {
             if (changeCentre == false)
             {
-                print(Vector3.Distance(townCenter.position, transform.position));
-                if (Vector3.Distance(townCenter.position, transform.position) > 25)
+                if (townCenter != null)
+                {
+                    print(Vector3.Distance(townCenter.position, transform.position));
+                    if (Vector3.Distance(townCenter.position, transform.position) > 25)
+                    {
+                        changeCentre = true;
+                    }
+                }
+                else
                 {
                     changeCentre = true;
                 }
@@ -195,7 +203,10 @@ public class Villager : MonoBehaviour
     {
         life--;
         Instantiate(tear, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        townCenter.GetComponent<TownCentre>().happiness--;
+        if (townCenter != null)
+        {
+            townCenter.GetComponent<TownCentre>().happiness--;
+        }
     }
 
     private void GetWeight(GameObject sender) //Return weight to the giant
@@ -451,11 +462,21 @@ public class Villager : MonoBehaviour
         }
         else if (collision.gameObject.name == "Water")
         {
+            canBuild = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "Water")
+        {
+            canBuild = true;
             if (fishing == false)
             {
                 fishing = true;
                 stop = true;
                 transform.position = lastPos;
+                transform.Rotate(new Vector3(0f, 180f, 0f));
                 anim.Play("VillagerFish");
                 //StartCoroutine(TimedEvent(15f));
                 StartCoroutine(Fishing());
@@ -550,29 +571,7 @@ public class Villager : MonoBehaviour
 
     public void PresentVillager()
     {
-        switch (colour)
-        {
-            case "mRed":
-                townCenter.GetComponent<TownCentre>().redM++;
-                break;
-            case "fRed":
-                townCenter.GetComponent<TownCentre>().redF++;
-                break;
-            case "mBlue":
-                townCenter.GetComponent<TownCentre>().blueM++;
-                break;
-            case "fBlue":
-                townCenter.GetComponent<TownCentre>().blueF++;
-                break;
-            case "mGreen":
-                townCenter.GetComponent<TownCentre>().greenM++;
-                break;
-            case "fGreen":
-                townCenter.GetComponent<TownCentre>().greenF++;
-                break;
-            default:
-                break;
-        }
+        StartCoroutine(PickUpCheck());
     }
 
     public void PickedUp()
@@ -619,32 +618,37 @@ public class Villager : MonoBehaviour
         if (giant.GetComponent<PlayerControl>().isCarrying == false) //No Longer being carried
         {
             pickedUp = false;
-            if (changeCentre == true || townCenter == null)
+            if ((changeCentre == true || townCenter == null) && canBuild == true)
             {
                 anim.Play("VillagerIdle");
                 stop = true;//cancel any actions
-                switch (colour)
+                if (townCenter != null)
                 {
-                    case "mRed":
-                        townCenter.GetComponent<TownCentre>().redM--;
-                        break;
-                    case "fRed":
-                        townCenter.GetComponent<TownCentre>().redF--;
-                        break;
-                    case "mBlue":
-                        townCenter.GetComponent<TownCentre>().blueM--;
-                        break;
-                    case "fBlue":
-                        townCenter.GetComponent<TownCentre>().blueF--;
-                        break;
-                    case "mGreen":
-                        townCenter.GetComponent<TownCentre>().greenM--;
-                        break;
-                    case "fGreen":
-                        townCenter.GetComponent<TownCentre>().greenF--;
-                        break;
-                    default:
-                        break;
+
+
+                    switch (colour)
+                    {
+                        case "mRed":
+                            townCenter.GetComponent<TownCentre>().redM--;
+                            break;
+                        case "fRed":
+                            townCenter.GetComponent<TownCentre>().redF--;
+                            break;
+                        case "mBlue":
+                            townCenter.GetComponent<TownCentre>().blueM--;
+                            break;
+                        case "fBlue":
+                            townCenter.GetComponent<TownCentre>().blueF--;
+                            break;
+                        case "mGreen":
+                            townCenter.GetComponent<TownCentre>().greenM--;
+                            break;
+                        case "fGreen":
+                            townCenter.GetComponent<TownCentre>().greenF--;
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 townCenter = null;
                 //Search all towncentres for 1 that is close enough/closest and set as town center
@@ -679,7 +683,7 @@ public class Villager : MonoBehaviour
                     build.GetComponent<MaterialGather>().VillageBuild(gameObject); //Start checking whether it can build there.
                     GameObject call = Instantiate(callBox, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);//Start Asking for help
                     call.GetComponent<CallBox>().setType(3);
-                    yield return new WaitUntil(() => canBuild == true || stop == true); //Wait until it can build or 60secs pass.
+                    yield return new WaitUntil(() => /*canBuild == true ||*/ stop == true); //Wait until it can build or 60secs pass.
                     Destroy(call);//Stop calling for help
                     Destroy(build);
 
@@ -729,6 +733,7 @@ public class Villager : MonoBehaviour
                 }
 
             }
+            changeCentre = false;
         }
     }
 
@@ -873,21 +878,39 @@ public class Villager : MonoBehaviour
     {
             print("fishing");
             int random = Random.Range(0, 2);
+        if (pickedUp == false)
+        {
             yield return new WaitForSeconds(10f);
-            if (random == 0)
+            if (pickedUp == false)
             {
-                Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-                //Play eating fish animation
-                anim.Play("VillagerEatFish");
+                if (random == 0)
+                {
+                    Instantiate(star, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                    //Play eating fish animation
+                    anim.Play("VillagerEatFish");
+                }
+                else
+                {
+                    //Play Thinking animation
+                    anim.Play("VillagerIdle");
+                }
             }
             else
             {
-                //Play Thinking animation
                 anim.Play("VillagerIdle");
             }
-            fishing = false;
-            stop = false;
-            StartCoroutine(Move());
+                fishing = false;
+                stop = false;
+            if (changeCentre == false)
+            {
+                StartCoroutine(Move());
+            }
+        }
+        else
+        {
+            anim.Play("VillagerIdle");
+        }
+
     }
 
 }
