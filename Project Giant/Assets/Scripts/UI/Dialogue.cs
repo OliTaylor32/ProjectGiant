@@ -154,153 +154,6 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - timer > 10f) //If no new text has appeared in 10secs, hide the text box.
-        {
-            txt.text = "";
-            panel.SetActive(false);
-            alt = !alt;
-
-        }
-        if (giant.GetComponent<PlayerControl>().stars > 0 && used[1] == false) //When the player has collected their first star
-        {
-            if (alt == true)
-                txt.text = altText[1];
-            else
-                txt.text = text[1];
-            used[1] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
-
-        if (giant.GetComponent<PlayerControl>().tears > 0 && used[2] == false) //When the player has collected their first star
-        {
-            if (alt == true)
-                txt.text = altText[2];
-            else
-                txt.text = text[2];
-            used[2] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
-
-
-        if (giant.GetComponent<PlayerControl>().stars > 9 && used[11] == false) //When the player has grown using stars
-        {
-            if (alt == true)
-                txt.text = altText[11];
-            else
-                txt.text = text[11];
-            used[11] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-            if (SceneManager.GetActiveScene().name != "TornadoChallenge1")
-            {
-                var ach = new Achievement("star");
-                ach.Trigger();
-                Steamworks.SteamClient.RunCallbacks();
-            }
-        }
-
-        if (giant.GetComponent<PlayerControl>().tears > 9 && used[10] == false) //When the player has grown using tears
-        {
-            if (alt == true)
-                txt.text = altText[10];
-            else
-                txt.text = text[10];
-            used[10] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-            var ach = new Achievement("tear");
-            ach.Trigger();
-            Steamworks.SteamClient.RunCallbacks();
-        }
-        //When the player has collected either 11 stars or tears.
-        if ((giant.GetComponent<PlayerControl>().stars > 11|| giant.GetComponent<PlayerControl>().tears > 11) && used[7] == false) 
-        {
-            if (alt == true)
-                txt.text = altText[7];
-            else
-                txt.text = text[7];
-            used[7] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
-
-        if (Time.time - timer >= 20f && used[8] == false) //When 20secs has passed without any narration
-        {
-            if (alt == true)
-                txt.text = altText[8];
-            else
-                txt.text = text[8];
-            used[8] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
-
-        if (Time.time - dayTimer >= 574f) //When the day is about to end.
-        {
-            musicControl.GetComponent<MusicControl>().endOfDayAlert();
-            if (alt == true)
-                txt.text = altText[9];
-            else
-                txt.text = text[9];
-            used[9] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
-
-        if (giant.GetComponent<PlayerControl>().tears > 19 && used[6] == false) //When the player grew for a secound time using tears
-        {
-            if (alt == true)
-                txt.text = altText[6];
-            else
-                txt.text = text[6];
-            used[6] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
-
-        if (giant.GetComponent<PlayerControl>().stars > 19 && used[5] == false) //When the player grew for a secound time using stars
-        {
-            if (alt == true)
-                txt.text = altText[5];
-            else
-                txt.text = text[5];
-            used[5] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
-
-        if (Time.time - timer >= 40f && used[12] == false) //When 40secs has passed without any narration
-        {
-            if (alt == true)
-                txt.text = altText[12];
-            else
-                txt.text = text[12];
-            used[12] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
-
-        if (Time.time - timer >= 60f && used[13] == false) //When 60secs has passed without any narration
-        {
-            if (alt == true)
-                txt.text = altText[13];
-            else
-                txt.text = text[13];
-            used[13] = true;
-            panel.SetActive(true);
-            timer = Time.time;
-        }
-
-        //if (Time.time - timer >= 45f && used[14] == false) //When 45secs has passed without any narration
-        //{
-        //    txt.text = text[14];
-        //    used[14] = true;
-        //    panel.SetActive(true);
-        //    timer = Time.time;
-        //}
-
         if (Time.time - dayTimer >= 600f) //When the day has ended
         {
             villagerScore = giant.GetComponent<PlayerControl>().stars - giant.GetComponent<PlayerControl>().tears;
@@ -366,6 +219,158 @@ public class Dialogue : MonoBehaviour
             panel.SetActive(true);
             timer = Time.time + 40f;
         }
+        else
+        {
+            if (Time.time - timer > 10f) //If no new text has appeared in 10secs, hide the text box.
+            {
+                txt.text = "";
+                panel.SetActive(false);
+                alt = !alt;
+
+            }
+            if (giant.GetComponent<PlayerControl>().stars > 0 && used[1] == false) //When the player has collected their first star
+            {
+                if (alt == true)
+                    txt.text = altText[1];
+                else
+                    txt.text = text[1];
+                used[1] = true;
+                panel.SetActive(true);
+                timer = Time.time;
+            }
+
+            if (giant.GetComponent<PlayerControl>().tears > 0 && used[2] == false) //When the player has collected their first star
+            {
+                if (alt == true)
+                    txt.text = altText[2];
+                else
+                    txt.text = text[2];
+                used[2] = true;
+                panel.SetActive(true);
+                timer = Time.time;
+            }
+
+
+            if (giant.GetComponent<PlayerControl>().stars > 9 && used[11] == false) //When the player has grown using stars
+            {
+                if (alt == true)
+                    txt.text = altText[11];
+                else
+                    txt.text = text[11];
+                used[11] = true;
+                panel.SetActive(true);
+                timer = Time.time;
+                if (SceneManager.GetActiveScene().name != "TornadoChallenge1")
+                {
+                    var ach = new Achievement("star");
+                    ach.Trigger();
+                    Steamworks.SteamClient.RunCallbacks();
+                }
+            }
+
+            if (giant.GetComponent<PlayerControl>().tears > 9 && used[10] == false) //When the player has grown using tears
+            {
+                if (alt == true)
+                    txt.text = altText[10];
+                else
+                    txt.text = text[10];
+                used[10] = true;
+                panel.SetActive(true);
+                timer = Time.time;
+                var ach = new Achievement("tear");
+                ach.Trigger();
+                Steamworks.SteamClient.RunCallbacks();
+            }
+            //When the player has collected either 11 stars or tears.
+            if ((giant.GetComponent<PlayerControl>().stars > 11 || giant.GetComponent<PlayerControl>().tears > 11) && used[7] == false)
+            {
+                if (alt == true)
+                    txt.text = altText[7];
+                else
+                    txt.text = text[7];
+                used[7] = true;
+                panel.SetActive(true);
+                timer = Time.time;
+            }
+
+            if (Time.time - timer >= 20f && used[8] == false) //When 20secs has passed without any narration
+            {
+                if (alt == true)
+                    txt.text = altText[8];
+                else
+                    txt.text = text[8];
+                used[8] = true;
+                panel.SetActive(true);
+                timer = Time.time;
+            }
+
+            if (Time.time - dayTimer >= 574f) //When the day is about to end.
+            {
+                musicControl.GetComponent<MusicControl>().endOfDayAlert();
+                if (alt == true)
+                    txt.text = altText[9];
+                else
+                    txt.text = text[9];
+                used[9] = true;
+                panel.SetActive(true);
+                timer = Time.time;
+            }
+
+            if (giant.GetComponent<PlayerControl>().tears > 19 && used[6] == false) //When the player grew for a secound time using tears
+            {
+                if (alt == true)
+                    txt.text = altText[6];
+                else
+                    txt.text = text[6];
+                used[6] = true;
+                panel.SetActive(true);
+                timer = Time.time;
+            }
+
+            if (giant.GetComponent<PlayerControl>().stars > 19 && used[5] == false) //When the player grew for a secound time using stars
+            {
+                if (alt == true)
+                    txt.text = altText[5];
+                else
+                    txt.text = text[5];
+                used[5] = true;
+                panel.SetActive(true);
+                timer = Time.time;
+            }
+
+            if (Time.time - timer >= 40f && used[12] == false) //When 40secs has passed without any narration
+            {
+                if (alt == true)
+                    txt.text = altText[12];
+                else
+                    txt.text = text[12];
+                used[12] = true;
+                panel.SetActive(true);
+                timer = Time.time;
+            }
+
+            if (Time.time - timer >= 60f && used[13] == false) //When 60secs has passed without any narration
+            {
+                if (alt == true)
+                    txt.text = altText[13];
+                else
+                    txt.text = text[13];
+                used[13] = true;
+                panel.SetActive(true);
+                timer = Time.time;
+            }
+
+            //if (Time.time - timer >= 45f && used[14] == false) //When 45secs has passed without any narration
+            //{
+            //    txt.text = text[14];
+            //    used[14] = true;
+            //    panel.SetActive(true);
+            //    timer = Time.time;
+            //}
+
+
+        }
+
     }
 
     public void BuildHelp() //When a Villager has been trying to build in a taken up space for 5secs

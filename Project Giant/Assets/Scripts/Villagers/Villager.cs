@@ -18,7 +18,7 @@ public class Villager : MonoBehaviour
     public GameObject star;
     public GameObject tear;
     public string colour;
-    private bool stop;
+    public bool stop;
 
     public GameObject[] buildings;
 
@@ -128,7 +128,7 @@ public class Villager : MonoBehaviour
             {
                 if (townCenter != null)
                 {
-                    print(Vector3.Distance(townCenter.position, transform.position));
+                    //print(Vector3.Distance(townCenter.position, transform.position));
                     if (Vector3.Distance(townCenter.position, transform.position) > 25)
                     {
                         changeCentre = true;
@@ -147,6 +147,7 @@ public class Villager : MonoBehaviour
     {
         if (townCenter != null)
         {
+            print("Move");
             anim.Play("VillagerWalk");
             //Random area around the village
             target = new Vector3((transform.position.x + Random.Range(-10, 10)), transform.position.y, (transform.position.z + Random.Range(-10, 10)));
@@ -154,7 +155,7 @@ public class Villager : MonoBehaviour
             {
                 target = new Vector3((transform.position.x + Random.Range(-10, 10)), transform.position.y, (transform.position.z + Random.Range(-10, 10)));
             }
-            while (Vector3.Distance(transform.position, target) > 1)
+            while (Vector3.Distance(transform.position, target) > 3)
             {
                 //print("step");
                 transform.LookAt(new Vector3(target.x, transform.position.y, target.z)); //Look at the target and straight ahead
@@ -728,12 +729,13 @@ public class Villager : MonoBehaviour
                     //}
 
                     //Destroy(gameObject);
-                    stop = false;
-                    StartCoroutine(Move());
+                    
                 }
 
             }
+            stop = false;
             changeCentre = false;
+            StartCoroutine(Move());
         }
     }
 

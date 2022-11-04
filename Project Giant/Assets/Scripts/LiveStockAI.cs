@@ -76,7 +76,7 @@ public class LiveStockAI : MonoBehaviour
         else
         {
             currentTarget = Random.Range(0, targets.Length);
-            print("New Target");
+            //print("New Target");
         }
     }
 
