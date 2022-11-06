@@ -9081,7 +9081,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 450}
+  m_SizeDelta: {x: 600, y: 460}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &588045668
 MonoBehaviour:
@@ -18774,6 +18774,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 588045666}
+  camera: {fileID: 282840814}
+  centerpoint: {fileID: 819304791}
   challengeMode: 0
 --- !u!1 &1886528039
 GameObject:

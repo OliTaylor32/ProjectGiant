@@ -237,6 +237,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 0
 --- !u!1 &29704353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,20 +1388,28 @@ MonoBehaviour:
   treeNo: 0
   treeWilts: []
   treeWiltNo: 0
+  snowTrees: []
+  snowTreeNo: 0
+  snowTreeWilts: []
+  snowTreeWiltNo: 0
   stoneNo: 0
   stones: []
   redSmallHouseNo: 0
   redSmallHouses: []
+  blueSmallHouseNo: 0
+  blueSmallHouses: []
   redFarmNo: 0
   redFarms: []
   torchNo: 0
   torches: []
   totemNo: 0
   totems: []
-  mRedVillagers: 0
-  fRedVillagers: 0
+  villageNo: 0
+  villages: []
   livestock: 0
   birds: 0
+  penguins: 0
+  nature: 0
 --- !u!1001 &171163525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1909,6 +1918,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 0
 --- !u!1001 &282576781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3085,6 +3095,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 0
 --- !u!1 &535752549
 GameObject:
   m_ObjectHideFlags: 0
@@ -3602,7 +3613,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 450}
+  m_SizeDelta: {x: 600, y: 460}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &588045668
 MonoBehaviour:
@@ -3839,6 +3850,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 0
 --- !u!1001 &641504777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13947,6 +13959,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 588045666}
+  camera: {fileID: 282840814}
+  centerpoint: {fileID: 819304791}
   challengeMode: 0
 --- !u!1 &1886528039
 GameObject:
@@ -15010,6 +15024,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 0
 --- !u!1 &2117274914
 GameObject:
   m_ObjectHideFlags: 0

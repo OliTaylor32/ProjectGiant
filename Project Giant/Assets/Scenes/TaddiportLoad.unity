@@ -973,20 +973,28 @@ MonoBehaviour:
   treeNo: 0
   treeWilts: []
   treeWiltNo: 0
+  snowTrees: []
+  snowTreeNo: 0
+  snowTreeWilts: []
+  snowTreeWiltNo: 0
   stoneNo: 0
   stones: []
   redSmallHouseNo: 0
   redSmallHouses: []
+  blueSmallHouseNo: 0
+  blueSmallHouses: []
   redFarmNo: 0
   redFarms: []
   torchNo: 0
   torches: []
   totemNo: 0
   totems: []
-  mRedVillagers: 0
-  fRedVillagers: 0
+  villageNo: 0
+  villages: []
   livestock: 0
   birds: 0
+  penguins: 0
+  nature: 0
 --- !u!1 &192740675
 GameObject:
   m_ObjectHideFlags: 0
@@ -3877,24 +3885,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8f3708ee549ee438fa109c69747770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nature: 0
   tree: {fileID: 5856365949524941649, guid: e62511e0ef67c164496413216e8401fe, type: 3}
   treeWilt: {fileID: 5856365949524941649, guid: 2376f483c5c6337439f436762a119720,
     type: 3}
+  snowTree: {fileID: 0}
+  snowTreeWilt: {fileID: 0}
   stone: {fileID: 3763959450055417507, guid: 13ac686f00d6db240a16a98d4a394e27, type: 3}
-  redSmallHouse: {fileID: 5991447621904987640, guid: 13c0f3f418d5cd24e80e6bea527ff4c7,
-    type: 3}
+  redSmallHouse:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  blueSmallHouse: []
   redFarm: {fileID: 7231733999227932771, guid: 2a17a3fb90c603e4ca47f8c716b7b5eb, type: 3}
   torch: {fileID: 0}
   totem: {fileID: 0}
-  mRedVillager: {fileID: 7450015869874365814, guid: 72090a334784a0e4689ee8f676b2d48c,
-    type: 3}
-  fRedVillager: {fileID: 8817063030580570143, guid: e486211609286bd4e85e3ff35066a8ad,
-    type: 3}
+  townCenter: {fileID: 0}
   livestockObj: {fileID: 2365678247931437208, guid: ae67f2470580d774fbde956e41fe3f60,
     type: 3}
   bird: {fileID: 5283954685752892236, guid: 9a0b6b37c6a7db944aae08d18e46826b, type: 3}
-  redCentre: {fileID: 45135578}
-  blackCentre: {fileID: 0}
+  penguin: {fileID: 0}
+  mRedVillager:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  fRedVillager:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mBlueVillager: []
+  fBlueVillager: []
+  mGreenVillager: []
+  fGreenVillager: []
   map: Taddiport
 --- !u!1001 &1102189663
 PrefabInstance:
@@ -6597,6 +6619,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 588045666}
+  camera: {fileID: 282840814}
+  centerpoint: {fileID: 819304791}
   challengeMode: 0
 --- !u!1 &1886528039
 GameObject:

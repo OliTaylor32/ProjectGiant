@@ -959,20 +959,28 @@ MonoBehaviour:
   treeNo: 0
   treeWilts: []
   treeWiltNo: 0
+  snowTrees: []
+  snowTreeNo: 0
+  snowTreeWilts: []
+  snowTreeWiltNo: 0
   stoneNo: 0
   stones: []
   redSmallHouseNo: 0
   redSmallHouses: []
+  blueSmallHouseNo: 0
+  blueSmallHouses: []
   redFarmNo: 0
   redFarms: []
   torchNo: 0
   torches: []
   totemNo: 0
   totems: []
-  mRedVillagers: 0
-  fRedVillagers: 0
+  villageNo: 0
+  villages: []
   livestock: 0
   birds: 0
+  penguins: 0
+  nature: 0
 --- !u!1 &192740675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,7 +2078,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 450}
+  m_SizeDelta: {x: 600, y: 460}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &588045668
 MonoBehaviour:
@@ -2409,6 +2417,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 0
 --- !u!65 &785267356
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3304,6 +3313,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 0
 --- !u!65 &982625078
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3512,6 +3522,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 0
 --- !u!65 &988779918
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4205,24 +4216,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8f3708ee549ee438fa109c69747770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nature: 0
   tree: {fileID: 4100721374366876524, guid: d343456f926715f44a33f38d5b63ac61, type: 3}
   treeWilt: {fileID: 3558836623326871346, guid: 822fa0e6798fb5a489d3d5ca59c407b5,
     type: 3}
+  snowTree: {fileID: 0}
+  snowTreeWilt: {fileID: 0}
   stone: {fileID: 3763959450055417507, guid: 13ac686f00d6db240a16a98d4a394e27, type: 3}
-  redSmallHouse: {fileID: 7041735975594151602, guid: fffe67a7219122a49a15d55528ddd40b,
-    type: 3}
+  redSmallHouse:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  blueSmallHouse: []
   redFarm: {fileID: 7231733999227932771, guid: 2a17a3fb90c603e4ca47f8c716b7b5eb, type: 3}
   torch: {fileID: 0}
   totem: {fileID: 0}
-  mRedVillager: {fileID: 7993131564059623530, guid: 4d7e01a16c69d3048b2249c44129ca40,
-    type: 3}
-  fRedVillager: {fileID: 6949264161421097427, guid: af5df7ce531eb0144aee92be53f33412,
-    type: 3}
+  townCenter: {fileID: 0}
   livestockObj: {fileID: 2365678247931437208, guid: ae67f2470580d774fbde956e41fe3f60,
     type: 3}
   bird: {fileID: 4849721386452328605, guid: 357717080fa81514cac2afedf7960f5a, type: 3}
-  redCentre: {fileID: 45135578}
-  blackCentre: {fileID: 0}
+  penguin: {fileID: 0}
+  mRedVillager:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  fRedVillager:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mBlueVillager: []
+  fBlueVillager: []
+  mGreenVillager: []
+  fGreenVillager: []
   map: Shebbear
 --- !u!1 &1133798521
 GameObject:
@@ -4970,6 +4995,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 0
 --- !u!65 &1354388719
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11805,6 +11831,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   star: {fileID: 0}
   tear: {fileID: 0}
+  treeType: 0
 --- !u!65 &1879945101
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11953,6 +11980,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 588045666}
+  camera: {fileID: 282840814}
+  centerpoint: {fileID: 819304791}
   challengeMode: 0
 --- !u!1 &1886528039
 GameObject:
